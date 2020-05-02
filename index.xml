@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>InformisTry</title>
+    <link>https://zhaohuabing.com/</link>
+    <description>Recent content on InformisTry</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 02 May 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://zhaohuabing.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>What&#39;s Informistry?</title>
+      <link>https://zhaohuabing.com/posts/whats_informistry/</link>
+      <pubDate>Sat, 02 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhaohuabing.com/posts/whats_informistry/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://zhaohuabing.com/search/placeholder/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhaohuabing.com/search/placeholder/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://zhaohuabing.com/top/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhaohuabing.com/top/about/</guid>
+      <description>Hank Lee is a full stack web developer and also software enginner. Currently, he is studying for master of information technology at RMIT university in Australia🇦🇺.
+He is willing to take new challenges if the opportunity matches his career path.
+While he is not working, he enjoys watching movies, dramas, travelling, writing blogs and learning new techniques.
+Feel free to connect Hank via Github, LinkedIn or drop him an email.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://zhaohuabing.com/top/books/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhaohuabing.com/top/books/</guid>
+      <description>Machine learning学习笔记 Coursera 在线课程 Machine learning 笔记讲师: 吴恩达(Andrew Ng) 课程地址：https://www.coursera.org/lear</description>
+    </item>
+    
+  </channel>
+</rss>
