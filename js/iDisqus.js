@@ -528,7 +528,7 @@
         //}
         if(!_.stat.disqusLoaded ){
             _tip = '尝试连接 Disqus……';
-
+            console.log(_.opts.forum);
             var s = d.createElement('script');
             s.src = '//'+_.opts.forum+'.disqus.com/embed.js';
             s.dataset.timestamp = Date.now();
