@@ -213,7 +213,8 @@
       <ul>
         <li><a href="#brief-introduction">Brief Introduction</a></li>
         <li><a href="#how-to-use-them">How to use them</a></li>
-        <li><a href="#extra-example-use-with-javanetsocket">Extra Example (Use with java.net.Socket)</a></li>
+        <li><a href="#extra-example-1-use-with-javanetsocket">Extra Example-1 (Use with java.net.Socket)</a></li>
+        <li><a href="#extra-example-2-use-with-javanetsocket-and-multi-thread-of-clients">Extra Example-2 (Use with java.net.Socket and multi-thread of clients)</a></li>
         <li><a href="#sample-code">Sample Code</a></li>
         <li><a href="#references">References</a></li>
       </ul>
@@ -329,7 +330,7 @@ Print message at: 2020-05-03T17:18:40.730
 Print message at: 2020-05-03T17:18:42.730
 Print message at: 2020-05-03T17:18:44.730
 Cancel timer. End the program.
-</code></pre><h2 id="extra-example-use-with-javanetsocket">Extra Example (Use with java.net.Socket)</h2>
+</code></pre><h2 id="extra-example-1-use-with-javanetsocket">Extra Example-1 (Use with java.net.Socket)</h2>
 <p>Recently, I use java.util.Timer and java.util.TimerTask in my java.net.Socket programs to send messages from server to client to check whether the client is still alive or not. The logic in my implementation is that <strong>before the server is waiting for the response from client, I start the schedule to send message periodically. Once the server receive the message from client, I cancel the schedular. With the same logic in client site, I start the schedule to catch the message sent from server and print the message in the console before getting the input from console entered by user. Once the user enters a message, I cancel the schedular.</strong> The examples are as below:</p>
 <p>The sample code of <code>ServerTask.java</code>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#ff79c6">import</span> java.io.PrintWriter<span style="color:#ff79c6">;</span>
@@ -581,8 +582,130 @@ ClientTask: Are you still there?
 q
 End the connection.
 </code></pre><p>The messages which starts from <em>ClientTask:</em> are printed in <code>ClientTask.java</code>.</p>
+<h2 id="extra-example-2-use-with-javanetsocket-and-multi-thread-of-clients">Extra Example-2 (Use with java.net.Socket and multi-thread of clients)</h2>
+<p>It&rsquo;s time to handle multi-thread in the server site with Timer and TimerTask. It&rsquo;s very easy to implement it by just moving part of the codes of <code>Server.java</code> to another class object which extends <code>java.lang.Thread</code>, which is <code>ClientThreadHandler.java</code> in my sample code. There is no need to change the code in <code>Client.java</code> and <code>ClientTask.java</code>. The codes are shown as below.</p>
+<p>The sample code of <code>Server.java</code> with handling multi-thread:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#ff79c6">import</span> java.io.IOException<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.net.ServerSocket<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.net.Socket<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.ArrayList<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.List<span style="color:#ff79c6">;</span>
+
+<span style="color:#6272a4">/**
+</span><span style="color:#6272a4"> * @author Hank Lee
+</span><span style="color:#6272a4"> * Shared in InformisTry -- https://jumperc2p.github.io/InformisTry/
+</span><span style="color:#6272a4"> *
+</span><span style="color:#6272a4"> */</span>
+<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">class</span> <span style="color:#50fa7b">Server</span> <span style="color:#ff79c6">{</span>
+	
+	<span style="color:#8be9fd;font-style:italic">private</span> <span style="color:#8be9fd;font-style:italic">final</span> <span style="color:#8be9fd">int</span> PORT <span style="color:#ff79c6">=</span> 61023<span style="color:#ff79c6">;</span>
+	<span style="color:#8be9fd;font-style:italic">private</span> Socket connection<span style="color:#ff79c6">;</span>
+	
+	<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#50fa7b">Server</span><span style="color:#ff79c6">()</span> <span style="color:#ff79c6">{</span>
+		
+		 ServerSocket server <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">null</span><span style="color:#ff79c6">;</span>
+		 List<span style="color:#ff79c6">&lt;</span>ClientThreadHandler<span style="color:#ff79c6">&gt;</span> clients <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> ArrayList<span style="color:#ff79c6">&lt;&gt;();</span>
+		 
+		 <span style="color:#ff79c6">try</span><span style="color:#ff79c6">{</span>
+			 
+			<span style="color:#6272a4">// create a new socket
+</span><span style="color:#6272a4"></span>            server <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> ServerSocket<span style="color:#ff79c6">(</span>PORT<span style="color:#ff79c6">);</span>
+            System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;Starts the server&#34;</span><span style="color:#ff79c6">);</span>
+
+            <span style="color:#ff79c6">while</span> <span style="color:#ff79c6">(</span><span style="color:#ff79c6">true</span><span style="color:#ff79c6">)</span>
+            <span style="color:#ff79c6">{</span>
+                System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;Waiting for new connections...&#34;</span><span style="color:#ff79c6">);</span>
+                <span style="color:#6272a4">// accept connections from client
+</span><span style="color:#6272a4"></span>                connection <span style="color:#ff79c6">=</span> server<span style="color:#ff79c6">.</span><span style="color:#50fa7b">accept</span><span style="color:#ff79c6">();</span>
+                clients<span style="color:#ff79c6">.</span><span style="color:#50fa7b">add</span><span style="color:#ff79c6">(</span><span style="color:#ff79c6">new</span> ClientThreadHandler<span style="color:#ff79c6">(</span>connection<span style="color:#ff79c6">));</span>
+                System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;Connection accepted&#34;</span><span style="color:#ff79c6">);</span>
+                System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;Start the thread.&#34;</span><span style="color:#ff79c6">);</span>
+                clients<span style="color:#ff79c6">.</span><span style="color:#50fa7b">get</span><span style="color:#ff79c6">(</span>clients<span style="color:#ff79c6">.</span><span style="color:#50fa7b">size</span><span style="color:#ff79c6">()-</span>1<span style="color:#ff79c6">).</span><span style="color:#50fa7b">start</span><span style="color:#ff79c6">();</span>
+               
+            <span style="color:#ff79c6">}</span>
+        <span style="color:#ff79c6">}</span> <span style="color:#ff79c6">catch</span> <span style="color:#ff79c6">(</span>IOException e<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+            e<span style="color:#ff79c6">.</span><span style="color:#50fa7b">printStackTrace</span><span style="color:#ff79c6">();</span>
+        <span style="color:#ff79c6">}</span> <span style="color:#ff79c6">finally</span> <span style="color:#ff79c6">{</span>
+            <span style="color:#ff79c6">try</span> <span style="color:#ff79c6">{</span>
+                server<span style="color:#ff79c6">.</span><span style="color:#50fa7b">close</span><span style="color:#ff79c6">();</span>
+            <span style="color:#ff79c6">}</span> <span style="color:#ff79c6">catch</span> <span style="color:#ff79c6">(</span>IOException e<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span> <span style="color:#ff79c6">}</span>
+        <span style="color:#ff79c6">}</span>
+	<span style="color:#ff79c6">}</span>
+
+	<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">static</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">main</span><span style="color:#ff79c6">(</span>String<span style="color:#ff79c6">[]</span> args<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+		<span style="color:#ff79c6">new</span> Server<span style="color:#ff79c6">();</span>
+	<span style="color:#ff79c6">}</span>
+
+<span style="color:#ff79c6">}</span>
+</code></pre></div><p>As you can see, in the <code>Server.java</code>, I just accept connections, and use the connection to create an instance of <code>ClientThreadHandler.java</code> and put the instance into a list, then start the instance.</p>
+<p>The sample code of <code>ClientThreadHandler.java</code> which extends <code>java.lang.Thread</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#ff79c6">import</span> java.io.IOException<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.io.PrintWriter<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.net.Socket<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.NoSuchElementException<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.Scanner<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.Timer<span style="color:#ff79c6">;</span>
+
+<span style="color:#6272a4">/**
+</span><span style="color:#6272a4"> * @author Hank Lee
+</span><span style="color:#6272a4"> * Shared in InformisTry -- https://jumperc2p.github.io/InformisTry/
+</span><span style="color:#6272a4"> *
+</span><span style="color:#6272a4"> */</span>
+<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">class</span> <span style="color:#50fa7b">ClientThreadHandler</span> <span style="color:#8be9fd;font-style:italic">extends</span> Thread <span style="color:#ff79c6">{</span>
+	
+	<span style="color:#8be9fd;font-style:italic">private</span> Scanner inputFromClient<span style="color:#ff79c6">;</span>
+    <span style="color:#8be9fd;font-style:italic">private</span> PrintWriter outputToClient<span style="color:#ff79c6">;</span>
+	
+	<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#50fa7b">ClientThreadHandler</span><span style="color:#ff79c6">(</span>Socket connection<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+		
+		<span style="color:#6272a4">// get the OutputStream and InputStream from connection
+</span><span style="color:#6272a4"></span>        <span style="color:#ff79c6">try</span> <span style="color:#ff79c6">{</span>
+			outputToClient <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> PrintWriter<span style="color:#ff79c6">(</span>connection<span style="color:#ff79c6">.</span><span style="color:#50fa7b">getOutputStream</span><span style="color:#ff79c6">(),</span><span style="color:#ff79c6">true</span><span style="color:#ff79c6">);</span>
+			inputFromClient <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> Scanner<span style="color:#ff79c6">(</span>connection<span style="color:#ff79c6">.</span><span style="color:#50fa7b">getInputStream</span><span style="color:#ff79c6">());</span>
+		<span style="color:#ff79c6">}</span> <span style="color:#ff79c6">catch</span> <span style="color:#ff79c6">(</span>IOException e<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+			e<span style="color:#ff79c6">.</span><span style="color:#50fa7b">printStackTrace</span><span style="color:#ff79c6">();</span>
+		<span style="color:#ff79c6">}</span>
+	<span style="color:#ff79c6">}</span>
+	
+	@Override
+	<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">run</span><span style="color:#ff79c6">()</span> <span style="color:#ff79c6">{</span>
+		
+		  <span style="color:#ff79c6">try</span> <span style="color:#ff79c6">{</span>
+          	
+          	<span style="color:#ff79c6">while</span> <span style="color:#ff79c6">(</span><span style="color:#ff79c6">true</span><span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+          		<span style="color:#6272a4">// send messages to client.
+</span><span style="color:#6272a4"></span>          		outputToClient<span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;Send messages to server. Or if you want to end the connection, please enter \&#34;q\&#34;:&#34;</span><span style="color:#ff79c6">);</span>
+          		
+          		<span style="color:#6272a4">// create new Timer to schedule TimerTask and start its schedule.
+</span><span style="color:#6272a4"></span>          		Timer timer <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> Timer<span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;ServerTaskTimer&#34;</span><span style="color:#ff79c6">);</span>
+          		<span style="color:#6272a4">// use delay to let the timer start after 3 seconds.
+</span><span style="color:#6272a4"></span>          		<span style="color:#8be9fd">long</span> delay <span style="color:#ff79c6">=</span> 3000<span style="color:#ff79c6">;</span>
+          		<span style="color:#8be9fd">long</span> period <span style="color:#ff79c6">=</span> 3000<span style="color:#ff79c6">;</span>
+          		timer<span style="color:#ff79c6">.</span><span style="color:#50fa7b">scheduleAtFixedRate</span><span style="color:#ff79c6">(</span><span style="color:#ff79c6">new</span> ServerTask<span style="color:#ff79c6">(</span>outputToClient<span style="color:#ff79c6">),</span> delay<span style="color:#ff79c6">,</span> period<span style="color:#ff79c6">);</span>
+          		<span style="color:#6272a4">// take input from client
+</span><span style="color:#6272a4"></span>          		String clientMessage <span style="color:#ff79c6">=</span> inputFromClient<span style="color:#ff79c6">.</span><span style="color:#50fa7b">nextLine</span><span style="color:#ff79c6">();</span>
+          		<span style="color:#6272a4">// Once it receive the message from client, cancel the timer.
+</span><span style="color:#6272a4"></span>          		timer<span style="color:#ff79c6">.</span><span style="color:#50fa7b">cancel</span><span style="color:#ff79c6">();</span>
+          		System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;Client says: &#34;</span> <span style="color:#ff79c6">+</span> clientMessage<span style="color:#ff79c6">);</span>
+          		<span style="color:#6272a4">// check if the client wants to end the connection.
+</span><span style="color:#6272a4"></span>          		<span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;q&#34;</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">equals</span><span style="color:#ff79c6">(</span>clientMessage<span style="color:#ff79c6">))</span> <span style="color:#ff79c6">{</span>
+          			System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;Client ends the connection.&#34;</span><span style="color:#ff79c6">);</span>
+          			<span style="color:#ff79c6">break</span><span style="color:#ff79c6">;</span>
+          		<span style="color:#ff79c6">}</span>
+          	<span style="color:#ff79c6">}</span>
+          <span style="color:#ff79c6">}</span><span style="color:#ff79c6">catch</span> <span style="color:#ff79c6">(</span>NoSuchElementException ne<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+          	System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;Client quits the game.&#34;</span><span style="color:#ff79c6">);</span>
+          <span style="color:#ff79c6">}</span>
+	<span style="color:#ff79c6">}</span>
+<span style="color:#ff79c6">}</span>
+</code></pre></div><p>In the <code>ClientThreadHandler.java</code>, I just paste codes used to react with client from <code>Server.java</code>.</p>
+<p>That&rsquo;s all. No thing is difficult.</p>
 <h2 id="sample-code">Sample Code</h2>
-<p>The sample code can be downloaded <a href="https://github.com/JumperC2P/Informistry_sample_code">here</a> in the package <strong>timer_example</strong>.</p>
+<p>The sample code can be downloaded <a href="https://github.com/JumperC2P/Informistry_sample_code">here</a>:</p>
+<ul>
+<li>Extra example -1 is in the package of <strong>timer_example</strong>.</li>
+<li>Extra example -2 is in the package of <strong>multithread_socket_with_timer</strong>.</li>
+</ul>
 <p>Using <code>java.util.Timer</code> and <code>java.util.TimerTask</code> can help us execute other programs at the same time. But I still need more practices to understand the knowledge of Thread.</p>
 <p>If you have any options about the article, please feel free to give me a comment below. Thank you.</p>
 <h2 id="references">References</h2>
