@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on InformisTry</title>
-    <link>https://jumperc2p.github.io/InformisTry/post/</link>
-    <description>Recent content in Posts on InformisTry</description>
+    <title>Tech on InformisTry</title>
+    <link>https://jumperc2p.github.io/InformisTry/categories/tech/</link>
+    <description>Recent content in Tech on InformisTry</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 03 May 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://jumperc2p.github.io/InformisTry/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://jumperc2p.github.io/InformisTry/categories/tech/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -18,15 +18,6 @@
       
       <guid>https://jumperc2p.github.io/InformisTry/post/2020-05-03-java-timertask-timer/</guid>
       <description>&lt;p&gt;In this article, I will give you a brief introduction about what Timer and TimerTask are and then a simple example to help you understand how to use them.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>What&#39;s Informistry?</title>
-      <link>https://jumperc2p.github.io/InformisTry/posts/whats_informistry/</link>
-      <pubDate>Sat, 02 May 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://jumperc2p.github.io/InformisTry/posts/whats_informistry/</guid>
-      <description></description>
     </item>
     
   </channel>

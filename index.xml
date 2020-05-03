@@ -6,10 +6,19 @@
     <description>Recent content on InformisTry</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 02 May 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 03 May 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://jumperc2p.github.io/InformisTry/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>A Combination of TimerTask and Timer</title>
+      <link>https://jumperc2p.github.io/InformisTry/post/2020-05-03-java-timertask-timer/</link>
+      <pubDate>Sun, 03 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://jumperc2p.github.io/InformisTry/post/2020-05-03-java-timertask-timer/</guid>
+      <description>&lt;p&gt;In this article, I will give you a brief introduction about what Timer and TimerTask are and then a simple example to help you understand how to use them.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>What&#39;s Informistry?</title>
