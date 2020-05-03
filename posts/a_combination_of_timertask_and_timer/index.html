@@ -310,7 +310,7 @@ Print message at: 2020-05-03T17:18:40.730
 Print message at: 2020-05-03T17:18:42.730
 Print message at: 2020-05-03T17:18:44.730
 Cancel timer. End the program.
-</code></pre><h2 id="extra-points">Extra Points</h2>
+</code></pre><h2 id="extra-example-use-with-javanetsocket">Extra Example (Use with java.net.Socket)</h2>
 <p>Recently, I use java.util.Timer and java.util.TimerTask in my java.net.Socket programs to send messages from server to client to check whether the client is still alive or not. The logic in my implementation is that <strong>before the server is waiting for the response from client, I start the schedule to send message periodically. Once the server receive the message from client, I cancel the schedular. With the same logic in client site, I start the schedule to catch the message sent from server and print the message in the console before getting the input from console entered by user. Once the user enters a message, I cancel the schedular.</strong> The examples are as below:</p>
 <p>The sample code of <code>ServerTask.java</code>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#ff79c6">import</span> java.io.PrintWriter<span style="color:#ff79c6">;</span>
