@@ -6,10 +6,19 @@
     <description>Recent content in Posts on InformisTry</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 08 May 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 05 Jul 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://jumperc2p.github.io/InformisTry/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【一口口用心品嚐演算法30天系列】Day2 -- 解析演算法的優劣</title>
+      <link>https://jumperc2p.github.io/InformisTry/posts/2020_30days/algorithm_time_complexity/</link>
+      <pubDate>Sun, 05 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://jumperc2p.github.io/InformisTry/posts/2020_30days/algorithm_time_complexity/</guid>
+      <description>前言 第一天我們針對了演算法做了非常簡單的介紹，我們提到演算法本身是一個用來解決問題的一系列精準不模糊的步驟或指示，而食譜中的製作步驟可以說是</description>
+    </item>
     
     <item>
       <title>A Brief Introduction of Using Java Logger</title>

@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="InformisTry">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="https://jumperc2p.github.io/InformisTry/https://tinyurl.com/yc28myh2">
+    <meta property="twitter:image" content="https://jumperc2p.github.io/InformisTry/https://tinyurl.com/yc28myh2" />
+    
+
+    
+    <meta name="title" content="【一口口用心品嚐演算法30天系列】Day2 -- 解析演算法的優劣" />
+    <meta property="og:title" content="【一口口用心品嚐演算法30天系列】Day2 -- 解析演算法的優劣" />
+    <meta property="twitter:title" content="【一口口用心品嚐演算法30天系列】Day2 -- 解析演算法的優劣" />
+    
+
+    
+    <meta name="description" content="Hank Lee。 IT &#43; Chemistry = InformisTry。 Career Change。">
+    <meta property="og:description" content="Hank Lee。 IT &#43; Chemistry = InformisTry。 Career Change。" />
+    <meta property="twitter:description" content="Hank Lee。 IT &#43; Chemistry = InformisTry。 Career Change。" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="Informistry, Hank Lee, JumperC2P, portfolio, Java, Python, Developer, Engineer, Software, ReactJS, Web, React, Database, Kubernetes, 微服務, Microservice, 演算法">
+    <link rel="shortcut icon" href="/InformisTry/img/favicon.ico">
+
+    <title>【一口口用心品嚐演算法30天系列】Day2 -- 解析演算法的優劣-Informistry</title>
+
+    <link rel="canonical" href="/InformisTry/posts/2020_30days/algorithm_time_complexity">
+
+    <link rel="stylesheet" href="/InformisTry/css/iDisqus.min.css"/>
+	
+    
+    <link rel="stylesheet" href="/InformisTry/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/InformisTry/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="/InformisTry/css/zanshang.css">
+    
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    
+    
+
+    
+    
+    <script src="/InformisTry/js/jquery.min.js"></script>
+    
+    
+    <script src="/InformisTry/js/bootstrap.min.js"></script>
+    
+    
+    <script src="/InformisTry/js/hux-blog.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/InformisTry/">InformisTry</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/InformisTry/">Home</a>
+                    </li>
+                    
+                        
+                        <li>
+                            <a href="/InformisTry/categories/life">life</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/InformisTry/categories/series">series</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/InformisTry/categories/tech">tech</a>
+                        </li>
+                        
+                    
+                    
+		            
+                        <li><a href="/InformisTry/top/about">ABOUT ME  </a></li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('https://tinyurl.com/y7zeezbe')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/InformisTry/tags/algorithm" title="Algorithm">
+                            Algorithm
+                        </a>
+                        
+                        <a class="tag" href="/InformisTry/tags/ithome" title="iThome">
+                            iThome
+                        </a>
+                        
+                        <a class="tag" href="/InformisTry/tags/triathlon" title="triathlon">
+                            triathlon
+                        </a>
+                        
+                        <a class="tag" href="/InformisTry/tags/data-structure" title="Data Structure">
+                            Data Structure
+                        </a>
+                        
+                    </div>
+                    <h1>【一口口用心品嚐演算法30天系列】Day2 -- 解析演算法的優劣</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by 
+                        
+                            Hank Lee
+                         
+                        on 
+                        Sunday, July 5, 2020
+                        
+                            <span id="/posts/2020_30days/algorithm_time_complexity" class="leancloud_visitors meta_data_item" data-flag-title="">
+    <span class="post-meta-item-icon">
+      <span class="octicon octicon-eye"></span> 
+    </span>
+    <i class="fa fa-eye"></i>
+    <span class="old-visitors-count" style="display: none;"></span>
+    <span class="leancloud-visitors-count"></span>
+</span>
+
+
+
+<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+
+<script>
+	AV.initialize("", "");
+</script>
+
+<script type="text/javascript">
+function showTime(Counter) {
+    var query = new AV.Query(Counter);
+    var entries = [];
+    var $visitors = $(".leancloud_visitors");
+
+    $visitors.each(function() {
+        entries.push($(this).attr("id").trim());
+    });
+
+    query.containedIn('url', entries);
+    query.find()
+        .done(function(results) {
+            var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+            var OLD_COUNT_CONTAINER_REF = '.old-visitors-count';
+
+            
+            
+            
+            
+
+            for (var i = 0; i < results.length; i++) {
+                var item = results[i];
+                var url = item.get('url');
+                var time = item.get('time');
+                var element = document.getElementById(url);
+
+                $(element).find(COUNT_CONTAINER_REF).text(time);
+            }
+            for (var i = 0; i < entries.length; i++) {
+                var url = entries[i];
+                var element = document.getElementById(url);
+                var countSpan = $(element).find(COUNT_CONTAINER_REF);
+                if (countSpan.text() == '') {
+                    var oldCountSpan = $(element).find(OLD_COUNT_CONTAINER_REF).text();
+                    if(oldCountSpan!=''){
+                        countSpan.text(0+parseInt(oldCountSpan));
+                    }else{
+                        countSpan.text(0);          
+                    }
+                }
+            }
+        })
+        .fail(function(object, error) {
+            console.log("Error: " + error.code + " " + error.message);
+        });
+}
+
+function addCount(Counter) {
+    var $visitors = $(".leancloud_visitors");
+    var url = $visitors.attr('id').trim();
+    var title = $visitors.attr('data-flag-title').trim();
+    var query = new AV.Query(Counter);
+
+    query.equalTo("url", url);
+    query.find({
+        success: function(results) {
+            if (results.length > 0) {
+                var counter = results[0];
+                counter.fetchWhenSave(true);
+                counter.increment("time");
+                counter.save(null, {
+                    success: function(counter) {
+                        var $element = $(document.getElementById(url));
+                        $element.find('.leancloud-visitors-count').text(counter.get('time'));
+                    },
+                    error: function(counter, error) {
+                        console.log('Failed to save Visitor num, with error message: ' + error.message);
+                    }
+                });
+            } else {
+                var newcounter = new Counter();
+                 
+                var acl = new AV.ACL();
+                acl.setPublicReadAccess(true);
+                acl.setPublicWriteAccess(true);
+                newcounter.setACL(acl);
+                 
+                newcounter.set("title", title);
+                newcounter.set("url", url);
+                var OLD_COUNT_CONTAINER_REF = '.old-visitors-count';
+                var $element = $(document.getElementById(url));
+                var oldCountSpan = $element.find(OLD_COUNT_CONTAINER_REF).text();
+                if(oldCountSpan!=''){
+                    newcounter.set("time", parseInt(oldCountSpan)+1);
+                }else{
+ 	                    newcounter.set("time",  1);
+                }
+                newcounter.save(null, {
+                    success: function(newcounter) {
+                        var $element = $(document.getElementById(url));
+                        $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                    },
+                    error: function(newcounter, error) {
+                        console.log('Failed to create');
+                    }
+                });
+            }
+        },
+        error: function(error) {
+            console.log('Error:' + error.code + " " + error.message);
+        }
+    });
+}
+$(function() {
+    var Counter = AV.Object.extend("Counter");
+    
+    
+    if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+    } else {
+        showTime(Counter);
+    }
+});
+</script>
+
+                        
+                        
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                    
+                    <header>
+                        <h2>Table of Contents</h2>
+                    </header>
+                    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#前言">前言</a></li>
+        <li><a href="#演算法優劣的衡量因素">演算法優劣的衡量因素？</a></li>
+        <li><a href="#如何去估計演算法的效率">如何去估計演算法的效率？</a></li>
+        <li><a href="#如何比較數個演算法的優劣">如何比較數個演算法的優劣？</a></li>
+        <li><a href="#小結">小結</a></li>
+        <li><a href="#預告">預告</a></li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+                    
+                
+
+                <h2 id="前言">前言</h2>
+<p>第一天我們針對了演算法做了非常簡單的介紹，我們提到演算法本身是一個<strong>用來解決問題的一系列精準不模糊的步驟或指示</strong>，而<strong>食譜中的製作步驟</strong>可以說是生活中的演算法，因為它很明確地告訴了讀者每一個步驟要如何進行、每一個環節要如何處理；再來我們用了<strong>如何求出兩個數值的最大公因數</strong>來解釋一個數學層面的演算法，同時舉出了兩種不同的演算法來解決這個問題。如果還沒看過或已經忘記第一天的內容，可以點擊<a href="TODO">這裏</a>複習一下。</p>
+<p>我們上次提到解決最大公因數的問題時有兩種演算法，而這兩種演算法有<strong>效率上的差異</strong>，那這個效率一定要把演算法實作出來後，實際上去執行計算時間才有辦法知道嗎？還是有什麼辦法可以在設計的時候就可以估算、評估的呢？</p>
+<p>今天，我們將會介紹如何解析一個演算法的優劣。</p>
+<hr>
+<h2 id="演算法優劣的衡量因素">演算法優劣的衡量因素？</h2>
+<p>一個演算法的好壞可以從兩個因素去衡量：<strong>執行時間(time complexity)、使用空間(space complexity)</strong>。前者也稱作效能或效率，對於要處理的資料量不大的狀況下，演算法的效能問題基本上無感，然而一但資料量倍增，這個問題就會變成誰也無法忽視的難題。演算法的效能直接影響了系統執行的速度，間接影響了使用者的使用體驗，進而影響了公司的基礎運作，以購物網站為例，成千上萬種商品，假如你想要搜尋某一個關鍵字的產品，網頁遲遲不出搜尋結果，那你可能也不會想繼續等了，之後你應該也不會再使用這個購物平台了，如此一來，這個網站的使用率直線下滑，經營的公司估計也可以打包收掉了。後者指的是一個演算法在執行過程中使用的儲存空間(如：Memory space)，基本上每一台機器的硬體設備是有限的，當一個程式在執行的時候，它所使用的Memory也不會無限上綱，而如果演算法在執行的過程中直接忽略了使用空間的問題，可能執行到中途就會出現<strong>記憶體不足</strong>的問題，這樣程式就沒辦法正常執行了。</p>
+<p>這次的30天系列文中，主要是針對<strong>演算法執行時間(time complexity)</strong> 來進行討論。</p>
+<hr>
+<h2 id="如何去估計演算法的效率">如何去估計演算法的效率？</h2>
+<p>要估計演算法的效率，首先我們要先知道兩個名詞定義：</p>
+<h4 id="1-basic-operation">1. Basic Operation:</h4>
+<p>Basic operation的定義是指在整體演算法執行『一次』的過程中，進行<strong>最多次</strong>的操作，白話一點就是『跑一次，什麼動作做了最多次』，如：加減乘除、等於、比較等。</p>
+<h4 id="2-input-size">2. Input Size:</h4>
+<p>Input Size的定義就是這個『需要被解決的問題的大小（資料量）』，如：若要從一個長度為n的陣列中搜尋一個指定的物件，那這個陣列的長度n就是input size。</p>
+<p>舉一個非常簡單的範例&ndash;<strong>計算次方</strong>&ndash;來解釋：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#6272a4">// Input: number, times
+</span><span style="color:#6272a4">// Output: number^times
+</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">public</span> Integer <span style="color:#50fa7b">square</span><span style="color:#ff79c6">(</span>Integer number<span style="color:#ff79c6">,</span> Integer times<span style="color:#ff79c6">){</span>
+    <span style="color:#8be9fd">int</span> result <span style="color:#ff79c6">=</span> 1<span style="color:#ff79c6">;</span>
+    <span style="color:#ff79c6">for</span> <span style="color:#ff79c6">(</span><span style="color:#8be9fd">int</span> i <span style="color:#ff79c6">=</span> 1 <span style="color:#ff79c6">;</span> i <span style="color:#ff79c6">&lt;=</span> times <span style="color:#ff79c6">;</span> i<span style="color:#ff79c6">++){</span>
+        result <span style="color:#ff79c6">=</span> result <span style="color:#ff79c6">*</span> number<span style="color:#ff79c6">;</span>
+    <span style="color:#ff79c6">}</span>
+    <span style="color:#ff79c6">return</span> result<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">}</span>
+</code></pre></div><p>範例中的Basic Operation就是『乘(＊)』，因為這個演算法在執行過程中，主要是在進行『乘』的這個動作；而迴圈執行的次數取決於<code>times</code>，因此<code>times</code>即為Input size。</p>
+<p>那既然我們知道了這兩個名詞分別代表的意義之後，又要怎麼去<strong>估計理論上的效率</strong>呢？</p>
+<p>應該已經有人想到了吧，<code>執行時間 ≈ 一次的動作時間 × 動作次數</code>，因而有了下列公式：</p>
+<h5 id="tn--cop--cn">t(n) ≈ Cop × C(n)</h5>
+<!-- raw HTML omitted -->
+<ul>
+<li>n : Input size</li>
+<li>t(n): 執行時間</li>
+<li>Cop : 單一次basic operation執行的時間</li>
+<li>C(n) : basic operation執行的次數</li>
+</ul>
+<p>以上面<strong>計算次方</strong>的範例來說，n是<code>times</code>，而因為演算法每執行一次，『相乘』的動作也只執行一次，因此<code>C(n)</code>為<code>1 x times = times</code>，另外我們假設『乘』每執行一次所需要的時間為<code>Cop</code>，所以計算公式為 ➜ <code>執行時間t(n) ≈ Cop × C(n) ≈ Cop x times</code>。</p>
+<p>讓我們再舉一個例子讓大家更熟悉一點：<strong>依序尋找Array中某一個值的index</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#6272a4">// array = [A1, A2, A3, ..., An]
+</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">public</span> Integer <span style="color:#50fa7b">sequentialSearch</span><span style="color:#ff79c6">(</span>Integer<span style="color:#ff79c6">[]</span> array<span style="color:#ff79c6">,</span> Integer target<span style="color:#ff79c6">){</span>
+    Integer index <span style="color:#ff79c6">=</span> 0<span style="color:#ff79c6">;</span>
+    <span style="color:#ff79c6">while</span> <span style="color:#ff79c6">(</span> index <span style="color:#ff79c6">&lt;</span> array<span style="color:#ff79c6">.</span><span style="color:#50fa7b">length</span> <span style="color:#ff79c6">&amp;&amp;</span> array<span style="color:#ff79c6">[</span>index<span style="color:#ff79c6">]</span> <span style="color:#ff79c6">!=</span> target<span style="color:#ff79c6">){</span>
+        index <span style="color:#ff79c6">=</span> index <span style="color:#ff79c6">+</span> 1<span style="color:#ff79c6">;</span>
+    <span style="color:#ff79c6">}</span>
+    <span style="color:#ff79c6">return</span> index<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">}</span>
+</code></pre></div><p>這個範例中，會從<code>array</code>的第一個element依序地開始尋找<code>target</code>，找到<code>target</code>後就回傳當下的<code>index</code>，對於這個範例的Basic operation、Input size、Time complexity分別是：</p>
+<ul>
+<li><strong>Basic operation:</strong> 加(+)、等於(=)、比較（&lt;, !=)</li>
+<li><strong>Input size:</strong> array的長度(array.length)</li>
+<li><strong>Time complexity:</strong> <code>t(n) ≈ Cop × C(n) ≈ Cop x array.length, as C(n) = 1 x array.length</code></li>
+</ul>
+<blockquote>
+<p>註：</p>
+<ol>
+<li>Basic operation中的『等於』，是賦值的意思</li>
+<li>Time complexity中，我們假設單一次basic operation執行的時間為Cop</li>
+</ol>
+</blockquote>
+<p>如果有人腦筋動比較快可能會想到：<strong>『那如果Array的第一個element就是target和最後一個element才是target，這樣兩種情況就是不一樣的，執行時間也是不一樣的才對！』</strong>，沒錯，因此這邊我又要再帶出三個名詞：</p>
+<h4 id="1-best-case">1. Best Case：</h4>
+<p>Best case指的就是一個演算法執行時『最好的情況』，以這個<code>sequentialSearch</code>為例，最好的情況就是第一個element就是target，所以這個時候執行的次數就是<code>1</code>；而Time complexity則是<code>t(n) = Cop</code>。</p>
+<h4 id="2-average-case">2. Average Case：</h4>
+<p>Average case指的是一個演算法執行的『平均』遇到的情況，基本上就是一個平均值。而要去探討一個Average case最難的就是要去<strong>考慮到所有的可能性</strong>，同樣以<code>sequentialSearch</code>為例，要去考慮target可能在每一個element中找到，換言之，所有可能性的執行次數的平均值為<code>C(n) = (1+2+3+4+...+n)÷n </code>，這時Time complexity則是<code>t(n) = Cop x ((1+2+3+4+...+n)÷n)</code>。</p>
+<h4 id="3-worst-case">3. Worst Case：</h4>
+<p>Worst case就是一個演算法執行時『最差的情況』，再以<code>sequentialSearch</code>為例，最差的情況就是target在這array中找不到或在最後一個element才找到；因為每執行一次<code>sequentialSearch</code>，進行一次『比較』的動作，因此這時執行的次數就是array的長度<code>array.length</code>，Time complexity則是<code>t(n) = Cop x array.length</code>。</p>
+<p>通常我們在討論一個演算法的效率問題時，不太常去針對Average case進行探討或比較，原因就如同剛剛有提到的，若要探討Average case，需要考慮到所有的可能性，然而實際上，真的很難考慮到所有的情況，因此在接下來的文章中，我們針對演算法的time complexity也會著重在Best case和Worst case上。</p>
+<hr>
+<h2 id="如何比較數個演算法的優劣">如何比較數個演算法的優劣？</h2>
+<p>假設現在上面兩個範例<strong>計算次方</strong>和<strong>依序尋找</strong>的Cop分別是5.1和5.2，而C(n)都是n，這樣的話兩者的Time complexity分別是：</p>
+<ul>
+<li>計算次方： <code>T1(n) = 5.1n</code></li>
+<li>依序尋找： <code>T2(n) = 5.2n</code></li>
+</ul>
+<p>而這兩個方程式轉換成2D線性圖時，看起來幾乎沒有差異：
+<img src="https://lh3.googleusercontent.com/asH44p6_lZcpXF2X8nJj19hSykdRrO_YEYkaizdjWB367klkiwxh5le-5Ar1F4G8hidl675nKGHuCvj0psuno-NqhypyYkz2hsXG12SgtIyYN9TJ93qt_kp7yK6TOm_0yckzbYWNKzjTg58xshd2cBJo_7msyoDiJQ3UO8AjXb9dbqs_GdbNvj9SsJ0ejZAlSUENYaO59fmSDXZ9h1YVnZZci6Mb-Evuf3cSt41L9aJBby0EuU7qVeQe4ZmByqy2lxNBstlUFHkl-h9Zz9RiS4ldYw7xd49YUe07oMOx6O5YT1fcN1RPxt8awI9elkeScrL8RO6Jk9ulwVNfoiVSXjPLzoznpKtdEEMn8KKEscIOVaQTQbhlsnhVhrjSSPzISC7Rwb2Jnd5cEOPFpJMnXBQetjc4z4cn4nIlJawpIHT-phik24NXZzv6sQu5UTrdZ1jGu7C8MEmZxJYZrcNDB84lLTUBXrU7s4lcu-AlBPaJigdOsiQPWpVLPhOwyXUgP2Xjnaa4Db2M0u6XO9ciN3G0CUCqXOAq654Aan0y7Xm2d5Q1_kLFQc-kJwHmRjV8ifJzdobrMJ5x83QXvWmuVYt9dlgou7xtxaxCiNezwqxEIxNmmyOTdFUwaJyaUKE_UbuwZoJnl9qBP__n3BpkiM4xNmHEsZQwiOEJZN0BNkgfvjYhlj-Ddpi55m8tPJnt1MkNa_k=s450-w450-h330-no?authuser=2" alt="線性圖"></p>
+<p>那假設C(n)改為n的2次方，那線性圖則會變成下圖，同樣看起來也幾乎沒有差異：
+<img src="https://lh3.googleusercontent.com/HIOG7ul3fsbNplusORaB32uC3GiN0x4ZS9etg00iqGe9rHMTPp_CKb5BeiVdvzebbV80U8pbWJmyVS_KpFTQuMnDo3eSXpn4fu9c3m2-rSQhGWf_qaRMqpScL1UGQhzGXJlm_hlWhjzvqNGRFSYoRkdJdmvcDyiON7IxT8w4uqLC9Vu5W3Qx_z1V3RcjzO0cLf35I28dJinH1MdtR_X1EeQFwsqHRctjA43FbbYlOS_oDk05tmLzBi-5FYKJIR2V5-Q74VHkDgE1a4ijxVRbgtpJfE2XYCCS_v3ANA2F0_WXnKoPtwYqcF-ggLR8lcxZWOM2b8lOJEPQaVPSLCr4HVfuoI2La5Qpk1napOoea4rXbdYJ4jqDSzL4L6L-9T55VW_BsTNt76rKOhGYDNwrGRJUSvamJm0pab9Jwrt0KfxxaXw4yzxJn3FJotrWL8fi6Ln8Ha6KpUjtPj7XMNacOInZkm5jG3pyy96HW9MPpGyrFd9PvsdsBGSmQUaJ_XvLWIdmtvggNviIymjbGlvnVU3kFrqIRrEfyFqHHKnoPEDKvvmccmIaxLLE2Jely4y0_dk7rsmmvB0NTKD8sWc9ue0C6lpfQbnRgHBDLlXJJaBFZpJ6fJEXXPRtz_Acy7lsdBYGJmEb5JgqFTfVs3N6dVERPMXKyj_TB_EAtXk2zlvKLkLJt5DdYhYKoHB8wlHa9Gw8clk=s450-w450-h320-no?authuser=2" alt="2次方線性圖"></p>
+<p>從上面兩個圖可以知道，在這個方程式中，當n的值越大，真正影響曲線結果的是<code>basic operation執行的次數-C(n)</code>，Cop反而不那麼重要，也就是說，我們在比較演算法的執行效率時，最主要是針對<code>C(n)</code>來進行討論，而在數學當中，我們會用 <strong>Big O Notation (𝜪)</strong> 來表示一個演算法簡化後的Time complexity。</p>
+<p><strong>Big O Notation</strong>是用一個更簡單的函數來表達一個方程式（函數）的<strong>漸進上界</strong>(<em>註1</em>）；假設現在有一個方程式為<code>2n^3 + n^2 + 10</code>，當n越來越接近∞時，<code>2n^3</code>會慢慢地佔據了這個方程式整體走向的主導地位，進而使方程式中的其他部位可以被忽略，有了<strong>簡化之後的結果</strong>，而因為在比較演算法效率時，n的值基本上都會被視為∞，因此<strong>Big O notation</strong>非常適合用來分析演算法的time complexity。</p>
+<blockquote>
+<p>註1：<strong>漸進上界</strong>指的是接近無窮級數時的狀態。</p>
+</blockquote>
+<p>以<code>T1(n) = 5.1n</code>為例，我們可以說<code>T1(n) ∈ 𝜪(n)</code>(<em>註2</em>）；若C(n)改為n的2次方<code>T1(n) = 5.1n^2</code>，那就是<code>T1(n) ∈ 𝜪(n^2)</code>。透過<strong>Big O Notation</strong>，我們就可以忽略方程式中比較不重要的『常數』(Cop)，專注在實際上會影響執行時間的參數(C(n))，進而比較不同的演算法的效率，以前面提到的兩個Big O notation來比較效率的話，<code>𝜪(n) &gt; 𝜪(n^2)</code>。</p>
+<blockquote>
+<p>註2：∈是『屬於』的意思，按照上面的例子來說，就表示<code>T1(n) = 5.1n 這個方程式是屬於𝜪(n)</code>的一種。</p>
+</blockquote>
+<p>下圖是在分析演算法的效率時常用到的Time complexity（來源:<a href="https://en.wikipedia.org/wiki/Time_complexity">Time Complexity-Wikipedia</a>)，從圖中我們可以知道，在<strong>Big O Notation</strong>的考量下(n ≈ ∞)，主導執行時間(N)的最主要因子是方程式中與n有關最大的參數（以<code>2n^3 + n^2 + 10</code>為例，與n有關最大的參數即為<code>2n^3</code>）。</p>
+<p><img src="https://lh3.googleusercontent.com/4oQbq6yYruRtk23wbzmQ3fPOqcRJJj3MbpKkc9YQEpLZw47qP7JM5BXwfWq9jmSMHarVwiL5_oczOno-47JOzyUb_Wm-BBH7XZfOrpqmi1h6TtDphFkSzk5svf1mcHSliy4sjnW6XqTvfMJapkqUqE9D32wDGViDpz6gXqd7L1m7zV-z-9cxd9Qavy2EVfoa5YgwGe7_y4k7EKvSlp_PMw50xdqLY3InqpB0-2ekRZecVUIm6Q2uC_wZChChaTIn5JfUxiE5qmOl67o4PgAziS326DmVCnAPViOSJL1XIx2N39rmkS5xLr1omNza0w2LWT7sXmLo3jeXzrvGOc08j7YtO22-WoTPYwOri35n8Fx4OSjipvlRCV4DMbx5XQnPCi__C2KCqDWUmYOC9f4D5i10z0DnXU9ACNk1HhqBZYWB2-htPr88gm2RlFIciZ6jwx9hyFQAKyFCtUQSHciQQDJC3jZfZ_-6qfvVLIVoDlaPuGZ9kfkyWbR9WYVnwhA28OP3PFcx1e9Z14F6keoovTlc7-j7KBl2h925Qexdhn0td2w-f8IkbrSvC8HLQrHhQg2HKacEAJiBEQg6PXElrUj9bn-xPon5Y7GIybE-IxH7LKpghGRPe6Gmsxs4wol_TPUQkgTtRyk3IF67BEWijnz2AUDUyIWlRxme-EHPAwc9S_xJFWJ5lRIdsOR-pPp4Cbm878k=s500-no?authuser=2" alt="Time complexity"></p>
+<hr>
+<h2 id="小結">小結</h2>
+<ol>
+<li>名詞解釋：<!-- raw HTML omitted --></li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>名稱</th>
+<th>解釋</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Basic Operation</td>
+<td>在整體演算法執行『一次』的過程中，什麼事情做了最多次</td>
+</tr>
+<tr>
+<td>Input size</td>
+<td>演算法總共執行了幾次</td>
+</tr>
+<tr>
+<td>Best case</td>
+<td>一個演算法會遇到的最好情況的結果</td>
+</tr>
+<tr>
+<td>Average case</td>
+<td>一個演算法會遇到的平均情況下的結果</td>
+</tr>
+<tr>
+<td>Worst case</td>
+<td>一個演算法會遇到的最差情況的結果</td>
+</tr>
+</tbody>
+</table>
+<ol start="2">
+<li>衡量一個演算法好壞的因素有二：
+<ul>
+<li><strong>執行時間(Time complexity)</strong></li>
+<li><strong>使用空間(Space complexity)</strong></li>
+</ul>
+</li>
+<li>估算演算法的執行時間：<code>t(n) ≈ Cop × C(n)</code></li>
+<li><strong>Big O Notation (𝜪)</strong> 的概念在電腦科學上常用來分析演算法的Time complexity。</li>
+<li>若有一個演算法的Time complexity方程式為<code>2n^3 + n^2 + 10</code>，在Big O notation的概念中，當<strong>n ≈ ∞</strong>時，<code>2n^3</code>會成為主導一個演算法執行時間最主要的因素。</li>
+</ol>
+<hr>
+<h2 id="預告">預告</h2>
+<p>下一篇將會介紹<strong>Ｎ種不同的資料結構及其特性</strong>。</p>
+<hr>
+<h2 id="references">References</h2>
+<ol>
+<li><a href="https://doc.lagout.org/science/0_Computer%20Science/2_Algorithms/Introduction%20to%20the%20Design%20and%20Analysis%20of%20Algorithms%20%283rd%20ed.%29%20%5BLevitin%202011-10-09%5D.pdf">Introduction to the Design and Analysis of Algorithms, 3rd Edition, by Anany Levitin</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Big_O_notation">Big O notation</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Time_complexity">Time complexity</a></li>
+</ol>
+
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/posts/a_brief_introduction_of_using_java_logger" data-toggle="tooltip" data-placement="top" title="A Brief Introduction of Using Java Logger">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                </ul>
+
+                
+<div id="disqus-comment"></div>
+
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "informistry" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+            </div>
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/InformisTry/tags/hints" title="hints">
+                            hints
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/InformisTry/tags/java" title="java">
+                            java
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>FRIENDS</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="https://ianjustin39.github.io/ianlife/">Ian化學系軟體工程師</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                    
+                    <li>
+                        <a href="mailto:adslbbc1949@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/JumperC2P">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/hank-lee-784779136/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/8090654/h-lee">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+            
+                    
+                    
+                    
+            
+            
+            
+                </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; InformisTry 2020
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-172654708-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+</body>
+</html>
