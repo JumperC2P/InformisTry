@@ -2,22 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>triathlon on InformisTry</title>
-    <link>https://jumperc2p.github.io/InformisTry/tags/triathlon/</link>
+    <link>https://jumperc2p.github.io/tags/triathlon/</link>
     <description>Recent content in triathlon on InformisTry</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 05 Jul 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 04 Jul 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://jumperc2p.github.io/InformisTry/tags/triathlon/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://jumperc2p.github.io/tags/triathlon/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>【一口口用心品嚐演算法30天系列】Day2 -- 解析演算法的優劣</title>
-      <link>https://jumperc2p.github.io/InformisTry/posts/2020_30days/algorithm_time_complexity/</link>
-      <pubDate>Sun, 05 Jul 2020 00:00:00 +0000</pubDate>
+      <title>【一口口用心品嚐演算法30天系列】Day4 -- 資料結構(Data Structures)</title>
+      <link>https://jumperc2p.github.io/posts/ithome-triathlon/data_structures/</link>
+      <pubDate>Sat, 04 Jul 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://jumperc2p.github.io/InformisTry/posts/2020_30days/algorithm_time_complexity/</guid>
-      <description>前言 第一天我們針對了演算法做了非常簡單的介紹，我們提到演算法本身是一個用來解決問題的一系列精準不模糊的步驟或指示，而食譜中的製作步驟可以說是</description>
+      <guid>https://jumperc2p.github.io/posts/ithome-triathlon/data_structures/</guid>
+      <description>前言 第三天說明了什麼是抽象資料型別(Abstract Data Type, ADT)，也介紹了八種相對比較被使用的抽象資料型別，然而，抽象資料型別本身並不是直接</description>
+    </item>
+    
+    <item>
+      <title>【一口口用心品嚐演算法30天系列】Day3 -- 抽象資料型別及特性</title>
+      <link>https://jumperc2p.github.io/posts/ithome-triathlon/abstract_data_types/</link>
+      <pubDate>Fri, 03 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://jumperc2p.github.io/posts/ithome-triathlon/abstract_data_types/</guid>
+      <description>前言 第二天我們介紹了針對演算法執行效率(Time Complexity)進行了說明，然而除了當中提到的Basic Operation和Input</description>
     </item>
     
   </channel>

@@ -15,9 +15,9 @@
     
 
     
-    <meta name="title" content="What&#39;s Informistry?" />
-    <meta property="og:title" content="What&#39;s Informistry?" />
-    <meta property="twitter:title" content="What&#39;s Informistry?" />
+    <meta name="title" content="【一口口用心品嚐演算法30天系列】Day3 -- 抽象資料型別及特性" />
+    <meta property="og:title" content="【一口口用心品嚐演算法30天系列】Day3 -- 抽象資料型別及特性" />
+    <meta property="twitter:title" content="【一口口用心品嚐演算法30天系列】Day3 -- 抽象資料型別及特性" />
     
 
     
@@ -34,9 +34,9 @@
     <meta name="keyword"  content="Chih-Hsuan Lee, Informistry, Hank Lee, JumperC2P, Hank portfolio, Java, Python, Developer, Engineer, Software, ReactJS, Web, React, Database, Kubernetes, 微服務, Microservice, 演算法">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>What&#39;s Informistry?-Informistry</title>
+    <title>【一口口用心品嚐演算法30天系列】Day3 -- 抽象資料型別及特性-Informistry</title>
 
-    <link rel="canonical" href="/posts/whats_informistry">
+    <link rel="canonical" href="/posts/iThome-triathlon/abstract_data_types">
 
     <link rel="stylesheet" href="/css/iDisqus.min.css"/>
 	
@@ -158,7 +158,7 @@
 
 <style type="text/css">
     header.intro-header {
-        background-image: url('https://tinyurl.com/yc28myh2')
+        background-image: url('https://tinyurl.com/y7zeezbe')
     }
 </style>
 <header class="intro-header">
@@ -168,22 +168,34 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/life" title="Life">
-                            Life
+                        <a class="tag" href="/tags/algorithm" title="Algorithm">
+                            Algorithm
+                        </a>
+                        
+                        <a class="tag" href="/tags/ithome" title="iThome">
+                            iThome
+                        </a>
+                        
+                        <a class="tag" href="/tags/triathlon" title="triathlon">
+                            triathlon
+                        </a>
+                        
+                        <a class="tag" href="/tags/data-structure" title="Data Structure">
+                            Data Structure
                         </a>
                         
                     </div>
-                    <h1>What&#39;s Informistry?</h1>
-                    <h2 class="subheading"></h2>
+                    <h1>【一口口用心品嚐演算法30天系列】Day3 -- 抽象資料型別及特性</h1>
+                    <h2 class="subheading">2020IT邦鐵人賽</h2>
                     <span class="meta">
                         Posted by 
                         
                             Hank Lee
                          
                         on 
-                        Saturday, May 2, 2020
+                        Friday, July 3, 2020
                         
-                            <span id="/posts/whats_informistry" class="leancloud_visitors meta_data_item" data-flag-title="">
+                            <span id="/posts/iThome-triathlon/abstract_data_types" class="leancloud_visitors meta_data_item" data-flag-title="">
     <span class="post-meta-item-icon">
       <span class="octicon octicon-eye"></span> 
     </span>
@@ -344,31 +356,238 @@ $(function() {
                     <header>
                         <h2>Table of Contents</h2>
                     </header>
-                    <nav id="TableOfContents"></nav>
+                    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#什麼是抽象資料型別abstract-data-type-adt">什麼是抽象資料型別(Abstract Data Type, ADT)?</a></li>
+    <li><a href="#八種抽象資料型別">八種抽象資料型別</a></li>
+    <li><a href="#小結">小結</a></li>
+    <li><a href="#預告">預告</a></li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
                     
                 
 
-                <p>When I tell others that my major subject in college is chemistry and biochemistry, both of them are shocked.</p>
-<p>They reckon the knowledge of chemistry and that of IT are totally different, and I always agree with that.</p>
-<p>For me, chemistry is fun, but maybe information technology is the career which I intend to devote my whole life to.</p>
-<p>So, the word <strong>Informistry</strong> is a combination of my life:</p>
+                <h2 id="前言">前言</h2>
+<p>第二天我們介紹了針對演算法執行效率(Time Complexity)進行了說明，然而除了當中提到的Basic Operation和Input Size會影響Time Complexity之外，資料本身的結構也是相當重要的。在真正介紹幾個比較常用的資料結構之前，今天會先介紹<strong>抽象資料型別(Abstract Data Type)及其特性</strong>。</p>
+<hr>
+<h2 id="什麼是抽象資料型別abstract-data-type-adt">什麼是抽象資料型別(Abstract Data Type, ADT)?</h2>
+<p>演算法在解析、處理資料時，可能會需要將原先的資料轉換成不同的資料形式進行處理，最後再以資料的樣態產出結果來儲存，然而我們在設計與分析演算法的時候，通常Input data的資料型態是固定的，我們並不會針對<strong>一個演算法</strong>考慮<strong>所有不同的Input資料型態</strong>，取而代之的是針對<strong>資料的一般特性(general characteristics)與操作方式(operations)</strong> 進行討論，而這種資料的抽象化就是<strong>抽象資料型別(Abstract Data Type)</strong>。</p>
+<p>在電腦科學中，抽象資料型別(Abstract Data Type)是一種<strong>理論上的觀念</strong>，它主要是用於設計與分析演算法、資料結構及軟體系統當中，而一個抽象資料型別通常定義了<strong>資料型別(values)<strong>和</strong>操作方式(operations)</strong>，舉例來說，整數(<code>Integer</code>)就是一個抽象資料型別，他定義了在這個ADT底下，其資料型別(value)為整數(-2, -1, 0, 1, 2等)且操作方式(operation)有加、減、乘、除等。此外，抽象資料型別的這個概念並沒有限定於特定的程式語言，換言之，不同的程式語言都可以<strong>實作</strong>抽象資料型別的<strong>概念</strong>，而且單一種ADT也可以透過<strong>多種不同的方式</strong>來進行實作，例如<code>Bit vectors</code>或<code>Hexadecimal vectors</code>這兩種資料結構都是<code>Integer</code>的實作(Implementation)。</p>
+<hr>
+<h2 id="八種抽象資料型別">八種抽象資料型別</h2>
+<p>下面將會針對八種比較常見的抽象資料型別一一介紹：</p>
+<h3 id="1-set">1. Set</h3>
 <ul>
-<li>Now: the career I work on now: <strong>Inform</strong>ation Technology</li>
-<li>Past: the major subject in college: Che<strong>mistry</strong></li>
+<li>集合物件(Collection)</li>
+<li>每個物件在<code>Set</code>中只會出現一次（不會重複）</li>
+<li>elements無順序(ordering)</li>
+<li>典型的操作方法：add, remove, search</li>
+<li>在<code>Set</code>中若一個物件可能出現多次，那這樣的集合稱為<code>Multiset</code></li>
+<li>範例：
+<ul>
+<li>Binary : S1 = {0, 1}</li>
+<li>Character : S2 = {c, a, y, s, t}</li>
+<li>Word : S3 = { car, house, man, sat, truck }</li>
+<li>Delimiter : S4 = {{!}, {; }, {?}, {.}}</li>
+<li>Variable, prefix-free : S5 = {0, 10, 110, 1110}</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    Informistry <span style="color:#ff79c6">=</span> IT <span style="color:#ff79c6">+</span> Chemistry
-</code></pre></div><p>This website is used to record those knowledge and tips that I cannot remember🤣.</p>
-<p>Hope I can post articles periodically, and all of you can enjoy my articles.</p>
-<p>If you have any questions, please feel free to contact me via <a href="https://github.com/JumperC2P">Github</a>, <a href="https://www.linkedin.com/in/hank-lee-784779136/">LinkedIn</a> or drop him an <a href="adslbbc1949@gmail.com">email</a>.</p>
+</li>
+</ul>
+<h3 id="2-sequenceslist">2. Sequences/List</h3>
+<ul>
+<li>集合物件(Collection)</li>
+<li>Elements可重複存在</li>
+<li>Elements會有先後順序(ordering)</li>
+<li>典型的操作方法：add, remove, search</li>
+<li>範例：
+<ul>
+<li>Binary : T1 = “101010110001”</li>
+<li>English : T2 = “The red car belongs to me.”</li>
+<li>Genomic : T3 = “gattcaggaatccgccggtaacgcgcatataattt”</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-dictionarymap">3. Dictionary/Map</h3>
+<ul>
+<li>以<strong>Key-Value</strong>組合的集合物件(Collection)</li>
+<li>每個Key在一個Collection中只會出現一次</li>
+<li>時常用來作為傳遞資料的<strong>JSON</strong>也常以<code>Dictionary/Map</code>的方式來存放資料</li>
+<li>範例：
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>brand</td>
+<td>Honda</td>
+</tr>
+<tr>
+<td>color</td>
+<td>Red</td>
+</tr>
+<tr>
+<td>body_type</td>
+<td>Hatch</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h3 id="4-stack">4. Stack</h3>
+<p><img src="https://tinyurl.com/y59r89tp" alt="Stack"></p>
+<ul>
+<li><strong>ＬＩＦＯ（Last In, First Out)</strong>: 舉例來說，就像去吃迴轉壽司，一個盤子一個盤子疊上去，當最後在算錢的時候，再從最上面一個盤子一個盤子取下來，也就是，最後疊上去的(Last In)，第一個拿下來(First Out)。</li>
+<li>典型的操作方法：pop, push</li>
+</ul>
+<h3 id="5-queue">5. Queue</h3>
+<p><img src="https://tinyurl.com/y2ztubk2" alt="Queue"></p>
+<ul>
+<li><strong>ＦＩＦＯ（First In, First Out)</strong>: 與<code>Stack</code>不同，<code>Queue</code>就像排隊一樣，先進到隊伍中的項目(First In)就會優先被取用(First Out)</li>
+<li>典型的操作方法：pop, push</li>
+</ul>
+<h3 id="6-priority-queue">6. Priority Queue</h3>
+<ul>
+<li>與<code>Queue</code>相同，但是每個Elements都會自帶一個『優先度』(priority)</li>
+<li>在新增Element(Enqueue)時，與<code>Queue</code>的的方式相同</li>
+<li>但在取出Element(Dequeue)時，會尋找<strong>優先度最高</strong>的Element先行取出</li>
+<li>如果有數個Element的</li>
+</ul>
+<h3 id="7-graph">7. Graph</h3>
+<p><img src="https://tinyurl.com/y3789dlj" alt="Graph"></p>
+<ul>
+<li>在做『路徑導航』或『計算路徑』時，使用的資料結構就是<code>Graph</code></li>
+<li><code>Graph</code>是由 <strong>節點(Vertices)和關聯(Edges)</strong> 組合而成，以上圖為例：
+<ul>
+<li><strong>V</strong>(ertices) <strong>= { A, B, C, D, E, F }</strong></li>
+<li><strong>E</strong>(dges) <strong>= { (A,F), (A,C), (C, E), (B, C), (B, F), (B, D), (D, E) }</strong></li>
+</ul>
+</li>
+<li><code>Graph</code>又可分為兩種：
+<ol>
+<li><strong>Directed Graph</strong>：Edges是<strong>單方向</strong>的，因此行進方向僅會依據『箭頭』前進。</li>
+<li><strong>Undirected Graph</strong>：Edges是<strong>雙方向</strong>的，也就是節點間只要有關聯，皆可相互溝通。
+<img src="https://tinyurl.com/yxwca2db" alt="Directed & Undirected Graph"></li>
+</ol>
+</li>
+<li>要如何在『不畫圖』的方式下表示<code>Graph</code>呢？基本上方法也有兩種：
+<ol>
+<li><strong>Adjacency Matrix</strong>：Matrix像是一個二維陣列，在有連線的『交集處』填入<code>1</code>，其餘則為<code>0</code>。</li>
+<li><strong>Adjacency List</strong>：List則是一個清單，直接列舉了每一個節點與哪些節點間有關聯。</li>
+</ol>
+<ul>
+<li>針對上方兩組Graph轉換成Adjacency Matrix和Adjacency List的過程如下：
+<img src="https://tinyurl.com/y6jsyky5" alt="Undirected Graph & Adjacency Matrix & Adjacency List">
+<img src="https://tinyurl.com/y3y38reo" alt="Directed Graph & Adjacency Matrix & Adjacency List"></li>
+</ul>
+</li>
+<li>假如每個Edges都包含了『距離』，在Adjacency Matrix和Adjacency List中的表示方式如下圖（僅以Undirected Graph舉例）：
+<img src="https://tinyurl.com/yxarnqn3" alt="Undirected Graph & Adjacency Matrix & Adjacency List with Distances"></li>
+</ul>
+<h3 id="8-tree">8. Tree</h3>
+<p><img src="https://tinyurl.com/yxeaov6r" alt="Tree"></p>
+<ul>
+<li><code>Tree</code>也是一種Graph</li>
+<li><code>Tree</code>是沒有環形（acyclic）的Graph</li>
+<li><code>Tree</code>有一個特性是<code>Graph</code>沒有的：<strong>Edges的數量永遠會是Vertices的數量減1（|E| = |V| -1）</strong></li>
+<li><code>Tree</code>可分為兩種：
+<ol>
+<li>Free Tree: 沒有環形且互連的Graph</li>
+<li>Forest: 沒有環形且不互連的Graph
+<img src="https://tinyurl.com/y5awysfl" alt="Free Tree & Forest"></li>
+</ol>
+</li>
+<li>在實際上應用時，絕大部分狀況會將原本的<code>Free Tree</code>轉換成<code>Rooted Tree</code>，會由其中一個Node作為<strong>Root</strong>，再由其往下延伸、串接。</li>
+<li><code>Rooted Tree</code>的好處是它的『階層關係』，至於這個『階層關係』所代表的意義，就看實作時要賦予它什麼意義了，可以是『大小』、『相似度』等。
+<img src="https://tinyurl.com/y3loold6" alt="Free Tree & Rooted Tree"></li>
+</ul>
+<hr>
+<h2 id="小結">小結</h2>
+<ul>
+<li>抽象資料型別(Abstract Data Type, ADT)是一種理論上的概念，可藉由不同的Data Structure來實作。</li>
+<li>8種常見的ADT：
+<table>
+<thead>
+<tr>
+<th align="left">No.</th>
+<th align="left">ADT</th>
+<th align="left">重點</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">1</td>
+<td align="left">Set</td>
+<td align="left">每個物件只會出現一次，且無順序性</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">Sequences/List</td>
+<td align="left">每個物件可出現多次，且有順序性</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">Dictionary/Map</td>
+<td align="left">key-value pairs的集合物件，Key在此集合物件中不會重複</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">Stack</td>
+<td align="left">Last In, First Out(LIFO)</td>
+</tr>
+<tr>
+<td align="left">5</td>
+<td align="left">Queue</td>
+<td align="left">First In, First Out(FIFO)</td>
+</tr>
+<tr>
+<td align="left">6</td>
+<td align="left">Priority Queue</td>
+<td align="left">有優先等級的Queue，在Dequeue時會依照優先等級取值</td>
+</tr>
+<tr>
+<td align="left">7</td>
+<td align="left">Graph</td>
+<td align="left">- 由Vertices和Edges組成 <br> - 可分為Undirected Graph及Directed Graph <br> - 在不畫圖的方式下，可用Adjacency Matrix和Adjacency List表示</td>
+</tr>
+<tr>
+<td align="left">8</td>
+<td align="left">Tree</td>
+<td align="left">- 為沒有<strong>環狀</strong>的Graph<br> - Edges的數量永遠會是Vertices的數量減一（</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<hr>
+<h2 id="預告">預告</h2>
+<p>下一篇將會介紹<strong>5種資料結構及其特性</strong>。</p>
+<hr>
+<h2 id="references">References</h2>
+<ol>
+<li><a href="https://doc.lagout.org/science/0_Computer%20Science/2_Algorithms/Introduction%20to%20the%20Design%20and%20Analysis%20of%20Algorithms%20%283rd%20ed.%29%20%5BLevitin%202011-10-09%5D.pdf">Introduction to the Design and Analysis of Algorithms, 3rd Edition, by Anany Levitin</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Abstract_data_type">Abstract data type - Wikipedia</a></li>
+</ol>
+
 
                 
 
                 <hr>
                 <ul class="pager">
                     
+                    <li class="previous">
+                        <a href="/posts/a_brief_introduction_of_using_java_logger" data-toggle="tooltip" data-placement="top" title="A Brief Introduction of Using Java Logger">&larr;
+                            Previous Post</a>
+                    </li>
+                    
                     
                     <li class="next">
-                        <a href="/posts/a_combination_of_timertask_and_timer" data-toggle="tooltip" data-placement="top" title="A Combination of TimerTask and Timer">Next
+                        <a href="/posts/iThome-triathlon/data_structures" data-toggle="tooltip" data-placement="top" title="【一口口用心品嚐演算法30天系列】Day4 -- 資料結構(Data Structures)">Next
                             Post &rarr;</a>
                     </li>
                     

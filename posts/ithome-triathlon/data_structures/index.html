@@ -15,9 +15,9 @@
     
 
     
-    <meta name="title" content="" />
-    <meta property="og:title" content="" />
-    <meta property="twitter:title" content="" />
+    <meta name="title" content="【一口口用心品嚐演算法30天系列】Day4 -- 資料結構(Data Structures)" />
+    <meta property="og:title" content="【一口口用心品嚐演算法30天系列】Day4 -- 資料結構(Data Structures)" />
+    <meta property="twitter:title" content="【一口口用心品嚐演算法30天系列】Day4 -- 資料結構(Data Structures)" />
     
 
     
@@ -34,9 +34,9 @@
     <meta name="keyword"  content="Chih-Hsuan Lee, Informistry, Hank Lee, JumperC2P, Hank portfolio, Java, Python, Developer, Engineer, Software, ReactJS, Web, React, Database, Kubernetes, 微服務, Microservice, 演算法">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
-    <title>Informistry</title>
+    <title>【一口口用心品嚐演算法30天系列】Day4 -- 資料結構(Data Structures)-Informistry</title>
 
-    <link rel="canonical" href="/top/about/">
+    <link rel="canonical" href="/posts/iThome-triathlon/data_structures">
 
     <link rel="stylesheet" href="/css/iDisqus.min.css"/>
 	
@@ -155,14 +155,183 @@
 
 
 
-<header class="intro-header" style="background-image: url('https://tinyurl.com/yc28myh2')">
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('https://tinyurl.com/y7zeezbe')
+    }
+</style>
+<header class="intro-header">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading">
-                    <h1>InformisTry </h1>
-                    
-		    <span class="subheading">The harder you work, the less repentance you will get.</span>
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/algorithm" title="Algorithm">
+                            Algorithm
+                        </a>
+                        
+                        <a class="tag" href="/tags/ithome" title="iThome">
+                            iThome
+                        </a>
+                        
+                        <a class="tag" href="/tags/triathlon" title="triathlon">
+                            triathlon
+                        </a>
+                        
+                        <a class="tag" href="/tags/data-structure" title="Data Structure">
+                            Data Structure
+                        </a>
+                        
+                    </div>
+                    <h1>【一口口用心品嚐演算法30天系列】Day4 -- 資料結構(Data Structures)</h1>
+                    <h2 class="subheading">2020IT邦鐵人賽</h2>
+                    <span class="meta">
+                        Posted by 
+                        
+                            Hank Lee
+                         
+                        on 
+                        Saturday, July 4, 2020
+                        
+                            <span id="/posts/iThome-triathlon/data_structures" class="leancloud_visitors meta_data_item" data-flag-title="">
+    <span class="post-meta-item-icon">
+      <span class="octicon octicon-eye"></span> 
+    </span>
+    <i class="fa fa-eye"></i>
+    <span class="old-visitors-count" style="display: none;"></span>
+    <span class="leancloud-visitors-count"></span>
+</span>
+
+
+
+<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+
+<script>
+	AV.initialize("", "");
+</script>
+
+<script type="text/javascript">
+function showTime(Counter) {
+    var query = new AV.Query(Counter);
+    var entries = [];
+    var $visitors = $(".leancloud_visitors");
+
+    $visitors.each(function() {
+        entries.push($(this).attr("id").trim());
+    });
+
+    query.containedIn('url', entries);
+    query.find()
+        .done(function(results) {
+            var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+            var OLD_COUNT_CONTAINER_REF = '.old-visitors-count';
+
+            
+            
+            
+            
+
+            for (var i = 0; i < results.length; i++) {
+                var item = results[i];
+                var url = item.get('url');
+                var time = item.get('time');
+                var element = document.getElementById(url);
+
+                $(element).find(COUNT_CONTAINER_REF).text(time);
+            }
+            for (var i = 0; i < entries.length; i++) {
+                var url = entries[i];
+                var element = document.getElementById(url);
+                var countSpan = $(element).find(COUNT_CONTAINER_REF);
+                if (countSpan.text() == '') {
+                    var oldCountSpan = $(element).find(OLD_COUNT_CONTAINER_REF).text();
+                    if(oldCountSpan!=''){
+                        countSpan.text(0+parseInt(oldCountSpan));
+                    }else{
+                        countSpan.text(0);          
+                    }
+                }
+            }
+        })
+        .fail(function(object, error) {
+            console.log("Error: " + error.code + " " + error.message);
+        });
+}
+
+function addCount(Counter) {
+    var $visitors = $(".leancloud_visitors");
+    var url = $visitors.attr('id').trim();
+    var title = $visitors.attr('data-flag-title').trim();
+    var query = new AV.Query(Counter);
+
+    query.equalTo("url", url);
+    query.find({
+        success: function(results) {
+            if (results.length > 0) {
+                var counter = results[0];
+                counter.fetchWhenSave(true);
+                counter.increment("time");
+                counter.save(null, {
+                    success: function(counter) {
+                        var $element = $(document.getElementById(url));
+                        $element.find('.leancloud-visitors-count').text(counter.get('time'));
+                    },
+                    error: function(counter, error) {
+                        console.log('Failed to save Visitor num, with error message: ' + error.message);
+                    }
+                });
+            } else {
+                var newcounter = new Counter();
+                 
+                var acl = new AV.ACL();
+                acl.setPublicReadAccess(true);
+                acl.setPublicWriteAccess(true);
+                newcounter.setACL(acl);
+                 
+                newcounter.set("title", title);
+                newcounter.set("url", url);
+                var OLD_COUNT_CONTAINER_REF = '.old-visitors-count';
+                var $element = $(document.getElementById(url));
+                var oldCountSpan = $element.find(OLD_COUNT_CONTAINER_REF).text();
+                if(oldCountSpan!=''){
+                    newcounter.set("time", parseInt(oldCountSpan)+1);
+                }else{
+ 	                    newcounter.set("time",  1);
+                }
+                newcounter.save(null, {
+                    success: function(newcounter) {
+                        var $element = $(document.getElementById(url));
+                        $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                    },
+                    error: function(newcounter, error) {
+                        console.log('Failed to create');
+                    }
+                });
+            }
+        },
+        error: function(error) {
+            console.log('Error:' + error.code + " " + error.message);
+        }
+    });
+}
+$(function() {
+    var Counter = AV.Object.extend("Counter");
+    
+    
+    if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+    } else {
+        showTime(Counter);
+    }
+});
+</script>
+
+                        
+                        
+                        
+                    </span>
                 </div>
             </div>
         </div>
@@ -182,12 +351,88 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-         	<p><img src="https://tinyurl.com/y76abp4y" alt=""></p>
-<p><strong><em>Hank Lee</em></strong> is a full stack web developer and also software enginner. Currently, he is studying for master of information technology at RMIT university in Australia🇦🇺.</p>
-<p>He is familiar with <strong>Java, Spring Boot, RDBMS</strong> and has experiences in <strong>HTML/CSS, Javascript, jQuery, Angular</strong>. Recently, he is working on <strong>ReactJS, Python, Docker and Raspberry Pi</strong> in his assessments. In his career, not only does he work as a web developer, but also he has some experiences in pre-sale works. As a pre-sale software engineer, he helped customers to solve many issues about the product they sell, and those customers are satisfied with his responses. He is willing to take new challenges if the opportunity matches his career path.</p>
-<p>And also, he is a sport lover. He joins RMIT volleyball club and have some games outside with some club members. Moreover, he loves to help people, so as <strong>a vice president</strong> of RMIT Taiwan club, he helps to hold some events that can truly let the students from Taiwan enjoy the culture in Melbourne with other Taiwan clubs in University of Melbourne and Monash University.</p>
-<p>While he is not working, he enjoys watching movies, dramas, travelling, writing blogs and learning new techniques.</p>
-<p>Feel free to connect Hank via <a href="https://github.com/JumperC2P">Github</a>, <a href="https://www.linkedin.com/in/hank-lee-784779136/">LinkedIn</a> or drop him an <a href="adslbbc1949@gmail.com">email</a>.</p>
+                
+                    
+                    <header>
+                        <h2>Table of Contents</h2>
+                    </header>
+                    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#什麼是資料結構data-structure">什麼是資料結構(Data Structure)？</a></li>
+    <li><a href="#五種資料結構">五種資料結構</a></li>
+    <li><a href="#小結">小結</a></li>
+    <li><a href="#預告">預告</a></li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+                    
+                
+
+                <h2 id="前言">前言</h2>
+<p>第三天說明了什麼是抽象資料型別(Abstract Data Type, ADT)，也介紹了八種相對比較被使用的抽象資料型別，然而，抽象資料型別本身並不是直接使用在演算法當中，它是屬於一個理論上的概念，那在演算法當中是用管理什麼來管理、儲存資料呢？</p>
+<hr>
+<h2 id="什麼是資料結構data-structure">什麼是資料結構(Data Structure)？</h2>
+<ul>
+<li>上面提到ADT只是一個<strong>概念</strong>，並不是『真正』在演算法中使用的物件；既然ADT只是概念，勢必就會有將這些概念實作出來的物件，而這實作ADT的物件就是<strong>資料結構(Data Structures)</strong>。</li>
+<li>資料結構用不同的方式來達到管理、儲存資料的目的。</li>
+<li>一個好的資料結構可以大幅增加系統運行的效能。</li>
+<li>不同類型的資料結構都有其適合的應用情境。</li>
+<li>有些資料結構也可能是針對某單一應用情境下被設計實作出來的。</li>
+</ul>
+<hr>
+<h2 id="五種資料結構">五種資料結構</h2>
+<h3 id="1-array">1. Array</h3>
+<p><img src="https://tinyurl.com/y4wuxgux" alt="Array"></p>
+<ul>
+<li><code>Array</code>是一個1-D(one dimensional)的結構，每個Elements會有自己的<strong>index</strong></li>
+<li><code>Array</code>也是一個集合物件(Collection)</li>
+<li>基本上用來儲存相同資料型態的物件</li>
+<li>儲存物件的時候具有<strong>連續性</strong>，如上圖，儲存物件的時候會依據index檢查該Element是否為空，當找到空的位置的時候，才將物件儲存在那個位置。</li>
+<li>具快速存取性</li>
+<li><code>Array</code>的三個操作模式：
+<h4 id="1-search">1. Search:</h4>
+<p><img src="https://tinyurl.com/yxsx4hla" alt="Array-Search">
+從Array當中尋找指定的Element時，會從第0個index開始針對其Element做比較，一步一步往下查找，直到找到指定的Element才結束流程。</p>
+<h4 id="2-insertion">2. Insertion:</h4>
+<p>當要把一個Element插入Array中指定的某一個位置時，對於這個指定位置後面的Elements來說，全部都要<strong>往後退一格</strong>。
+<img src="https://tinyurl.com/y2brnutm" alt="Array-Insertion-Non-Fully-Array">
+但假設在插入這個新Element之前，Array本身的空間已經是滿的了，那就是變成要<strong>新增一個原Array長度加1</strong>的Array，然後<strong>再將Elements一個一個放進這個新Array裡面</strong>。
+<img src="https://tinyurl.com/yywzpawq" alt="Array-Insertion-Fully-Array"></p>
+<h4 id="3-deletion">3. Deletion:</h4>
+<p><img src="https://tinyurl.com/y22j47jr" alt="Array-Deletion">
+從Array當中刪除指定的Element時，原本位在此Element後方的其他Elements都會<strong>往前移動一格</strong>。</p>
+</li>
+</ul>
+<h3 id="2-linked-list">2. Linked List</h3>
+<h3 id="3-binary-search-treebst">3. Binary Search Tree(BST)</h3>
+<h3 id="4-hashtable">4. Hashtable</h3>
+<h3 id="5-heap">5. Heap</h3>
+<hr>
+<h2 id="小結">小結</h2>
+<hr>
+<h2 id="預告">預告</h2>
+<p>重頭戲即將登場，接下來將會一天介紹一個演算法。</p>
+<hr>
+<h2 id="references">References</h2>
+<ol>
+<li><a href="https://doc.lagout.org/science/0_Computer%20Science/2_Algorithms/Introduction%20to%20the%20Design%20and%20Analysis%20of%20Algorithms%20%283rd%20ed.%29%20%5BLevitin%202011-10-09%5D.pdf">Introduction to the Design and Analysis of Algorithms, 3rd Edition, by Anany Levitin</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Data_structure">Data Structure - Wikipedia</a></li>
+</ol>
+
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/posts/iThome-triathlon/abstract_data_types" data-toggle="tooltip" data-placement="top" title="【一口口用心品嚐演算法30天系列】Day3 -- 抽象資料型別及特性">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                </ul>
 
                 
 <div id="disqus-comment"></div>
@@ -232,31 +477,31 @@
                         
                         
                         <a href="/tags/algorithm" title="algorithm">
-                        algorithm
+                            algorithm
                         </a>
                         
                         
                         
                         <a href="/tags/data-structure" title="data-structure">
-                        data-structure
+                            data-structure
                         </a>
                         
                         
                         
                         <a href="/tags/hints" title="hints">
-                        hints
+                            hints
                         </a>
                         
                         
                         
                         <a href="/tags/ithome" title="ithome">
-                        ithome
+                            ithome
                         </a>
                         
                         
                         
                         <a href="/tags/java" title="java">
-                        java
+                            java
                         </a>
                         
                         
@@ -268,7 +513,7 @@
                         
                         
                         <a href="/tags/triathlon" title="triathlon">
-                        triathlon
+                            triathlon
                         </a>
                         
                         
