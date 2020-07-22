@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>iThome on InformisTry</title>
-    <link>https://jumperc2p.github.io/tags/ithome/</link>
+    <link>https://jumperc2p.github.io/InformisTry/tags/ithome/</link>
     <description>Recent content in iThome on InformisTry</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 04 Jul 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://jumperc2p.github.io/tags/ithome/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://jumperc2p.github.io/InformisTry/tags/ithome/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>【一口口用心品嚐演算法30天系列】Day4 -- 資料結構(Data Structures)</title>
-      <link>https://jumperc2p.github.io/posts/ithome-triathlon/data_structures/</link>
+      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/data_structures/</link>
       <pubDate>Sat, 04 Jul 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://jumperc2p.github.io/posts/ithome-triathlon/data_structures/</guid>
+      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/data_structures/</guid>
       <description>前言 第三天說明了什麼是抽象資料型別(Abstract Data Type, ADT)，也介紹了八種相對比較被使用的抽象資料型別，然而，抽象資料型別本身並不是直接</description>
     </item>
     
     <item>
       <title>【一口口用心品嚐演算法30天系列】Day3 -- 抽象資料型別及特性</title>
-      <link>https://jumperc2p.github.io/posts/ithome-triathlon/abstract_data_types/</link>
+      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/abstract_data_types/</link>
       <pubDate>Fri, 03 Jul 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://jumperc2p.github.io/posts/ithome-triathlon/abstract_data_types/</guid>
+      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/abstract_data_types/</guid>
       <description>前言 第二天我們介紹了針對演算法執行效率(Time Complexity)進行了說明，然而除了當中提到的Basic Operation和Input</description>
     </item>
     

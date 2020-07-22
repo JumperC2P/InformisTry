@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Log on InformisTry</title>
-    <link>https://jumperc2p.github.io/tags/log/</link>
+    <link>https://jumperc2p.github.io/InformisTry/tags/log/</link>
     <description>Recent content in Log on InformisTry</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 08 May 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://jumperc2p.github.io/tags/log/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://jumperc2p.github.io/InformisTry/tags/log/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>A Brief Introduction of Using Java Logger</title>
-      <link>https://jumperc2p.github.io/posts/a_brief_introduction_of_using_java_logger/</link>
+      <link>https://jumperc2p.github.io/InformisTry/posts/a_brief_introduction_of_using_java_logger/</link>
       <pubDate>Fri, 08 May 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://jumperc2p.github.io/posts/a_brief_introduction_of_using_java_logger/</guid>
+      <guid>https://jumperc2p.github.io/InformisTry/posts/a_brief_introduction_of_using_java_logger/</guid>
       <description>&lt;p&gt;Recently, I am asked to record some information about how my server runs. So, I decide to use &lt;code&gt;java.util.logging.Logger&lt;/code&gt; to implement the logging process.
 Also this article will give you a sample code of how to use the basic function of &lt;code&gt;java.util.logging.Logger&lt;/code&gt;.&lt;/p&gt;</description>
     </item>

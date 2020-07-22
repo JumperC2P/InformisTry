@@ -2,58 +2,58 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on InformisTry</title>
-    <link>https://jumperc2p.github.io/post/</link>
+    <link>https://jumperc2p.github.io/InformisTry/post/</link>
     <description>Recent content in Posts on InformisTry</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 04 Jul 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://jumperc2p.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://jumperc2p.github.io/InformisTry/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>【一口口用心品嚐演算法30天系列】Day4 -- 資料結構(Data Structures)</title>
-      <link>https://jumperc2p.github.io/posts/ithome-triathlon/data_structures/</link>
+      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/data_structures/</link>
       <pubDate>Sat, 04 Jul 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://jumperc2p.github.io/posts/ithome-triathlon/data_structures/</guid>
+      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/data_structures/</guid>
       <description>前言 第三天說明了什麼是抽象資料型別(Abstract Data Type, ADT)，也介紹了八種相對比較被使用的抽象資料型別，然而，抽象資料型別本身並不是直接</description>
     </item>
     
     <item>
       <title>【一口口用心品嚐演算法30天系列】Day3 -- 抽象資料型別及特性</title>
-      <link>https://jumperc2p.github.io/posts/ithome-triathlon/abstract_data_types/</link>
+      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/abstract_data_types/</link>
       <pubDate>Fri, 03 Jul 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://jumperc2p.github.io/posts/ithome-triathlon/abstract_data_types/</guid>
+      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/abstract_data_types/</guid>
       <description>前言 第二天我們介紹了針對演算法執行效率(Time Complexity)進行了說明，然而除了當中提到的Basic Operation和Input</description>
     </item>
     
     <item>
       <title>A Brief Introduction of Using Java Logger</title>
-      <link>https://jumperc2p.github.io/posts/a_brief_introduction_of_using_java_logger/</link>
+      <link>https://jumperc2p.github.io/InformisTry/posts/a_brief_introduction_of_using_java_logger/</link>
       <pubDate>Fri, 08 May 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://jumperc2p.github.io/posts/a_brief_introduction_of_using_java_logger/</guid>
+      <guid>https://jumperc2p.github.io/InformisTry/posts/a_brief_introduction_of_using_java_logger/</guid>
       <description>&lt;p&gt;Recently, I am asked to record some information about how my server runs. So, I decide to use &lt;code&gt;java.util.logging.Logger&lt;/code&gt; to implement the logging process.
 Also this article will give you a sample code of how to use the basic function of &lt;code&gt;java.util.logging.Logger&lt;/code&gt;.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>A Combination of TimerTask and Timer</title>
-      <link>https://jumperc2p.github.io/posts/a_combination_of_timertask_and_timer/</link>
+      <link>https://jumperc2p.github.io/InformisTry/posts/a_combination_of_timertask_and_timer/</link>
       <pubDate>Sun, 03 May 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://jumperc2p.github.io/posts/a_combination_of_timertask_and_timer/</guid>
+      <guid>https://jumperc2p.github.io/InformisTry/posts/a_combination_of_timertask_and_timer/</guid>
       <description>&lt;p&gt;In this article, I will give you a brief introduction about what Timer and TimerTask are and then a simple example to help you understand how to use them.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>What&#39;s Informistry?</title>
-      <link>https://jumperc2p.github.io/posts/whats_informistry/</link>
+      <link>https://jumperc2p.github.io/InformisTry/posts/whats_informistry/</link>
       <pubDate>Sat, 02 May 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://jumperc2p.github.io/posts/whats_informistry/</guid>
+      <guid>https://jumperc2p.github.io/InformisTry/posts/whats_informistry/</guid>
       <description></description>
     </item>
     
