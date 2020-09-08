@@ -21,15 +21,6 @@
     </item>
     
     <item>
-      <title>【一口口用心品嚐演算法30天系列】Day5 -- Brute Force - Insertion Sort</title>
-      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/data_structures/</link>
-      <pubDate>Sun, 05 Jul 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/data_structures/</guid>
-      <description>前言 一連講了四天的背景知識，今天我們終於要來開始上主菜了，而主菜也是有很多的類別： Brute Force Decrease and Conquer Divide and Conquer Transform and Conquer Time and Space Tradeoffs Dynamic Programming Greedy Techniques 在我們這30天的系列</description>
-    </item>
-    
-    <item>
       <title>A Brief Introduction of Using Java Logger</title>
       <link>https://jumperc2p.github.io/InformisTry/posts/a_brief_introduction_of_using_java_logger/</link>
       <pubDate>Fri, 08 May 2020 00:00:00 +0000</pubDate>
