@@ -6,10 +6,28 @@
     <description>Recent content on InformisTry</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 08 May 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 05 Jul 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://jumperc2p.github.io/InformisTry/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【一口口用心品嚐演算法30天系列】Day5 -- Brute Force - Insertion Sort</title>
+      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/data_structures/</link>
+      <pubDate>Sun, 05 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/data_structures/</guid>
+      <description>前言 一連講了四天的背景知識，今天我們終於要來開始上主菜了，而主菜也是有很多的類別： Brute Force Decrease and Conquer Divide and Conquer Transform and Conquer Time and Space Tradeoffs Dynamic Programming Greedy Techniques 在我們這30天的系列</description>
+    </item>
+    
+    <item>
+      <title>【舌尖上的演算法】Day1 -- 初嚐演算法</title>
+      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/whats_algorithm/</link>
+      <pubDate>Wed, 01 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/whats_algorithm/</guid>
+      <description>前言 從生物科技產業轉行到資訊科技產業不知不覺來到第五個年頭，這五年裡當個無憂無慮的小小碼農渾渾噩噩地來到了今天，雖然內心一直覺得既然踏入了這</description>
+    </item>
     
     <item>
       <title>A Brief Introduction of Using Java Logger</title>

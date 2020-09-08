@@ -15,9 +15,9 @@
     
 
     
-    <meta name="title" content="" />
-    <meta property="og:title" content="" />
-    <meta property="twitter:title" content="" />
+    <meta name="title" content="【舌尖上的演算法】Day1 -- 初嚐演算法" />
+    <meta property="og:title" content="【舌尖上的演算法】Day1 -- 初嚐演算法" />
+    <meta property="twitter:title" content="【舌尖上的演算法】Day1 -- 初嚐演算法" />
     
 
     
@@ -34,9 +34,9 @@
     <meta name="keyword"  content="Chih-Hsuan Lee, Informistry, Hank Lee, JumperC2P, Hank portfolio, Java, Python, Developer, Engineer, Software, ReactJS, Web, React, Database, Kubernetes, 微服務, Microservice, 演算法">
     <link rel="shortcut icon" href="/InformisTry/img/favicon.ico">
 
-    <title>Informistry</title>
+    <title>【舌尖上的演算法】Day1 -- 初嚐演算法-Informistry</title>
 
-    <link rel="canonical" href="/InformisTry/InformisTry/search/placeholder/">
+    <link rel="canonical" href="/InformisTry/posts/iThome-triathlon/whats_algorithm">
 
     <link rel="stylesheet" href="/InformisTry/css/iDisqus.min.css"/>
 	
@@ -158,7 +158,7 @@
 
 <style type="text/css">
     header.intro-header {
-        background-image: url('https://tinyurl.com/yc28myh2')
+        background-image: url('https://tinyurl.com/ybt2h8uv')
     }
 </style>
 <header class="intro-header">
@@ -168,18 +168,34 @@
                 <div class="post-heading">
                     <div class="tags">
                         
+                        <a class="tag" href="/InformisTry/tags/algorithm" title="Algorithm">
+                            Algorithm
+                        </a>
+                        
+                        <a class="tag" href="/InformisTry/tags/ithome" title="iThome">
+                            iThome
+                        </a>
+                        
+                        <a class="tag" href="/InformisTry/tags/triathlon" title="triathlon">
+                            triathlon
+                        </a>
+                        
+                        <a class="tag" href="/InformisTry/tags/data-structure" title="Data Structure">
+                            Data Structure
+                        </a>
+                        
                     </div>
-                    <h1></h1>
-                    <h2 class="subheading"></h2>
+                    <h1>【舌尖上的演算法】Day1 -- 初嚐演算法</h1>
+                    <h2 class="subheading">2020IT邦鐵人賽</h2>
                     <span class="meta">
                         Posted by 
                         
-                                InformisTry
+                            Hank Lee
                          
                         on 
-                        Monday, January 1, 0001
+                        Wednesday, July 1, 2020
                         
-                            <span id="/InformisTry/search/placeholder/" class="leancloud_visitors meta_data_item" data-flag-title="">
+                            <span id="/posts/iThome-triathlon/whats_algorithm" class="leancloud_visitors meta_data_item" data-flag-title="">
     <span class="post-meta-item-icon">
       <span class="octicon octicon-eye"></span> 
     </span>
@@ -340,17 +356,130 @@ $(function() {
                     <header>
                         <h2>Table of Contents</h2>
                     </header>
-                    <nav id="TableOfContents"></nav>
+                    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#30天後的目標">30天後的目標</a></li>
+    <li><a href="#為什麼要學演算法">為什麼要學演算法？</a></li>
+    <li><a href="#什麼是演算法">什麼是演算法？</a></li>
+    <li><a href="#小結">小結</a></li>
+    <li><a href="#預告">預告</a></li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
                     
                 
 
-                
+                <h2 id="前言">前言</h2>
+<p>從生物科技產業轉行到資訊科技產業不知不覺來到第五個年頭，這五年裡當個無憂無慮的小小碼農渾渾噩噩地來到了今天，雖然內心一直覺得既然踏入了這個行業，不會一點演算法好像不太行，但畢竟我一直都沒有點<strong>數學</strong>這個技能項目，也不覺得自己邏輯好，因此這五年始終沒有勇氣去面對這駭人的項目；如今，有個朋友找我一起組隊參加<strong>第12屆ＩＴ邦幫忙鐵人賽</strong>，一個小小碼農也沒什麼特長可以分享，於是我決定藉由這個機會來摸一摸演算法，同時也透過寫成文章的方式來試著將自己理解的內容用最簡單的方式表達出來，希望能夠幫助到其他想了解演算法卻又無從開始的人。</p>
+<hr>
+<h2 id="30天後的目標">30天後的目標</h2>
+<p>連續30天介紹一個主題是個看似時間不長但卻很考驗毅力的一件事，既然下定決心要挑戰，就要設定一個衝線標準🏆，因此我在這30天裡，希望可以透過下列四點來讓大家初步了解演算法到底都在幹嘛：</p>
+<ul>
+<li>了解8個資料型別及其特性</li>
+<li>了解5種資料結構及其特性</li>
+<li>了解Ｎ種演算法及其目的</li>
+<li>了解如何估計演算法的執行效能</li>
+<li>數獨背後的演算法及資料結構</li>
+</ul>
+<hr>
+<h2 id="為什麼要學演算法">為什麼要學演算法？</h2>
+<p>演算法學可以<strong>視為資訊科技、電腦科學的發展基礎</strong>，廣義來說，如果沒有演算法就不會有所謂的『程式』，程式的運行基礎就是建立在各式各樣不同的演算法上。身為一個ＩＴ領域的有為青年，學習演算法可以幫助了解到在不同的情境下，有一些基礎且標準的演算法可以用來解決難題，甚至可以自己設計出新的演算法並分析這個新演算法的執行效率來進行調整與優化。此外，在David Harel的書中-Algorithmics: the Spirit of Computing-就有提到：「演算法學不只是電腦科學其中的一個分支，更是電腦科學的核心觀念，甚至可應用到其他科學、科技與商業行為上」，因此演算法除了應用在電腦科學領域之外，還可以在其他領域中實現演算法的一些概念，進而解決問題與困境，所以演算法一直都存在於我們的生活中，只是平常不會意識到罷了。</p>
+<p>而演算法的重要性在於運算的速度，在目標資料的數量不龐大的情況下，演算法看似可有可無，可是只要數量來到上萬筆，那這運算速度的問題就會凸顯出來了；如同一開始只是拿一把斧頭去砍樹枝，還算應付的來，速度可能也還能接受，但如果還是只拿一把斧頭去砍樹🌴，樹還是可以被砍斷，只是所花費的時間會大幅增加。或許在開發小系統或小專案中不太會去思考運算速度的問題，可是對於一些大型系統而言，其運算速度可能攸關公司的運作，例如電商的搜尋引擎，假設你輸入關鍵字要找某一類的產品，結果網頁一直在轉圈圈，估計你下一個動作就是把網頁關掉，然後去用其他的電商平台了😡。</p>
+<p>因此，學演算法的目的是<strong>在有限的步驟內精準地解決問題</strong>，而透過了解演算法的步驟，試著進一步對演算法或程式進行優化，來達到最佳的執行效率。</p>
+<hr>
+<h2 id="什麼是演算法">什麼是演算法？</h2>
+<p>既然生活中就圍繞著演算法，那到底演算法是什麼東西？🤨</p>
+<p>雖然針對「演算法」這個名詞並沒有一個所謂標準的定義，卻有一個一致認可的解釋：<strong>演算法是用來解決問題的一系列清楚明白的步驟或指示</strong>，換言之，演算法就是針對問題精確地列出解決步驟進而得到解答。</p>
+<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3cbOs8PK6RYPt9Oia_-BTtySQSyQ0K9AtpmBtailned9vxvt0CiqgpYV78MFag8atlcxZ9bsKtFH_M3eCbIct8bYyfojDOIzzSYleaSUn8Sdsds7R4ngPGztcKLAwh__7ZLNDKKbFk9WAu6T4RIBv1Q=w400-h257-no?authuser=0" alt="演算法的概念"></p>
+<p>如上圖所示，演算法的概念就是：<strong>透過演算法(Algorithm)的步驟(Computer)將問題(Problem)的Input（用來解決問題的素材）轉換成Output（解答）</strong>，下面我舉兩個例子來初步解釋這個概念：</p>
+<h3 id="問題一problem-生活中的演算法如何製作奶酪吐司">問題一(Problem)-生活中的演算法：如何製作奶酪吐司？</h3>
+<h4 id="食材input">食材(Input）：</h4>
+<ul>
+<li>六片厚切冷凍白吐司</li>
+<li>200克軟化的奶油（非冷凍）</li>
+<li>100克帕瑪森起司</li>
+<li>沙拉油</li>
+</ul>
+<h4 id="製作步驟algorithm-computer">製作步驟(Algorithm-Computer):</h4>
+<ol>
+<li>在碗中將奶油與帕瑪森起司混合均勻</li>
+<li>在厚切冷凍白土司上塗抹一層奶油起司</li>
+<li>放回冷凍庫待其凝固</li>
+<li>預熱平底鍋（中溫）後，加入適量沙拉油，奶酪吐司置於平底鍋中（有奶油起司的面朝下）烹飪，直到吐司上面解凍且奶油起司面呈現金黃色，即可起鍋。</li>
+</ol>
+<h4 id="結果output六片熱奶酪吐司">結果(Output)：六片熱奶酪吐司</h4>
+<p>上面的例子中，<strong>製作步驟即可視為『演算法的步驟』</strong>，這樣是不是稍微比較有一點感覺了。👍</p>
+<hr>
+<h3 id="問題二problem-兩種演算法vs同一個問題求最大公因數greatest-common-divisor">問題二(Problem)-兩種演算法v.s.同一個問題：求最大公因數（Greatest Common Divisor）</h3>
+<h4 id="兩個要求最大公因數的數值input">兩個要求最大公因數的數值(Input）：</h4>
+<ul>
+<li>m, n</li>
+</ul>
+<h4 id="計算步驟與方法algorithm-computer">計算步驟與方法(Algorithm-Computer):</h4>
+<p>下面提供兩種計算的方法：</p>
+<ol>
+<li>
+<p><strong>Euclid’s Algorithm</strong></p>
+<p>Euclid’s algorithm是反覆地去計算<strong>GCD(m, n) = GCD(n, m mod n)</strong>，直到第二個數值（n)為零時，第一個數值（m）即為最大公因數。</p>
+<blockquote>
+<p>(公式中的<strong>mod</strong>表示取餘數)</p>
+</blockquote>
+<p>例如：GCD(60, 24) = GCD(24, 12) = GCD(12, 0) = 12</p>
+<p>步驟分解：</p>
+<ol>
+<li>m = 60, n = 24 ➡︎ GCD(60, 24) ➡︎ 60 ÷ <strong>24</strong> = 2 &hellip; <strong>12</strong></li>
+<li>m = 24, n = 12 ➡︎ GCD(24, 12) ➡︎ 24 ÷ <strong>12</strong> = 2 &hellip; <strong>0</strong></li>
+<li>m = 12, n = 0 ➡︎ GCD(12, 0) ➡︎ 第二個數值為零，故第一個數值（<strong>12</strong>）即為60和24的最大公因數</li>
+</ol>
+</li>
+<li>
+<p><strong>Common Primes</strong></p>
+<p>Common primes就是將兩個數值分別進行質因數分解，再將兩者分解後的結果進行比較，取出相同的部分相乘，即可得到兩數值的最大公因數。</p>
+<p>例如：</p>
+<ul>
+<li>60 = <strong>2 × 2 × 3</strong> × 5</li>
+<li>24 = 2 × <strong>2 × 2 × 3</strong></li>
+<li>GCD(60, 24) = 2 × 2 × 3 = <strong>12</strong></li>
+</ul>
+</li>
+</ol>
+<h4 id="結果outputm-n的最大公因數">結果(Output)：m, n的最大公因數</h4>
+<p>雖然這兩種方法都可以求出最大公因數，但是實際上在透過程式執行時，若要進行Common Primes的話，需要先準備一個質因數的清單，有了清單之後還需要針對各別數值去一一計算出分解後的公式，這一個步驟也是會很花時間的關鍵，因此Common Primes的實作複雜度會比Euclid&rsquo;s Algorithm大得多，且前者的執行效率也比後者慢許多（因為步驟多）。從這裡我們也可以知道，針對同一個問題，雖然可以透過不同的演算法來得到結果，但在演算法的設計上，仍然會有執行效率上的差異，而這些微的差異卻有可能演變成影響整個系統效能的關鍵。</p>
+<hr>
+<h2 id="小結">小結</h2>
+<ol>
+<li>學演算法的目的是<strong>在有限的步驟內精準地解決問題</strong>。</li>
+<li>演算法是個✨<strong>用來解決問題的一系列精準不模糊的步驟或指示</strong>✨。</li>
+<li>不是只有Computer Science領域的人才需要學習演算法，演算法的應用一直存在我們生活中，<strong>食譜</strong>就是一個很好的例子。</li>
+<li>透過好的演算法可以提升程式運行的效率，進而穩定公司的運作。</li>
+</ol>
+<hr>
+<h2 id="預告">預告</h2>
+<p>下一篇將會介紹<strong>如何估計、衡量一個演算法的效率</strong>⏱。</p>
+<hr>
+<h2 id="references">References</h2>
+<ol>
+<li><a href="https://doc.lagout.org/science/0_Computer%20Science/2_Algorithms/Introduction%20to%20the%20Design%20and%20Analysis%20of%20Algorithms%20%283rd%20ed.%29%20%5BLevitin%202011-10-09%5D.pdf">Introduction to the Design and Analysis of Algorithms, 3rd Edition, by Anany Levitin</a></li>
+<li><a href="https://www.kidspot.com.au/kitchen/recipes/homemade-sizzler-cheese-toast-recipe/5jhzc41o">Make a Sizzler Cheese Sandwich</a></li>
+</ol>
+
 
                 
 
                 <hr>
                 <ul class="pager">
                     
+                    <li class="previous">
+                        <a href="/posts/a_brief_introduction_of_using_java_logger" data-toggle="tooltip" data-placement="top" title="A Brief Introduction of Using Java Logger">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/posts/ithome-triathlon/data_structures" data-toggle="tooltip" data-placement="top" title="【一口口用心品嚐演算法30天系列】Day5 -- Brute Force - Insertion Sort">Next
+                            Post &rarr;</a>
+                    </li>
                     
                 </ul>
 
