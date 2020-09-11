@@ -15,9 +15,9 @@
     
 
     
-    <meta name="title" content="【一口口用心品嚐演算法30天系列】Day3 -- 抽象資料型別及特性" />
-    <meta property="og:title" content="【一口口用心品嚐演算法30天系列】Day3 -- 抽象資料型別及特性" />
-    <meta property="twitter:title" content="【一口口用心品嚐演算法30天系列】Day3 -- 抽象資料型別及特性" />
+    <meta name="title" content="【舌尖上的演算法】Day4 -- 抽象資料型別及特性" />
+    <meta property="og:title" content="【舌尖上的演算法】Day4 -- 抽象資料型別及特性" />
+    <meta property="twitter:title" content="【舌尖上的演算法】Day4 -- 抽象資料型別及特性" />
     
 
     
@@ -34,7 +34,7 @@
     <meta name="keyword"  content="Chih-Hsuan Lee, Informistry, Hank Lee, JumperC2P, Hank portfolio, Java, Python, Developer, Engineer, Software, ReactJS, Web, React, Database, Kubernetes, 微服務, Microservice, 演算法">
     <link rel="shortcut icon" href="/InformisTry/img/favicon.ico">
 
-    <title>【一口口用心品嚐演算法30天系列】Day3 -- 抽象資料型別及特性-Informistry</title>
+    <title>【舌尖上的演算法】Day4 -- 抽象資料型別及特性-Informistry</title>
 
     <link rel="canonical" href="/InformisTry/posts/iThome-triathlon/abstract_data_types">
 
@@ -185,7 +185,7 @@
                         </a>
                         
                     </div>
-                    <h1>【一口口用心品嚐演算法30天系列】Day3 -- 抽象資料型別及特性</h1>
+                    <h1>【舌尖上的演算法】Day4 -- 抽象資料型別及特性</h1>
                     <h2 class="subheading">2020IT邦鐵人賽</h2>
                     <span class="meta">
                         Posted by 
@@ -193,7 +193,7 @@
                             Hank Lee
                          
                         on 
-                        Friday, July 3, 2020
+                        Friday, September 11, 2020
                         
                             <span id="/posts/iThome-triathlon/abstract_data_types" class="leancloud_visitors meta_data_item" data-flag-title="">
     <span class="post-meta-item-icon">
@@ -369,8 +369,9 @@ $(function() {
                     
                 
 
-                <h2 id="前言">前言</h2>
-<p>第二天我們介紹了針對演算法執行效率(Time Complexity)進行了說明，然而除了當中提到的Basic Operation和Input Size會影響Time Complexity之外，資料本身的結構也是相當重要的。在真正介紹幾個比較常用的資料結構之前，今天會先介紹<strong>抽象資料型別(Abstract Data Type)及其特性</strong>。</p>
+                <p><a href="">本系列文章同步分享於IT邦幫忙第12屆鐵人賽</a></p>
+<h2 id="前言">前言</h2>
+<p>第二天和第三天我們介紹了針對演算法執行效率(Time Complexity)進行了說明，然而除了當中提到的Basic Operation和Input Size會影響Time Complexity之外，資料本身的結構也是相當重要的。在真正介紹幾個比較常用的資料結構之前，今天會先介紹<strong>抽象資料型別(Abstract Data Type)及其特性</strong>。</p>
 <hr>
 <h2 id="什麼是抽象資料型別abstract-data-type-adt">什麼是抽象資料型別(Abstract Data Type, ADT)?</h2>
 <p>演算法在解析、處理資料時，可能會需要將原先的資料轉換成不同的資料形式進行處理，最後再以資料的樣態產出結果來儲存，然而我們在設計與分析演算法的時候，通常Input data的資料型態是固定的，我們並不會針對<strong>一個演算法</strong>考慮<strong>所有不同的Input資料型態</strong>，取而代之的是針對<strong>資料的一般特性(general characteristics)與操作方式(operations)</strong> 進行討論，而這種資料的抽象化就是<strong>抽象資料型別(Abstract Data Type)</strong>。</p>
@@ -440,13 +441,13 @@ $(function() {
 </li>
 </ul>
 <h3 id="4-stack">4. Stack</h3>
-<p><img src="https://tinyurl.com/y59r89tp" alt="Stack"></p>
+<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3cwp6fuagIna8GZMnN3KA-5bEvwmuGea5bQDeAB8Ncz5U3lOYdkeCyylEXIrm1w7siPoyHsfebETeNzTJCEA8dp_6ghIwOuRKI1CyKa3RsittzYWnd49Jtx2YGi-o_D1lLfbBx3mv4gNSYeeQAs9Aa4=w480-h288-no?authuser=0" alt="Stack"></p>
 <ul>
 <li><strong>ＬＩＦＯ（Last In, First Out)</strong>: 舉例來說，就像去吃迴轉壽司，一個盤子一個盤子疊上去，當最後在算錢的時候，再從最上面一個盤子一個盤子取下來，也就是，最後疊上去的(Last In)，第一個拿下來(First Out)。</li>
 <li>典型的操作方法：pop, push</li>
 </ul>
 <h3 id="5-queue">5. Queue</h3>
-<p><img src="https://tinyurl.com/y2ztubk2" alt="Queue"></p>
+<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3c0uCC8ZTtUESJZC1ZGlPD7TqJ0SUgUzyELAVpHXc00BHIW_0rUQWptBLRWhYZzSlfIJghDpLUxM-ZaANWwHtJWXTAv7LDamYyr2nv4xCSvjFuEvDZJAChs10Tx6viB7LCuxxRz9RmzieK4n2FMV-pG=w480-h288-no?authuser=0" alt="Queue"></p>
 <ul>
 <li><strong>ＦＩＦＯ（First In, First Out)</strong>: 與<code>Stack</code>不同，<code>Queue</code>就像排隊一樣，先進到隊伍中的項目(First In)就會優先被取用(First Out)</li>
 <li>典型的操作方法：pop, push</li>
@@ -459,7 +460,7 @@ $(function() {
 <li>如果有數個Element的</li>
 </ul>
 <h3 id="7-graph">7. Graph</h3>
-<p><img src="https://tinyurl.com/y3789dlj" alt="Graph"></p>
+<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3dDNXzpChhBEOJ4YjjzfTdTiQ0pI1tP9wiwBZskJi7dTQ8A1612talcrKGSROIYucY5Sp0kUq5Smj4hIAvve0f73hkw691vUZ7yVXF1LeN2KAOoZLxfXqwMQsgKB_e2-iYb3pCL1yQySbYxmUckctd-=w480-h206-no?authuser=0" alt="Graph"></p>
 <ul>
 <li>在做『路徑導航』或『計算路徑』時，使用的資料結構就是<code>Graph</code></li>
 <li><code>Graph</code>是由 <strong>節點(Vertices)和關聯(Edges)</strong> 組合而成，以上圖為例：
@@ -472,7 +473,7 @@ $(function() {
 <ol>
 <li><strong>Directed Graph</strong>：Edges是<strong>單方向</strong>的，因此行進方向僅會依據『箭頭』前進。</li>
 <li><strong>Undirected Graph</strong>：Edges是<strong>雙方向</strong>的，也就是節點間只要有關聯，皆可相互溝通。
-<img src="https://tinyurl.com/yxwca2db" alt="Directed & Undirected Graph"></li>
+<img src="https://lh3.googleusercontent.com/pw/ACtC-3fCNrkue-59i9T0bErDkku1LlqStHaSRSV_CFexhxYIMEju0_YfSC8ezV6FRr--214uLFKd0UjBrC4BeetYdgyPku7ZxGKcK96ODiuajsV3lMNVktVlm0qIDEFygVk1Pp_VWN4DVLLZiP84R6t2a3Q1=w500-h197-no?authuser=0" alt="Directed & Undirected Graph"></li>
 </ol>
 </li>
 <li>要如何在『不畫圖』的方式下表示<code>Graph</code>呢？基本上方法也有兩種：
@@ -482,15 +483,15 @@ $(function() {
 </ol>
 <ul>
 <li>針對上方兩組Graph轉換成Adjacency Matrix和Adjacency List的過程如下：
-<img src="https://tinyurl.com/y6jsyky5" alt="Undirected Graph & Adjacency Matrix & Adjacency List">
-<img src="https://tinyurl.com/y3y38reo" alt="Directed Graph & Adjacency Matrix & Adjacency List"></li>
+<img src="https://lh3.googleusercontent.com/pw/ACtC-3ctcekYbd31VR0zjzDxK3HNg9ZGZGmavp3tdkP6Gx2RpbFPmNAPBzdHnlAIGhlaRhCRU7YyV_MJfAOO0_7BNqfykY7NOTzPeZRSzehPKs6DGl9LyIgfGk6QP9ERAa5GgvVIqp07x4b-DTMFdPoswEh4=w480-h206-no?authuser=0" alt="Undirected Graph & Adjacency Matrix & Adjacency List">
+<img src="https://lh3.googleusercontent.com/pw/ACtC-3enx5Vah2lkRUft8jfMtKOI4s8b9MB2yStK09lNu7TNeG1Pz7Y_63gRUNcxEjroM0EaN2PeJf-AOC2s_XD2GrZXPQc3PFNVEfsf57N3RJD9tgir-KjRr67m93LK7m7D2tL3ojHnAJpjEvoAFNUTZk13=w480-h206-no?authuser=0" alt="Directed Graph & Adjacency Matrix & Adjacency List"></li>
 </ul>
 </li>
 <li>假如每個Edges都包含了『距離』，在Adjacency Matrix和Adjacency List中的表示方式如下圖（僅以Undirected Graph舉例）：
-<img src="https://tinyurl.com/yxarnqn3" alt="Undirected Graph & Adjacency Matrix & Adjacency List with Distances"></li>
+<img src="https://lh3.googleusercontent.com/pw/ACtC-3eIOzj9Uk4o6hm8sRmHHIjO5U2xRQCXbN67fH7b556cZfJW36HyUh7LwOF5vqr8Gee-weGAvVuUCfjwWR3lPIhnC_bdQ2c3O4U2sx5c0pWbbZhRgrKflmoR47_XPjRbLBNnj8hyg5odh3CuPOo4fY3O=w700-h300-no?authuser=0" alt="Undirected Graph & Adjacency Matrix & Adjacency List with Distances"></li>
 </ul>
 <h3 id="8-tree">8. Tree</h3>
-<p><img src="https://tinyurl.com/yxeaov6r" alt="Tree"></p>
+<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3d4o1BqsTAu18tS3AYRAfvbsObT5ekqPr6h9bL5d0OLtjio77BRUixzxSuMmfdi3LbE1rnQQpsvjOhP9JIorQb6ndfqjptc2bS8ULy0a29k3G3ia1TcOnMnecDU7vn3giNP-NVO19l44Gbq9UtlM5xe=w500-h300-no?authuser=0" alt="Tree"></p>
 <ul>
 <li><code>Tree</code>也是一種Graph</li>
 <li><code>Tree</code>是沒有環形（acyclic）的Graph</li>
@@ -499,12 +500,12 @@ $(function() {
 <ol>
 <li>Free Tree: 沒有環形且互連的Graph</li>
 <li>Forest: 沒有環形且不互連的Graph
-<img src="https://tinyurl.com/y5awysfl" alt="Free Tree & Forest"></li>
+<img src="https://lh3.googleusercontent.com/pw/ACtC-3eAj_bsgJiv7W9qMZimB2fV2t1dQ4wtGhfbGsLb_5ODTHVw4II-VKlZnOSfbsR7jwBj2rdHDk-5wsUUY8pNLhEU9eMW_VWKo6l-7QhDJOmrSnrvmqqQppLZN3bd93Bs3K1EukjftW3FO_40-i92481m=w500-h300-no?authuser=0" alt="Free Tree & Forest"></li>
 </ol>
 </li>
 <li>在實際上應用時，絕大部分狀況會將原本的<code>Free Tree</code>轉換成<code>Rooted Tree</code>，會由其中一個Node作為<strong>Root</strong>，再由其往下延伸、串接。</li>
 <li><code>Rooted Tree</code>的好處是它的『階層關係』，至於這個『階層關係』所代表的意義，就看實作時要賦予它什麼意義了，可以是『大小』、『相似度』等。
-<img src="https://tinyurl.com/y3loold6" alt="Free Tree & Rooted Tree"></li>
+<img src="https://lh3.googleusercontent.com/pw/ACtC-3ciu7G4lfJ9nSyrArVmtVKR6HwvhAUEhhB865RwGscXcxejzKwEnXWdJWtiTqI-cxc0fWJUj2zBimwhcHJoMnaYCoq5sl3D-CeZG7ndvCLzWqP5sU2SKghXYLdc09zinwo_vDJZBn0hcfhgpgPkfeRd=w500-h300-no?authuser=0" alt="Free Tree & Rooted Tree"></li>
 </ul>
 <hr>
 <h2 id="小結">小結</h2>
@@ -581,15 +582,10 @@ $(function() {
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/posts/a_brief_introduction_of_using_java_logger" data-toggle="tooltip" data-placement="top" title="A Brief Introduction of Using Java Logger">&larr;
+                        <a href="/posts/iThome-triathlon/algorithm_time_complexity_2" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day3 -- 解析演算法的優劣（下）">&larr;
                             Previous Post</a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/posts/iThome-triathlon/data_structures" data-toggle="tooltip" data-placement="top" title="【一口口用心品嚐演算法30天系列】Day4 -- 資料結構(Data Structures)">Next
-                            Post &rarr;</a>
-                    </li>
                     
                 </ul>
 
@@ -765,8 +761,12 @@ $(function() {
             
             
                 </ul>
-		<p class="copyright text-muted">
+		        <p class="copyright text-muted">
                     Copyright &copy; InformisTry 2020
+                    <br>
+                    <small id="busuanzi_container_site_pv" style='display:none'> Page Views: <span id="busuanzi_value_site_pv"></span> </small>
+                    |
+                    <small id="busuanzi_container_site_uv" style='display:none'> Count of Visits: <span id="busuanzi_value_site_uv"></span> </small>
                     <br>
                     <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
                     <iframe
@@ -819,6 +819,9 @@ $(function() {
         if($nav) FastClick.attach($nav);
     })
 </script>
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
