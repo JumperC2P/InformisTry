@@ -6,10 +6,19 @@
     <description>Recent content in Algorithm on InformisTry</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 11 Sep 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 12 Sep 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://jumperc2p.github.io/InformisTry/tags/algorithm/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【舌尖上的演算法】Day5 -- 線性資料結構(Linear Data Structures)</title>
+      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/data_structures/</link>
+      <pubDate>Sat, 12 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/data_structures/</guid>
+      <description>本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 第三天我們說明了什麼是抽象資料型別(Abstract Data Type, ADT)，同時也介紹了8種相對常被使</description>
+    </item>
     
     <item>
       <title>【舌尖上的演算法】Day4 -- 抽象資料型別及特性</title>
