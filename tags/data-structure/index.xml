@@ -6,10 +6,19 @@
     <description>Recent content in Data Structure on InformisTry</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 12 Sep 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 13 Sep 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://jumperc2p.github.io/InformisTry/tags/data-structure/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【舌尖上的演算法】Day6 -- Brute Force - Selection Sort</title>
+      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/brute_force_selection_sort/</link>
+      <pubDate>Sun, 13 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/brute_force_selection_sort/</guid>
+      <description>本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 一連講了五天的背景知識，今天我們終於要來開始上主菜了，而主菜也是有很多的類別： Brute Force Decrease and Conquer Divide and</description>
+    </item>
     
     <item>
       <title>【舌尖上的演算法】Day5 -- 線性資料結構(Linear Data Structures)</title>

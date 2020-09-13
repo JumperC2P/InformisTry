@@ -15,9 +15,9 @@
     
 
     
-    <meta name="title" content="【舌尖上的演算法】Day5 -- 線性資料結構(Linear Data Structures)" />
-    <meta property="og:title" content="【舌尖上的演算法】Day5 -- 線性資料結構(Linear Data Structures)" />
-    <meta property="twitter:title" content="【舌尖上的演算法】Day5 -- 線性資料結構(Linear Data Structures)" />
+    <meta name="title" content="【舌尖上的演算法】Day6 -- Brute Force - Selection Sort" />
+    <meta property="og:title" content="【舌尖上的演算法】Day6 -- Brute Force - Selection Sort" />
+    <meta property="twitter:title" content="【舌尖上的演算法】Day6 -- Brute Force - Selection Sort" />
     
 
     
@@ -34,9 +34,9 @@
     <meta name="keyword"  content="Chih-Hsuan Lee, Informistry, Hank Lee, JumperC2P, Hank portfolio, Java, Python, Developer, Engineer, Software, ReactJS, Web, React, Database, Kubernetes, 微服務, Microservice, 演算法">
     <link rel="shortcut icon" href="/InformisTry/img/favicon.ico">
 
-    <title>【舌尖上的演算法】Day5 -- 線性資料結構(Linear Data Structures)-Informistry</title>
+    <title>【舌尖上的演算法】Day6 -- Brute Force - Selection Sort-Informistry</title>
 
-    <link rel="canonical" href="/InformisTry/posts/ithome-triathlon/data_structures">
+    <link rel="canonical" href="/InformisTry/posts/ithome-triathlon/brute_force_selection_sort">
 
     <link rel="stylesheet" href="/InformisTry/css/iDisqus.min.css"/>
 	
@@ -185,7 +185,7 @@
                         </a>
                         
                     </div>
-                    <h1>【舌尖上的演算法】Day5 -- 線性資料結構(Linear Data Structures)</h1>
+                    <h1>【舌尖上的演算法】Day6 -- Brute Force - Selection Sort</h1>
                     <h2 class="subheading">2020IT邦鐵人賽</h2>
                     <span class="meta">
                         Posted by 
@@ -193,9 +193,9 @@
                             Hank Lee
                          
                         on 
-                        Saturday, September 12, 2020
+                        Sunday, September 13, 2020
                         
-                            <span id="/posts/ithome-triathlon/data_structures" class="leancloud_visitors meta_data_item" data-flag-title="">
+                            <span id="/posts/ithome-triathlon/brute_force_selection_sort" class="leancloud_visitors meta_data_item" data-flag-title="">
     <span class="post-meta-item-icon">
       <span class="octicon octicon-eye"></span> 
     </span>
@@ -359,8 +359,10 @@ $(function() {
                     <nav id="TableOfContents">
   <ul>
     <li><a href="#前言">前言</a></li>
-    <li><a href="#什麼是資料結構data-structure">什麼是資料結構(Data Structure)？</a></li>
-    <li><a href="#線性資料結構linear-data-structure">線性資料結構(Linear Data Structure)</a></li>
+    <li><a href="#什麼是brute-force">什麼是Brute Force？</a></li>
+    <li><a href="#selection-sort如何運作">Selection Sort如何運作？</a></li>
+    <li><a href="#selection-sort的時間複雜度time-complexity">Selection Sort的時間複雜度(Time complexity)</a></li>
+    <li><a href="#為什麼要使用selection-sort">為什麼要使用Selection Sort?</a></li>
     <li><a href="#小結">小結</a></li>
     <li><a href="#預告">預告</a></li>
     <li><a href="#references">References</a></li>
@@ -369,76 +371,70 @@ $(function() {
                     
                 
 
-                <p><a href="https://ithelp.ithome.com.tw/articles/10235874">本系列文章同步分享於IT邦幫忙第12屆鐵人賽</a></p>
+                <p><a href="https://ithelp.ithome.com.tw/articles/10236212">本系列文章同步分享於IT邦幫忙第12屆鐵人賽</a></p>
 <h2 id="前言">前言</h2>
-<p>第三天我們說明了什麼是抽象資料型別(Abstract Data Type, ADT)，同時也介紹了8種相對常被使用的ADT，還沒有看過的朋友或是想要複習的朋友可以點擊<a href="https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/abstract_data_types/">【舌尖上的演算法】Day4 &ndash; 抽象資料型別及特性</a>；但這些ADT畢竟只是<strong>概念</strong>，真正將ADT實作出來的物件就是所謂的<strong>資料結構(Data Structure)</strong>。</p>
-<p>在接下來的20多天裡，我們將會針對一些比較淺顯易懂的演算法一一介紹，但是在正式開始品味這些演算法之前，我會先介紹<strong>資料結構本身</strong>，才會開始說明利用這種資料結構的演算法。今天，我會先提出兩種<code>線性資料結構(Linear Data Structure)</code>的範例。</p>
-<p>日後會再針對Binary Search Tree及HashTable做說明。</p>
+<p>一連講了五天的背景知識，今天我們終於要來開始上主菜了，而主菜也是有很多的類別：</p>
+<ol>
+<li>Brute Force</li>
+<li>Decrease and Conquer</li>
+<li>Divide and Conquer</li>
+<li>Transform and Conquer</li>
+<li>Time and Space Tradeoffs</li>
+<li>Dynamic Programming</li>
+<li>Greedy Techniques</li>
+</ol>
+<p>在我們這30天的系列中，我們也會針對這七個類別中一些比較基礎的演算法進行介紹，今天的主題是<strong>Brute Force中的Selection Sort</strong>。</p>
 <hr>
-<h2 id="什麼是資料結構data-structure">什麼是資料結構(Data Structure)？</h2>
-<ul>
-<li>上面提到ADT只是一個<strong>概念</strong>，並不是『真正』在演算法中使用的物件；既然ADT只是概念，勢必就會有將這些概念實作出來的物件，而這實作ADT的物件就是<strong>資料結構(Data Structures)</strong>。</li>
-<li>資料結構用不同的方式來達到管理、儲存資料的目的。</li>
-<li>一個好的資料結構可以大幅增加系統運行的效能。</li>
-<li>不同類型的資料結構都有其適合的應用情境。</li>
-<li>有些資料結構也可能是針對某單一應用情境下被設計實作出來的。</li>
-</ul>
+<h2 id="什麼是brute-force">什麼是Brute Force？</h2>
+<p>Brute Force就是針對要解決的問題，用最『直接』的方始去取得結果，我個人覺得最簡單的說法就是<strong>暴力破解</strong>，例如要計算某個數值X的n次方，那就真的去把X乘n次、或者是要從一堆資料中找出某一筆資料，就把這堆資料中每一個資料都拿出來比對。那可能會有人覺得：『既然是暴力破解法，那Brute Force沒什麼特別的啊，幹嘛要特別說？！』，至少我曾經這麼想過，但是我覺得就是因為Brute Force沒什麼特別的，所以我自己認為他是演算法的『源頭』，藉由了解最原始的做法，才能知道未來演變出的演算法的優勢及好處。</p>
 <hr>
-<h2 id="線性資料結構linear-data-structure">線性資料結構(Linear Data Structure)</h2>
-<p>線性資料結構，顧名思義，是直線性的資料結構，而這種資料結構最常被使用且最重要的就是<code>Array</code>及<code>Linked List</code>。</p>
-<h3 id="1-array">1. Array</h3>
-<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3d4sqbDVp4TwZWgcQjREhkyDeK66llUQncIA2BVAfYxi7TPvdjUBGmRKr5EtB64HoKabqShySxvDS7mXzIJ5nosKHjztiAJV240az-Smg_eC5Wo-IIblxAlfjrytjgSdM597U6_CvbR2TkaF47lQJnk=w459-h109-no?authuser=0" alt="Array"></p>
-<ul>
-<li><code>Array</code>是一個1-D(one dimensional)的結構，每個Elements會有自己的<strong>index</strong></li>
-<li><code>Array</code>也是一個集合物件(Collection)</li>
-<li>基本上用來儲存相同資料型態的物件</li>
-<li>儲存物件的時候具有<strong>連續性</strong>，如上圖，儲存物件的時候會依據index檢查該Element是否為空，當找到空的位置的時候，才將物件儲存在那個位置。</li>
-<li>具快速存取性</li>
-<li><code>Array</code>的三個操作模式：
-<h4 id="1-search">(1) Search:</h4>
-<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3fad4xqUPfOWwgPvx3C7VpNPWAU0KyOS-MRHBiND-X5DwMWi2pefUq7sTHUFSIQl37ooJEcc-8POS3pONruyfTmo7VTEM1uz4N2UmlKKZfyQajZS4BKvEhPFTa6esh0qgggN0RjN7MNpZtZZ4b36mjc=w480-h288-no?authuser=0" alt="Array-Search">
-從Array當中尋找指定的Element時，會從第0個index開始針對其Element做比較，一步一步往下查找，直到找到指定的Element才結束流程。</p>
-<h4 id="2-insertion">(2) Insertion:</h4>
-<p>當要把一個Element插入Array中指定的某一個位置時，對於這個指定位置後面的Elements來說，全部都要<strong>往後退一格</strong>。
-<img src="https://lh3.googleusercontent.com/pw/ACtC-3cvVTJhwgTJjoDb7uJi-nVxqJxqoCbQdhlV0SVeEgFFgTM5Xu0obdUDZkl56U8NhMiYOqTQrhwCWqcy5uHdGVQM6TurIDDfhwFnWWIMkq_uAtri0Vo-MYleMjOvsqRgzoE4dqKQfCrgROHrY0ZJk-Ya=w480-h288-no?authuser=0" alt="Array-Insertion-Non-Fully-Array">
-但假設在插入這個新Element之前，Array本身的空間已經是滿的了，那就是變成要<strong>新增一個原Array長度加1</strong>的Array，然後<strong>再將Elements一個一個放進這個新Array裡面</strong>。
-<img src="https://lh3.googleusercontent.com/pw/ACtC-3fpWzhw_s4N1zj2AcezCyTzN7I8H5bguB96KSL02wbDXXIRBS0A4Tkk2RF-gj9d6Ara3Jr3jgt41b_wFAa4iPCpCNsOxwmPIzn9OjLeXCeVeB2TSmrShfcOfoZEEJduL1vWof_YSc1p9Mm3jAVOd0ag=w480-h288-no?authuser=0" alt="Array-Insertion-Fully-Array"></p>
-<h4 id="3-deletion">(3) Deletion:</h4>
-<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3d0s6H1j1asE3HRfZaeMG_j8IfMxr-Rn6jtLvEqnCBmhWrmGaJLZM_rNqwsqgln4nnBHtVG9Qn2KdQ-vetyrs-aARgZHYO4u0oqA_e4akAR2GrAKhdWks8MBzboME4lGeyzkHLFQqVITFcLiWUffaDe=w480-h288-no?authuser=0" alt="Array-Deletion">
-從Array當中刪除指定的Element時，原本位在此Element後方的其他Elements都會<strong>往前移動一格</strong>。</p>
-</li>
-</ul>
-<h3 id="2-linked-list">2. Linked List</h3>
-<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3dx6giV8q5Lb65rKdMihHU4vBBCbx5U9A9zAsFhsAZHBoIQw2Deyusv-C5jpWUi-I_WcS6rs8pqfGNw-EBHHK8RGiL6wpl0M-tF2pkKUsSo7h5vRv9a9I5NR1wu6RR0ftUlkrPEWFubRjXG0XzUwMUV=w480-h192-no?authuser=0" alt="Linked List"></p>
-<ul>
-<li><code>Linked List</code>的特性是每一個Node除了儲存<strong>Element</strong>之外，還包含了一個『指標』，這個指標代表的是<strong>下一個Node</strong>，也就是說，透過這個指標可以將每一個Node都串起來，形成一個List的結構。<code>（Node = Element + Pointer)</code></li>
-<li>在實作的時候，會有一個<code>head pointer</code>用來記錄<strong>第一個Node</strong>；有時候會另外有一個<code>tail pointer</code>紀錄<strong>最後一個Node</strong>。</li>
-<li>除了這種一般的<code>Singly Linked List</code>外，<code>Linked List</code>還有其他種類的實作方式，其中一種是<code>Doubly Linked List</code>，Double代表的是<strong>每一個Node都會記錄『前一個』和『後一個』的Node</strong>，在這邊我們不多做說明，因為在第25天的時候，我們會花比較多篇幅來介紹<code>Doubly Linked List</code>，也會在第30天的時候介紹<code>Cyclic Doubly Linked List</code>。</li>
-<li><code>Linked List</code>的兩個操作模式：
-<h4 id="1-insertion">(1) Insertion:</h4>
-<p>因為<code>Linked List</code>是透過<strong>pointer</strong>將Node關聯起來，因此其實在改變『結構』的時候，只要做一件事：<code>調整pointer連線的對象</code>。在做Insertion的時候，是將<strong>插入位置前一個Node的pointer</strong>指到New Node，再將New Node的pointer指到<strong>插入位置後一個的Node</strong>（如下圖）。
-<img src="https://lh3.googleusercontent.com/pw/ACtC-3dwhKMTdE1qE3vkdrXbOnLBrcKZq5c1khUFX0Vu2gqAHMs4zgi8q86VitOYWhBr7xjSCaqiVTCoRUwegHW-qK163xT-VQFDnMROSBN6JDoYMs8USvGhcDjFhlPPWqcECbMXRGpTVfqz9EtzEV6iGMHf=w480-h192-no?authuser=0" alt="LinkedList-Insertion"></p>
-<h4 id="2-deletion">(2) Deletion:</h4>
-<p>正如<strong>Insertion</strong>中提到的，我們針對要刪除的Node(B Node)的<strong>前一個Node(A Node)的Pointer</strong>做改變，只要將<strong>這個Pointer直接指定到『下一個Node(C Node)』</strong>，那這個要刪除的Node就斷開了連繫，進而被系統刪除(如下圖）。
-<img src="https://lh3.googleusercontent.com/pw/ACtC-3dHDO_2xVlGGu1xrO2LNVr4fswv1tJ7ANZIgTuLElPU2FrevuCWYQi2bLrz15k_EVyz-DqQmzUcqwj1PoWBmVmi-bUKgLmbTdWTE_wuoA1Kvrjg26rSIonVc3IxoJWysjaHzQmmyGDuNrqnSdSoUkns=w480-h192-no?authuser=0" alt="LinkedList-Deletion"></p>
-</li>
-</ul>
-<p><code>Array</code>和<code>Linked List</code>在程式實作中都很常被使用，很多簡單的演算法也都是透過這兩種資料結構來進行運用。</p>
+<h2 id="selection-sort如何運作">Selection Sort如何運作？</h2>
+<p>其實要了解一個演算法，透過 <strong>排序(Sort)及搜尋(Search)</strong> 大概會是最容易的方式了，今天我們就來介紹第一個屬於Brute Force的演算法&ndash;<strong>Selection Sort</strong>，既然名字都已經有<code>Sort</code>了，自然表示這個演算法的目的是用在<code>排序</code>，基本上這個演算法的步驟為下：</p>
+<ol>
+<li>針對整個數列進行搜尋，尋找<code>最小的值</code>，然後把這個最小的值<code>換到第一個位置</code>。</li>
+<li>再<code>從第二個數值位置</code>開始搜尋整個數列，一樣尋找<code>最小的值</code>，然後把這次找到的最小的值<code>換到第二個位置</code>。</li>
+<li>重複上述動作，直到最後一個數值。</li>
+</ol>
+<p>對，這個Selection sort就是這麼的簡單，沒有複雜的流程，沒有複雜的理論，非常簡顯易懂，那Pseudo-code則是下面這樣：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#6272a4">// Input: An array Array[0...n-1] of orderable elements
+</span><span style="color:#6272a4">// Output: An array Array[0...n-1] sorted in ascending order
+</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">function</span> SelectionSort(<span style="color:#8be9fd;font-style:italic">Array</span>[<span style="color:#bd93f9">0</span>, ..., n<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>]){
+    <span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span> to n<span style="color:#ff79c6">-</span><span style="color:#bd93f9">2</span> <span style="color:#ff79c6">do</span><span style="color:#ff79c6">:</span>
+        min <span style="color:#ff79c6">=</span> i
+        <span style="color:#ff79c6">for</span> j <span style="color:#ff79c6">=</span> i <span style="color:#ff79c6">+</span> <span style="color:#bd93f9">1</span> to n<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span> <span style="color:#ff79c6">do</span><span style="color:#ff79c6">:</span>
+            <span style="color:#ff79c6">if</span> <span style="color:#8be9fd;font-style:italic">Array</span>[j] <span style="color:#ff79c6">&lt;</span> <span style="color:#8be9fd;font-style:italic">Array</span>[min]<span style="color:#ff79c6">:</span>
+                min <span style="color:#ff79c6">=</span> j
+            end <span style="color:#ff79c6">if</span>
+        end <span style="color:#ff79c6">for</span>
+        SWAP <span style="color:#8be9fd;font-style:italic">Array</span>[i] and <span style="color:#8be9fd;font-style:italic">Array</span>[min]
+    end <span style="color:#ff79c6">for</span>
+}
+</code></pre></div><hr>
+<h2 id="selection-sort的時間複雜度time-complexity">Selection Sort的時間複雜度(Time complexity)</h2>
+<p>在講Selection Sort的時間複雜度之前，我們先透過一張GIF來『視覺化』Selection Sort的步驟吧。</p>
+<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3e2jczB0gpo5MQZUUr9ZAQHxp28RXRJLElG1A5I54R0ug0aBx7HC6nJweX6-fOj2L7bPg0O0uvuz0ERugSgcxDjm5c1TW4oNzVVVZz29fFHHcsw4-NXH0ZfGtvwuLs19dhu6h389Ls7JYgvxur0zXvn=w480-h240-no?authuser=0" alt="selection-sort"></p>
+<p>從上面的GIF可以看到，短短一個長度為8的陣列，在進行Selection Sort的時候，就會需要進行<strong>數值大小比較28次和數值交換7次</strong>，也就是說，透過Selection Sort每跑一次長度為n的陣列，就需要進行<strong>接近</strong><code>n^2/2次</code>的<strong>數值比較</strong>和<code>n-1次</code>的<strong>數值交換</strong>，另外，從Pseudo-code中可以看到跑一次Selection Sort會跑兩次<strong>執行時間決定於n的大小</strong>的巢狀迴圈，因此其時間複雜度為<code>𝜪(n^2)</code>；而對於Selection Sort而言，Best Case、Average Case和Worst Case的時間複雜度都是<code>𝜪(n^2)</code>。</p>
+<hr>
+<h2 id="為什麼要使用selection-sort">為什麼要使用Selection Sort?</h2>
+<ol>
+<li>Selection Sort執行的時候，讀取數據(writes)次數為<code>𝜪(n^2)</code>，而寫入數據(reads)次數為<code>𝜪(n)</code>。</li>
+<li>當<strong>寫入的動作</strong>的『費用』比<strong>讀取的動作</strong>來的高出許多時，那Selection Sort就會是一個比較好的選擇。</li>
+<li>如果要處理的陣列是個<strong>長度很小的陣列</strong>，那Selection Sort就相對有效率，而且比較容易實現。</li>
+</ol>
 <hr>
 <h2 id="小結">小結</h2>
 <ul>
-<li>ADT畢竟只是<strong>概念</strong>，真正將ADT實作出來的物件就是所謂的<strong>資料結構(Data Structure)</strong>。</li>
-<li>一個好的資料結構可以大幅增加系統運行的效能。</li>
-<li>線性資料結構，顧名思義，是直線性的資料結構，而這種資料結構最常被使用且最重要的就是<code>Array</code>及<code>Linked List</code></li>
+<li>Brute Force其實就是<strong>暴力破解法</strong>。</li>
+<li>Selection Sort是從中尋找最小的值後與最前面的數值交換位置，直到整個數列變成從小到大的排序。</li>
+<li>Selection Sort的時間複雜度為𝜪(n^2)。</li>
 </ul>
 <hr>
 <h2 id="預告">預告</h2>
-<p>接下來的數天，我們會將一些比較容易理解的演算法分類，然後再一一跟大家介紹，準備上主菜囉～</p>
+<p>明天我們將會介紹第二個屬於Brute Force的演算法-Bubble Sort。</p>
 <hr>
 <h2 id="references">References</h2>
 <ol>
 <li><a href="https://doc.lagout.org/science/0_Computer%20Science/2_Algorithms/Introduction%20to%20the%20Design%20and%20Analysis%20of%20Algorithms%20%283rd%20ed.%29%20%5BLevitin%202011-10-09%5D.pdf">Introduction to the Design and Analysis of Algorithms, 3rd Edition, by Anany Levitin</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Data_structure">Data Structure - Wikipedia</a></li>
 </ol>
 
 
@@ -448,15 +444,10 @@ $(function() {
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/posts/iThome-triathlon/abstract_data_types" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day4 -- 抽象資料型別及特性">&larr;
+                        <a href="/posts/ithome-triathlon/data_structures" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day5 -- 線性資料結構(Linear Data Structures)">&larr;
                             Previous Post</a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/posts/ithome-triathlon/brute_force_selection_sort" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day6 -- Brute Force - Selection Sort">Next
-                            Post &rarr;</a>
-                    </li>
                     
                 </ul>
 
