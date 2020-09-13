@@ -399,15 +399,15 @@ $(function() {
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#6272a4">// Input: An array Array[0...n-1] of orderable elements
 </span><span style="color:#6272a4">// Output: An array Array[0...n-1] sorted in ascending order
 </span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">function</span> SelectionSort(<span style="color:#8be9fd;font-style:italic">Array</span>[<span style="color:#bd93f9">0</span>, ..., n<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>]){
-    <span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span> to n<span style="color:#ff79c6">-</span><span style="color:#bd93f9">2</span> <span style="color:#ff79c6">do</span><span style="color:#ff79c6">:</span>
+    <span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span> to n<span style="color:#ff79c6">-</span><span style="color:#bd93f9">2</span> {
         min <span style="color:#ff79c6">=</span> i
-        <span style="color:#ff79c6">for</span> j <span style="color:#ff79c6">=</span> i <span style="color:#ff79c6">+</span> <span style="color:#bd93f9">1</span> to n<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span> <span style="color:#ff79c6">do</span><span style="color:#ff79c6">:</span>
-            <span style="color:#ff79c6">if</span> <span style="color:#8be9fd;font-style:italic">Array</span>[j] <span style="color:#ff79c6">&lt;</span> <span style="color:#8be9fd;font-style:italic">Array</span>[min]<span style="color:#ff79c6">:</span>
+        <span style="color:#ff79c6">for</span> j <span style="color:#ff79c6">=</span> i <span style="color:#ff79c6">+</span> <span style="color:#bd93f9">1</span> to n<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span> {
+            <span style="color:#ff79c6">if</span> <span style="color:#8be9fd;font-style:italic">Array</span>[j] <span style="color:#ff79c6">&lt;</span> <span style="color:#8be9fd;font-style:italic">Array</span>[min]{
                 min <span style="color:#ff79c6">=</span> j
-            end <span style="color:#ff79c6">if</span>
-        end <span style="color:#ff79c6">for</span>
+            }
+        }
         SWAP <span style="color:#8be9fd;font-style:italic">Array</span>[i] and <span style="color:#8be9fd;font-style:italic">Array</span>[min]
-    end <span style="color:#ff79c6">for</span>
+    }
 }
 </code></pre></div><hr>
 <h2 id="selection-sort的時間複雜度time-complexity">Selection Sort的時間複雜度(Time complexity)</h2>
