@@ -15,9 +15,9 @@
     
 
     
-    <meta name="title" content="【舌尖上的演算法】Day6 -- Brute Force - Selection Sort" />
-    <meta property="og:title" content="【舌尖上的演算法】Day6 -- Brute Force - Selection Sort" />
-    <meta property="twitter:title" content="【舌尖上的演算法】Day6 -- Brute Force - Selection Sort" />
+    <meta name="title" content="【舌尖上的演算法】Day8 -- Brute Force - Knapsack" />
+    <meta property="og:title" content="【舌尖上的演算法】Day8 -- Brute Force - Knapsack" />
+    <meta property="twitter:title" content="【舌尖上的演算法】Day8 -- Brute Force - Knapsack" />
     
 
     
@@ -34,9 +34,9 @@
     <meta name="keyword"  content="Chih-Hsuan Lee, Informistry, Hank Lee, JumperC2P, Hank portfolio, Java, Python, Developer, Engineer, Software, ReactJS, Web, React, Database, Kubernetes, 微服務, Microservice, 演算法">
     <link rel="shortcut icon" href="/InformisTry/img/favicon.ico">
 
-    <title>【舌尖上的演算法】Day6 -- Brute Force - Selection Sort-Informistry</title>
+    <title>【舌尖上的演算法】Day8 -- Brute Force - Knapsack-Informistry</title>
 
-    <link rel="canonical" href="/InformisTry/posts/ithome-triathlon/brute_force_selection_sort">
+    <link rel="canonical" href="/InformisTry/posts/ithome-triathlon/brute_force_knapsack">
 
     <link rel="stylesheet" href="/InformisTry/css/iDisqus.min.css"/>
 	
@@ -185,7 +185,7 @@
                         </a>
                         
                     </div>
-                    <h1>【舌尖上的演算法】Day6 -- Brute Force - Selection Sort</h1>
+                    <h1>【舌尖上的演算法】Day8 -- Brute Force - Knapsack</h1>
                     <h2 class="subheading">2020IT邦鐵人賽</h2>
                     <span class="meta">
                         Posted by 
@@ -193,9 +193,9 @@
                             Hank Lee
                          
                         on 
-                        Sunday, September 13, 2020
+                        Tuesday, September 15, 2020
                         
-                            <span id="/posts/ithome-triathlon/brute_force_selection_sort" class="leancloud_visitors meta_data_item" data-flag-title="">
+                            <span id="/posts/ithome-triathlon/brute_force_knapsack" class="leancloud_visitors meta_data_item" data-flag-title="">
     <span class="post-meta-item-icon">
       <span class="octicon octicon-eye"></span> 
     </span>
@@ -359,10 +359,10 @@ $(function() {
                     <nav id="TableOfContents">
   <ul>
     <li><a href="#前言">前言</a></li>
-    <li><a href="#什麼是brute-force">什麼是Brute Force？</a></li>
-    <li><a href="#selection-sort如何運作">Selection Sort如何運作？</a></li>
-    <li><a href="#selection-sort的時間複雜度time-complexity">Selection Sort的時間複雜度(Time complexity)</a></li>
-    <li><a href="#為什麼要使用selection-sort">為什麼要使用Selection Sort?</a></li>
+    <li><a href="#真正的暴力---exhaustive-search">真正的暴力 - Exhaustive Search</a></li>
+    <li><a href="#knapsack-algorithm是什麼又是如何運作的呢">Knapsack Algorithm是什麼？又是如何運作的呢？</a></li>
+    <li><a href="#knapsack-algorithm的範例時間">Knapsack Algorithm的範例時間</a></li>
+    <li><a href="#knapsack-algorithm的時間複雜度time-complexity">Knapsack Algorithm的時間複雜度(Time complexity)</a></li>
     <li><a href="#小結">小結</a></li>
     <li><a href="#預告">預告</a></li>
     <li><a href="#references">References</a></li>
@@ -371,66 +371,350 @@ $(function() {
                     
                 
 
-                <p><a href="https://ithelp.ithome.com.tw/articles/10236212">本系列文章同步分享於IT邦幫忙第12屆鐵人賽</a></p>
+                <p><a href="">本系列文章同步分享於IT邦幫忙第12屆鐵人賽</a></p>
 <h2 id="前言">前言</h2>
-<p>一連講了五天的背景知識，今天我們終於要來開始上主菜了，而主菜也是有很多的類別：</p>
-<ol>
-<li>Brute Force</li>
-<li>Decrease and Conquer</li>
-<li>Divide and Conquer</li>
-<li>Transform and Conquer</li>
-<li>Time and Space Tradeoffs</li>
-<li>Dynamic Programming</li>
-<li>Greedy Techniques</li>
-</ol>
-<p>在我們這30天的系列中，我們也會針對這七個類別中一些比較基礎的演算法進行介紹，今天的主題是<strong>Brute Force中的Selection Sort</strong>。</p>
+<p>接連兩天分別介紹了Selection Sort和Bubble Sort兩種排序的演算法，有沒有人開始覺得 <em>『排個序也需要這麼麻煩的嗎？』</em> ，我自己在學習的過程中是覺得很有趣，就這麼單單是<strong>排序</strong>這件事情，卻可以有這麼多種不同的方式來達成目的，其實還是有很多種不同的Sort演算法，只是由於其他Sort演算法的分類不在Brute Force當中，因此我們將會在未來陸陸續續跟大家介紹。</p>
+<p>今天我們就來說明同樣歸類為Brute Force的演算法 &ndash; <strong>Knapsack Algorithm</strong>。</p>
 <hr>
-<h2 id="什麼是brute-force">什麼是Brute Force？</h2>
-<p>Brute Force就是針對要解決的問題，用最『直接』的方始去取得結果，我個人覺得最簡單的說法就是<strong>暴力破解</strong>，例如要計算某個數值X的n次方，那就真的去把X乘n次、或者是要從一堆資料中找出某一筆資料，就把這堆資料中每一個資料都拿出來比對。那可能會有人覺得：『既然是暴力破解法，那Brute Force沒什麼特別的啊，幹嘛要特別說？！』，至少我曾經這麼想過，但是我覺得就是因為Brute Force沒什麼特別的，所以我自己認為他是演算法的『源頭』，藉由了解最原始的做法，才能知道未來演變出的演算法的優勢及好處。</p>
+<h2 id="真正的暴力---exhaustive-search">真正的暴力 - Exhaustive Search</h2>
+<p>兩天前說Brute Force其實是一種<strong>暴力破解法</strong>，因此當然對於暴力破解一個問題就是要夠兇夠狠，直接產生所有的<strong>可能性</strong>，然後再從中找出<strong>最好的解答</strong>，這樣才夠暴力，而這種方式就叫做<strong>Exhaustive Search</strong>；基本上這種方式可能會有人覺得很笨很無趣，但很不巧地，可能有先問題還真的只有用這種方式反而可以更有效地取得解答。</p>
 <hr>
-<h2 id="selection-sort如何運作">Selection Sort如何運作？</h2>
-<p>其實要了解一個演算法，透過 <strong>排序(Sort)及搜尋(Search)</strong> 大概會是最容易的方式了，今天我們就來介紹第一個屬於Brute Force的演算法&ndash;<strong>Selection Sort</strong>，既然名字都已經有<code>Sort</code>了，自然表示這個演算法的目的是用在<code>排序</code>，基本上這個演算法的步驟為下：</p>
+<h2 id="knapsack-algorithm是什麼又是如何運作的呢">Knapsack Algorithm是什麼？又是如何運作的呢？</h2>
+<p>假設現在有n個物品，每個物品都有它的重量(weight)和價值(value)，要把這些物品裝進一個限重W的小背包，而在符合限重的前提下裝進<strong>最有價值的</strong>物品組合，這個就是所謂的<code>Knapsack Problem</code>。而Exhaustive Search就可以用來解決這個問題啦，流程如下：</p>
 <ol>
-<li>針對整個數列進行搜尋，尋找<code>最小的值</code>，然後把這個最小的值<code>換到第一個位置</code>。</li>
-<li>再<code>從第二個數值位置</code>開始搜尋整個數列，一樣尋找<code>最小的值</code>，然後把這次找到的最小的值<code>換到第二個位置</code>。</li>
-<li>重複上述動作，直到最後一個數值。</li>
+<li>針對這n個物品排列組合出所有的可能性（總負重及總價值）。</li>
+<li>將所有可能性的總負重與小背包的限重Ｗ進行比較，留下符合限重的組合。</li>
+<li>從留下的組合中找出總價值最高的組合。</li>
 </ol>
-<p>對，這個Selection sort就是這麼的簡單，沒有複雜的流程，沒有複雜的理論，非常簡顯易懂，那Pseudo-code則是下面這樣：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#6272a4">// Input: An array Array[0...n-1] of orderable elements
-</span><span style="color:#6272a4">// Output: An array Array[0...n-1] sorted in ascending order
-</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">function</span> SelectionSort(<span style="color:#8be9fd;font-style:italic">Array</span>[<span style="color:#bd93f9">0</span>, ..., n<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>]){
-    <span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span> to n<span style="color:#ff79c6">-</span><span style="color:#bd93f9">2</span> {
-        min <span style="color:#ff79c6">=</span> i
-        <span style="color:#ff79c6">for</span> j <span style="color:#ff79c6">=</span> i <span style="color:#ff79c6">+</span> <span style="color:#bd93f9">1</span> to n<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span> {
-            <span style="color:#ff79c6">if</span> <span style="color:#8be9fd;font-style:italic">Array</span>[j] <span style="color:#ff79c6">&lt;</span> <span style="color:#8be9fd;font-style:italic">Array</span>[min]{
-                min <span style="color:#ff79c6">=</span> j
-            }
-        }
-        SWAP <span style="color:#8be9fd;font-style:italic">Array</span>[i] and <span style="color:#8be9fd;font-style:italic">Array</span>[min]
-    }
-}
-</code></pre></div><hr>
-<h2 id="selection-sort的時間複雜度time-complexity">Selection Sort的時間複雜度(Time complexity)</h2>
-<p>在講Selection Sort的時間複雜度之前，我們先透過一張GIF來『視覺化』Selection Sort的步驟吧。</p>
-<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3e2jczB0gpo5MQZUUr9ZAQHxp28RXRJLElG1A5I54R0ug0aBx7HC6nJweX6-fOj2L7bPg0O0uvuz0ERugSgcxDjm5c1TW4oNzVVVZz29fFHHcsw4-NXH0ZfGtvwuLs19dhu6h389Ls7JYgvxur0zXvn=w480-h240-no?authuser=0" alt="selection-sort"></p>
-<p>從上面的GIF可以看到，短短一個長度為8的陣列，在進行Selection Sort的時候，就會需要進行<strong>數值大小比較28次和數值交換7次</strong>，也就是說，透過Selection Sort每跑一次長度為n的陣列，就需要進行<strong>接近</strong><code>n^2/2次</code>的<strong>數值比較</strong>和<code>n-1次</code>的<strong>數值交換</strong>，另外，從Pseudo-code中可以看到跑一次Selection Sort會跑兩次<strong>執行時間決定於n的大小</strong>的巢狀迴圈，因此其時間複雜度為<code>𝜪(n^2)</code>；而對於Selection Sort而言，Best Case、Average Case和Worst Case的時間複雜度都是<code>𝜪(n^2)</code>。</p>
+<p>好吧～說起來真的很『常識』，而他就真的這麼平常。</p>
 <hr>
-<h2 id="為什麼要使用selection-sort">為什麼要使用Selection Sort?</h2>
-<ol>
-<li>Selection Sort執行的時候，讀取數據(writes)次數為<code>𝜪(n^2)</code>，而寫入數據(reads)次數為<code>𝜪(n)</code>。</li>
-<li>當<strong>寫入的動作</strong>的『費用』比<strong>讀取的動作</strong>來的高出許多時，那Selection Sort就會是一個比較好的選擇。</li>
-<li>如果要處理的陣列是個<strong>長度很小的陣列</strong>，那Selection Sort就相對有效率，而且比較容易實現。</li>
-</ol>
+<h2 id="knapsack-algorithm的範例時間">Knapsack Algorithm的範例時間</h2>
+<p>我們舉個例子來說明好了：</p>
+<p>假設現在有個小背包限重(W)為<code>15</code>，而有4個物品（A, B, C, D)可以放入這個背包，其重量(w)與價值(v)分別為：</p>
+<table>
+<thead>
+<tr>
+<th align="left">物品</th>
+<th align="left">重量</th>
+<th align="left">價值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">A</td>
+<td align="left">7</td>
+<td align="left">$ 15</td>
+</tr>
+<tr>
+<td align="left">B</td>
+<td align="left">2</td>
+<td align="left">$ 10</td>
+</tr>
+<tr>
+<td align="left">C</td>
+<td align="left">6</td>
+<td align="left">$ 30</td>
+</tr>
+<tr>
+<td align="left">D</td>
+<td align="left">5</td>
+<td align="left">$ 50</td>
+</tr>
+</tbody>
+</table>
+<p>經過上方所提到的流程第一步-<code>找出所有可能性</code>後，可以得到下表的結果：</p>
+<table>
+<thead>
+<tr>
+<th align="left">組合</th>
+<th align="left">總重量</th>
+<th align="left">總價值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">-</td>
+<td align="left">0</td>
+<td align="left">$ 0</td>
+</tr>
+<tr>
+<td align="left">A</td>
+<td align="left">7</td>
+<td align="left">$ 15</td>
+</tr>
+<tr>
+<td align="left">B</td>
+<td align="left">2</td>
+<td align="left">$ 10</td>
+</tr>
+<tr>
+<td align="left">C</td>
+<td align="left">6</td>
+<td align="left">$ 30</td>
+</tr>
+<tr>
+<td align="left">D</td>
+<td align="left">5</td>
+<td align="left">$ 50</td>
+</tr>
+<tr>
+<td align="left">A, B</td>
+<td align="left">9</td>
+<td align="left">$ 25</td>
+</tr>
+<tr>
+<td align="left">A, C</td>
+<td align="left">13</td>
+<td align="left">$ 45</td>
+</tr>
+<tr>
+<td align="left">A, D</td>
+<td align="left">12</td>
+<td align="left">$ 65</td>
+</tr>
+<tr>
+<td align="left">B, C</td>
+<td align="left">8</td>
+<td align="left">$ 40</td>
+</tr>
+<tr>
+<td align="left">B, D</td>
+<td align="left">7</td>
+<td align="left">$ 60</td>
+</tr>
+<tr>
+<td align="left">C, D</td>
+<td align="left">11</td>
+<td align="left">$ 80</td>
+</tr>
+<tr>
+<td align="left">A, B, C</td>
+<td align="left">15</td>
+<td align="left">$ 55</td>
+</tr>
+<tr>
+<td align="left">A, B, D</td>
+<td align="left">14</td>
+<td align="left">$ 75</td>
+</tr>
+<tr>
+<td align="left">A, C, D</td>
+<td align="left">18</td>
+<td align="left">$ 95</td>
+</tr>
+<tr>
+<td align="left">B, C, D</td>
+<td align="left">13</td>
+<td align="left">$ 90</td>
+</tr>
+<tr>
+<td align="left">A, B, C, D</td>
+<td align="left">20</td>
+<td align="left">$ 105</td>
+</tr>
+</tbody>
+</table>
+<p>再來，第二步-<code>比較背包限重(W&lt;=15)</code>，留下符合的組合後，變成下表的結果：</p>
+<table>
+<thead>
+<tr>
+<th align="left">組合</th>
+<th align="left">總重量</th>
+<th align="left">總價值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">-</td>
+<td align="left">0</td>
+<td align="left">$ 0</td>
+</tr>
+<tr>
+<td align="left">A</td>
+<td align="left">7</td>
+<td align="left">$ 15</td>
+</tr>
+<tr>
+<td align="left">B</td>
+<td align="left">2</td>
+<td align="left">$ 10</td>
+</tr>
+<tr>
+<td align="left">C</td>
+<td align="left">6</td>
+<td align="left">$ 30</td>
+</tr>
+<tr>
+<td align="left">D</td>
+<td align="left">5</td>
+<td align="left">$ 50</td>
+</tr>
+<tr>
+<td align="left">A, B</td>
+<td align="left">9</td>
+<td align="left">$ 25</td>
+</tr>
+<tr>
+<td align="left">A, C</td>
+<td align="left">13</td>
+<td align="left">$ 45</td>
+</tr>
+<tr>
+<td align="left">A, D</td>
+<td align="left">12</td>
+<td align="left">$ 65</td>
+</tr>
+<tr>
+<td align="left">B, C</td>
+<td align="left">8</td>
+<td align="left">$ 40</td>
+</tr>
+<tr>
+<td align="left">B, D</td>
+<td align="left">7</td>
+<td align="left">$ 60</td>
+</tr>
+<tr>
+<td align="left">C, D</td>
+<td align="left">11</td>
+<td align="left">$ 80</td>
+</tr>
+<tr>
+<td align="left">A, B, C</td>
+<td align="left">15</td>
+<td align="left">$ 55</td>
+</tr>
+<tr>
+<td align="left">A, B, D</td>
+<td align="left">14</td>
+<td align="left">$ 75</td>
+</tr>
+<tr>
+<td align="left">A, C, D</td>
+<td align="left">超重</td>
+<td align="left">超重</td>
+</tr>
+<tr>
+<td align="left">B, C, D</td>
+<td align="left">13</td>
+<td align="left">$ 90</td>
+</tr>
+<tr>
+<td align="left">A, B, C, D</td>
+<td align="left">超重</td>
+<td align="left">超重</td>
+</tr>
+</tbody>
+</table>
+<p>最後一步-<code>找出當中價值最高的組合</code>:</p>
+<table>
+<thead>
+<tr>
+<th align="left">組合</th>
+<th align="left">總重量</th>
+<th align="left">總價值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">-</td>
+<td align="left">0</td>
+<td align="left">$ 0</td>
+</tr>
+<tr>
+<td align="left">A</td>
+<td align="left">7</td>
+<td align="left">$ 15</td>
+</tr>
+<tr>
+<td align="left">B</td>
+<td align="left">2</td>
+<td align="left">$ 10</td>
+</tr>
+<tr>
+<td align="left">C</td>
+<td align="left">6</td>
+<td align="left">$ 30</td>
+</tr>
+<tr>
+<td align="left">D</td>
+<td align="left">5</td>
+<td align="left">$ 50</td>
+</tr>
+<tr>
+<td align="left">A, B</td>
+<td align="left">9</td>
+<td align="left">$ 25</td>
+</tr>
+<tr>
+<td align="left">A, C</td>
+<td align="left">13</td>
+<td align="left">$ 45</td>
+</tr>
+<tr>
+<td align="left">A, D</td>
+<td align="left">12</td>
+<td align="left">$ 65</td>
+</tr>
+<tr>
+<td align="left">B, C</td>
+<td align="left">8</td>
+<td align="left">$ 40</td>
+</tr>
+<tr>
+<td align="left">B, D</td>
+<td align="left">7</td>
+<td align="left">$ 60</td>
+</tr>
+<tr>
+<td align="left">C, D</td>
+<td align="left">11</td>
+<td align="left">$ 80</td>
+</tr>
+<tr>
+<td align="left">A, B, C</td>
+<td align="left">15</td>
+<td align="left">$ 55</td>
+</tr>
+<tr>
+<td align="left">A, B, D</td>
+<td align="left">14</td>
+<td align="left">$ 75</td>
+</tr>
+<tr>
+<td align="left">A, C, D</td>
+<td align="left">超重</td>
+<td align="left">超重</td>
+</tr>
+<tr>
+<td align="left"><code>B, C, D</code></td>
+<td align="left"><code>13</code></td>
+<td align="left"><code>$ 90</code></td>
+</tr>
+<tr>
+<td align="left">A, B, C, D</td>
+<td align="left">超重</td>
+<td align="left">超重</td>
+</tr>
+</tbody>
+</table>
+<p>這樣即可取得最佳組合&ndash; <strong>B, C, D，其重量與價值分別為13和$ 90。</strong></p>
+<hr>
+<h2 id="knapsack-algorithm的時間複雜度time-complexity">Knapsack Algorithm的時間複雜度(Time complexity)</h2>
+<p>在進行Knapsack Algorithm時，最花時間的過程會在<code>排列組合</code>，而針對n個物品進行排列組合，總共會取得<code>2^n</code>個結果，以上方例子來說，<code>4</code>個物品總共產生出<code>16</code>種可能性(<code>2^4</code>)，而這一個步驟就是影響Knapsack Algorithm的關鍵所在，因此Knapsack Algorithm的時間複雜度即為<code>𝜪(2^n)</code>。</p>
+<blockquote>
+<p>Knapsack的問題還有另外一種演算法可以解決，我們未來在介紹。</p>
+</blockquote>
 <hr>
 <h2 id="小結">小結</h2>
 <ul>
-<li>Brute Force其實就是<strong>暴力破解法</strong>。</li>
-<li>Selection Sort是從中尋找最小的值後與最前面的數值交換位置，直到整個數列變成從小到大的排序。</li>
-<li>Selection Sort的時間複雜度為𝜪(n^2)。</li>
+<li>Exhaustive Search就是先排列組合出所有可能性，再從中找出最佳解答。</li>
+<li>Knapsnack Algorithm就是一種Exhaustive Search。</li>
+<li>Knapsnack Algorithm的時間複雜度為<code>𝜪(2^n)</code>。</li>
 </ul>
 <hr>
 <h2 id="預告">預告</h2>
-<p>明天我們將會介紹第二個屬於Brute Force的演算法-Bubble Sort。</p>
+<p>明天我們將會介紹第四個屬於Brute Force的演算法-DFS和BFS。</p>
 <hr>
 <h2 id="references">References</h2>
 <ol>
@@ -444,15 +728,10 @@ $(function() {
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/posts/ithome-triathlon/data_structures" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day5 -- 線性資料結構(Linear Data Structures)">&larr;
+                        <a href="/posts/ithome-triathlon/brute_force_bubble_sort" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day7 -- Brute Force - Bubble Sort">&larr;
                             Previous Post</a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/posts/ithome-triathlon/brute_force_bubble_sort" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day7 -- Brute Force - Bubble Sort">Next
-                            Post &rarr;</a>
-                    </li>
                     
                 </ul>
 

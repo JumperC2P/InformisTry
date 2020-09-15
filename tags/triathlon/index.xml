@@ -6,10 +6,28 @@
     <description>Recent content in triathlon on InformisTry</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 13 Sep 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 15 Sep 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://jumperc2p.github.io/InformisTry/tags/triathlon/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【舌尖上的演算法】Day8 -- Brute Force - Knapsack</title>
+      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/brute_force_knapsack/</link>
+      <pubDate>Tue, 15 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/brute_force_knapsack/</guid>
+      <description>本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 接連兩天分別介紹了Selection Sort和Bubble Sort兩種排序的演算法，有沒有人</description>
+    </item>
+    
+    <item>
+      <title>【舌尖上的演算法】Day7 -- Brute Force - Bubble Sort</title>
+      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/brute_force_bubble_sort/</link>
+      <pubDate>Mon, 14 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/brute_force_bubble_sort/</guid>
+      <description>本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 第六天我們終於開始上主菜了，第一個演算法Brute Force中的Selection Sort（</description>
+    </item>
     
     <item>
       <title>【舌尖上的演算法】Day6 -- Brute Force - Selection Sort</title>

@@ -15,9 +15,9 @@
     
 
     
-    <meta name="title" content="【舌尖上的演算法】Day6 -- Brute Force - Selection Sort" />
-    <meta property="og:title" content="【舌尖上的演算法】Day6 -- Brute Force - Selection Sort" />
-    <meta property="twitter:title" content="【舌尖上的演算法】Day6 -- Brute Force - Selection Sort" />
+    <meta name="title" content="【舌尖上的演算法】Day7 -- Brute Force - Bubble Sort" />
+    <meta property="og:title" content="【舌尖上的演算法】Day7 -- Brute Force - Bubble Sort" />
+    <meta property="twitter:title" content="【舌尖上的演算法】Day7 -- Brute Force - Bubble Sort" />
     
 
     
@@ -34,9 +34,9 @@
     <meta name="keyword"  content="Chih-Hsuan Lee, Informistry, Hank Lee, JumperC2P, Hank portfolio, Java, Python, Developer, Engineer, Software, ReactJS, Web, React, Database, Kubernetes, 微服務, Microservice, 演算法">
     <link rel="shortcut icon" href="/InformisTry/img/favicon.ico">
 
-    <title>【舌尖上的演算法】Day6 -- Brute Force - Selection Sort-Informistry</title>
+    <title>【舌尖上的演算法】Day7 -- Brute Force - Bubble Sort-Informistry</title>
 
-    <link rel="canonical" href="/InformisTry/posts/ithome-triathlon/brute_force_selection_sort">
+    <link rel="canonical" href="/InformisTry/posts/ithome-triathlon/brute_force_bubble_sort">
 
     <link rel="stylesheet" href="/InformisTry/css/iDisqus.min.css"/>
 	
@@ -185,7 +185,7 @@
                         </a>
                         
                     </div>
-                    <h1>【舌尖上的演算法】Day6 -- Brute Force - Selection Sort</h1>
+                    <h1>【舌尖上的演算法】Day7 -- Brute Force - Bubble Sort</h1>
                     <h2 class="subheading">2020IT邦鐵人賽</h2>
                     <span class="meta">
                         Posted by 
@@ -193,9 +193,9 @@
                             Hank Lee
                          
                         on 
-                        Sunday, September 13, 2020
+                        Monday, September 14, 2020
                         
-                            <span id="/posts/ithome-triathlon/brute_force_selection_sort" class="leancloud_visitors meta_data_item" data-flag-title="">
+                            <span id="/posts/ithome-triathlon/brute_force_bubble_sort" class="leancloud_visitors meta_data_item" data-flag-title="">
     <span class="post-meta-item-icon">
       <span class="octicon octicon-eye"></span> 
     </span>
@@ -359,10 +359,10 @@ $(function() {
                     <nav id="TableOfContents">
   <ul>
     <li><a href="#前言">前言</a></li>
-    <li><a href="#什麼是brute-force">什麼是Brute Force？</a></li>
-    <li><a href="#selection-sort如何運作">Selection Sort如何運作？</a></li>
-    <li><a href="#selection-sort的時間複雜度time-complexity">Selection Sort的時間複雜度(Time complexity)</a></li>
-    <li><a href="#為什麼要使用selection-sort">為什麼要使用Selection Sort?</a></li>
+    <li><a href="#佐料---stable-sorting">佐料 - Stable Sorting</a></li>
+    <li><a href="#bubble-sort如何運作">Bubble Sort如何運作？</a></li>
+    <li><a href="#bubble-sort的時間複雜度time-complexity">Bubble Sort的時間複雜度(Time complexity)</a></li>
+    <li><a href="#如何提早結束bubble-sort">如何提早結束Bubble Sort？</a></li>
     <li><a href="#小結">小結</a></li>
     <li><a href="#預告">預告</a></li>
     <li><a href="#references">References</a></li>
@@ -371,66 +371,66 @@ $(function() {
                     
                 
 
-                <p><a href="https://ithelp.ithome.com.tw/articles/10236212">本系列文章同步分享於IT邦幫忙第12屆鐵人賽</a></p>
+                <p><a href="https://ithelp.ithome.com.tw/articles/10236214">本系列文章同步分享於IT邦幫忙第12屆鐵人賽</a></p>
 <h2 id="前言">前言</h2>
-<p>一連講了五天的背景知識，今天我們終於要來開始上主菜了，而主菜也是有很多的類別：</p>
-<ol>
-<li>Brute Force</li>
-<li>Decrease and Conquer</li>
-<li>Divide and Conquer</li>
-<li>Transform and Conquer</li>
-<li>Time and Space Tradeoffs</li>
-<li>Dynamic Programming</li>
-<li>Greedy Techniques</li>
-</ol>
-<p>在我們這30天的系列中，我們也會針對這七個類別中一些比較基礎的演算法進行介紹，今天的主題是<strong>Brute Force中的Selection Sort</strong>。</p>
+<p>第六天我們終於開始上主菜了，第一個演算法Brute Force中的Selection Sort（<a href="https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/brute_force_selection_sort/">複習連結在此</a>)，稍微複習一下，Selection Sort的邏輯是從一組數列中找出最小的值，然後與位在數列最前面的數值交換，直到整個數列都跑過了一輪，數列的順序也就成了從小至大的排序結果，而Selection Sort的時間複雜度(Time complexity)是<code>𝜪(n^2)</code>。</p>
+<p>今天我們要來上第二道蔡，同樣是屬於Brute Force中的<strong>Bubble Sort</strong>。</p>
 <hr>
-<h2 id="什麼是brute-force">什麼是Brute Force？</h2>
-<p>Brute Force就是針對要解決的問題，用最『直接』的方始去取得結果，我個人覺得最簡單的說法就是<strong>暴力破解</strong>，例如要計算某個數值X的n次方，那就真的去把X乘n次、或者是要從一堆資料中找出某一筆資料，就把這堆資料中每一個資料都拿出來比對。那可能會有人覺得：『既然是暴力破解法，那Brute Force沒什麼特別的啊，幹嘛要特別說？！』，至少我曾經這麼想過，但是我覺得就是因為Brute Force沒什麼特別的，所以我自己認為他是演算法的『源頭』，藉由了解最原始的做法，才能知道未來演變出的演算法的優勢及好處。</p>
+<h2 id="佐料---stable-sorting">佐料 - Stable Sorting</h2>
+<p>在講<strong>Sorting</strong>的時候，其實還有一個小小觀念可以帶出來，就是<strong>Stable Sorting</strong>。</p>
+<p>Stable Sorting並不是一種演算法，它是附加於Sorting相關的方法(演算法)的一種概念，如果Sorting後的結果針對重複Key的資料保留了原先的順序時，則這個Sorting方法（演算法）就可被稱為Stable Sorting。讓我們看看下面的範例：</p>
+<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3cu7FRqfTKp4pza78cM0lTc9BzxOoIbgrwAe5hIzwpXAnUoY6cMEFnVrPUMogw18txlGQFGrQkZEwhMfZ2N4z7XWm4sCoPh17XxSsnJGZoJ13auJlPwj3h6Zthz5NDeHAVMXnY_n3HYZIewifQvtCd2=w428-h253-no?authuser=0" alt="Stable Sorting"></p>
+<p>從上圖可以看到，在使用數字做為排序所使用的Key時，排序前與排序後，同樣Key的值的順序是一樣的，可以符合這種效果的排序就稱為<strong>Stable Sorting</strong>。</p>
+<p>那昨天介紹的<strong>Selection Sort是屬於Stable Sorting嗎？</strong> 大家可以想想，解答會在今日小結中公布。</p>
 <hr>
-<h2 id="selection-sort如何運作">Selection Sort如何運作？</h2>
-<p>其實要了解一個演算法，透過 <strong>排序(Sort)及搜尋(Search)</strong> 大概會是最容易的方式了，今天我們就來介紹第一個屬於Brute Force的演算法&ndash;<strong>Selection Sort</strong>，既然名字都已經有<code>Sort</code>了，自然表示這個演算法的目的是用在<code>排序</code>，基本上這個演算法的步驟為下：</p>
+<h2 id="bubble-sort如何運作">Bubble Sort如何運作？</h2>
+<p>Bubble Sort在排序的演算法中也算是經典了，而且也是很容易了解的演算法之一；和Selection Sort有一點類似，都是<code>比較</code>和<code>交換</code>，只是Selection Sort是先把資料全部比較完再交換，而Bubble Sort是邊比較邊交換，具體步驟如下：</p>
 <ol>
-<li>針對整個數列進行搜尋，尋找<code>最小的值</code>，然後把這個最小的值<code>換到第一個位置</code>。</li>
-<li>再<code>從第二個數值位置</code>開始搜尋整個數列，一樣尋找<code>最小的值</code>，然後把這次找到的最小的值<code>換到第二個位置</code>。</li>
-<li>重複上述動作，直到最後一個數值。</li>
+<li>將數列中<strong>第一與第二</strong>的數值進行比較，若第一個數值大於第二個數值，兩者交換位置；再來，將<strong>第二與第三</strong>的數值進行比較，若第二個數值大於第三個數值，再交換，反之，則維持原狀；基於這樣的方式，最大的數值將會被『交換』到最後一個位置。</li>
+<li>重複上述步驟，只是這次會將<strong>第二大的數值</strong>會被交換到 <strong>『倒數第二』個位置</strong>。</li>
+<li>再重複上述步驟，直到整個數列排序完畢。</li>
 </ol>
-<p>對，這個Selection sort就是這麼的簡單，沒有複雜的流程，沒有複雜的理論，非常簡顯易懂，那Pseudo-code則是下面這樣：</p>
+<p>所以，與Selection Sort不同，Selection Sort是找出<code>最小值</code>來移動，而Bubble Sort是針對<code>最大值</code>做移動。讓我們來看看Pseudo-Code大概是怎麼實作Bubble Sort：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#6272a4">// Input: An array Array[0...n-1] of orderable elements
 </span><span style="color:#6272a4">// Output: An array Array[0...n-1] sorted in ascending order
-</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">function</span> SelectionSort(<span style="color:#8be9fd;font-style:italic">Array</span>[<span style="color:#bd93f9">0</span>, ..., n<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>]){
+</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">function</span> BubbleSort(<span style="color:#8be9fd;font-style:italic">Array</span>[<span style="color:#bd93f9">0</span>, ..., n<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>]){
     <span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span> to n<span style="color:#ff79c6">-</span><span style="color:#bd93f9">2</span> {
-        min <span style="color:#ff79c6">=</span> i
-        <span style="color:#ff79c6">for</span> j <span style="color:#ff79c6">=</span> i <span style="color:#ff79c6">+</span> <span style="color:#bd93f9">1</span> to n<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span> {
-            <span style="color:#ff79c6">if</span> <span style="color:#8be9fd;font-style:italic">Array</span>[j] <span style="color:#ff79c6">&lt;</span> <span style="color:#8be9fd;font-style:italic">Array</span>[min]{
-                min <span style="color:#ff79c6">=</span> j
+        <span style="color:#ff79c6">for</span> j <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span> to n<span style="color:#ff79c6">-</span><span style="color:#bd93f9">2</span><span style="color:#ff79c6">-</span>i {
+            <span style="color:#ff79c6">if</span> <span style="color:#8be9fd;font-style:italic">Array</span>[j<span style="color:#ff79c6">+</span><span style="color:#bd93f9">1</span>] <span style="color:#ff79c6">&lt;</span> <span style="color:#8be9fd;font-style:italic">Array</span>[j]{
+                SWAP <span style="color:#8be9fd;font-style:italic">Array</span>[j] and <span style="color:#8be9fd;font-style:italic">Array</span>[j<span style="color:#ff79c6">+</span><span style="color:#bd93f9">1</span>]
             }
         }
-        SWAP <span style="color:#8be9fd;font-style:italic">Array</span>[i] and <span style="color:#8be9fd;font-style:italic">Array</span>[min]
-    }
+    } 
 }
-</code></pre></div><hr>
-<h2 id="selection-sort的時間複雜度time-complexity">Selection Sort的時間複雜度(Time complexity)</h2>
-<p>在講Selection Sort的時間複雜度之前，我們先透過一張GIF來『視覺化』Selection Sort的步驟吧。</p>
-<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3e2jczB0gpo5MQZUUr9ZAQHxp28RXRJLElG1A5I54R0ug0aBx7HC6nJweX6-fOj2L7bPg0O0uvuz0ERugSgcxDjm5c1TW4oNzVVVZz29fFHHcsw4-NXH0ZfGtvwuLs19dhu6h389Ls7JYgvxur0zXvn=w480-h240-no?authuser=0" alt="selection-sort"></p>
-<p>從上面的GIF可以看到，短短一個長度為8的陣列，在進行Selection Sort的時候，就會需要進行<strong>數值大小比較28次和數值交換7次</strong>，也就是說，透過Selection Sort每跑一次長度為n的陣列，就需要進行<strong>接近</strong><code>n^2/2次</code>的<strong>數值比較</strong>和<code>n-1次</code>的<strong>數值交換</strong>，另外，從Pseudo-code中可以看到跑一次Selection Sort會跑兩次<strong>執行時間決定於n的大小</strong>的巢狀迴圈，因此其時間複雜度為<code>𝜪(n^2)</code>；而對於Selection Sort而言，Best Case、Average Case和Worst Case的時間複雜度都是<code>𝜪(n^2)</code>。</p>
+</code></pre></div><blockquote>
+<p>內層迴圈的限制之所以除了減2後再減<code>i</code>，是因為Bubble Sort每跑完一次外層迴圈，最後的目標位置會往前移一個。</p>
+</blockquote>
 <hr>
-<h2 id="為什麼要使用selection-sort">為什麼要使用Selection Sort?</h2>
+<h2 id="bubble-sort的時間複雜度time-complexity">Bubble Sort的時間複雜度(Time complexity)</h2>
+<p>同樣的，再講Bubble Sort之前，我們再來看一下Bubble Sort的動圖流程吧，希望這樣可以幫助到大家更容易理解Bubble Sort的執行過程：
+<img src="https://lh3.googleusercontent.com/pw/ACtC-3cBK_nMXkS6Xp7hOUIvWKB3vtb5YjThiEzkziDr0zATQAfPBh4e2ZeVO-WLZNVTymXrLD-Uq_tVbs2KdzKCMSm_niwWCGrf3BOrQV6cbosZWvF4TSQ-rQDMCezIzUhcAXK2fMtbOCAn4eaGW04a6T4G=w480-h240-no?authuser=0" alt="Bubble Sort"></p>
+<p>會有人看完這個GIF後覺得，在排完<code>4</code>的位置時，整個數列基本上已經是排序完畢了，為什麼之後還是繼續進行比較嗎？（我一開始有這樣想過ＸＤ）原因是因為程式『看不到』數列當下已經排序完了，所以對程式而言，他會繼續執行下去。而跟Selection Sort一樣，Bubble Sort在執行過程中總共比較了28次，但是卻也交換了18次，整整比Selection Sort多了一倍多，也因為Bubble Sort在實作時同樣要跑一個雙層迴圈，因此Bubble Sort的時間複雜度為<code>𝜪(n^2)</code>；而Bubble Sort的Best Case、Average Case和Worst Case會發生在下列狀況：</p>
 <ol>
-<li>Selection Sort執行的時候，讀取數據(writes)次數為<code>𝜪(n^2)</code>，而寫入數據(reads)次數為<code>𝜪(n)</code>。</li>
-<li>當<strong>寫入的動作</strong>的『費用』比<strong>讀取的動作</strong>來的高出許多時，那Selection Sort就會是一個比較好的選擇。</li>
-<li>如果要處理的陣列是個<strong>長度很小的陣列</strong>，那Selection Sort就相對有效率，而且比較容易實現。</li>
+<li>Best Case是發生在這一組數列已經是正序排列了，此時數值比較的次數為<code>n^2/2</code>，但交換的次數為<code>0</code>。</li>
+<li>Average Case則是數列是隨機亂序，此時數值比較的次數為<code>n^2/2</code>，而交換的次數會小於<code>n^2/2</code>。</li>
+<li>Worst Case則是數列為倒序排列，此時數值比較的次數為<code>n^2/2</code>，而交換的次數亦為<code>n^2/2</code>。</li>
 </ol>
+<hr>
+<h2 id="如何提早結束bubble-sort">如何提早結束Bubble Sort？</h2>
+<p>正如同上面範例中，明明在排完<code>4</code>的位置時，整個數列已經完成排序了，那有沒有什麼辦法可以就這樣結束程式的進行呢？答案是有的，這個做法叫做Early-Termination Bubble Sort（提早終止的Bubble Sort），做法其實很簡單：</p>
+<p>假設在某一次的iteration當中，<code>完全沒有</code>進行『交換』的動作時，就表示整個數列已經完成排序，而程式就跳出迴圈，結束後續排序的進行。</p>
+<p>雖然這樣的做法並不會改變Bubble Sort的時間複雜度，但還是有機會減少整體的執行時間。</p>
 <hr>
 <h2 id="小結">小結</h2>
 <ul>
-<li>Brute Force其實就是<strong>暴力破解法</strong>。</li>
-<li>Selection Sort是從中尋找最小的值後與最前面的數值交換位置，直到整個數列變成從小到大的排序。</li>
-<li>Selection Sort的時間複雜度為𝜪(n^2)。</li>
+<li>Stable Sorting的定義就是在面對有相同Key的排序，數列排序前後有同樣Key的值的順序維持一致。</li>
+<li>Selection Sort和Bubble都是Stable Sorting。</li>
+<li>Bubble Sort的時間複雜度為<code>𝜪(n^2)</code>。</li>
+<li>Early-Termination Bubble Sort是可行的。</li>
 </ul>
 <hr>
 <h2 id="預告">預告</h2>
-<p>明天我們將會介紹第二個屬於Brute Force的演算法-Bubble Sort。</p>
+<p>明天我們將會介紹第三個屬於Brute Force的演算法-knapsack。</p>
 <hr>
 <h2 id="references">References</h2>
 <ol>
@@ -444,13 +444,13 @@ $(function() {
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/posts/ithome-triathlon/data_structures" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day5 -- 線性資料結構(Linear Data Structures)">&larr;
+                        <a href="/posts/ithome-triathlon/brute_force_selection_sort" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day6 -- Brute Force - Selection Sort">&larr;
                             Previous Post</a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/posts/ithome-triathlon/brute_force_bubble_sort" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day7 -- Brute Force - Bubble Sort">Next
+                        <a href="/posts/ithome-triathlon/brute_force_knapsack" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day8 -- Brute Force - Knapsack">Next
                             Post &rarr;</a>
                     </li>
                     
