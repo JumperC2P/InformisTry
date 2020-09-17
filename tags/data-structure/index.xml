@@ -6,10 +6,19 @@
     <description>Recent content in Data Structure on InformisTry</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 16 Sep 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 17 Sep 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://jumperc2p.github.io/InformisTry/tags/data-structure/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【舌尖上的演算法】Day10 -- Decrease and Conquer - Insertion Sort</title>
+      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/decon-insertion-sort/</link>
+      <pubDate>Thu, 17 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/decon-insertion-sort/</guid>
+      <description>本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 第六天到第九天，我們都是在介紹屬於Brute Force的演算法，若要複習的人可以點下面連結：</description>
+    </item>
     
     <item>
       <title>【舌尖上的演算法】Day9 -- Brute Force - DFS &amp; BFS</title>
