@@ -6,10 +6,19 @@
     <description>Recent content in SERIES on InformisTry</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 17 Sep 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 18 Sep 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://jumperc2p.github.io/InformisTry/categories/series/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【舌尖上的演算法】Day11 -- Decrease and Conquer - Shell Sort</title>
+      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/decon-shell-sort/</link>
+      <pubDate>Fri, 18 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/decon-shell-sort/</guid>
+      <description>本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 第十天我們第一次介紹了Decrease and Conquer類別的運作方式，同時也介紹了Inser</description>
+    </item>
     
     <item>
       <title>【舌尖上的演算法】Day10 -- Decrease and Conquer - Insertion Sort</title>

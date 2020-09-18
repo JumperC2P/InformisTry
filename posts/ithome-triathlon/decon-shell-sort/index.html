@@ -15,9 +15,9 @@
     
 
     
-    <meta name="title" content="【舌尖上的演算法】Day10 -- Decrease and Conquer - Insertion Sort" />
-    <meta property="og:title" content="【舌尖上的演算法】Day10 -- Decrease and Conquer - Insertion Sort" />
-    <meta property="twitter:title" content="【舌尖上的演算法】Day10 -- Decrease and Conquer - Insertion Sort" />
+    <meta name="title" content="【舌尖上的演算法】Day11 -- Decrease and Conquer - Shell Sort" />
+    <meta property="og:title" content="【舌尖上的演算法】Day11 -- Decrease and Conquer - Shell Sort" />
+    <meta property="twitter:title" content="【舌尖上的演算法】Day11 -- Decrease and Conquer - Shell Sort" />
     
 
     
@@ -34,9 +34,9 @@
     <meta name="keyword"  content="Chih-Hsuan Lee, Informistry, Hank Lee, JumperC2P, Hank portfolio, Java, Python, Developer, Engineer, Software, ReactJS, Web, React, Database, Kubernetes, 微服務, Microservice, 演算法">
     <link rel="shortcut icon" href="/InformisTry/img/favicon.ico">
 
-    <title>【舌尖上的演算法】Day10 -- Decrease and Conquer - Insertion Sort-Informistry</title>
+    <title>【舌尖上的演算法】Day11 -- Decrease and Conquer - Shell Sort-Informistry</title>
 
-    <link rel="canonical" href="/InformisTry/posts/ithome-triathlon/decon-insertion-sort">
+    <link rel="canonical" href="/InformisTry/posts/ithome-triathlon/decon-shell-sort">
 
     <link rel="stylesheet" href="/InformisTry/css/iDisqus.min.css"/>
 	
@@ -185,7 +185,7 @@
                         </a>
                         
                     </div>
-                    <h1>【舌尖上的演算法】Day10 -- Decrease and Conquer - Insertion Sort</h1>
+                    <h1>【舌尖上的演算法】Day11 -- Decrease and Conquer - Shell Sort</h1>
                     <h2 class="subheading">2020 IT邦鐵人賽</h2>
                     <span class="meta">
                         Posted by 
@@ -193,9 +193,9 @@
                             Hank Lee
                          
                         on 
-                        Thursday, September 17, 2020
+                        Friday, September 18, 2020
                         
-                            <span id="/posts/ithome-triathlon/decon-insertion-sort" class="leancloud_visitors meta_data_item" data-flag-title="">
+                            <span id="/posts/ithome-triathlon/decon-shell-sort" class="leancloud_visitors meta_data_item" data-flag-title="">
     <span class="post-meta-item-icon">
       <span class="octicon octicon-eye"></span> 
     </span>
@@ -359,9 +359,8 @@ $(function() {
                     <nav id="TableOfContents">
   <ul>
     <li><a href="#前言">前言</a></li>
-    <li><a href="#decrease-and-conquer">Decrease and Conquer</a></li>
-    <li><a href="#insertion-sort是什麼">Insertion Sort是什麼？</a></li>
-    <li><a href="#insertion-sort的時間複雜度time-complexity">Insertion Sort的時間複雜度(Time complexity)</a></li>
+    <li><a href="#shell-sort如何改善insertion-sort">Shell Sort如何改善Insertion Sort？</a></li>
+    <li><a href="#shell-sort的時間複雜度">Shell Sort的時間複雜度</a></li>
     <li><a href="#小結">小結</a></li>
     <li><a href="#預告">預告</a></li>
     <li><a href="#references">References</a></li>
@@ -370,69 +369,33 @@ $(function() {
                     
                 
 
-                <p><a href="https://ithelp.ithome.com.tw/articles/10238401">本系列文章同步分享於IT邦幫忙第12屆鐵人賽</a></p>
+                <p><a href="https://ithelp.ithome.com.tw/articles/10239056">本系列文章同步分享於IT邦幫忙第12屆鐵人賽</a></p>
 <h2 id="前言">前言</h2>
-<p>第六天到第九天，我們都是在介紹屬於Brute Force的演算法，若要複習的人可以點下面連結：</p>
-<ul>
-<li><a href="https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/brute_force_selection_sort/">【舌尖上的演算法】Day6 &ndash; Brute Force - Selection Sort</a></li>
-<li><a href="https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/brute_force_bubble_sort/">【舌尖上的演算法】Day7 &ndash; Brute Force - Bubble Sort</a></li>
-<li><a href="https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/brute_force_knapsack/">【舌尖上的演算法】Day8 &ndash; Brute Force - Knapsack</a></li>
-<li><a href="https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/brute_force_dfs_bfs/">【舌尖上的演算法】Day9 &ndash; Brute Force - DFS &amp; BFS</a></li>
-</ul>
-<p>今天開始的三天，我們就要來介紹另一個演算法類別<strong>Decrease and Conquer</strong>以及三種屬於這個類別的演算法。</p>
+<p>第十天我們第一次介紹了Decrease and Conquer類別的運作方式，同時也介紹了Insertion Sort，小複習一下，Insertion Sort就是大部分人在玩撲克牌時針對手牌進行排序的方式，而今天我們來介紹Insertion Sort的進化版 &ndash; Shell Sort。</p>
 <hr>
-<h2 id="decrease-and-conquer">Decrease and Conquer</h2>
-<p><code>Decrease and Conquer</code>的中文翻譯成『減治法』，這個名稱我一看到就是滿頭問號，但是當我瞭解他的流程之後，我才恍然大悟，我們在生活中很多事情都是透過這樣的方式在處理問題，只是從來沒想到居然真的被歸納出一個名稱來表示，那到底Decrease and Conquer是怎樣的一個過程呢？簡單來說，它分成下列三個步驟：</p>
-<ol>
-<li>將一個大問題拆解成多個小問題</li>
-<li>解決這些小問題</li>
-<li>將解決這些小問題的方法衍生到原本的大問題</li>
-</ol>
-<p>我相信如果大家仔細想想，應該多多少少可以想到一到兩個例子是用這個方式來解決問題的，那到底又有哪些演算法是屬於這種將大問題拆解成小問題來解決的呢？</p>
-<p>我們在這三天將會介紹三種：<strong>Insertion Sort, Shell Sort和Binary Search</strong>，今天我們就來介紹第一種<strong>Insertion Sort</strong>。</p>
+<h2 id="shell-sort如何改善insertion-sort">Shell Sort如何改善Insertion Sort？</h2>
+<p>Shell Sort是針對目標陣列再次進行<code>Decrease</code>的動作，將陣列以預先定義好的<code>區間</code>的數值進行比較，針對這幾個指定位置的數值排序，當此利用此區間進行排序完成後，再將區間<strong>縮小</strong>，反覆之前的動作，直到區間已經無法縮小（最小區間為3）後，再進行原先的Insertion Sort。</p>
+<p>文字實在有點難形容這個過程，我們直接來看GIF吧：</p>
+<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3eoVi6aow4-L5kHtQDsGMpoel0-8k3j0wWMbTabsstuiTHyzBZjj1-exeb_QXZ18YTQAhw0-QLYiBT-xdmvjzHwDg-O0IylLaxijr0mcVjyfz7jlLbeVq6YSe9HAI5zQ9txmgrEHqkxUUkjngohPUQc=w480-h384-no?authuser=0" alt="Shell Sort"></p>
+<p>從GIF中可以看到，我們一開始從<code>1+5的倍數</code>的位置(1, 6, 11, 16, 21, &hellip;)開始進行排序，並僅在這幾個位置進行數值的交換，當利用5的倍數作為依據將陣列排序後，改成使用<code>3的倍數</code>的位置再排序一次，結束之後，因為3的倍數基本上已經是最小單位了，因此我們就直接針對這個已經排序兩次的陣列進行InSertion Sort，就可以得到結果啦。</p>
+<p>而如何決定這個<code>幾的倍數</code>是一個一直被大家廣泛討論的問題，但是有一個已知數列可以讓Shell Sort執行效率還不錯：<code>1, 4, 13, 40, 121, 364,...(3x+1)</code></p>
+<blockquote>
+<p>x為『前一個數』</p>
+</blockquote>
 <hr>
-<h2 id="insertion-sort是什麼">Insertion Sort是什麼？</h2>
-<p>Insertion Sort其實有一個生活化的例子，大家應該都有玩過撲克牌吧，我們在玩撲克牌很多人都會有個習慣，會把撲克牌一張一張的抽出來，看看這張牌的大小應該在手排中的哪個位置，找到他所屬的位置之後，再插進手牌中，最後手上的牌就是經過排序的樣子，比較方便之後出牌或自己比較容易理解牌型。</p>
-<p>其實這個動作就是Insertion Sort，Insertion Sort的步驟就是：</p>
-<ol>
-<li>一次考慮一個項目</li>
-<li>將這個項目放進(插入)其在已經被考慮過的組合中對應的位置。</li>
-</ol>
-<p>我們在玩撲克牌的時候也是這樣去排手牌的吧。</p>
-<p>Insertion Sort也算是很容易實現的演算法，其Pseudo-code如下：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#6272a4">// Input: An array Array[0...n-1] of orderable elements
-</span><span style="color:#6272a4">// Output: An array Array[0...n-1] sorted in ascending order
-</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">function</span> InsertionSort(<span style="color:#8be9fd;font-style:italic">Array</span>[<span style="color:#bd93f9">0</span>, ..., n<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>]){
-    <span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1</span> to n<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span> {
-        v <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">Array</span>[i]
-        j <span style="color:#ff79c6">=</span> i <span style="color:#ff79c6">-</span> <span style="color:#bd93f9">1</span>
-        <span style="color:#ff79c6">while</span> j <span style="color:#ff79c6">&gt;=</span> <span style="color:#bd93f9">0</span> and <span style="color:#8be9fd;font-style:italic">Array</span>[j] <span style="color:#ff79c6">&gt;</span> v {
-            <span style="color:#8be9fd;font-style:italic">Array</span>[j<span style="color:#ff79c6">+</span><span style="color:#bd93f9">1</span>] <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">Array</span>[j]
-            j <span style="color:#ff79c6">=</span> j <span style="color:#ff79c6">-</span> <span style="color:#bd93f9">1</span>
-        }
-        A[j<span style="color:#ff79c6">+</span><span style="color:#bd93f9">1</span>] <span style="color:#ff79c6">=</span> v
-    }
-}
-</code></pre></div><hr>
-<h2 id="insertion-sort的時間複雜度time-complexity">Insertion Sort的時間複雜度(Time complexity)</h2>
-<p>按照慣例，讓我們來看個ＧＩＦ圖檔吧：
-<img src="https://lh3.googleusercontent.com/pw/ACtC-3cm5wJ744y1nwuoNq4M_FlicLqIlSIs196hUqr0kSAPDTzrFlVMv-IYT2SNXC7y-0jz34jk0aVKylAG_cJZg-nP0cEhe7XPKbQK5QUTuCZ3ixC3bHEW-QZAYSXa1ru34h6-GdOXjdnYQa1-oU4fRmtc=w480-h240-no?authuser=0" alt="Insertion Sort"></p>
-<p>我的ＧＩＦ圖中省略了一個一個值『換位置』的過程，但仍可從中發現，在一個一個『取值』時，是<code>從左至右</code>取值，但是在進行『比較』的時候，卻是<code>從右至左</code>比較，比較的過程中，當遇到比自己小的值的時候，就會將值放入當前位置；此外，由於Insertion Sort在執行時，也是一個巢狀迴圈的結構，因此其時間複雜度亦為<code>𝜪(n^2)</code>，而其Best Case、Average Case和Worst Case會發生在下列狀況：</p>
-<ol>
-<li>Best Case：數列已經排序完畢（正序排列），此時的時間複雜度為<code>𝜪(n)</code>(因為內層迴圈不會跑，僅跑了外層迴圈而已)。</li>
-<li>Average Case：數列是隨機排序的狀態且期望每個數值在比較至『一半』的位置時，即可找到對應的位置，此時的時間複雜度為<code>𝜪(n^2)</code>。</li>
-<li>Worst Case：數列是反序排列，此時的時間複雜度為<code>𝜪(n^2)</code>。</li>
-</ol>
+<h2 id="shell-sort的時間複雜度">Shell Sort的時間複雜度</h2>
+<p>當我們使用上方數列（1, 4, 13, 40, 121, 364,&hellip;(3x+1))作為Shell Sort的依據時，Worst case的時間複雜度為<code>𝜪(n^(3/2))</code>；而且Shell Sort本身是一個<code>Unstable Sorting</code>，原因是因為他的排序某程度而言，並沒有照著數值原先順序進行一個一個排序，Shell Sort的排序方式有點像<strong>跳棋</strong>，所以有可能當兩個數值一樣，但後面的數值會被往前移動而跳過原先排在前面且值相同的數值，有興趣的人可以試著畫圖試試看。</p>
 <hr>
 <h2 id="小結">小結</h2>
 <ul>
-<li>Decrease and Conquer就是把問題變小去解決，再衍生到大問題中。</li>
-<li>Insertion Sort就是玩撲克牌時的排序原理。</li>
-<li>Insertion Sort的時間複雜度為<code>𝜪(n^2)</code>，但其Best Case的時間複雜度為<code>𝜪(n)</code>。</li>
+<li>Shell Sort是進化版的Insertion Sort。</li>
+<li>讓Shell Sort執行效率還不錯的數列：<code>1, 4, 13, 40, 121, 364,...(3x+1)</code>。</li>
+<li>Shell Sort若使用上方數列，其Worst case的時間複雜度為<code>𝜪(n^(3/2))</code>。</li>
+<li>Shell Sort是<code>Unstable Sorting</code>。</li>
 </ul>
 <hr>
 <h2 id="預告">預告</h2>
-<p>明天我們將會介紹的是Insertion Sort的改良版 - Shell Sort。</p>
+<p>明天我們將會介紹的是Binary Search。</p>
 <hr>
 <h2 id="references">References</h2>
 <ol>
@@ -446,15 +409,10 @@ $(function() {
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/posts/ithome-triathlon/brute_force_dfs_bfs" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day9 -- Brute Force - DFS &amp; BFS">&larr;
+                        <a href="/posts/ithome-triathlon/decon-insertion-sort" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day10 -- Decrease and Conquer - Insertion Sort">&larr;
                             Previous Post</a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/posts/ithome-triathlon/decon-shell-sort" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day11 -- Decrease and Conquer - Shell Sort">Next
-                            Post &rarr;</a>
-                    </li>
                     
                 </ul>
 
