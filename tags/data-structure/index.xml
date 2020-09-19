@@ -6,10 +6,19 @@
     <description>Recent content in Data Structure on InformisTry</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 18 Sep 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 19 Sep 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://jumperc2p.github.io/InformisTry/tags/data-structure/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【舌尖上的演算法】Day12 -- Decrease and Conquer - Binary Search</title>
+      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/decon-binary-search/</link>
+      <pubDate>Sat, 19 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/decon-binary-search/</guid>
+      <description>本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 一連講了好幾個Sorting的演算法，我們今天來換換口味，今天要講的演算法是用來針對已經排序</description>
+    </item>
     
     <item>
       <title>【舌尖上的演算法】Day11 -- Decrease and Conquer - Shell Sort</title>

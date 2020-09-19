@@ -15,9 +15,9 @@
     
 
     
-    <meta name="title" content="【舌尖上的演算法】Day11 -- Decrease and Conquer - Shell Sort" />
-    <meta property="og:title" content="【舌尖上的演算法】Day11 -- Decrease and Conquer - Shell Sort" />
-    <meta property="twitter:title" content="【舌尖上的演算法】Day11 -- Decrease and Conquer - Shell Sort" />
+    <meta name="title" content="【舌尖上的演算法】Day12 -- Decrease and Conquer - Binary Search" />
+    <meta property="og:title" content="【舌尖上的演算法】Day12 -- Decrease and Conquer - Binary Search" />
+    <meta property="twitter:title" content="【舌尖上的演算法】Day12 -- Decrease and Conquer - Binary Search" />
     
 
     
@@ -34,9 +34,9 @@
     <meta name="keyword"  content="Chih-Hsuan Lee, Informistry, Hank Lee, JumperC2P, Hank portfolio, Java, Python, Developer, Engineer, Software, ReactJS, Web, React, Database, Kubernetes, 微服務, Microservice, 演算法">
     <link rel="shortcut icon" href="/InformisTry/img/favicon.ico">
 
-    <title>【舌尖上的演算法】Day11 -- Decrease and Conquer - Shell Sort-Informistry</title>
+    <title>【舌尖上的演算法】Day12 -- Decrease and Conquer - Binary Search-Informistry</title>
 
-    <link rel="canonical" href="/InformisTry/posts/ithome-triathlon/decon-shell-sort">
+    <link rel="canonical" href="/InformisTry/posts/ithome-triathlon/decon-binary-search">
 
     <link rel="stylesheet" href="/InformisTry/css/iDisqus.min.css"/>
 	
@@ -185,7 +185,7 @@
                         </a>
                         
                     </div>
-                    <h1>【舌尖上的演算法】Day11 -- Decrease and Conquer - Shell Sort</h1>
+                    <h1>【舌尖上的演算法】Day12 -- Decrease and Conquer - Binary Search</h1>
                     <h2 class="subheading">2020 IT邦鐵人賽</h2>
                     <span class="meta">
                         Posted by 
@@ -193,9 +193,9 @@
                             Hank Lee
                          
                         on 
-                        Friday, September 18, 2020
+                        Saturday, September 19, 2020
                         
-                            <span id="/posts/ithome-triathlon/decon-shell-sort" class="leancloud_visitors meta_data_item" data-flag-title="">
+                            <span id="/posts/ithome-triathlon/decon-binary-search" class="leancloud_visitors meta_data_item" data-flag-title="">
     <span class="post-meta-item-icon">
       <span class="octicon octicon-eye"></span> 
     </span>
@@ -359,8 +359,9 @@ $(function() {
                     <nav id="TableOfContents">
   <ul>
     <li><a href="#前言">前言</a></li>
-    <li><a href="#shell-sort如何改善insertion-sort">Shell Sort如何改善Insertion Sort？</a></li>
-    <li><a href="#shell-sort的時間複雜度">Shell Sort的時間複雜度</a></li>
+    <li><a href="#binary-search的運行過程">Binary Search的運行過程</a></li>
+    <li><a href="#binary-search的時間複雜度">Binary Search的時間複雜度</a></li>
+    <li><a href="#真假硬幣的分辨">真假硬幣的分辨</a></li>
     <li><a href="#小結">小結</a></li>
     <li><a href="#預告">預告</a></li>
     <li><a href="#references">References</a></li>
@@ -369,33 +370,71 @@ $(function() {
                     
                 
 
-                <p><a href="https://ithelp.ithome.com.tw/articles/10239056">本系列文章同步分享於IT邦幫忙第12屆鐵人賽</a></p>
+                <p><a href="https://ithelp.ithome.com.tw/articles/10239837">本系列文章同步分享於IT邦幫忙第12屆鐵人賽</a></p>
 <h2 id="前言">前言</h2>
-<p>第十天我們第一次介紹了Decrease and Conquer類別的運作方式，同時也介紹了Insertion Sort，小複習一下，Insertion Sort就是大部分人在玩撲克牌時針對手牌進行排序的方式，而今天我們來介紹Insertion Sort的進化版 &ndash; Shell Sort。</p>
+<p>一連講了好幾個Sorting的演算法，我們今天來換換口味，今天要講的演算法是用來針對<strong>已經排序</strong>之後的陣列進行搜尋，一個也很容易理解的演算 - <strong>Binary Search</strong>。</p>
 <hr>
-<h2 id="shell-sort如何改善insertion-sort">Shell Sort如何改善Insertion Sort？</h2>
-<p>Shell Sort是針對目標陣列再次進行<code>Decrease</code>的動作，將陣列以預先定義好的<code>區間</code>的數值進行比較，針對這幾個指定位置的數值排序，當此利用此區間進行排序完成後，再將區間<strong>縮小</strong>，反覆之前的動作，直到區間已經無法縮小（最小區間為3）後，再進行原先的Insertion Sort。</p>
-<p>文字實在有點難形容這個過程，我們直接來看GIF吧：</p>
-<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3eoVi6aow4-L5kHtQDsGMpoel0-8k3j0wWMbTabsstuiTHyzBZjj1-exeb_QXZ18YTQAhw0-QLYiBT-xdmvjzHwDg-O0IylLaxijr0mcVjyfz7jlLbeVq6YSe9HAI5zQ9txmgrEHqkxUUkjngohPUQc=w480-h384-no?authuser=0" alt="Shell Sort"></p>
-<p>從GIF中可以看到，我們一開始從<code>1+5的倍數</code>的位置(1, 6, 11, 16, 21, &hellip;)開始進行排序，並僅在這幾個位置進行數值的交換，當利用5的倍數作為依據將陣列排序後，改成使用<code>3的倍數</code>的位置再排序一次，結束之後，因為3的倍數基本上已經是最小單位了，因此我們就直接針對這個已經排序兩次的陣列進行InSertion Sort，就可以得到結果啦。</p>
-<p>而如何決定這個<code>幾的倍數</code>是一個一直被大家廣泛討論的問題，但是有一個已知數列可以讓Shell Sort執行效率還不錯：<code>1, 4, 13, 40, 121, 364,...(3x+1)</code></p>
-<blockquote>
-<p>x為『前一個數』</p>
+<h2 id="binary-search的運行過程">Binary Search的運行過程</h2>
+<p>Binary Search的基本概念是將<code>已經排序的陣列</code>用二分法拆成左右兩半進行比較，因為是已經排序的陣列，所以知道拆分過後的兩半，左邊比較小，右邊比較大，進而快速篩選出目標可能在哪一個部分，因此流程如下：</p>
+<ol>
+<li>從一個已經正序排列的陣列中，直接取<code>中間位置</code>的值與目標（Ｋ）進行比較。</li>
+<li>經過上述比較，會有三種可能：
+<ul>
+<li>陣列正中間位置的值<code>等於</code>Ｋ，則<code>找到</code>目標。</li>
+<li>陣列正中間位置的值<code>小於</code>Ｋ，則表示Ｋ位於<code>右邊</code>區段。</li>
+<li>陣列正中間位置的值<code>大於</code>Ｋ，則表示Ｋ位於<code>左邊</code>區段。</li>
+</ul>
+</li>
+<li>此時已經Ｋ可能的所屬區段，再針對該區段進行第一步，反覆直到找到Ｋ的位置。（當然也有可能全部找完找不到Ｋ）</li>
+</ol>
+<p>看看GIF吧：</p>
+<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3e4xdNHMP9LZD1AEQALxYaG6mp7hgdNaUMRhCmwP_TkPIMHZ-EGZF5IAQx_wHIrBh7HFX_0uxvZsYObF_pd07K-OobWtaVR2kDcFV8eyitG4oUiCSYJzLz_ei4GCtS177-JhI5UQzYCplYRZgSdaj05=w480-h160-no?authuser=0" alt="Binary Search"></p>
+<p>有一個點特別提出來說明，所謂的『中間位置』，其實算法是將頭尾兩個位置所屬的index值相加後除以2，在無條件捨去而決定的，因此在上方GIF中，當只剩下四個位置的值要比較時，就是透過這個方式選擇<code>20</code>來進行比較，而非<code>24</code>。</p>
+<p>那Binary Search的Pseudo-code大概會是怎樣呢？</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#6272a4">// Input: An array Array[l,...,r] of ordered elements, and a search target k
+</span><span style="color:#6272a4">// Output: an index to the position of k in Array if k is found or -1 otherwise.
+</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">function</span> BinarySearchRecursive(<span style="color:#8be9fd;font-style:italic">Array</span>[l,...,r], k){
+    <span style="color:#ff79c6">if</span> l <span style="color:#ff79c6">&gt;</span> r {
+        <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>;
+    }
+    m <span style="color:#ff79c6">=</span> round((l<span style="color:#ff79c6">+</span>r)<span style="color:#ff79c6">/</span><span style="color:#bd93f9">2</span>);
+    <span style="color:#ff79c6">if</span> k <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">Array</span>[m] {
+        <span style="color:#ff79c6">return</span> m;
+    }<span style="color:#ff79c6">else</span> <span style="color:#ff79c6">if</span> k <span style="color:#ff79c6">&lt;</span> <span style="color:#8be9fd;font-style:italic">Array</span>[m]{
+        <span style="color:#ff79c6">return</span> BinarySearchRecursive(<span style="color:#8be9fd;font-style:italic">Array</span>[l,...,m<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>], k);
+    }<span style="color:#ff79c6">else</span>{
+        <span style="color:#ff79c6">return</span> BinarySearchRecursive(<span style="color:#8be9fd;font-style:italic">Array</span>[m<span style="color:#ff79c6">+</span><span style="color:#bd93f9">1</span>,...,l], k);
+    }
+}
+
+</code></pre></div><blockquote>
+<p>這種在一個方法中再次呼叫自身方法的寫法稱為遞迴(Recursive)</p>
 </blockquote>
 <hr>
-<h2 id="shell-sort的時間複雜度">Shell Sort的時間複雜度</h2>
-<p>當我們使用上方數列（1, 4, 13, 40, 121, 364,&hellip;(3x+1))作為Shell Sort的依據時，Worst case的時間複雜度為<code>𝜪(n^(3/2))</code>；而且Shell Sort本身是一個<code>Unstable Sorting</code>，原因是因為他的排序某程度而言，並沒有照著數值原先順序進行一個一個排序，Shell Sort的排序方式有點像<strong>跳棋</strong>，所以有可能當兩個數值一樣，但後面的數值會被往前移動而跳過原先排在前面且值相同的數值，有興趣的人可以試著畫圖試試看。</p>
+<h2 id="binary-search的時間複雜度">Binary Search的時間複雜度</h2>
+<p>Binary Search在進行的過程中，每一次的迴圈都會將要搜尋的範圍<code>減半</code>，這個方式可以大幅降低執行時間，因此對於這種會將範圍砍半的演算法，基本上其時間複雜度皆為<code>Ｏ(㏒2 n)</code>。</p>
+<hr>
+<h2 id="真假硬幣的分辨">真假硬幣的分辨</h2>
+<h4 id="假設現在有一堆的金幣而其中有一枚金幣是假的目前已知假金幣比較輕那我們要如何找出這一枚假金幣呢">假設現在有一堆的金幣，而其中有一枚金幣是假的，目前已知假金幣比較輕，那我們要如何找出這一枚假金幣呢？</h4>
+<p>既然這個問題出現在這篇文章，就表示這個解決辦法與Binary Search是一樣的：</p>
+<ol>
+<li>將這堆金幣依照數量平均分成兩邊，拿去秤重。</li>
+<li>找出比較輕的一方，即表示假金幣在其中。</li>
+<li>再將這一方的金幣依照數量平均分成兩堆，再拿去秤重。</li>
+<li>一樣，較輕的一方為假金幣所在的地方。</li>
+<li>重複上述步驟，直到假金幣現出原形。</li>
+</ol>
+<p>這種解決辦法就是Binary Search的一個應用。</p>
 <hr>
 <h2 id="小結">小結</h2>
-<ul>
-<li>Shell Sort是進化版的Insertion Sort。</li>
-<li>讓Shell Sort執行效率還不錯的數列：<code>1, 4, 13, 40, 121, 364,...(3x+1)</code>。</li>
-<li>Shell Sort若使用上方數列，其Worst case的時間複雜度為<code>𝜪(n^(3/2))</code>。</li>
-<li>Shell Sort是<code>Unstable Sorting</code>。</li>
-</ul>
+<ol>
+<li>Binary Search只能用在<code>已經排序的陣列上</code>。</li>
+<li>Binary Search的時間複雜度為<code>Ｏ(㏒2 n)</code>。</li>
+<li>尋找假金幣的方式就是透過Binary Search來進行。</li>
+</ol>
 <hr>
 <h2 id="預告">預告</h2>
-<p>明天我們將會介紹的是Binary Search。</p>
+<p>明天我們將會介紹一種資料結構 - Binary Search Tree。</p>
 <hr>
 <h2 id="references">References</h2>
 <ol>
@@ -409,15 +448,10 @@ $(function() {
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/posts/ithome-triathlon/decon-insertion-sort" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day10 -- Decrease and Conquer - Insertion Sort">&larr;
+                        <a href="/posts/ithome-triathlon/decon-shell-sort" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day11 -- Decrease and Conquer - Shell Sort">&larr;
                             Previous Post</a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/posts/ithome-triathlon/decon-binary-search" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day12 -- Decrease and Conquer - Binary Search">Next
-                            Post &rarr;</a>
-                    </li>
                     
                 </ul>
 
