@@ -6,10 +6,19 @@
     <description>Recent content in Posts on InformisTry</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 19 Sep 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 20 Sep 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://jumperc2p.github.io/InformisTry/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【舌尖上的演算法】Day13 -- Decrease and Conquer - Binary Search Tree</title>
+      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/decon-bst/</link>
+      <pubDate>Sun, 20 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/decon-bst/</guid>
+      <description>本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 第十二天我們介紹了Binary Search，而Binary Search在執行的過程中，每一次</description>
+    </item>
     
     <item>
       <title>【舌尖上的演算法】Day12 -- Decrease and Conquer - Binary Search</title>

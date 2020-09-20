@@ -15,9 +15,9 @@
     
 
     
-    <meta name="title" content="【舌尖上的演算法】Day12 -- Decrease and Conquer - Binary Search" />
-    <meta property="og:title" content="【舌尖上的演算法】Day12 -- Decrease and Conquer - Binary Search" />
-    <meta property="twitter:title" content="【舌尖上的演算法】Day12 -- Decrease and Conquer - Binary Search" />
+    <meta name="title" content="【舌尖上的演算法】Day13 -- Decrease and Conquer - Binary Search Tree" />
+    <meta property="og:title" content="【舌尖上的演算法】Day13 -- Decrease and Conquer - Binary Search Tree" />
+    <meta property="twitter:title" content="【舌尖上的演算法】Day13 -- Decrease and Conquer - Binary Search Tree" />
     
 
     
@@ -34,9 +34,9 @@
     <meta name="keyword"  content="Chih-Hsuan Lee, Informistry, Hank Lee, JumperC2P, Hank portfolio, Java, Python, Developer, Engineer, Software, ReactJS, Web, React, Database, Kubernetes, 微服務, Microservice, 演算法">
     <link rel="shortcut icon" href="/InformisTry/img/favicon.ico">
 
-    <title>【舌尖上的演算法】Day12 -- Decrease and Conquer - Binary Search-Informistry</title>
+    <title>【舌尖上的演算法】Day13 -- Decrease and Conquer - Binary Search Tree-Informistry</title>
 
-    <link rel="canonical" href="/InformisTry/posts/ithome-triathlon/decon-binary-search">
+    <link rel="canonical" href="/InformisTry/posts/ithome-triathlon/decon-bst">
 
     <link rel="stylesheet" href="/InformisTry/css/iDisqus.min.css"/>
 	
@@ -185,7 +185,7 @@
                         </a>
                         
                     </div>
-                    <h1>【舌尖上的演算法】Day12 -- Decrease and Conquer - Binary Search</h1>
+                    <h1>【舌尖上的演算法】Day13 -- Decrease and Conquer - Binary Search Tree</h1>
                     <h2 class="subheading">2020 IT邦鐵人賽</h2>
                     <span class="meta">
                         Posted by 
@@ -193,9 +193,9 @@
                             Hank Lee
                          
                         on 
-                        Saturday, September 19, 2020
+                        Sunday, September 20, 2020
                         
-                            <span id="/posts/ithome-triathlon/decon-binary-search" class="leancloud_visitors meta_data_item" data-flag-title="">
+                            <span id="/posts/ithome-triathlon/decon-bst" class="leancloud_visitors meta_data_item" data-flag-title="">
     <span class="post-meta-item-icon">
       <span class="octicon octicon-eye"></span> 
     </span>
@@ -359,9 +359,8 @@ $(function() {
                     <nav id="TableOfContents">
   <ul>
     <li><a href="#前言">前言</a></li>
-    <li><a href="#binary-search的運行過程">Binary Search的運行過程</a></li>
-    <li><a href="#binary-search的時間複雜度">Binary Search的時間複雜度</a></li>
-    <li><a href="#真假硬幣的分辨">真假硬幣的分辨</a></li>
+    <li><a href="#binary-search-tree是怎樣的資料結構呢">Binary Search Tree是怎樣的資料結構呢？</a></li>
+    <li><a href="#binary-search-tree的演算法">Binary Search Tree的演算法</a></li>
     <li><a href="#小結">小結</a></li>
     <li><a href="#預告">預告</a></li>
     <li><a href="#references">References</a></li>
@@ -370,71 +369,72 @@ $(function() {
                     
                 
 
-                <p><a href="https://ithelp.ithome.com.tw/articles/10239837">本系列文章同步分享於IT邦幫忙第12屆鐵人賽</a></p>
+                <p><a href="https://ithelp.ithome.com.tw/articles/10240495">本系列文章同步分享於IT邦幫忙第12屆鐵人賽</a></p>
 <h2 id="前言">前言</h2>
-<p>一連講了好幾個Sorting的演算法，我們今天來換換口味，今天要講的演算法是用來針對<strong>已經排序</strong>之後的陣列進行搜尋，一個也很容易理解的演算 - <strong>Binary Search</strong>。</p>
+<p>第十二天我們介紹了Binary Search，而Binary Search在執行的過程中，每一次的迴圈都是將已經正序排列的陣列拆成兩半，且左半段的數值一定比右半段的數值小，而我們在第四天介紹抽象資料型別的時候有提到一個資料結構也是會分成左右兩邊的，那就是<code>Rooted Tree</code>，因此今天我們要介紹的<code>Binary Search Tree（ＢＳＴ）</code>就是結合了Binary Search和Tree的特性而產生出來的一個資料結構。</p>
 <hr>
-<h2 id="binary-search的運行過程">Binary Search的運行過程</h2>
-<p>Binary Search的基本概念是將<code>已經排序的陣列</code>用二分法拆成左右兩半進行比較，因為是已經排序的陣列，所以知道拆分過後的兩半，左邊比較小，右邊比較大，進而快速篩選出目標可能在哪一個部分，因此流程如下：</p>
+<h2 id="binary-search-tree是怎樣的資料結構呢">Binary Search Tree是怎樣的資料結構呢？</h2>
+<p>Tree這種抽象資料型別下面也是有多種不同實作方式的資料結構，而今天我們要講的這個Binary Search Tree只是其中的一種，再講Binary Search Tree之前，我們要先介紹<strong>Binary Tree</strong>（其結構示意圖如下）:</p>
+<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3cGTM0B8K4LrImMSPBR4Qs0vTgjxMd0J8KMg1dIhm7rDIKRj3tZcAfREZcjSc6Aoy4kAAp5hVqQfAp7jwKZtbN9gtEudU3KpMQ5CTRJwmS0AWhAyasGHWKa-keVlk1Xb9qSnuENl-PHk45jByNZdtvh=w600-h358-no?authuser=0" alt="Binary Tree"></p>
+<p>配合上方示意圖，可以說Binary Tree的架構很簡單，大概就是兩點：</p>
 <ol>
-<li>從一個已經正序排列的陣列中，直接取<code>中間位置</code>的值與目標（Ｋ）進行比較。</li>
-<li>經過上述比較，會有三種可能：
-<ul>
-<li>陣列正中間位置的值<code>等於</code>Ｋ，則<code>找到</code>目標。</li>
-<li>陣列正中間位置的值<code>小於</code>Ｋ，則表示Ｋ位於<code>右邊</code>區段。</li>
-<li>陣列正中間位置的值<code>大於</code>Ｋ，則表示Ｋ位於<code>左邊</code>區段。</li>
-</ul>
-</li>
-<li>此時已經Ｋ可能的所屬區段，再針對該區段進行第一步，反覆直到找到Ｋ的位置。（當然也有可能全部找完找不到Ｋ）</li>
+<li>一個有<code>『根』</code>的樹狀結構</li>
+<li>每一個節點都包含<code>不多於</code>兩個子節點</li>
+<li>在每一個<code>父節點</code>都會記碌<code>左</code>子節點和<code>右</code>子節點的資訊。</li>
 </ol>
-<p>看看GIF吧：</p>
-<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3e4xdNHMP9LZD1AEQALxYaG6mp7hgdNaUMRhCmwP_TkPIMHZ-EGZF5IAQx_wHIrBh7HFX_0uxvZsYObF_pd07K-OobWtaVR2kDcFV8eyitG4oUiCSYJzLz_ei4GCtS177-JhI5UQzYCplYRZgSdaj05=w480-h160-no?authuser=0" alt="Binary Search"></p>
-<p>有一個點特別提出來說明，所謂的『中間位置』，其實算法是將頭尾兩個位置所屬的index值相加後除以2，在無條件捨去而決定的，因此在上方GIF中，當只剩下四個位置的值要比較時，就是透過這個方式選擇<code>20</code>來進行比較，而非<code>24</code>。</p>
-<p>那Binary Search的Pseudo-code大概會是怎樣呢？</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#6272a4">// Input: An array Array[l,...,r] of ordered elements, and a search target k
-</span><span style="color:#6272a4">// Output: an index to the position of k in Array if k is found or -1 otherwise.
-</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">function</span> BinarySearchRecursive(<span style="color:#8be9fd;font-style:italic">Array</span>[l,...,r], k){
-    <span style="color:#ff79c6">if</span> l <span style="color:#ff79c6">&gt;</span> r {
-        <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>;
+<blockquote>
+<p>在實作上，位於整個結構中最下方節點並不會有子節點，此時其左右子節點的紀錄方式則為null</p>
+</blockquote>
+<p>而Binary Search Tree則是在更進一步地規範：<code>所有位於父節點左邊的子節點，其值均比父節點之值小；反之，所有位於父節點右邊的子節點，其值均比父節點之值大</code>；那如果有一個值跟父節點的值相同，則看是要放在父節點的左邊或是右邊都可以，但是實作上必須統一，不能在同一個實作中，有的放左邊，有的放右邊。下方圖中則是示範兩種不同結構的Binary Search Tree：</p>
+<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3fMVwk_NPq9KKC3jyox5W5Tl3a547TQsPH_6E3hsENmOv0Wv7I3ChlW9OvTLRR4DQnHqrvDpP2rAZSEyjuBt3Hv7o1qpL__7arKi1dI0N_7AahWN1VY6gFMqh-sr2Jsn-s5K6mrkdK9tZ5V7iSj2rII=w600-h360-no?authuser=0" alt="BST"></p>
+<p>上圖左邊的是『平衡型』的Binary Search Tree，而右邊則是『未平衡』的Binary Search Tree，而Binary Search Tree的平衡與否，與其在進行資料結構轉換前的陣列內容有關，假設原先的陣列是正序或倒序排列，那轉換後的Binary Search Tree絕對會是像上圖右邊一樣，呈現一個『棒狀』結構，這樣的結構與線性結構大同小異，並不能展現Binary Search Tree的優勢。關於<strong>如何平衡Binary Search Tree</strong>，我們晚點再來說。</p>
+<p>在進入到下一個項目前，還有一個很重要的事情要說，就是Binary Search Tree的<code>高度(height)</code>，在計算高度時，起始值跟Array的index相同，都是從<code>0</code>開始，也就是Root Node的Height是0，其子節點的Height是1，依此類推，因此上方圖中的兩個BST的Height都是3。</p>
+<hr>
+<h2 id="binary-search-tree的演算法">Binary Search Tree的演算法</h2>
+<p>既然BST是一種資料結構，那他當然也有Search, Insert, Delete這三種操作，下面我們來一一介紹：</p>
+<h3 id="1-bst-search">1. BST Search</h3>
+<p>如同上面所說，在建構BST時，會依照值的大小排到左邊分支或是右邊分支，因此在做Search的時候，可以透過這個特性去找，其Pseudo-code如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#6272a4">// Input: A BST tree and a target to be found
+</span><span style="color:#6272a4">// Output: A BST tree
+</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">function</span> BSTSearch(BSTree, t){
+    <span style="color:#ff79c6">if</span> (BSTree is empyt) or (BSTree.value <span style="color:#ff79c6">==</span> t) {
+        <span style="color:#ff79c6">return</span> BSTree;
     }
-    m <span style="color:#ff79c6">=</span> round((l<span style="color:#ff79c6">+</span>r)<span style="color:#ff79c6">/</span><span style="color:#bd93f9">2</span>);
-    <span style="color:#ff79c6">if</span> k <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">Array</span>[m] {
-        <span style="color:#ff79c6">return</span> m;
-    }<span style="color:#ff79c6">else</span> <span style="color:#ff79c6">if</span> k <span style="color:#ff79c6">&lt;</span> <span style="color:#8be9fd;font-style:italic">Array</span>[m]{
-        <span style="color:#ff79c6">return</span> BinarySearchRecursive(<span style="color:#8be9fd;font-style:italic">Array</span>[l,...,m<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>], k);
+    <span style="color:#ff79c6">if</span> BSTree.value <span style="color:#ff79c6">&gt;</span> t {
+        <span style="color:#ff79c6">return</span> BSTSearch(Left child node <span style="color:#ff79c6">of</span> BSTree, t);
     }<span style="color:#ff79c6">else</span>{
-        <span style="color:#ff79c6">return</span> BinarySearchRecursive(<span style="color:#8be9fd;font-style:italic">Array</span>[m<span style="color:#ff79c6">+</span><span style="color:#bd93f9">1</span>,...,l], k);
+        <span style="color:#ff79c6">return</span> BSTSearch(Right child node <span style="color:#ff79c6">of</span> BSTree, t);
     }
 }
 
-</code></pre></div><blockquote>
-<p>這種在一個方法中再次呼叫自身方法的寫法稱為遞迴(Recursive)</p>
-</blockquote>
-<hr>
-<h2 id="binary-search的時間複雜度">Binary Search的時間複雜度</h2>
-<p>Binary Search在進行的過程中，每一次的迴圈都會將要搜尋的範圍<code>減半</code>，這個方式可以大幅降低執行時間，因此對於這種會將範圍砍半的演算法，基本上其時間複雜度皆為<code>𝜪(㏒2 n)</code>。</p>
-<hr>
-<h2 id="真假硬幣的分辨">真假硬幣的分辨</h2>
-<h4 id="假設現在有一堆的金幣而其中有一枚金幣是假的目前已知假金幣比較輕那我們要如何找出這一枚假金幣呢">假設現在有一堆的金幣，而其中有一枚金幣是假的，目前已知假金幣比較輕，那我們要如何找出這一枚假金幣呢？</h4>
-<p>既然這個問題出現在這篇文章，就表示這個解決辦法與Binary Search是一樣的：</p>
-<ol>
-<li>將這堆金幣依照數量平均分成兩邊，拿去秤重。</li>
-<li>找出比較輕的一方，即表示假金幣在其中。</li>
-<li>再將這一方的金幣依照數量平均分成兩堆，再拿去秤重。</li>
-<li>一樣，較輕的一方為假金幣所在的地方。</li>
-<li>重複上述步驟，直到假金幣現出原形。</li>
-</ol>
-<p>這種解決辦法就是Binary Search的一個應用。</p>
+</code></pre></div><p>BST Search也是透過遞迴的方式進行，假設還沒有找到目標所在的位置，就會依據當前節點的值和目標比較，進而再將sub-tree傳入BSTSearch中，再一次進行拆解與尋找；下方範例GIF檔應該可以更清楚的表達這個過程：
+<img src="https://lh3.googleusercontent.com/pw/ACtC-3eNW0GJkwndp_VPxMu_Q5VLw9qy5EPu8lWJA2scDOnhDif_hLa2ujAWQWVnz-9wiOiSSLli0RKRXbuvfY8_1Q-i6J0_h2OqdhIODXa-cVKRNRAk-CRpmdcxZHDA6cFzPwGIt01q1v8P4Dda9XKzJET3=w480-h288-no?authuser=0" alt="BST-Search"></p>
+<p>在做BST Search的時候，若這個BST的結構是<code>Stick</code>，那這個BST Search的Worst Case時間複雜度為<code>𝜪(n)</code>；但是，如果這個BST是<code>balanced</code>，那Worst Case就變成了<code>𝜪(㏒2 n)</code>。</p>
+<h3 id="2-bst-insert">2. BST Insert</h3>
+<p>BST在做Insertion的時候，也是很簡單的，也是依據值的比較，來決定要加在哪一個節點下面，我們透過GIF來了解過程吧：
+<img src="https://lh3.googleusercontent.com/pw/ACtC-3fgy62TnbFdiNSv6ZG7vhOXYEHj2B4jslmppQw6CUSwT0QwvgjzIm_zSqIF9XL8rSldT9iqVAKkspeFclRKM_I8fsFXfyy0i5xToooIXQtHrUWPr_hVLnkNhmNQ1E7ijgKgy4AYdxQAstx5N1Pxh7dG=w480-h288-no?authuser=0" alt="BST-Insert"></p>
+<h3 id="3-bst-delete">3. BST Delete</h3>
+<p>Deletion在BST裡面則比較麻煩，他有三種情況是需要被考慮的：</p>
+<h4 id="1-要刪除的node並沒有任何的child-node">(1) 要刪除的Node並沒有任何的child node:</h4>
+<p>這個情況下的處理很簡單，由於這個要刪除的node並沒有其他child node，因此，直接斷開這個node相關的連結即可。
+<img src="https://lh3.googleusercontent.com/pw/ACtC-3csac02WO6BUd6OOpXk2m0CCdd4AZJNTAsAg6DfWGwfbSLJKuvxIiY0luBst6D2_wwcWbl5bNKSFfxZYfJtK1mASiFqbWjLD9fIxUJrHqLlmtnOk-ylxttYa-7ZM2i9EyZfyLjgPHqko0bpXKmUEHCb=w480-h288-no?authuser=0" alt="BST-Delete-1"></p>
+<h4 id="2-要刪除的node有一個child-node">(2) 要刪除的Node有一個child node:</h4>
+<p>因為在BST裡面存在著parent-child的關係，因此每個node都會記錄期parent node和children node的資訊，當現在要刪除的Node(A Node)是有一個child node(C Node)的時候，即表示對於這個要刪除的node的parent node(B Node)而言，B Node要將原先紀錄A Node的資訊更改成C Node，而C Node則是將其parent node由原先的A Node改成B Node，這樣與A Node有關的所有連結都消失了，等同於A Node從BST中刪除了。
+<img src="https://lh3.googleusercontent.com/pw/ACtC-3c6oydWr733weFBn74ytdQgm_faFS_74_kh72hc-BMci0E7z52-D20GrwNVrhmX8lkkXLH3ETF0N8RwEAvwjhDPjEaC7raYRNMDEO9o2MgwqmyWnS1r4jiojK8Sf0puffXMt0Gy-UBtrnWl09-rxxVS=w480-h288-no?authuser=0" alt="BST-Delete-2"></p>
+<h4 id="3-要刪除的node有兩個child-node">(3) 要刪除的Node有兩個child node:</h4>
+<p>當這個要刪除的Node有兩個child node的時候，我們則是要從他所有的child node中尋找能夠換到這個位置的Node，通常會有兩種方式，一是用左邊分支中最右下的Node或是其右邊分支最左下的Node去取代，二是若其中一個child node也只有連接一個child node，那也可以用這個child node來取代，因為僅有這兩種狀況其Node被置換到該位置後，不破壞BST的規則，有點複雜，看看下面GIF吧：
+<img src="https://lh3.googleusercontent.com/pw/ACtC-3d4YM-ahz0kNKK926KBPrrj5mviM3lzN-ddjy_xXpaLHWONMpv7edKBMnUZ2rgpNHrBKVDvYq7DdW9XMLCGFnAvJRdDw5t4iyCJl0NetHxwlMHM7MjZ_L7Dmaqqev41inLRu5Oyi2T6IKnYeOqBTXSQ=w480-h288-no?authuser=0" alt="BST-Delete-3-1">
+<img src="https://lh3.googleusercontent.com/pw/ACtC-3dsG26L2rn_F5sX2xRprXJCZI-N2ZNQ7FNISrbGH2ikaoMtvYOu8Mt8wSp1ET_EK55iN3yk82LFflM44Anpy-G7itiVxvV7zP2hbTOJ9ImWcc-IYHU9YCxkD1ouiV23DMZMDcqUzceY6-dxsALZmzyT=w480-h288-no?authuser=0" alt="BST-Delete-3-2"></p>
 <hr>
 <h2 id="小結">小結</h2>
 <ol>
-<li>Binary Search只能用在<code>已經排序的陣列上</code>。</li>
-<li>Binary Search的時間複雜度為<code>𝜪(㏒2 n)</code>。</li>
-<li>尋找假金幣的方式就是透過Binary Search來進行。</li>
+<li>Binary Search Tree的三個重點：有根、兩個children node、左小右大。</li>
+<li>Stick BST的時間複雜度比Balanced BST大。</li>
+<li>BST的Deletion要考慮多種情況。</li>
 </ol>
 <hr>
 <h2 id="預告">預告</h2>
-<p>明天我們將會介紹一種資料結構 - Binary Search Tree。</p>
+<p>明天我們將會繼續介紹BST。</p>
 <hr>
 <h2 id="references">References</h2>
 <ol>
@@ -448,15 +448,10 @@ $(function() {
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/posts/ithome-triathlon/decon-shell-sort" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day11 -- Decrease and Conquer - Shell Sort">&larr;
+                        <a href="/posts/ithome-triathlon/decon-binary-search" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day12 -- Decrease and Conquer - Binary Search">&larr;
                             Previous Post</a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/posts/ithome-triathlon/decon-bst" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day13 -- Decrease and Conquer - Binary Search Tree">Next
-                            Post &rarr;</a>
-                    </li>
                     
                 </ul>
 
