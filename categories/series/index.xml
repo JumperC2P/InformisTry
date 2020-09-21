@@ -6,10 +6,19 @@
     <description>Recent content in SERIES on InformisTry</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 20 Sep 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 21 Sep 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://jumperc2p.github.io/InformisTry/categories/series/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【舌尖上的演算法】Day14 -- Decrease and Conquer - Binary Search Tree-續</title>
+      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/decon-bst-con/</link>
+      <pubDate>Mon, 21 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/decon-bst-con/</guid>
+      <description>本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 昨天我們介紹了Binary Search Tree(BST)，而今天要講的BST包含了兩點：Process</description>
+    </item>
     
     <item>
       <title>【舌尖上的演算法】Day13 -- Decrease and Conquer - Binary Search Tree</title>
