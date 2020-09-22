@@ -6,10 +6,37 @@
     <description>Recent content in Posts on InformisTry</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 21 Sep 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 25 Sep 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://jumperc2p.github.io/InformisTry/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【舌尖上的演算法】Day18 -- Transform and Conquer - AVL Tree(下）</title>
+      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/tandc-avl-tree/</link>
+      <pubDate>Fri, 25 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/tandc-avl-tree/</guid>
+      <description>本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 昨天介紹了AVL Tree和當針對AVL Tree進行Insertion的時候可能會需要進行的R</description>
+    </item>
+    
+    <item>
+      <title>【舌尖上的演算法】Day16 -- Divide and Conquer - Quick Sort</title>
+      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/dicon-qs/</link>
+      <pubDate>Wed, 23 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/dicon-qs/</guid>
+      <description>本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 昨天介紹了第一種Divide and Conquer的演算法(Merge Sort)，今天我們要來講第</description>
+    </item>
+    
+    <item>
+      <title>【舌尖上的演算法】Day15 -- Divide and Conquer - Merge Sort</title>
+      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/dicon-ms/</link>
+      <pubDate>Tue, 22 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/dicon-ms/</guid>
+      <description>本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 一連五天，我們介紹了Decrease and Conquer，今天和明天我們要介紹另一個主題 &amp;ndash; Divide and C</description>
+    </item>
     
     <item>
       <title>【舌尖上的演算法】Day14 -- Decrease and Conquer - Binary Search Tree-續</title>

@@ -15,9 +15,9 @@
     
 
     
-    <meta name="title" content="【舌尖上的演算法】Day14 -- Decrease and Conquer - Binary Search Tree-續" />
-    <meta property="og:title" content="【舌尖上的演算法】Day14 -- Decrease and Conquer - Binary Search Tree-續" />
-    <meta property="twitter:title" content="【舌尖上的演算法】Day14 -- Decrease and Conquer - Binary Search Tree-續" />
+    <meta name="title" content="【舌尖上的演算法】Day15 -- Divide and Conquer - Merge Sort" />
+    <meta property="og:title" content="【舌尖上的演算法】Day15 -- Divide and Conquer - Merge Sort" />
+    <meta property="twitter:title" content="【舌尖上的演算法】Day15 -- Divide and Conquer - Merge Sort" />
     
 
     
@@ -34,9 +34,9 @@
     <meta name="keyword"  content="Chih-Hsuan Lee, Informistry, Hank Lee, JumperC2P, Hank portfolio, Java, Python, Developer, Engineer, Software, ReactJS, Web, React, Database, Kubernetes, 微服務, Microservice, 演算法">
     <link rel="shortcut icon" href="/InformisTry/img/favicon.ico">
 
-    <title>【舌尖上的演算法】Day14 -- Decrease and Conquer - Binary Search Tree-續-Informistry</title>
+    <title>【舌尖上的演算法】Day15 -- Divide and Conquer - Merge Sort-Informistry</title>
 
-    <link rel="canonical" href="/InformisTry/posts/ithome-triathlon/decon-bst-con">
+    <link rel="canonical" href="/InformisTry/posts/ithome-triathlon/dicon-ms">
 
     <link rel="stylesheet" href="/InformisTry/css/iDisqus.min.css"/>
 	
@@ -185,7 +185,7 @@
                         </a>
                         
                     </div>
-                    <h1>【舌尖上的演算法】Day14 -- Decrease and Conquer - Binary Search Tree-續</h1>
+                    <h1>【舌尖上的演算法】Day15 -- Divide and Conquer - Merge Sort</h1>
                     <h2 class="subheading">2020 IT邦鐵人賽</h2>
                     <span class="meta">
                         Posted by 
@@ -193,9 +193,9 @@
                             Hank Lee
                          
                         on 
-                        Monday, September 21, 2020
+                        Tuesday, September 22, 2020
                         
-                            <span id="/posts/ithome-triathlon/decon-bst-con" class="leancloud_visitors meta_data_item" data-flag-title="">
+                            <span id="/posts/ithome-triathlon/dicon-ms" class="leancloud_visitors meta_data_item" data-flag-title="">
     <span class="post-meta-item-icon">
       <span class="octicon octicon-eye"></span> 
     </span>
@@ -359,8 +359,9 @@ $(function() {
                     <nav id="TableOfContents">
   <ul>
     <li><a href="#前言">前言</a></li>
-    <li><a href="#讀取bst的順序">讀取BST的順序</a></li>
-    <li><a href="#how-to-balance-bst">How to Balance BST</a></li>
+    <li><a href="#divide-and-conquer的運作方式">Divide and Conquer的運作方式</a></li>
+    <li><a href="#merge-sort的流程">Merge Sort的流程</a></li>
+    <li><a href="#merge-sort的時間複雜度">Merge Sort的時間複雜度</a></li>
     <li><a href="#小結">小結</a></li>
     <li><a href="#預告">預告</a></li>
     <li><a href="#references">References</a></li>
@@ -369,135 +370,30 @@ $(function() {
                     
                 
 
-                <p><a href="https://ithelp.ithome.com.tw/articles/10241265">本系列文章同步分享於IT邦幫忙第12屆鐵人賽</a></p>
+                <p><a href="https://ithelp.ithome.com.tw/articles/10241640">本系列文章同步分享於IT邦幫忙第12屆鐵人賽</a></p>
 <h2 id="前言">前言</h2>
-<p>昨天我們介紹了<code>Binary Search Tree(BST)</code>，而今天要講的BST包含了兩點：<strong>Process BST和Balancing</strong>。</p>
+<p>一連五天，我們介紹了Decrease and Conquer，今天和明天我們要介紹另一個主題 &ndash; <strong>Divide and Conquer</strong>和兩種屬於這個類別的演算法，分別是Merge Sort（今天）和Quick Sort（明天），那就讓我們開始今天的主題吧。</p>
 <hr>
-<h2 id="讀取bst的順序">讀取BST的順序</h2>
-<p>我自己在實作BST的時候，我一定要把BST的每個Node數值印出來，我才能確定我所實作的Search, Insert和Delete是正確的，因此如何把BST的內容按照所期望的方式印出來就是我這邊要介紹的內容，大致上讀取BST時有三種過程：</p>
-<h4 id="1-preorder">1. Preorder:</h4>
-<p>Preorder是先讀取Root Node，才往左邊分支往下開始讀取，等左邊分支的Node都讀取完了，再前往右邊分支去讀取。
-<img src="https://lh3.googleusercontent.com/pw/ACtC-3ei-O3zizcE8Z8SMnsBaYayXvBltCkA6A-5zzBXP4Cl0EzUZmuWWGbnOPw9hSX7awIbXIa17NId-49UGdXQNO0fxaAmbop1X_OdZaASnE0nRp0Pz7PodyZSNsRoj8uB5qdc5Zqr39dUrmnSX0g5Y43M=w480-h288-no?authuser=0" alt="BST-Preorder"></p>
-<h4 id="2-inorder">2. Inorder:</h4>
-<p>Inorder是先一路向下，下到左邊分支的最左下角開始讀取，然後再來是Root Node，再來才是右邊分支。這是唯一一個讀取後是『正序排列』的結果。
-<img src="https://lh3.googleusercontent.com/pw/ACtC-3fX6WA2dL4Yzoo02YoZnwZhNnVHRwKmfdb7LJ0Vsui0FdTpvDp7kPKRiwZfRbX8vaC-0oDCGeF5faeRZeStU2XMIzrvqLkp2jbD1eh3s59azm9VK_YDnW-NSL4XjjTxRcFd1rsjpZpvR64xm_Tffo5o=w480-h288-no?authuser=0" alt="BST-Inorder"></p>
-<h4 id="3-postorder">3. Postorder:</h4>
-<p>Postorder則是先讀取左邊分支，再來是右邊分支，最後才讀取Root Node。
-<img src="https://lh3.googleusercontent.com/pw/ACtC-3djOSBpz0NXxkUzC3eXrpSZhXE2I3g-brEyZglkL5XLinBnXqGiTd4ZWGj9cjMq9O57dLBz_FZ2T5yLd1ynGFYm3qFlboas9vhhECck012XtHOm9xxqGvmPveYXBVuf9OuYzY4H_Pd9VwmMc7RJvMdT=w480-h288-no?authuser=0" alt="BST-PostOrder"></p>
+<h2 id="divide-and-conquer的運作方式">Divide and Conquer的運作方式</h2>
+<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3clERbtViJrGT_wam9JR9N3xoEv1XEOPTLOTSpbVH9amz7fVH_MO51OzBFLGB5hrrfzEmWz-bO71n_UFao204UJ-7iw73kynSJS5aNLPFU3_SLp5eZPDMhWKAOk_1gCXl2Nn5AS3iWcQKLBdkQlFbxE=w600-h601-no?authuser=0" alt="Divide and Conquer"></p>
+<p><strong>Decrease and Conquer</strong>和<code>Divide and Conquer</code>都是<strong>將大問題拆解成小問題解決的運作方式</strong>，然而<strong>前者</strong>是將小問題的解決方式<strong>衍生</strong>到大問題去解決，但<code>後者</code>則是將解決小問題而有的小結果<strong>合併</strong>起來，變成大問題的解答，所以兩者還是有其區別。從上示意圖可知，原先有一問題（紅色），其大小為<code>n</code>，將其拆解成兩個子問題（藍色），大小分別為<code>n/2</code>，再進一步拆解成四個小子問題（大小分別為<code>n/4</code>）（黃色），此時，再針對這四個小子問題去解決，進而取得小子問題的解答（結果）（綠色），再將四個小子結果合併成兩個子結果（粉色），最後將兩個子結果合併成最終的結果（黑色）；這個就是Divide and Conquer的運作流程。</p>
 <hr>
-<h2 id="how-to-balance-bst">How to Balance BST</h2>
-<p>昨天有提到BST有分為Balanced BST和Unbalanced BST，而有沒有BST有沒有被Balanced可以說是很關鍵的一個問題；試問，假設現在有一個陣列的長度是<code>15</code>，那如果一個BST沒有進行過Balance，那這個BST的Height就會是<code>14</code>（<a href="">原因請看昨日的分享</a>），這樣表示若是這種狀況下，在進行BST Search的時候，最壞的狀況下要找到最後一個Node才有結果；但是如果經過Balanced的BST，其Height僅為<code>4</code>，如此一來，進行BST Search最壞的情況下也只需要找四次就可以有結果了。那我們要怎麼去做到balance這件事呢？</p>
-<p>Code在此，給大家參考，不敢說效能很好，但是經過我的測試看起來是可行的：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">class</span> <span style="color:#50fa7b">BSTProc</span> <span style="color:#ff79c6">{</span>
-	
-	<span style="color:#8be9fd;font-style:italic">private</span> BSTProc parentNode<span style="color:#ff79c6">;</span>
-	<span style="color:#8be9fd;font-style:italic">private</span> BSTProc leftNode<span style="color:#ff79c6">;</span>
-	<span style="color:#8be9fd;font-style:italic">private</span> BSTProc rightNode<span style="color:#ff79c6">;</span>
-	
-	<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#50fa7b">BSTProc</span><span style="color:#ff79c6">(</span>String procLabel<span style="color:#ff79c6">,</span> <span style="color:#8be9fd">int</span> vt<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
-		<span style="color:#ff79c6">this</span><span style="color:#ff79c6">(</span>procLabel<span style="color:#ff79c6">,</span> vt<span style="color:#ff79c6">,</span> <span style="color:#ff79c6">null</span><span style="color:#ff79c6">,</span> <span style="color:#ff79c6">null</span><span style="color:#ff79c6">,</span> <span style="color:#ff79c6">null</span><span style="color:#ff79c6">);</span>
-	<span style="color:#ff79c6">}</span>
-	
-	<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#50fa7b">BSTProc</span><span style="color:#ff79c6">(</span>String procLabel<span style="color:#ff79c6">,</span> <span style="color:#8be9fd">int</span> vt<span style="color:#ff79c6">,</span> BSTProc parentNode<span style="color:#ff79c6">,</span> BSTProc leftNode<span style="color:#ff79c6">,</span> BSTProc rightNode<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
-		<span style="color:#8be9fd;font-style:italic">super</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">setProcLabel</span><span style="color:#ff79c6">(</span>procLabel<span style="color:#ff79c6">);</span>
-		<span style="color:#8be9fd;font-style:italic">super</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">setVt</span><span style="color:#ff79c6">(</span>vt<span style="color:#ff79c6">);</span>
-		<span style="color:#ff79c6">this</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">setParentNode</span><span style="color:#ff79c6">(</span>parentNode<span style="color:#ff79c6">);</span>
-		<span style="color:#ff79c6">this</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">setLeftNode</span><span style="color:#ff79c6">(</span>leftNode<span style="color:#ff79c6">);</span>
-		<span style="color:#ff79c6">this</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">setRightNode</span><span style="color:#ff79c6">(</span>rightNode<span style="color:#ff79c6">);</span>
-	<span style="color:#ff79c6">}</span>
-
-	<span style="color:#8be9fd;font-style:italic">public</span> BSTProc <span style="color:#50fa7b">getParentNode</span><span style="color:#ff79c6">()</span> <span style="color:#ff79c6">{</span>
-		<span style="color:#ff79c6">return</span> parentNode<span style="color:#ff79c6">;</span>
-	<span style="color:#ff79c6">}</span>
-
-	<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">setParentNode</span><span style="color:#ff79c6">(</span>BSTProc parentNode<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
-		<span style="color:#ff79c6">this</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">parentNode</span> <span style="color:#ff79c6">=</span> parentNode<span style="color:#ff79c6">;</span>
-	<span style="color:#ff79c6">}</span>
-
-	<span style="color:#8be9fd;font-style:italic">public</span> BSTProc <span style="color:#50fa7b">getLeftNode</span><span style="color:#ff79c6">()</span> <span style="color:#ff79c6">{</span>
-		<span style="color:#ff79c6">return</span> leftNode<span style="color:#ff79c6">;</span>
-	<span style="color:#ff79c6">}</span>
-
-	<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">setLeftNode</span><span style="color:#ff79c6">(</span>BSTProc leftNode<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
-		<span style="color:#ff79c6">this</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">leftNode</span> <span style="color:#ff79c6">=</span> leftNode<span style="color:#ff79c6">;</span>
-	<span style="color:#ff79c6">}</span>
-
-	<span style="color:#8be9fd;font-style:italic">public</span> BSTProc <span style="color:#50fa7b">getRightNode</span><span style="color:#ff79c6">()</span> <span style="color:#ff79c6">{</span>
-		<span style="color:#ff79c6">return</span> rightNode<span style="color:#ff79c6">;</span>
-	<span style="color:#ff79c6">}</span>
-
-	<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">setRightNode</span><span style="color:#ff79c6">(</span>BSTProc rightNode<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
-		<span style="color:#ff79c6">this</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">rightNode</span> <span style="color:#ff79c6">=</span> rightNode<span style="color:#ff79c6">;</span>
-	<span style="color:#ff79c6">}</span> 
-
-<span style="color:#ff79c6">}</span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">
-    <span style="color:#6272a4">// Rebuild an existed BST
-</span><span style="color:#6272a4"></span>    <span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">rebuild</span><span style="color:#ff79c6">()</span> <span style="color:#ff79c6">{</span>
-		
-        index <span style="color:#ff79c6">=</span> 0<span style="color:#ff79c6">;</span>
-        
-        <span style="color:#6272a4">// Transform a BST to an sorted array
-</span><span style="color:#6272a4"></span>		BSTProc<span style="color:#ff79c6">[]</span> array <span style="color:#ff79c6">=</span> getProcessAsc<span style="color:#ff79c6">(</span><span style="color:#ff79c6">new</span> BSTProc<span style="color:#ff79c6">[</span>size<span style="color:#ff79c6">],</span> rootNode<span style="color:#ff79c6">);</span>
-        
-        <span style="color:#6272a4">// Get the index of middle value of the array
-</span><span style="color:#6272a4"></span>        <span style="color:#8be9fd">int</span> middleIndex <span style="color:#ff79c6">=</span> Integer<span style="color:#ff79c6">.</span><span style="color:#50fa7b">valueOf</span><span style="color:#ff79c6">(</span>array<span style="color:#ff79c6">.</span><span style="color:#50fa7b">length</span><span style="color:#ff79c6">/</span>2<span style="color:#ff79c6">);</span>
-        <span style="color:#6272a4">// Set the value of the root node as the value of the middle of the array
-</span><span style="color:#6272a4"></span>		rootNode <span style="color:#ff79c6">=</span> array<span style="color:#ff79c6">[</span>middleIndex<span style="color:#ff79c6">];</span>
-		rootNode<span style="color:#ff79c6">.</span><span style="color:#50fa7b">setParentNode</span><span style="color:#ff79c6">(</span><span style="color:#ff79c6">null</span><span style="color:#ff79c6">);</span>
-        
-        <span style="color:#6272a4">// Set left node, starting from root node recursively.
-</span><span style="color:#6272a4"></span>        rootNode<span style="color:#ff79c6">.</span><span style="color:#50fa7b">setLeftNode</span><span style="color:#ff79c6">(</span>treeBuilder<span style="color:#ff79c6">(</span>array<span style="color:#ff79c6">,</span> 0<span style="color:#ff79c6">,</span> middleIndex<span style="color:#ff79c6">-</span>1<span style="color:#ff79c6">,</span> rootNode<span style="color:#ff79c6">));</span>
-        
-        <span style="color:#6272a4">// Set right node, starting from root node recursively.
-</span><span style="color:#6272a4"></span>		rootNode<span style="color:#ff79c6">.</span><span style="color:#50fa7b">setRightNode</span><span style="color:#ff79c6">(</span>treeBuilder<span style="color:#ff79c6">(</span>array<span style="color:#ff79c6">,</span> middleIndex<span style="color:#ff79c6">+</span>1<span style="color:#ff79c6">,</span> array<span style="color:#ff79c6">.</span><span style="color:#50fa7b">length</span><span style="color:#ff79c6">-</span>1<span style="color:#ff79c6">,</span> rootNode<span style="color:#ff79c6">));</span>
-		
-    <span style="color:#ff79c6">}</span>
-    
-    <span style="color:#8be9fd;font-style:italic">private</span> BSTProc<span style="color:#ff79c6">[]</span> <span style="color:#50fa7b">getProcessAsc</span><span style="color:#ff79c6">(</span>BSTProc<span style="color:#ff79c6">[]</span> array<span style="color:#ff79c6">,</span> BSTProc currentNode<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
-		
-		<span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>currentNode<span style="color:#ff79c6">.</span><span style="color:#50fa7b">getLeftNode</span><span style="color:#ff79c6">()</span> <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">null</span><span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
-			array <span style="color:#ff79c6">=</span> getProcessAsc<span style="color:#ff79c6">(</span>array<span style="color:#ff79c6">,</span> currentNode<span style="color:#ff79c6">.</span><span style="color:#50fa7b">getLeftNode</span><span style="color:#ff79c6">());</span>
-		<span style="color:#ff79c6">}</span>
-		
-		array<span style="color:#ff79c6">[</span>index<span style="color:#ff79c6">]</span> <span style="color:#ff79c6">=</span> currentNode<span style="color:#ff79c6">;</span>
-		index<span style="color:#ff79c6">++;</span>
-		
-		<span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>currentNode<span style="color:#ff79c6">.</span><span style="color:#50fa7b">getRightNode</span><span style="color:#ff79c6">()</span> <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">null</span><span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
-			array <span style="color:#ff79c6">=</span> getProcessAsc<span style="color:#ff79c6">(</span>array<span style="color:#ff79c6">,</span> currentNode<span style="color:#ff79c6">.</span><span style="color:#50fa7b">getRightNode</span><span style="color:#ff79c6">());</span>
-		<span style="color:#ff79c6">}</span>
-		
-		<span style="color:#ff79c6">return</span> array<span style="color:#ff79c6">;</span>
-	<span style="color:#ff79c6">}</span>
-
-	<span style="color:#8be9fd;font-style:italic">private</span> BSTProc <span style="color:#50fa7b">treeBuilder</span><span style="color:#ff79c6">(</span>BSTProc<span style="color:#ff79c6">[]</span> array<span style="color:#ff79c6">,</span> <span style="color:#8be9fd">int</span> startIndex<span style="color:#ff79c6">,</span> <span style="color:#8be9fd">int</span> endIndex<span style="color:#ff79c6">,</span> BSTProc parentNode<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
-		
-		<span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>endIndex <span style="color:#ff79c6">&lt;</span> startIndex<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
-			<span style="color:#ff79c6">return</span> <span style="color:#ff79c6">null</span><span style="color:#ff79c6">;</span>
-		<span style="color:#ff79c6">}</span>
-		
-		<span style="color:#8be9fd">int</span> middleIndex <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>startIndex <span style="color:#ff79c6">+</span> endIndex<span style="color:#ff79c6">)/</span>2<span style="color:#ff79c6">;</span>
-		BSTProc currentNode <span style="color:#ff79c6">=</span> array<span style="color:#ff79c6">[</span>middleIndex<span style="color:#ff79c6">];</span>
-		<span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span> currentNode <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">null</span><span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
-			currentNode<span style="color:#ff79c6">.</span><span style="color:#50fa7b">setParentNode</span><span style="color:#ff79c6">(</span>parentNode<span style="color:#ff79c6">);</span>
-			currentNode<span style="color:#ff79c6">.</span><span style="color:#50fa7b">setLeftNode</span><span style="color:#ff79c6">(</span>treeBuilder<span style="color:#ff79c6">(</span>array<span style="color:#ff79c6">,</span> startIndex<span style="color:#ff79c6">,</span> middleIndex<span style="color:#ff79c6">-</span>1<span style="color:#ff79c6">,</span> currentNode<span style="color:#ff79c6">));</span>
-			currentNode<span style="color:#ff79c6">.</span><span style="color:#50fa7b">setRightNode</span><span style="color:#ff79c6">(</span>treeBuilder<span style="color:#ff79c6">(</span>array<span style="color:#ff79c6">,</span> middleIndex<span style="color:#ff79c6">+</span>1<span style="color:#ff79c6">,</span> endIndex<span style="color:#ff79c6">,</span> currentNode<span style="color:#ff79c6">));</span>
-		<span style="color:#ff79c6">}</span>
-		
-		<span style="color:#ff79c6">return</span> currentNode<span style="color:#ff79c6">;</span>
-	<span style="color:#ff79c6">}</span>
-
-</code></pre></div><p>基本上這個方式是將原本已經存在的ＢＳＴ，轉換成正序排列的Array後，將Array一再拆分成兩邊，找出其對應的child node後，在連到對應的parent node上面；經過我的實測結果，其示意圖如下：</p>
-<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3fYawibJZlzeHAXbqSW0XcYv4PlJQUT4xj7U9C1Tw_XmNY5QT4cLPnSR8YKk_Hn6mM6D0HA23tO1_2uWKcCebAAoAB1rWTzOHC33FtGcDXOiElod2oWTG-gW4Aa87QDTQW7D-zhlCiDYkM2JULJLlN8=w1000-h368-no?authuser=0" alt="Balancing-BST"></p>
+<h2 id="merge-sort的流程">Merge Sort的流程</h2>
+<p>Merge Sort其實就是標準的Divide and Conquer，完全按照上面的圖進行拆解和組合，我們來看看GIF了解實際上Merge Sort是如何進行的吧：</p>
+<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3ftqq5ZuPER3bQttaU28NbooheqgUjeHq9sMTxv84tdvpDVKnesYLC28VfZoA91eWHE8bOGlSHYcSNEVALKtkmoClujbHHQTqImtM5z4uDBAAYnTWJ9lcUvdgIa0lptOeofkba7yogAOrCa6gfIBYyf=w369-h480-no?authuser=0" alt="Merge Sort"></p>
+<p>從上GIF圖可以看到，在進行Divide的時候，會拆解成最小單位，然後在每一步Conquer的過程中進行Sort的動作，如此一來在進入下一階段的Conquer前，就會是兩個已經排列過的陣列合併。</p>
+<hr>
+<h2 id="merge-sort的時間複雜度">Merge Sort的時間複雜度</h2>
+<p>Merge Sort保留了Binary Search的『砍半』手法，所以只要有砍半的動作，時間複雜度就會是<code>𝜪(㏒2 n)</code>；<strong><code>但是</code></strong>，Merge Sort在進行Merge的時候，最壞的情況(Worst Case)是每一步的Conquer都要去做兩個陣列完整的比較後才能完成排序與合併，而這個動作的時間複雜度為<code>𝜪(n)</code>；因此，整體來說，Merge Sort的時間複雜度需要合併這兩個結果，即為<code>𝜪(n·㏒2 n)</code>。</p>
 <hr>
 <h2 id="小結">小結</h2>
 <ol>
-<li>BST的讀取順序分為Preorder, Inorder和Postorder。</li>
-<li>BST的平衡會大幅影響執行效率。</li>
+<li>Divide and Conquer是將大問題拆解成小問題解決後，再將所有小問題的結果合併成大問題的結果。</li>
+<li>Merge Sort的時間複雜度為<code>𝜪(n·㏒2 n)</code>。</li>
 </ol>
 <hr>
 <h2 id="預告">預告</h2>
-<p>明天我們將會介紹新的演算法類別-Divide and Conquer。</p>
+<p>明天我們將會介紹另一個Divide and Conquer的演算法-Quick Sort。</p>
 <hr>
 <h2 id="references">References</h2>
 <ol>
@@ -511,13 +407,13 @@ $(function() {
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/posts/ithome-triathlon/decon-bst" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day13 -- Decrease and Conquer - Binary Search Tree">&larr;
+                        <a href="/posts/ithome-triathlon/decon-bst-con" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day14 -- Decrease and Conquer - Binary Search Tree-續">&larr;
                             Previous Post</a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/posts/ithome-triathlon/dicon-ms" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day15 -- Divide and Conquer - Merge Sort">Next
+                        <a href="/posts/ithome-triathlon/dicon-qs" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day16 -- Divide and Conquer - Quick Sort">Next
                             Post &rarr;</a>
                     </li>
                     
