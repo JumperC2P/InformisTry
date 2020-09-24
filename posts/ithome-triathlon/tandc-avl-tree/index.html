@@ -15,9 +15,9 @@
     
 
     
-    <meta name="title" content="【舌尖上的演算法】Day18 -- Transform and Conquer - AVL Tree(下）" />
-    <meta property="og:title" content="【舌尖上的演算法】Day18 -- Transform and Conquer - AVL Tree(下）" />
-    <meta property="twitter:title" content="【舌尖上的演算法】Day18 -- Transform and Conquer - AVL Tree(下）" />
+    <meta name="title" content="【舌尖上的演算法】Day17 -- Transform and Conquer - AVL Tree(上）" />
+    <meta property="og:title" content="【舌尖上的演算法】Day17 -- Transform and Conquer - AVL Tree(上）" />
+    <meta property="twitter:title" content="【舌尖上的演算法】Day17 -- Transform and Conquer - AVL Tree(上）" />
     
 
     
@@ -34,7 +34,7 @@
     <meta name="keyword"  content="Chih-Hsuan Lee, Informistry, Hank Lee, JumperC2P, Hank portfolio, Java, Python, Developer, Engineer, Software, ReactJS, Web, React, Database, Kubernetes, 微服務, Microservice, 演算法">
     <link rel="shortcut icon" href="/InformisTry/img/favicon.ico">
 
-    <title>【舌尖上的演算法】Day18 -- Transform and Conquer - AVL Tree(下）-Informistry</title>
+    <title>【舌尖上的演算法】Day17 -- Transform and Conquer - AVL Tree(上）-Informistry</title>
 
     <link rel="canonical" href="/InformisTry/posts/ithome-triathlon/tandc-avl-tree">
 
@@ -185,7 +185,7 @@
                         </a>
                         
                     </div>
-                    <h1>【舌尖上的演算法】Day18 -- Transform and Conquer - AVL Tree(下）</h1>
+                    <h1>【舌尖上的演算法】Day17 -- Transform and Conquer - AVL Tree(上）</h1>
                     <h2 class="subheading">2020 IT邦鐵人賽</h2>
                     <span class="meta">
                         Posted by 
@@ -193,7 +193,7 @@
                             Hank Lee
                          
                         on 
-                        Friday, September 25, 2020
+                        Thursday, September 24, 2020
                         
                             <span id="/posts/ithome-triathlon/tandc-avl-tree" class="leancloud_visitors meta_data_item" data-flag-title="">
     <span class="post-meta-item-icon">
@@ -359,8 +359,9 @@ $(function() {
                     <nav id="TableOfContents">
   <ul>
     <li><a href="#前言">前言</a></li>
-    <li><a href="#四種insertion的使用情境">四種Insertion的使用情境</a></li>
-    <li><a href="#avl-tree-insertion範例">AVL Tree Insertion範例</a></li>
+    <li><a href="#transform-and-conquer">Transform and Conquer</a></li>
+    <li><a href="#avl-tree">AVL Tree</a></li>
+    <li><a href="#avl-tree的rotation">AVL Tree的Rotation</a></li>
     <li><a href="#小結">小結</a></li>
     <li><a href="#預告">預告</a></li>
     <li><a href="#references">References</a></li>
@@ -369,50 +370,48 @@ $(function() {
                     
                 
 
-                <p><a href="">本系列文章同步分享於IT邦幫忙第12屆鐵人賽</a></p>
+                <p><a href="https://ithelp.ithome.com.tw/articles/10243140">本系列文章同步分享於IT邦幫忙第12屆鐵人賽</a></p>
 <h2 id="前言">前言</h2>
-<p>昨天介紹了AVL Tree和當針對AVL Tree進行Insertion的時候可能會需要進行的Rotation，而今天會再針對Rotation這件事情提出四種情境，以及如何從一個Array變成一個AVL Tree的過程，那我們就繼續吧～</p>
+<p>目前為止已經介紹了三種類別的演算法，每一種演算法都有其有趣的地方，今天我們要介紹另一個新的類別-Transform and Conquer。</p>
+<blockquote>
+<p>跟Transformer沒關係啊～～～～～～</p>
+</blockquote>
 <hr>
-<h2 id="四種insertion的使用情境">四種Insertion的使用情境</h2>
-<h4 id="情境一">＊情境一：</h4>
-<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3eFlUmWchDlWsVIZ86xkA1ma4Ly7wm7iF2hYsu1Wa6i26Ynz4H9wChdPsZ5AnYWh20JAokuVu2lUFgQmS6rSDR5bH2WsJNfvlKPPNPQbjGU0CHZ36Il61SgTXrw41dw5xcR62JnufCkzf4ITcIEyhY1=w500-h300-no?authuser=0" alt="AVL-Tree-Scenario-1-1"></p>
-<p>如上圖所示，Node Y是Node X的右邊子節點，而這個新增的Node D成為Node Y右邊subtree的子節點，此時就需要經過<code>Left-Rotation</code>使之呈現Balanced Tree的狀態。</p>
-<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3enCLu0J5oArKg04tCuxwnWFE1TB3mVcgzmVRBnwSOMhvWuDkVI4UjTefjrPtG2clBg60zijcG0fU57UB_no2JagF-QKCXcSum18bh-RiH0fmg4VMuo8tN3LujR8ak7uStEkmWlcnRgF4O2SK8Rrumh=w500-h300-no?authuser=0" alt="AVL-Tree-Scenario-1-2"></p>
-<p>從範例可以看到，Rotation過後，其Tree還是符合BST Tree的要求。</p>
-<h4 id="情境二">＊情境二：</h4>
-<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3c6hKKDJED3hnRYj1Zlv0OYtCQs8EnQWgBxgJBKMDz4pRUtIAb3FoqOBr4UpsLO4SS2OMNfhsIWL8v07dY5S32LtAdPu6KRWMbYkvTglFx2OGu0Sa559dhZFPoQJ4wEdxKN9QwTJ-NVSpsGyfRJm7fU=w500-h300-no?authuser=0" alt="AVL-Tree-Scenario-2-1"></p>
-<p>如上圖所示，Node Y是Node X的左邊子節點，而這個新增的Node D成為Node Y左邊subtree的子節點，此時就需要經過<code>Right-Rotation</code>使之呈現Balanced Tree的狀態。</p>
-<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3e2dxpINfDtUsp4clsmu3xEVuHDCns7lveKRxQ1RW4Cws_gDUlERTGWr_X9kG-ihPlTLXGO0huVsfYJO8aGJewirZexFMM0KinWO4is8UpVh_Xiz6xoHzae8JW8r3CtXf6BBEYFCsr8ihmWOHEi-36v=w500-h300-no?authuser=0" alt="AVL-Tree-Scenario-2-2"></p>
-<p>這個算是情境一的反向而已，應該還算可以理解。</p>
-<h4 id="情境三">＊情境三：</h4>
-<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3f2vKhiqRZm_cObaH66CatYX__XDR5e7zcRrp2MdIdflSVhULWy4xFuficHRonoMoRGzbfL7e9oe6a1O0PVteQg4cXaXIkbgjNMMP1xQ-2Jb_QR18hjcTMK7tnGAhIVNX4U-uYYMXUctzMPDYau7XkK=w500-h300-no?authuser=0" alt="AVL-Tree-Scenario-3-1"></p>
-<p>這種情境可能就複雜一點，可以注意到Node X仍為Node Y的parent node，而Node Z為Node Y的左邊子節點，此時若將Node D加到Tree 2或Tree 3時，Node X的balance factor會超過合法範圍，因此需要進行Rotation，而此時是先針對Node Y進行<code>Right-Rotation</code>，將Node Z往上轉一個層級後，再針對Node X進行<code>Left-Rotation</code>，將Node Ｚ變成Root Node，因此這種情境是使用<code>Right-Left Rotation</code>。</p>
-<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3efDEz3y5z43R_3TRnm_285fGEMjPSO6l5QJmTfVIssH6OleJjhB_x_jgzYmCTJatyHqZxXkaj_GzOYpgSV-9wQQZLzYWw7yFs0UZwuxFJ2ug4htj-uE6ujF940A8mjWOsHC5adnBGf_8L21LbqnC8X=w500-h300-no?authuser=0" alt="AVL-Tree-Scenario-3-2"></p>
-<h4 id="情境四">＊情境四：</h4>
-<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3dtuHr57XUvRiRoSYR0br1JvrtfhLWmPPtIUZauZc5bnYkXtqNa_kgIvWpBbO-ct73Bmt5srMN-PnIs47pXo6rCjM4LscyPvsrHJ2xDeYnboLGxrljKC9raj0i0QesiqA5RE6e7bR9KmVQqx-7R7wYV=w500-h300-no?authuser=0" alt="AVL-Tree-Scenario-4-1"></p>
-<p>最後一個情境是情境三的相反，所以進行Rotation的順序是先<code>Left-Rotation</code>再<code>Right-Rotation</code>。</p>
-<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3eQGxfCLjoUccflYbmM8rBX4KbAyyNgUuJrWRu58tdiO8IZ_So6YYzHGdAfG-ZI3Qsa-RsoudXArWCNTez2g1SA3dC05DnWRWQWlybTAbW2kySTEkNzvtDuZBbfFIq2VCYgRHVoEi1FLN9_nRptbLyv=w500-h300-no?authuser=0" alt="AVL-Tree-Scenario-4-2"></p>
+<h2 id="transform-and-conquer">Transform and Conquer</h2>
+<p>Transform的重點就是要『變形』，這種狀況大概用在改變資料形式之後，問題就可以相對容易的被解決，這個時候就是使用Transform and Conquer的時機，其實在找處理Array的資料的時候，很多時候我們都會先去排序，而這個先去排序的動作就是Transform了，因為他改變了陣列的排序，就是改變了格式，然後再針對這個已經排序的陣列進行下一步，而這種可以算是分了『兩個步驟』在做，因此其時間複雜度也是兩個加起來算。舉個例子，從一個隨機排列的陣列中尋找某一個element，用Brute Force的selection sort排序，之後用Binary Search去找，此時時間複雜度為<code>𝜪(n^2) + 𝜪(㏒2 n) = 𝜪(n^2)</code>。</p>
 <hr>
-<h2 id="avl-tree-insertion範例">AVL Tree Insertion範例</h2>
-<p>現在，我們就來針對一個隨機排列的陣列進行AVL Tree Insertion吧～</p>
-<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3fo0-LW3_SO8gTmbV8Pe8B6KOhICWj-iuEa2-vzIlxdd9h-TbX5LvX53fA5qF7DBazNOIn_YOX9rKejylCtrq_DHeA2X0cHraZ4RqddSFoffuyS57ydoghtnApL4CccPZwSp8o-8GflwBtFiBn6aFjr=w480-h288-no?authuser=0" alt="AVL Tree-example"></p>
-<p>在GIF中有幾個情況下需要進行Rotation：</p>
-<ol>
-<li>新增<code>Node 19</code>的時候，因為<code>Node 13的Balance factor為-2</code>，又此情況屬於上方所提的<strong>情境一</strong>，因此進行<code>Left Rotation</code>。</li>
-<li>新增<code>Node 4</code>的時候，又是<code>Node 13的Balance factor變成2</code>，而此情況屬於<strong>情境二</strong>，因此進行<code>Right Rotation</code>。</li>
-<li>新增<code>Node 10</code>的時候，<code>Node 15的Balance factor為2</code>，此情況為<strong>情境四</strong>，因此進行<code>Left-Right Rotation</code>。</li>
-<li>新增<code>Node 17</code>時，<code>Node 15的Balance factor為-2</code>，為情境三，故進行<code>Right-Left Rotation</code>。</li>
-</ol>
-<p>以上即為AVL Tree Insertion的過程，希望還算可以理解。</p>
+<h2 id="avl-tree">AVL Tree</h2>
+<p>AVL Tree是一種Binary Search Tree，而他的重點在於每一個節點(Node)都會去計算<code>Balance factor</code>，計算後的結果必須是<code>-1, 0, 1</code>，僅有這三個結果才表示這個BST是平衡的，我們可以看看下面的GIF。</p>
+<pre><code>Balance Factor(node x) = height(left subtree of x) - height(right subtree of x), if subtree is empty, heigh = -1.
+</code></pre>
+<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3e6EgpHjJ056RwlvMR_RI4XrAhhjKiJcYabTY7Pw4-oRX_of-C2b5BBD3riP9kAqKRWFfztzpe1J6MfTenJJy-yLJh7p76ixgj-tDtYxJd20DWefkJkiCCAMNA-yVkrfUGwr6CJp8Q-5k7-9ylqjIDp=w480-h288-no?authuser=0" alt="AVL Tree -1"></p>
+<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3cKJNVqcJHsh5cZVOmYm0bgEt_nmHPdzEVlcBhYwYpV_LM40KTNUp97DvHkO-EOYmlbzAriFZjqlPBwovD6M3UkjYwfJTRrhsRaJtrLzK7uFuHVz8PFBHY2H7Hk1OkEnJr_bAVHBdLu33SN-VsuNdrd=w480-h288-no?authuser=0" alt="AVL Tree -2"></p>
+<hr>
+<h2 id="avl-tree的rotation">AVL Tree的Rotation</h2>
+<p>當針對AVL Tree進行Insertion的時候，是根據BST Insertion的方式進行（忘記的可以點<a href="https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/decon-bst/">這裏</a>)，但是Insertion過後，需要重新計算每一個節點的balance factor，這樣才能確認這個AVL Tree是不是處在Balanced的狀態，如果因為Insertion後某一個Node變成Unbalanced時，就會針對這個Node進行<code>Rotation</code>，而整個Tree也會因此『變形』而使Tree最終呈現Balanced的狀態；Rotation可以分為四種：</p>
+<h4 id="1-left-rotation">1. Left Rotation:</h4>
+<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3ePJ3je0Gl1jVcSiPLU-HrgynpvkELci960mcZBJ7ykL3w1IZnoYISEZKeD1ISIzXF1ZYsDgXEypZbv-GcQEXnIKfLSK_DOjV0GmRX9czd5i4tUc-AL78FMaiPf9icC3RJWZHwQzIzIJyGiXoqFYr_4=w480-h288-no?authuser=0" alt="AVL Tree-Left Rotation"></p>
+<p>由於Node Y本身已經有兩個child node，當Node Y被<code>轉上</code>去成為Node X的Parent Node時，表示原先Node Y的其中一個child node會斷開連結，而這時斷開連結的Node即為Node Y<code>左邊的</code>child node，而這個Node會被連接到<code>Node X</code>的<code>右邊child node的位置</code>，因為這樣才會符合BST的規則。</p>
+<h4 id="2-right-rotation">2. Right Rotation:</h4>
+<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3cphFm3wfWFh5CggcXUKETsBn5XZsDvTxqXbYU56UXURdP0Tj-60y4DFTeosye_y0XYSiZfKBxJkuyLZArI348gAkQLprRp_IwA3JQvGHtaLUpZKh8md3YKl1FH4aRLHOZsrxo9jcHuCyoJKdaK5SDg=w480-h288-no?authuser=0" alt="AVL Tree-Right Rotation"></p>
+<p>由於Node Y本身已經有兩個child node，當Node Y被<code>轉上</code>去成為Node X的Parent Node時，表示原先Node Y的其中一個child node會斷開連結，而這時斷開連結的Node即為Node Y<code>右邊的</code>child node，而這個Node會被連接到<code>Node X</code>的<code>左邊child node的位置</code>，因為這樣才會符合BST的規則。</p>
+<h4 id="3-left-right-rotation">3. Left-Right Rotation:</h4>
+<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3fgCKtL97IS_XwmJE0RW8hvbhAX5IuajvY6l9u3qrRDdiSJYdpGYsunbQaM4M0fb6yJAcXY2g370yoWHCPi4fuMRTYmEwtNII_fHSC_KdOkwmB4SvK5YO0jfsF_LJLbZK3_SnRpQl3RslMIIEMtLIfU=w480-h288-no?authuser=0" alt="AVL Tree-Left-Right Rotation"></p>
+<p>基本上就是上面兩種Rotation的合併，所以機制相同。</p>
+<h4 id="4-right-left-rotation">4. Right-Left Rotation:</h4>
+<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3e4_6SlTJDx-fV6CCJ4JeqwhMR1Imd3ecgRJZlQurT54lCSwi2lkGbn2duEwvrPLZorL3t0ewmEzTS-UiVyFtaHPGRzFcuYVhjG3IFLRFKtl4NJsRZ8Liw6kz2T5gzqzkWbZ9fOFLdYi9jdzS3RwBvF=w480-h288-no?authuser=0" alt="AVL Tree-Right-Left Rotation"></p>
+<p>與第三點的Left-Right Rotation機制相同，只是方向相反。</p>
 <hr>
 <h2 id="小結">小結</h2>
 <ol>
-<li>AVL Tree Insertion有四種情境。</li>
-<li>Insertion過程中，若某一個Node的Balance factor不是<code>-1, 0, 1</code>其中之一，就需要針對這個Node進行Rotation。</li>
+<li>Transform and Conquer的使用時機：在改變資料形式之後，問題就可以相對容易的被解決。</li>
+<li>AVL Tree也是一種BST，只是多了要計算Balance factor的動作，才能確保AVL Tree是Balanced的狀態。</li>
+<li>若經過Insertion後有某一個Node的Balance factor不是<code>-1, 0, 1</code>其中之一，就需要針對這個Node進行Rotation。</li>
+<li>Rotation有四種方式：Left Rotation, Right Rotation, Left-Right Rotation, Right-Left Rotation。</li>
 </ol>
 <hr>
 <h2 id="預告">預告</h2>
-<p>明天我們將會介紹另一種Tree - 2-3 Tree。</p>
+<p>明天我們再繼續介紹AVL Tree的Insertion。</p>
 <hr>
 <h2 id="references">References</h2>
 <ol>
