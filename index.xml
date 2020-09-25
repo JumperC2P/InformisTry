@@ -2,230 +2,230 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>InformisTry</title>
-    <link>https://jumperc2p.github.io/InformisTry/</link>
+    <link>https://jumperc2p.github.io/</link>
     <description>Recent content on InformisTry</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 25 Sep 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://jumperc2p.github.io/InformisTry/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://jumperc2p.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>【舌尖上的演算法】Day18 -- Transform and Conquer - AVL Tree(下）</title>
-      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/tandc-avl-tree-cont/</link>
+      <link>https://jumperc2p.github.io/posts/ithome-triathlon/tandc-avl-tree-cont/</link>
       <pubDate>Fri, 25 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/tandc-avl-tree-cont/</guid>
+      <guid>https://jumperc2p.github.io/posts/ithome-triathlon/tandc-avl-tree-cont/</guid>
       <description>本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 昨天介紹了AVL Tree和當針對AVL Tree進行Insertion的時候可能會需要進行的R</description>
     </item>
     
     <item>
       <title>【舌尖上的演算法】Day17 -- Transform and Conquer - AVL Tree(上）</title>
-      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/tandc-avl-tree/</link>
+      <link>https://jumperc2p.github.io/posts/ithome-triathlon/tandc-avl-tree/</link>
       <pubDate>Thu, 24 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/tandc-avl-tree/</guid>
+      <guid>https://jumperc2p.github.io/posts/ithome-triathlon/tandc-avl-tree/</guid>
       <description>本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 目前為止已經介紹了三種類別的演算法，每一種演算法都有其有趣的地方，今天我們要介紹另一個新的類</description>
     </item>
     
     <item>
       <title>【舌尖上的演算法】Day16 -- Divide and Conquer - Quick Sort</title>
-      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/dicon-qs/</link>
+      <link>https://jumperc2p.github.io/posts/ithome-triathlon/dicon-qs/</link>
       <pubDate>Wed, 23 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/dicon-qs/</guid>
+      <guid>https://jumperc2p.github.io/posts/ithome-triathlon/dicon-qs/</guid>
       <description>本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 昨天介紹了第一種Divide and Conquer的演算法(Merge Sort)，今天我們要來講第</description>
     </item>
     
     <item>
       <title>【舌尖上的演算法】Day15 -- Divide and Conquer - Merge Sort</title>
-      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/dicon-ms/</link>
+      <link>https://jumperc2p.github.io/posts/ithome-triathlon/dicon-ms/</link>
       <pubDate>Tue, 22 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/dicon-ms/</guid>
+      <guid>https://jumperc2p.github.io/posts/ithome-triathlon/dicon-ms/</guid>
       <description>本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 一連五天，我們介紹了Decrease and Conquer，今天和明天我們要介紹另一個主題 &amp;ndash; Divide and C</description>
     </item>
     
     <item>
       <title>【舌尖上的演算法】Day14 -- Decrease and Conquer - Binary Search Tree-續</title>
-      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/decon-bst-con/</link>
+      <link>https://jumperc2p.github.io/posts/ithome-triathlon/decon-bst-con/</link>
       <pubDate>Mon, 21 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/decon-bst-con/</guid>
+      <guid>https://jumperc2p.github.io/posts/ithome-triathlon/decon-bst-con/</guid>
       <description>本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 昨天我們介紹了Binary Search Tree(BST)，而今天要講的BST包含了兩點：Process</description>
     </item>
     
     <item>
       <title>【舌尖上的演算法】Day13 -- Decrease and Conquer - Binary Search Tree</title>
-      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/decon-bst/</link>
+      <link>https://jumperc2p.github.io/posts/ithome-triathlon/decon-bst/</link>
       <pubDate>Sun, 20 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/decon-bst/</guid>
+      <guid>https://jumperc2p.github.io/posts/ithome-triathlon/decon-bst/</guid>
       <description>本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 第十二天我們介紹了Binary Search，而Binary Search在執行的過程中，每一次</description>
     </item>
     
     <item>
       <title>【舌尖上的演算法】Day12 -- Decrease and Conquer - Binary Search</title>
-      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/decon-binary-search/</link>
+      <link>https://jumperc2p.github.io/posts/ithome-triathlon/decon-binary-search/</link>
       <pubDate>Sat, 19 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/decon-binary-search/</guid>
+      <guid>https://jumperc2p.github.io/posts/ithome-triathlon/decon-binary-search/</guid>
       <description>本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 一連講了好幾個Sorting的演算法，我們今天來換換口味，今天要講的演算法是用來針對已經排序</description>
     </item>
     
     <item>
       <title>【舌尖上的演算法】Day11 -- Decrease and Conquer - Shell Sort</title>
-      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/decon-shell-sort/</link>
+      <link>https://jumperc2p.github.io/posts/ithome-triathlon/decon-shell-sort/</link>
       <pubDate>Fri, 18 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/decon-shell-sort/</guid>
+      <guid>https://jumperc2p.github.io/posts/ithome-triathlon/decon-shell-sort/</guid>
       <description>本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 第十天我們第一次介紹了Decrease and Conquer類別的運作方式，同時也介紹了Inser</description>
     </item>
     
     <item>
       <title>【舌尖上的演算法】Day10 -- Decrease and Conquer - Insertion Sort</title>
-      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/decon-insertion-sort/</link>
+      <link>https://jumperc2p.github.io/posts/ithome-triathlon/decon-insertion-sort/</link>
       <pubDate>Thu, 17 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/decon-insertion-sort/</guid>
+      <guid>https://jumperc2p.github.io/posts/ithome-triathlon/decon-insertion-sort/</guid>
       <description>本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 第六天到第九天，我們都是在介紹屬於Brute Force的演算法，若要複習的人可以點下面連結：</description>
     </item>
     
     <item>
       <title>【舌尖上的演算法】Day9 -- Brute Force - DFS &amp; BFS</title>
-      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/brute_force_dfs_bfs/</link>
+      <link>https://jumperc2p.github.io/posts/ithome-triathlon/brute_force_dfs_bfs/</link>
       <pubDate>Wed, 16 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/brute_force_dfs_bfs/</guid>
+      <guid>https://jumperc2p.github.io/posts/ithome-triathlon/brute_force_dfs_bfs/</guid>
       <description>本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 應該有人跟我一樣真心覺得Brute Force其實看起來也沒什麼，就都是很簡單的邏輯和實作方式</description>
     </item>
     
     <item>
       <title>【舌尖上的演算法】Day8 -- Brute Force - Knapsack</title>
-      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/brute_force_knapsack/</link>
+      <link>https://jumperc2p.github.io/posts/ithome-triathlon/brute_force_knapsack/</link>
       <pubDate>Tue, 15 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/brute_force_knapsack/</guid>
+      <guid>https://jumperc2p.github.io/posts/ithome-triathlon/brute_force_knapsack/</guid>
       <description>本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 接連兩天分別介紹了Selection Sort和Bubble Sort兩種排序的演算法，有沒有人</description>
     </item>
     
     <item>
       <title>【舌尖上的演算法】Day7 -- Brute Force - Bubble Sort</title>
-      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/brute_force_bubble_sort/</link>
+      <link>https://jumperc2p.github.io/posts/ithome-triathlon/brute_force_bubble_sort/</link>
       <pubDate>Mon, 14 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/brute_force_bubble_sort/</guid>
+      <guid>https://jumperc2p.github.io/posts/ithome-triathlon/brute_force_bubble_sort/</guid>
       <description>本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 第六天我們終於開始上主菜了，第一個演算法Brute Force中的Selection Sort（</description>
     </item>
     
     <item>
       <title>【舌尖上的演算法】Day6 -- Brute Force - Selection Sort</title>
-      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/brute_force_selection_sort/</link>
+      <link>https://jumperc2p.github.io/posts/ithome-triathlon/brute_force_selection_sort/</link>
       <pubDate>Sun, 13 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/brute_force_selection_sort/</guid>
+      <guid>https://jumperc2p.github.io/posts/ithome-triathlon/brute_force_selection_sort/</guid>
       <description>本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 一連講了五天的背景知識，今天我們終於要來開始上主菜了，而主菜也是有很多的類別： Brute Force Decrease and Conquer Divide and</description>
     </item>
     
     <item>
       <title>【舌尖上的演算法】Day5 -- 線性資料結構(Linear Data Structures)</title>
-      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/data_structures/</link>
+      <link>https://jumperc2p.github.io/posts/ithome-triathlon/data_structures/</link>
       <pubDate>Sat, 12 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/data_structures/</guid>
+      <guid>https://jumperc2p.github.io/posts/ithome-triathlon/data_structures/</guid>
       <description>本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 第三天我們說明了什麼是抽象資料型別(Abstract Data Type, ADT)，同時也介紹了8種相對常被使</description>
     </item>
     
     <item>
       <title>【舌尖上的演算法】Day4 -- 抽象資料型別及特性</title>
-      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/abstract_data_types/</link>
+      <link>https://jumperc2p.github.io/posts/ithome-triathlon/abstract_data_types/</link>
       <pubDate>Fri, 11 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/abstract_data_types/</guid>
+      <guid>https://jumperc2p.github.io/posts/ithome-triathlon/abstract_data_types/</guid>
       <description>本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 第二天和第三天我們介紹了針對演算法執行效率(Time Complexity)進行了說明，然而除</description>
     </item>
     
     <item>
       <title>【舌尖上的演算法】Day3 -- 解析演算法的優劣（下）</title>
-      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/algorithm_time_complexity_2/</link>
+      <link>https://jumperc2p.github.io/posts/ithome-triathlon/algorithm_time_complexity_2/</link>
       <pubDate>Thu, 10 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/algorithm_time_complexity_2/</guid>
+      <guid>https://jumperc2p.github.io/posts/ithome-triathlon/algorithm_time_complexity_2/</guid>
       <description>本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 第二天我們提到了衡量一個演算法好壞的因素分別是執行時間(Time complexity)和使用</description>
     </item>
     
     <item>
       <title>【舌尖上的演算法】Day2 -- 解析演算法的優劣（上）</title>
-      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/algorithm_time_complexity_1/</link>
+      <link>https://jumperc2p.github.io/posts/ithome-triathlon/algorithm_time_complexity_1/</link>
       <pubDate>Wed, 09 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/algorithm_time_complexity_1/</guid>
+      <guid>https://jumperc2p.github.io/posts/ithome-triathlon/algorithm_time_complexity_1/</guid>
       <description>本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 第一天我們針對了演算法做了非常簡單的介紹，我們提到演算法本身是一個用來解決問題的一系列精準不</description>
     </item>
     
     <item>
       <title>【舌尖上的演算法】Day1 -- 初嚐演算法</title>
-      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/whats_algorithm/</link>
+      <link>https://jumperc2p.github.io/posts/ithome-triathlon/whats_algorithm/</link>
       <pubDate>Tue, 08 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/whats_algorithm/</guid>
+      <guid>https://jumperc2p.github.io/posts/ithome-triathlon/whats_algorithm/</guid>
       <description>前言 從生物科技產業轉行到資訊科技產業不知不覺來到第五個年頭，這五年裡當個無憂無慮的小小碼農渾渾噩噩地來到了今天，雖然內心一直覺得既然踏入了這</description>
     </item>
     
     <item>
       <title>A Brief Introduction of Using Java Logger</title>
-      <link>https://jumperc2p.github.io/InformisTry/posts/a_brief_introduction_of_using_java_logger/</link>
+      <link>https://jumperc2p.github.io/posts/a_brief_introduction_of_using_java_logger/</link>
       <pubDate>Fri, 08 May 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://jumperc2p.github.io/InformisTry/posts/a_brief_introduction_of_using_java_logger/</guid>
+      <guid>https://jumperc2p.github.io/posts/a_brief_introduction_of_using_java_logger/</guid>
       <description>&lt;p&gt;Recently, I am asked to record some information about how my server runs. So, I decide to use &lt;code&gt;java.util.logging.Logger&lt;/code&gt; to implement the logging process.
 Also this article will give you a sample code of how to use the basic function of &lt;code&gt;java.util.logging.Logger&lt;/code&gt;.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>A Combination of TimerTask and Timer</title>
-      <link>https://jumperc2p.github.io/InformisTry/posts/a_combination_of_timertask_and_timer/</link>
+      <link>https://jumperc2p.github.io/posts/a_combination_of_timertask_and_timer/</link>
       <pubDate>Sun, 03 May 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://jumperc2p.github.io/InformisTry/posts/a_combination_of_timertask_and_timer/</guid>
+      <guid>https://jumperc2p.github.io/posts/a_combination_of_timertask_and_timer/</guid>
       <description>&lt;p&gt;In this article, I will give you a brief introduction about what Timer and TimerTask are and then a simple example to help you understand how to use them.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>What&#39;s Informistry?</title>
-      <link>https://jumperc2p.github.io/InformisTry/posts/whats_informistry/</link>
+      <link>https://jumperc2p.github.io/posts/whats_informistry/</link>
       <pubDate>Sat, 02 May 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://jumperc2p.github.io/InformisTry/posts/whats_informistry/</guid>
+      <guid>https://jumperc2p.github.io/posts/whats_informistry/</guid>
       <description></description>
     </item>
     
     <item>
       <title></title>
-      <link>https://jumperc2p.github.io/InformisTry/search/placeholder/</link>
+      <link>https://jumperc2p.github.io/search/placeholder/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://jumperc2p.github.io/InformisTry/search/placeholder/</guid>
+      <guid>https://jumperc2p.github.io/search/placeholder/</guid>
       <description></description>
     </item>
     
     <item>
       <title></title>
-      <link>https://jumperc2p.github.io/InformisTry/top/about/</link>
+      <link>https://jumperc2p.github.io/top/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://jumperc2p.github.io/InformisTry/top/about/</guid>
+      <guid>https://jumperc2p.github.io/top/about/</guid>
       <description>Hank Lee is a full stack web developer and also software enginner. Currently, he is studying for master of information technology at RMIT university in Australia🇦🇺.
 He is familiar with Java, Spring Boot, RDBMS and has experiences in HTML/CSS, Javascript, jQuery, Angular. Recently, he is working on ReactJS, Python, Docker and Raspberry Pi in his assessments. In his career, not only does he work as a web developer, but also he has some experiences in pre-sale works.</description>
     </item>
     
     <item>
       <title></title>
-      <link>https://jumperc2p.github.io/InformisTry/top/books/</link>
+      <link>https://jumperc2p.github.io/top/books/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://jumperc2p.github.io/InformisTry/top/books/</guid>
+      <guid>https://jumperc2p.github.io/top/books/</guid>
       <description>Machine learning学习笔记 Coursera 在线课程 Machine learning 笔记 讲师: 吴恩达(Andrew Ng) 课程地址：https://www.coursera.org/lear</description>
     </item>
     
