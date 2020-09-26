@@ -15,9 +15,9 @@
     
 
     
-    <meta name="title" content="【舌尖上的演算法】Day19 -- Transform and Conquer - 2-3 Trees" />
-    <meta property="og:title" content="【舌尖上的演算法】Day19 -- Transform and Conquer - 2-3 Trees" />
-    <meta property="twitter:title" content="【舌尖上的演算法】Day19 -- Transform and Conquer - 2-3 Trees" />
+    <meta name="title" content="【舌尖上的演算法】Day20 -- Time and Space Tradeoff- Distribution Sorting" />
+    <meta property="og:title" content="【舌尖上的演算法】Day20 -- Time and Space Tradeoff- Distribution Sorting" />
+    <meta property="twitter:title" content="【舌尖上的演算法】Day20 -- Time and Space Tradeoff- Distribution Sorting" />
     
 
     
@@ -34,9 +34,9 @@
     <meta name="keyword"  content="Chih-Hsuan Lee, Informistry, Hank Lee, JumperC2P, Hank portfolio, Java, Python, Developer, Engineer, Software, ReactJS, Web, React, Database, Kubernetes, 微服務, Microservice, 演算法">
     <link rel="shortcut icon" href="/InformisTry/img/favicon.ico">
 
-    <title>【舌尖上的演算法】Day19 -- Transform and Conquer - 2-3 Trees-HankLee</title>
+    <title>【舌尖上的演算法】Day20 -- Time and Space Tradeoff- Distribution Sorting-HankLee</title>
 
-    <link rel="canonical" href="/InformisTry/posts/ithome-triathlon/tandc-2-3-tree">
+    <link rel="canonical" href="/InformisTry/posts/ithome-triathlon/ts-sbyc">
 
     <link rel="stylesheet" href="/InformisTry/css/iDisqus.min.css"/>
 	
@@ -185,7 +185,7 @@
                         </a>
                         
                     </div>
-                    <h1>【舌尖上的演算法】Day19 -- Transform and Conquer - 2-3 Trees</h1>
+                    <h1>【舌尖上的演算法】Day20 -- Time and Space Tradeoff- Distribution Sorting</h1>
                     <h2 class="subheading">2020 IT邦鐵人賽</h2>
                     <span class="meta">
                         Posted by 
@@ -193,9 +193,9 @@
                             Hank Lee
                          
                         on 
-                        Saturday, September 26, 2020
+                        Sunday, September 27, 2020
                         
-                            <span id="/posts/ithome-triathlon/tandc-2-3-tree" class="leancloud_visitors meta_data_item" data-flag-title="">
+                            <span id="/posts/ithome-triathlon/ts-sbyc" class="leancloud_visitors meta_data_item" data-flag-title="">
     <span class="post-meta-item-icon">
       <span class="octicon octicon-eye"></span> 
     </span>
@@ -359,9 +359,9 @@ $(function() {
                     <nav id="TableOfContents">
   <ul>
     <li><a href="#前言">前言</a></li>
-    <li><a href="#2-3-trees">2-3 Trees</a></li>
-    <li><a href="#2-3-trees的insertion範例">2-3 Trees的Insertion範例</a></li>
-    <li><a href="#2-3-trees的時間複雜度">2-3 Trees的時間複雜度</a></li>
+    <li><a href="#time-and-space-tradeoff的概念">Time and Space Tradeoff的概念</a></li>
+    <li><a href="#輸入增進計畫input-enhancement-counting-sort">輸入增進計畫(Input Enhancement)-Counting Sort</a></li>
+    <li><a href="#distribution-sorting">Distribution Sorting</a></li>
     <li><a href="#小結">小結</a></li>
     <li><a href="#預告">預告</a></li>
     <li><a href="#references">References</a></li>
@@ -370,41 +370,43 @@ $(function() {
                     
                 
 
-                <p><a href="https://ithelp.ithome.com.tw/articles/10244428">本系列文章同步分享於IT邦幫忙第12屆鐵人賽</a></p>
+                <p><a href="https://ithelp.ithome.com.tw/articles/10243805">本系列文章同步分享於IT邦幫忙第12屆鐵人賽</a></p>
 <h2 id="前言">前言</h2>
-<p>當在設計一個演算法的時候，倘若使用到了Tree這種資料結構，絕大部分的情況下都需要考慮到Tree的平衡問題，這樣才能確保比較好的執行效率，我們第一次接觸這個議題是在第14天介紹Binary Search Tree如何平衡（<a href="https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/decon-bst-con/">複習</a>)，BST的平衡比較像是<strong>事後補救</strong>，將原本已有的BST重新打散進行排列組合；前兩天介紹了另一種Tree-AVL Tree，AVL Tree則是透過Transform的方式，在進行Insertion的同時去做平衡的動作，因此一旦AVL Tree建構起來了，這個Tree本身也已經處於平衡狀態。</p>
-<p>今天要再介紹另一種平衡Tree的方式 &ndash; 2-3 Trees。</p>
+<p>我們生活中隨時隨地都在做出選擇，而在做選擇時，我們都會根據利弊進行判斷，今天要講的演算法適用於這種狀況。</p>
 <hr>
-<h2 id="2-3-trees">2-3 Trees</h2>
-<p>2-3 Trees無疑也是一種Search Tree，但與前兩種提到BST和AVL Tree不同的地方是，2-3 Trees<code>允許每一個Node至多存放兩個值，且可連結3個Children nodes</code>，因此下圖所示的兩種結構，在2-3 Trees的定義下都是合法的。</p>
-<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3fGC79-W_rFvxhdkwk6N4DucYwX_f-9qixx3VNGJJ4FWQr7UxijYKKLPlBTWZ6qVlglbre8hYHB47fJsB0psbt0VUyDeODaHvpMDMUNX-ivqqCXQZ_qT92I9DfoaQzx0NzfS4sMO59quhz582CBPo2y=w500-h300-no?authuser=0" alt="2-3 Trees"></p>
-<blockquote>
-<p>註：在右邊的3-node結構中，中間的child node所記錄的值是<code>介於V和X之間的值</code>。</p>
-</blockquote>
+<h2 id="time-and-space-tradeoff的概念">Time and Space Tradeoff的概念</h2>
+<p>在設計演算法的時候，有些時候為了讓執行速度加快，我們可以使用更多內存去儲存資料，藉此減少迴圈數；反之，如果內存不足，可能所設計的演算法就會有更多的迴圈，而導致執行時間變長，這也算是一種利弊取捨，同時也是Time and Space Tradeoff的概念，我們在時間和空間中進行取捨，而這兩天我們會介紹的兩種方式都是利用空間換取時間（畢竟現在要加大記憶體也不是什麼難事了）。</p>
 <hr>
-<h2 id="2-3-trees的insertion範例">2-3 Trees的Insertion範例</h2>
-<p>進行Insertion的步驟如下：</p>
+<h2 id="輸入增進計畫input-enhancement-counting-sort">輸入增進計畫(Input Enhancement)-Counting Sort</h2>
+<p>Input Enhancement的主要訴求，就是<code>針對輸入值進行預處理</code>，就像如果用樹幹製作的傢俱，在製作前需要先將樹幹的樹皮移除，而演算法處理資料也會有這種概念，在經過這種預處理後產生的資料，可能會需要使用更多的儲存空間來保存，然而卻可以大幅加速產生對應的結果，因此在這種狀況下，<code>時間的利遠大於空間的弊</code>，就像我們下面要講的<strong>Sort by Counting</strong>。</p>
+<hr>
+<h2 id="distribution-sorting">Distribution Sorting</h2>
+<p>如果要針對一個包含數個重複數值的陣列進行排序，原本的作法可能是：</p>
 <ol>
-<li>針對值進行大小比較。</li>
-<li>將值安插至對應的Node中。</li>
-<li>看看Node中的值的數量是否超過2個，若超過，則將中間值往上拉，加入或形成一個parent node。</li>
-<li>若Node所連結的child node超過3個，進行分割。</li>
+<li>寫一個迴圈，找出最小的值。</li>
+<li>再寫一個迴圈，計算這個值重複幾次。</li>
+<li>再把這個值依照他重複的次數放到一個新的陣列當中。</li>
+<li>將原本的陣列中的所有這個值刪除。</li>
+<li>重複1~5步，直到初始陣列為空。</li>
 </ol>
-<p>透過GIF我們可以看到，當插入19時，第一個Node中的值來到了三個，因此進行分割而有了一個由三個Node組成的Tree，爾後插入4的時候，左下child node中的值來到了三個，因此再一次進行分割，形成上圖藍色的結構，最後插入14的時候，中間的child node也有了三個值，而針對這個Node進行分割，而將13移動至parent node，這時來到一個中介型態（parent node有三個值，且有四個children node），然後再進一步將這時的parent node分切，將13提出來形成一個新的parent node，而有了最後的結構。</p>
-<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3dFyHyjvv2LjvEwUnFYWTGwJoZ_VCtONI3AKrDB-ZHi6EyZrhFf579L7VZEBisHAvgWDQJ_x9wQdJ3XX46WKQoFrqQ2STuJ8PXolgWSnB-ioxVii_bUif4AfaRm70RO0GP5FMndP6uOZs8_y9xWyasf=w480-h440-no?authuser=0" alt="2-3 Tree-Insertion"></p>
-<hr>
-<h2 id="2-3-trees的時間複雜度">2-3 Trees的時間複雜度</h2>
-<p>由於2-3 Trees本身還是承襲了Binary Search Tree的特性，因此無論是Search, Insert和Delete，其時間複雜度均為<code>𝜪(㏒2 n)</code>。</p>
+<p>上面這個步驟沒有太大的毛病，但是可以更好，所以我們可以改良成下面的方式，也就是所謂的<code>Distribution Sort</code>：</p>
+<ol>
+<li>透過一個迴圈將初始陣列中所有數值及其重複次數記錄到另一個物件當中（Map/Dictionary）。</li>
+<li>改變這個Map/Dictionary的Value（後一個的值加上前一個的值）。</li>
+<li>再利用這個改變後的Map/Dictionary配合初始陣列，一步一步地將排序的結果生成。</li>
+</ol>
+<p>第一種做法就只會有<strong>兩個參數：當前的值和重複的次數，以及兩個陣列（一新一舊）</strong>，而第二種做法就會<code>多一個Map/Dictionary</code>的物件和兩個陣列，而這個Map/Dictionary中記錄了所有的值和個別重複的次數，因此所使用的<strong>空間比較多</strong>，但是<strong>節省了執行時間</strong>，因此Distribution Sort是一種Time and Space Tradeoff。</p>
+<p>我們透過下面GIF來更加了解這個過程，首先先針對Array當中所有的值計算重複次數，記錄到一個Key-Value的物件中，然後再利用初始陣列Backward的順序，配合這個Key-Value的物件將值放到新陣列中對應的位置，並將Key-Value的Value減一（下一次的位置），反覆進行，即可得到排序後的結果。</p>
+<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3dUyPzQ12U0BACU8HWzmdKSgN_3mgnX0OFHdpa24HcfyRRKBw69Ib2zKat3WZb5-z45jwKoGMPpcuWtalTNY9bKWxtjMLrHP8A-I5hJ4dlpOR0WnrcVIAmnhmmW-4dzknxQXaI-TL74WjR6tUej_Zo1=w480-h384-no?authuser=0" alt="Distribution Sort"></p>
 <hr>
 <h2 id="小結">小結</h2>
 <ol>
-<li>2-3 Trees的每一個Node可以包含最多兩個值，且每一個Node均允許有三個children node。</li>
-<li>在Insertion的時候，若一個Node中新增了第三個值，就會將這個Node進行分割。</li>
-<li>Seach, Insert, Delete的時間複雜度均為<code>𝜪(㏒2 n)</code>。</li>
+<li>空間換取時間，抑或時間換取空間，就是Time and Space Tradeoff的概念。</li>
+<li>Distribution Sort會利用額外的空間來記錄過渡狀態，並利用過渡狀態進行排列。</li>
 </ol>
 <hr>
 <h2 id="預告">預告</h2>
-<p>明天我們會介紹新的演算法類別-Time and Space Tradeoff。</p>
+<p>明天我們將會介紹另一種Time and Space Tradeoff的演算法 - hashing。</p>
 <hr>
 <h2 id="references">References</h2>
 <ol>
@@ -418,14 +420,10 @@ $(function() {
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/InformisTry/posts/ithome-triathlon/tandc-avl-tree-cont/"  style="width: 49rem;" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day18 -- Transform and Conquer - AVL Tree(下）">&larr;
-                            【舌尖上的演算法】Day18 -- Transform and Conquer - AVL Tree(下）</a>
+                        <a href="/InformisTry/posts/ithome-triathlon/tandc-2-3-tree/"  style="width: 49rem;" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day19 -- Transform and Conquer - 2-3 Trees">&larr;
+                            【舌尖上的演算法】Day19 -- Transform and Conquer - 2-3 Trees</a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/InformisTry/posts/ithome-triathlon/ts-sbyc/" style="width: 49rem;" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day20 -- Time and Space Tradeoff- Distribution Sorting">&rarr; 【舌尖上的演算法】Day20 -- Time and Space Tradeoff- Distribution Sorting</a>
-                    </li>
                     
                 </ul>
 
