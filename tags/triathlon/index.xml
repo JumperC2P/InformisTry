@@ -6,10 +6,19 @@
     <description>Recent content in triathlon on InformisTry</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 27 Sep 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 28 Sep 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://jumperc2p.github.io/InformisTry/tags/triathlon/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【舌尖上的演算法】Day21 -- Time and Space Tradeoff - Hashing</title>
+      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/ts-hash/</link>
+      <pubDate>Mon, 28 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/ts-hash/</guid>
+      <description>本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 昨天介紹Distribution Sort的時候提到了Map/Dictionary，相信應該很</description>
+    </item>
     
     <item>
       <title>【舌尖上的演算法】Day20 -- Time and Space Tradeoff- Distribution Sorting</title>
