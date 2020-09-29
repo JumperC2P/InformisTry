@@ -6,10 +6,19 @@
     <description>Recent content in SERIES on InformisTry</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 28 Sep 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 29 Sep 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://jumperc2p.github.io/InformisTry/categories/series/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【舌尖上的演算法】Day22 -- Dynamic Programming - Coin-row Problem</title>
+      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/dp-coin-row-problem/</link>
+      <pubDate>Tue, 29 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/dp-coin-row-problem/</guid>
+      <description>本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 今天算是進入我們倒數第二個主題了，雖然不知道前面的內容大家能不能吸收，或是了解了多少，但是&amp;</description>
+    </item>
     
     <item>
       <title>【舌尖上的演算法】Day21 -- Time and Space Tradeoff - Hashing</title>
