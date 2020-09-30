@@ -15,9 +15,9 @@
     
 
     
-    <meta name="title" content="【舌尖上的演算法】Day22 -- Dynamic Programming - Coin-row Problem" />
-    <meta property="og:title" content="【舌尖上的演算法】Day22 -- Dynamic Programming - Coin-row Problem" />
-    <meta property="twitter:title" content="【舌尖上的演算法】Day22 -- Dynamic Programming - Coin-row Problem" />
+    <meta name="title" content="【舌尖上的演算法】Day23 -- Dynamic Programming - Edit Distance" />
+    <meta property="og:title" content="【舌尖上的演算法】Day23 -- Dynamic Programming - Edit Distance" />
+    <meta property="twitter:title" content="【舌尖上的演算法】Day23 -- Dynamic Programming - Edit Distance" />
     
 
     
@@ -34,9 +34,9 @@
     <meta name="keyword"  content="Chih-Hsuan Lee, Informistry, Hank Lee, JumperC2P, Hank portfolio, Java, Python, Developer, Engineer, Software, ReactJS, Web, React, Database, Kubernetes, 微服務, Microservice, 演算法">
     <link rel="shortcut icon" href="/InformisTry/img/favicon.ico">
 
-    <title>【舌尖上的演算法】Day22 -- Dynamic Programming - Coin-row Problem-HankLee</title>
+    <title>【舌尖上的演算法】Day23 -- Dynamic Programming - Edit Distance-HankLee</title>
 
-    <link rel="canonical" href="/InformisTry/posts/ithome-triathlon/dp-coin-row-problem">
+    <link rel="canonical" href="/InformisTry/posts/ithome-triathlon/dp-edit-distance">
 
     <link rel="stylesheet" href="/InformisTry/css/iDisqus.min.css"/>
 	
@@ -185,7 +185,7 @@
                         </a>
                         
                     </div>
-                    <h1>【舌尖上的演算法】Day22 -- Dynamic Programming - Coin-row Problem</h1>
+                    <h1>【舌尖上的演算法】Day23 -- Dynamic Programming - Edit Distance</h1>
                     <h2 class="subheading">2020 IT邦鐵人賽</h2>
                     <span class="meta">
                         Posted by 
@@ -193,9 +193,9 @@
                             Hank Lee
                          
                         on 
-                        Tuesday, September 29, 2020
+                        Wednesday, September 30, 2020
                         
-                            <span id="/posts/ithome-triathlon/dp-coin-row-problem" class="leancloud_visitors meta_data_item" data-flag-title="">
+                            <span id="/posts/ithome-triathlon/dp-edit-distance" class="leancloud_visitors meta_data_item" data-flag-title="">
     <span class="post-meta-item-icon">
       <span class="octicon octicon-eye"></span> 
     </span>
@@ -359,8 +359,7 @@ $(function() {
                     <nav id="TableOfContents">
   <ul>
     <li><a href="#前言">前言</a></li>
-    <li><a href="#dynamic-programming的概念">Dynamic Programming的概念</a></li>
-    <li><a href="#範例coin-row-problem">範例：Coin-Row Problem</a></li>
+    <li><a href="#edit-distance">Edit Distance</a></li>
     <li><a href="#小結">小結</a></li>
     <li><a href="#預告">預告</a></li>
     <li><a href="#references">References</a></li>
@@ -369,40 +368,50 @@ $(function() {
                     
                 
 
-                <p><a href="https://ithelp.ithome.com.tw/articles/10246183">本系列文章同步分享於IT邦幫忙第12屆鐵人賽</a></p>
+                <p><a href="https://ithelp.ithome.com.tw/articles/10247023">本系列文章同步分享於IT邦幫忙第12屆鐵人賽</a></p>
 <h2 id="前言">前言</h2>
-<p>今天算是進入我們倒數第二個主題了，雖然不知道前面的內容大家能不能吸收，或是了解了多少，但是&hellip;..<code>The show must go on!!!!!</code>🤠</p>
-<p>今天開始一連三天，我們要介紹的是Dynamic Programming這個類別的演算法，這種演算法有啥特別的勒？讓我們看下去吧～</p>
+<p>有些時候就是有一些無聊的問題想要解決，才會發展出一些簡單的演算法，然後才會進展出更厲害的演算法，今天要講的就是一個很無聊的問題，但是也可以說是很常見的問題，那就讓我們開始吧，</p>
 <hr>
-<h2 id="dynamic-programming的概念">Dynamic Programming的概念</h2>
-<p>Dynamic Programming是一個使用小問題解決方式來解決大問題的演算法，主要的想法大概如下：</p>
+<h2 id="edit-distance">Edit Distance</h2>
+<p>今天要講的是字串改變的距離 &ndash; Edit Distance，也就是<strong>現在有一個字串Ａ，然後要把它改成字串Ｂ，最少需要做幾次調整</strong>；這是一個很經典的Dynamic Programming的問題，而要改變一個字串的動作有三：<code>Change, Insert, Delete</code>，舉個例來說：</p>
+<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3e5xQW5k9psF3oGaUVLJABOdAr3pOfX5fAM6iaig_H32I_Ff0_VnO8I3_DWsooleV6Hryu8LLT-BKmVG7nIw0AE6Bek6H7O6cCrEwvqj_C6HBmd5K5qYePqbpan3AEOaaCQi4s7Jr1ohd0Lo-E_QQ_m=w480-h192-no?authuser=0" alt="Edit Distance-1"></p>
+<ul>
+<li>字串Ａ：<strong>Spotify</strong></li>
+<li>字串Ｂ：<strong>Shopify</strong></li>
+<li>Edit Distance：<strong>2</strong></li>
+</ul>
+<p>按照上面的GIF來說，一個一個去比對，這麼短的字串基本上自己判斷也可以，但是如果是一組很長或很複雜的兩個字串要做比較，那就不知道要自己判斷到何年何月了。</p>
+<p>因此Edit Distance的演算法就此誕生，正式進行Edit Distance之前，我們會先將兩個字串轉變成一個<strong>2-D Array</strong>，並且會多一行一列，這一行一列表示的是<code>從空字串改成當前字串的Edit Distance數值</code>，如下<strong>紅框</strong>，當從空字串要變成Spotify的話，Edit Distance為7，而<strong>綠框</strong>也是從空字串變成Shopify的Edit Distance也是7。</p>
+<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3fuVTOKdDlYopIZv7Q1LVVitxP2y7GPLZM9aYczDBoHzcw3Y3DkWD9EiaLkPRTCVhNMKwmKiGJPEVpE9ccCfN-OhKzO7x_tZ8cfhTW8GyQBU5PxdBRIOUFjSFDb5_kB_qrS22rmJ9O485ONgBUOnL1n=w500-h297-no?authuser=0" alt="Edit Distance-2"></p>
+<p>在進行比較的時候，基本上會有兩種可能：</p>
 <ol>
-<li>把一個大問題拆成數個相關的小問題</li>
-<li>解決這些小問題</li>
-<li><strong>將小問題的解答記錄下來</strong></li>
-<li>重新組合這些小問題的解答，藉此來得到大問題的解答。</li>
+<li>兩個值相等 ➜ 其<code>M[x, y] = M[x-1, y-1]</code></li>
+<li>兩個值不相等 ➜ 需要進行Edit ➜ <code>M[x, y] = 1 + min(M[x-1, y], M[x, y-1], M[x-1, y-1])</code></li>
 </ol>
-<p>這樣看起來，是不是跟Divide and Conquer有點像（忘記的人點<a href="https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/dicon-ms/">這邊</a>)，但兩者之間的差異在於經過<strong>Divide and Conquer</strong>所取得的小問題解答之間是<code>獨立的</code>，也就是用完即丟，一種拋棄式的概念，如果回想Merge Sort的Pseudo-code，雖然他將Array拆成很多個片段，然後在進行組合，可是，這個片段與組合的過程中，<strong>變數本身的能見度僅局限於該方法，也就是說，當這個方法結束之後，這個變數就被資源回收了</strong>；然而，Dynamic Programming會<strong>把所有小問題解答給記錄下來，然後再利用這些小解答進行重複使用的組合或判斷</strong>，進而取得最後大問題的解答，因此每一個小解答間是<code>相依的</code>；這就是兩者之間最大的差別。也因為Dynamic Programming會記錄所有小解答，使其屬於<strong>利用空間換取時間</strong>的一種演算法。</p>
-<hr>
-<h2 id="範例coin-row-problem">範例：Coin-Row Problem</h2>
-<h4 id="問題如果有一串硬幣上面分別有不同的金額8-3-4-12-7-5請從中選出最大金額的硬幣組合且這些硬幣不能相連">問題：如果有一串硬幣上面分別有不同的金額(8, 3, 4, 12, 7, 5)，請從中選出最大金額的硬幣組合且這些硬幣不能相連？</h4>
-<p>在解決一個問題之前，我們要先了解這個問題的條件，按照這個問題來說，現在有六個硬幣，編號(n)分別是0, 1, 2, 3, 4, 5, 6，假如我選了編號0的硬幣，我就不能選編號1的硬幣，在這樣的規則下，我必須要找出擁有最大金額的金幣組合，若將這個金幣按照編號排列，並依序將面額相加，基本上會有兩種情況：</p>
+<blockquote>
+<p>從三個值當中尋找最小值，是因為最小值表示的是改變的最少次數，然後再加1是因為要把值改變成目標值會需要多加一次Edit。</p>
+</blockquote>
+<p>因此在執行Edit Distance的時候就是依照上面這兩種可能去決定當前Cell要填入什麼值，過程如下：</p>
+<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3dGmsNCefenHwu30DRIM7LU0dt_dM2wRj7AgM7UaT1PU67uH6cEdYWpJoQMO3i72v6qBVDxjdL9hWX8-GnzEYNxK79wjvrwqRFLsutLIc1sa5ObZ73sayWUj8vDQUfboLdMxpjLHn-B7xTtU-tSW9O3=s480-no?authuser=0" alt="Edit Distance-3"></p>
+<p>這個過程很冗長，但我希望透過這樣的方式可以讓大家確保自己了解過程是怎麼進展；基本上，每次進行兩個字符的比較時，若字符相同，則填入<code>斜對角</code>的值，若字符不相同，則是比較周圍的三個值，取最小值後再加1；透過這樣一連串的過程，到最後的結果就是這兩個字串的Edit Distance。</p>
+<p>而從這個表格上也是可以看出要如何更改，方式是從結果的Cell（最右下）透過<code>Backtracking</code>一路返回到最初的Cell（最左上），過程如下：</p>
+<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3d5fFk0Boxp4gPwb0WMWOOnFh9mEPWP6YmVOBPVEDe9hoOAc5uZgi6EzZftN7-gUHvJaixCNUwy3QKTFM2oNw0T-3eQbftrMlXrhEs6mPV3vGQBPQVkgqxEYukm_tK_fGhMQoXRt_fd9DEQ9mcKpQgJ=s480-no?authuser=0" alt="Edit Distance-4"></p>
+<p>在進行Backtracking的時候，會去尋找當前的值的<code>來源</code>，找到來源後會有四種情況，透過這四種情況就可以判斷我們到底要怎麼將兩個字串改的一樣：</p>
 <ol>
-<li>我選了當前硬幣 ➜ 目前合計金額為自己＋前兩格金幣的面額 ➜ <code>Ｃn + F(n-2) </code></li>
-<li>我不選當前硬幣 ➜ 合計金額為上一次的合計金額 ➜ <code>F(n-1)</code></li>
+<li>當前的值 ＝ 來源的值 ➜ 沒有改變</li>
+<li>來源的值是<strong>斜對角</strong>，且來源的值 &lt; 當前的值 ➜ 字符的改變(Change)</li>
+<li>來源的值是<strong>左邊</strong>，且來源的值 &lt; 當前的值 ➜ 字符的刪除(Delete)</li>
+<li>來源的值是<strong>上面</strong>，且來源的值 &lt; 當前的值 ➜ 字符的新增(Insert)</li>
 </ol>
-<p>而我們就要上面這兩種可能性選出最大值記錄下來，便可取得一個計算過後的Table，如下GIF：</p>
-<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3fQb1Kz_-7bhI0pClctqTPMCquOAtFIHMfIgPnIYpEUXllRvrnFPj5bB__ObaCu-bwDi9qQ-kWoixxRK2hQyXmWYePM31OdYMxedoIQP7baGC8X1ZGKCF_7fb0ijb42vgSeOcHUy29EyFLi8moSfVk3=w480-h288-no?authuser=0" alt="Coin-Row Problem -1"></p>
-<p>然後，我們要利用這個Table進行Backtracking，從中找出最大的組合，其方式為<code>倒序</code>的方式將合計的金額兩兩比較並取大值，便表示該硬幣被選擇，直到回到第一個硬幣，如下GIF：</p>
-<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3cdGNrsBXctiVPQzwi5xuMGn2_F_vNf9XeCJx5c-65q-x69Mw8QFd-n2WQ7i50JtA7-aggWnMd1Xrrne-RET7h8T_pMeJVDNKDVB_nKc9HS8zdDlLtTi4m3AsITGKHFIfXoNTkm4QB81rdROWZA4FmE=w480-h288-no?authuser=0" alt="Coin-Row Problem -2"></p>
-<p>因為問題要求所選擇的硬幣不能相連，故在比較時，會跳過幾個值再去進行比較；另外過程中發現有兩個值會有同樣的結果，因此這個範例會產生兩種最終結果。</p>
-<h4 id="結果兩個組合--c4-c6-c1-c3-c6">結果：兩個組合 ➜ (C4, C6), (C1, C3, C6)</h4>
 <hr>
 <h2 id="小結">小結</h2>
-<p>Dynamic Programming也是將大問題拆解成小問題處理，但是過程中會紀錄下所有小問題的解答，再依據這些小問題的解答重新讀取使用、計算、組合，進而得出最終的結果。</p>
+<ol>
+<li>Edit Distance就是將兩個字串改成一樣需要動幾次。</li>
+<li>Edit Distance的過程很長，但可以透過Backtracking來知道怎麼改字串。</li>
+</ol>
 <hr>
 <h2 id="預告">預告</h2>
-<p>明天我們將會介紹另一種Dynamic Programming的演算法 - Edit Distance。</p>
+<p>明天我們將會再介紹另一種Dynamic Programming的演算法 - Knapsack Problem</p>
 <hr>
 <h2 id="references">References</h2>
 <ol>
@@ -416,14 +425,10 @@ $(function() {
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/InformisTry/posts/ithome-triathlon/ts-hash/"  style="width: 49rem;" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day21 -- Time and Space Tradeoff - Hashing">&larr;
-                            【舌尖上的演算法】Day21 -- Time and Space Tradeoff - Hashing</a>
+                        <a href="/InformisTry/posts/ithome-triathlon/dp-coin-row-problem/"  style="width: 49rem;" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day22 -- Dynamic Programming - Coin-row Problem">&larr;
+                            【舌尖上的演算法】Day22 -- Dynamic Programming - Coin-row Problem</a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/InformisTry/posts/ithome-triathlon/dp-edit-distance/" style="width: 49rem;" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day23 -- Dynamic Programming - Edit Distance">&rarr; 【舌尖上的演算法】Day23 -- Dynamic Programming - Edit Distance</a>
-                    </li>
                     
                 </ul>
 

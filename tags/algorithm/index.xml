@@ -6,10 +6,19 @@
     <description>Recent content in Algorithm on InformisTry</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 29 Sep 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 30 Sep 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://jumperc2p.github.io/InformisTry/tags/algorithm/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【舌尖上的演算法】Day23 -- Dynamic Programming - Edit Distance</title>
+      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/dp-edit-distance/</link>
+      <pubDate>Wed, 30 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/dp-edit-distance/</guid>
+      <description>本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 有些時候就是有一些無聊的問題想要解決，才會發展出一些簡單的演算法，然後才會進展出更厲害的演算</description>
+    </item>
     
     <item>
       <title>【舌尖上的演算法】Day22 -- Dynamic Programming - Coin-row Problem</title>
