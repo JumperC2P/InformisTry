@@ -15,9 +15,9 @@
     
 
     
-    <meta name="title" content="【舌尖上的演算法】Day23 -- Dynamic Programming - Edit Distance" />
-    <meta property="og:title" content="【舌尖上的演算法】Day23 -- Dynamic Programming - Edit Distance" />
-    <meta property="twitter:title" content="【舌尖上的演算法】Day23 -- Dynamic Programming - Edit Distance" />
+    <meta name="title" content="【舌尖上的演算法】Day24 -- Dynamic Programming - Knapsack" />
+    <meta property="og:title" content="【舌尖上的演算法】Day24 -- Dynamic Programming - Knapsack" />
+    <meta property="twitter:title" content="【舌尖上的演算法】Day24 -- Dynamic Programming - Knapsack" />
     
 
     
@@ -34,9 +34,9 @@
     <meta name="keyword"  content="Chih-Hsuan Lee, Informistry, Hank Lee, JumperC2P, Hank portfolio, Java, Python, Developer, Engineer, Software, ReactJS, Web, React, Database, Kubernetes, 微服務, Microservice, 演算法">
     <link rel="shortcut icon" href="/InformisTry/img/favicon.ico">
 
-    <title>【舌尖上的演算法】Day23 -- Dynamic Programming - Edit Distance-HankLee</title>
+    <title>【舌尖上的演算法】Day24 -- Dynamic Programming - Knapsack-HankLee</title>
 
-    <link rel="canonical" href="/InformisTry/posts/ithome-triathlon/dp-edit-distance">
+    <link rel="canonical" href="/InformisTry/posts/ithome-triathlon/dp-knapsack">
 
     <link rel="stylesheet" href="/InformisTry/css/iDisqus.min.css"/>
 	
@@ -185,7 +185,7 @@
                         </a>
                         
                     </div>
-                    <h1>【舌尖上的演算法】Day23 -- Dynamic Programming - Edit Distance</h1>
+                    <h1>【舌尖上的演算法】Day24 -- Dynamic Programming - Knapsack</h1>
                     <h2 class="subheading">2020 IT邦鐵人賽</h2>
                     <span class="meta">
                         Posted by 
@@ -193,9 +193,9 @@
                             Hank Lee
                          
                         on 
-                        Wednesday, September 30, 2020
+                        Thursday, October 1, 2020
                         
-                            <span id="/posts/ithome-triathlon/dp-edit-distance" class="leancloud_visitors meta_data_item" data-flag-title="">
+                            <span id="/posts/ithome-triathlon/dp-knapsack" class="leancloud_visitors meta_data_item" data-flag-title="">
     <span class="post-meta-item-icon">
       <span class="octicon octicon-eye"></span> 
     </span>
@@ -359,7 +359,8 @@ $(function() {
                     <nav id="TableOfContents">
   <ul>
     <li><a href="#前言">前言</a></li>
-    <li><a href="#edit-distance">Edit Distance</a></li>
+    <li><a href="#dynamic-programming下的knapsack-problem">Dynamic Programming下的Knapsack Problem</a></li>
+    <li><a href="#一步一步找出答案">一步一步找出答案</a></li>
     <li><a href="#小結">小結</a></li>
     <li><a href="#預告">預告</a></li>
     <li><a href="#references">References</a></li>
@@ -368,50 +369,35 @@ $(function() {
                     
                 
 
-                <p><a href="https://ithelp.ithome.com.tw/articles/10247023">本系列文章同步分享於IT邦幫忙第12屆鐵人賽</a></p>
+                <p><a href="https://ithelp.ithome.com.tw/articles/10247368">本系列文章同步分享於IT邦幫忙第12屆鐵人賽</a></p>
 <h2 id="前言">前言</h2>
-<p>有些時候就是有一些無聊的問題想要解決，才會發展出一些簡單的演算法，然後才會進展出更厲害的演算法，今天要講的就是一個很無聊的問題，但是也可以說是很常見的問題，那就讓我們開始吧，</p>
+<p>今天要把一個舊問題拉出來再提一次，那就是 &ndash; Knapsack Problem；上一次是在第八天提到可以用Brute Force來解決這個問題（<a href="https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/brute_force_knapsack/">複習</a>)，今天我們就來講講怎麼用Dynamic Programming來解決這個問題。</p>
 <hr>
-<h2 id="edit-distance">Edit Distance</h2>
-<p>今天要講的是字串改變的距離 &ndash; Edit Distance，也就是<strong>現在有一個字串Ａ，然後要把它改成字串Ｂ，最少需要做幾次調整</strong>；這是一個很經典的Dynamic Programming的問題，而要改變一個字串的動作有三：<code>Change, Insert, Delete</code>，舉個例來說：</p>
-<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3e5xQW5k9psF3oGaUVLJABOdAr3pOfX5fAM6iaig_H32I_Ff0_VnO8I3_DWsooleV6Hryu8LLT-BKmVG7nIw0AE6Bek6H7O6cCrEwvqj_C6HBmd5K5qYePqbpan3AEOaaCQi4s7Jr1ohd0Lo-E_QQ_m=w480-h192-no?authuser=0" alt="Edit Distance-1"></p>
+<h2 id="dynamic-programming下的knapsack-problem">Dynamic Programming下的Knapsack Problem</h2>
+<p>Knapsack Problem是指當有一堆不同重量不同價值的物品，如何從這堆物品中選出最有價值的項目放入一個大小有限的背包(knapsack)中。在第八天，我們提到可以用<strong>Brute Force</strong>的概念，將這堆物品透過條列式的方式，將所有排列組合都條列出來，再從中去選擇符合背包大小且價值最高的組合。而後來針對這個問題又衍生出了<strong>Dynammic Programming</strong>的解決方式，在使用Dynamic Programming解決這個問題的時候，同樣是把大問題變成小問題，假設現在有一個背包，其容量(W)為5，那我們在進行Dynamic Programming的時候，就會從容量為0開始計算放進去的物品的價值合計，然後再來是容量為1，依此類推，最後我們就可以算出容量為5的時候哪個組合是最有價值的。</p>
+<hr>
+<h2 id="一步一步找出答案">一步一步找出答案</h2>
+<p>在進行Dynamic Programming之前，要先準備好下面這個表格（就跟Edit Distance一樣）：</p>
 <ul>
-<li>字串Ａ：<strong>Spotify</strong></li>
-<li>字串Ｂ：<strong>Shopify</strong></li>
-<li>Edit Distance：<strong>2</strong></li>
+<li>範例：w為物件大小，v為物件價值；Ｗ為背包容量</li>
+<li>紅色的<code>0</code>是因為當<code>背包的容量為0</code>時，其背包內物品的價值也是0(因為放不了任何東西)。
+<img src="https://i.imgur.com/vnkzaRf.png" alt="Dynamic Programming-Knapsack-1"></li>
 </ul>
-<p>按照上面的GIF來說，一個一個去比對，這麼短的字串基本上自己判斷也可以，但是如果是一組很長或很複雜的兩個字串要做比較，那就不知道要自己判斷到何年何月了。</p>
-<p>因此Edit Distance的演算法就此誕生，正式進行Edit Distance之前，我們會先將兩個字串轉變成一個<strong>2-D Array</strong>，並且會多一行一列，這一行一列表示的是<code>從空字串改成當前字串的Edit Distance數值</code>，如下<strong>紅框</strong>，當從空字串要變成Spotify的話，Edit Distance為7，而<strong>綠框</strong>也是從空字串變成Shopify的Edit Distance也是7。</p>
-<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3fuVTOKdDlYopIZv7Q1LVVitxP2y7GPLZM9aYczDBoHzcw3Y3DkWD9EiaLkPRTCVhNMKwmKiGJPEVpE9ccCfN-OhKzO7x_tZ8cfhTW8GyQBU5PxdBRIOUFjSFDb5_kB_qrS22rmJ9O485ONgBUOnL1n=w500-h297-no?authuser=0" alt="Edit Distance-2"></p>
-<p>在進行比較的時候，基本上會有兩種可能：</p>
+<p>有了這個表格後，我們又要<strong>怎麼去填入每一個cell（Ｖ）的值</strong>呢？跟前面的Coin-Row Problem和Edit Distance一樣，在每一個cell填值進去都是有其條件的，配合這個條件就可以來進行Dynamic Programming：</p>
 <ol>
-<li>兩個值相等 ➜ 其<code>M[x, y] = M[x-1, y-1]</code></li>
-<li>兩個值不相等 ➜ 需要進行Edit ➜ <code>M[x, y] = 1 + min(M[x-1, y], M[x, y-1], M[x-1, y-1])</code></li>
+<li>當W減去w的值若<strong>大於等於</strong>0 ➜ <code>V[x, y] = Max(V[x, y-1], v + V[x-w, y-1])</code></li>
+<li>當W減去w的值若<strong>小於</strong>0 ➜ <code>V[x, y] = V[x, y-1]</code>
+<img src="https://lh3.googleusercontent.com/pw/ACtC-3fgFsPIGjIsOplRw2hzBG_EiAt8x3wrwv8w66hB1PcH5EZuyxKmp4eNixfI6MYR3PTGxTt2tbHhfPIu8CBlcR8LD0BjIWjZy83UNweLnjbYcUFM4OlQO6ouyHlXDPwyPsNXInw2NGfM-1HWm5ANLxmu=s480-no?authuser=0" alt="Dynamic Programming-Knapsack-2"></li>
 </ol>
-<blockquote>
-<p>從三個值當中尋找最小值，是因為最小值表示的是改變的最少次數，然後再加1是因為要把值改變成目標值會需要多加一次Edit。</p>
-</blockquote>
-<p>因此在執行Edit Distance的時候就是依照上面這兩種可能去決定當前Cell要填入什麼值，過程如下：</p>
-<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3dGmsNCefenHwu30DRIM7LU0dt_dM2wRj7AgM7UaT1PU67uH6cEdYWpJoQMO3i72v6qBVDxjdL9hWX8-GnzEYNxK79wjvrwqRFLsutLIc1sa5ObZ73sayWUj8vDQUfboLdMxpjLHn-B7xTtU-tSW9O3=s480-no?authuser=0" alt="Edit Distance-3"></p>
-<p>這個過程很冗長，但我希望透過這樣的方式可以讓大家確保自己了解過程是怎麼進展；基本上，每次進行兩個字符的比較時，若字符相同，則填入<code>斜對角</code>的值，若字符不相同，則是比較周圍的三個值，取最小值後再加1；透過這樣一連串的過程，到最後的結果就是這兩個字串的Edit Distance。</p>
-<p>而從這個表格上也是可以看出要如何更改，方式是從結果的Cell（最右下）透過<code>Backtracking</code>一路返回到最初的Cell（最左上），過程如下：</p>
-<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3d5fFk0Boxp4gPwb0WMWOOnFh9mEPWP6YmVOBPVEDe9hoOAc5uZgi6EzZftN7-gUHvJaixCNUwy3QKTFM2oNw0T-3eQbftrMlXrhEs6mPV3vGQBPQVkgqxEYukm_tK_fGhMQoXRt_fd9DEQ9mcKpQgJ=s480-no?authuser=0" alt="Edit Distance-4"></p>
-<p>在進行Backtracking的時候，會去尋找當前的值的<code>來源</code>，找到來源後會有四種情況，透過這四種情況就可以判斷我們到底要怎麼將兩個字串改的一樣：</p>
-<ol>
-<li>當前的值 ＝ 來源的值 ➜ 沒有改變</li>
-<li>來源的值是<strong>斜對角</strong>，且來源的值 &lt; 當前的值 ➜ 字符的改變(Change)</li>
-<li>來源的值是<strong>左邊</strong>，且來源的值 &lt; 當前的值 ➜ 字符的刪除(Delete)</li>
-<li>來源的值是<strong>上面</strong>，且來源的值 &lt; 當前的值 ➜ 字符的新增(Insert)</li>
-</ol>
+<p>在進行Dynamic Programming的過程中，都是一步一步去比較去計算，然後透過這些步驟，就可以取得最後的結果：<code>75</code>。那重點又來了，又要<strong>怎麼回推出要放哪個物件呢？</strong> 讓我們繼續看下去：</p>
+<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3eD0JMK3xfmGkNf2hdAJvaQrs90lC2ZulOuPwFRPZkL9-L7LrbL16R4wsOvCcZCR2mCHPoRJQXuJwqbmozJDOdV98po-UtCpnwuAaEy_ZSUXTrOxldchtnCo15r3F1fP5Sy2wFTOuU1jhPks7aWoXrh=s480-no?authuser=0" alt="Dynamic Programming-Knapsack-3"></p>
+<p>當選擇出其中一個項目之後，就需要把容量扣除，才能透過backtracking取得結果，所以在這個範例中，最後選擇的是<code>w1和w5</code>，其價值為<code>75</code>。</p>
 <hr>
 <h2 id="小結">小結</h2>
-<ol>
-<li>Edit Distance就是將兩個字串改成一樣需要動幾次。</li>
-<li>Edit Distance的過程很長，但可以透過Backtracking來知道怎麼改字串。</li>
-</ol>
+<p>Knapsack Problem也可以用Dynamic Programming來解決。</p>
 <hr>
 <h2 id="預告">預告</h2>
-<p>明天我們將會再介紹另一種Dynamic Programming的演算法 - Knapsack Problem</p>
+<p>明天我們將會進入最後一個主題 - <strong>貪婪的技術(Greedy Techniques)</strong>。</p>
 <hr>
 <h2 id="references">References</h2>
 <ol>
@@ -425,14 +411,10 @@ $(function() {
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/InformisTry/posts/ithome-triathlon/dp-coin-row-problem/"  style="width: 49rem;" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day22 -- Dynamic Programming - Coin-row Problem">&larr;
-                            【舌尖上的演算法】Day22 -- Dynamic Programming - Coin-row Problem</a>
+                        <a href="/InformisTry/posts/ithome-triathlon/dp-edit-distance/"  style="width: 49rem;" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day23 -- Dynamic Programming - Edit Distance">&larr;
+                            【舌尖上的演算法】Day23 -- Dynamic Programming - Edit Distance</a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/InformisTry/posts/ithome-triathlon/dp-knapsack/" style="width: 49rem;" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day24 -- Dynamic Programming - Knapsack">&rarr; 【舌尖上的演算法】Day24 -- Dynamic Programming - Knapsack</a>
-                    </li>
                     
                 </ul>
 

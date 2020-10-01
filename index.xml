@@ -6,10 +6,19 @@
     <description>Recent content on InformisTry</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 30 Sep 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 01 Oct 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://jumperc2p.github.io/InformisTry/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【舌尖上的演算法】Day24 -- Dynamic Programming - Knapsack</title>
+      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/dp-knapsack/</link>
+      <pubDate>Thu, 01 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/dp-knapsack/</guid>
+      <description>本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 今天要把一個舊問題拉出來再提一次，那就是 &amp;ndash; Knapsack Problem；上一次是在第八天提到可以用Bru</description>
+    </item>
     
     <item>
       <title>【舌尖上的演算法】Day23 -- Dynamic Programming - Edit Distance</title>
