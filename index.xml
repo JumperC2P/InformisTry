@@ -6,10 +6,19 @@
     <description>Recent content on InformisTry</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 01 Oct 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 02 Oct 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://jumperc2p.github.io/InformisTry/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【舌尖上的演算法】Day25 -- Greedy Techniques - Prim&#39;s Algorithm</title>
+      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/gt-prim/</link>
+      <pubDate>Fri, 02 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/gt-prim/</guid>
+      <description>本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 最後一個主題拉～～～歡慶昨天中秋節～～～ 最後一個主題我們要講的是貪婪的演算法(Greedy A</description>
+    </item>
     
     <item>
       <title>【舌尖上的演算法】Day24 -- Dynamic Programming - Knapsack</title>

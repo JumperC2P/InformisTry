@@ -15,9 +15,9 @@
     
 
     
-    <meta name="title" content="【舌尖上的演算法】Day24 -- Dynamic Programming - Knapsack" />
-    <meta property="og:title" content="【舌尖上的演算法】Day24 -- Dynamic Programming - Knapsack" />
-    <meta property="twitter:title" content="【舌尖上的演算法】Day24 -- Dynamic Programming - Knapsack" />
+    <meta name="title" content="【舌尖上的演算法】Day25 -- Greedy Techniques - Prim&#39;s Algorithm" />
+    <meta property="og:title" content="【舌尖上的演算法】Day25 -- Greedy Techniques - Prim&#39;s Algorithm" />
+    <meta property="twitter:title" content="【舌尖上的演算法】Day25 -- Greedy Techniques - Prim&#39;s Algorithm" />
     
 
     
@@ -34,9 +34,9 @@
     <meta name="keyword"  content="Chih-Hsuan Lee, Informistry, Hank Lee, JumperC2P, Hank portfolio, Java, Python, Developer, Engineer, Software, ReactJS, Web, React, Database, Kubernetes, 微服務, Microservice, 演算法">
     <link rel="shortcut icon" href="/InformisTry/img/favicon.ico">
 
-    <title>【舌尖上的演算法】Day24 -- Dynamic Programming - Knapsack-HankLee</title>
+    <title>【舌尖上的演算法】Day25 -- Greedy Techniques - Prim&#39;s Algorithm-HankLee</title>
 
-    <link rel="canonical" href="/InformisTry/posts/ithome-triathlon/dp-knapsack">
+    <link rel="canonical" href="/InformisTry/posts/ithome-triathlon/gt-prim">
 
     <link rel="stylesheet" href="/InformisTry/css/iDisqus.min.css"/>
 	
@@ -185,7 +185,7 @@
                         </a>
                         
                     </div>
-                    <h1>【舌尖上的演算法】Day24 -- Dynamic Programming - Knapsack</h1>
+                    <h1>【舌尖上的演算法】Day25 -- Greedy Techniques - Prim&#39;s Algorithm</h1>
                     <h2 class="subheading">2020 IT邦鐵人賽</h2>
                     <span class="meta">
                         Posted by 
@@ -193,9 +193,9 @@
                             Hank Lee
                          
                         on 
-                        Thursday, October 1, 2020
+                        Friday, October 2, 2020
                         
-                            <span id="/posts/ithome-triathlon/dp-knapsack" class="leancloud_visitors meta_data_item" data-flag-title="">
+                            <span id="/posts/ithome-triathlon/gt-prim" class="leancloud_visitors meta_data_item" data-flag-title="">
     <span class="post-meta-item-icon">
       <span class="octicon octicon-eye"></span> 
     </span>
@@ -359,8 +359,8 @@ $(function() {
                     <nav id="TableOfContents">
   <ul>
     <li><a href="#前言">前言</a></li>
-    <li><a href="#dynamic-programming下的knapsack-problem">Dynamic Programming下的Knapsack Problem</a></li>
-    <li><a href="#一步一步找出答案">一步一步找出答案</a></li>
+    <li><a href="#greedy-algorithm是什麼">Greedy Algorithm是什麼</a></li>
+    <li><a href="#問題在一個網絡系統中依序找出由近至遠的節點">問題：在一個網絡系統中，依序找出由近至遠的節點</a></li>
     <li><a href="#小結">小結</a></li>
     <li><a href="#預告">預告</a></li>
     <li><a href="#references">References</a></li>
@@ -369,35 +369,30 @@ $(function() {
                     
                 
 
-                <p><a href="https://ithelp.ithome.com.tw/articles/10247368">本系列文章同步分享於IT邦幫忙第12屆鐵人賽</a></p>
+                <p><a href="https://ithelp.ithome.com.tw/articles/10248017">本系列文章同步分享於IT邦幫忙第12屆鐵人賽</a></p>
 <h2 id="前言">前言</h2>
-<p>今天要把一個舊問題拉出來再提一次，那就是 &ndash; Knapsack Problem；上一次是在第八天提到可以用Brute Force來解決這個問題（<a href="https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/brute_force_knapsack/">複習</a>)，今天我們就來講講怎麼用Dynamic Programming來解決這個問題。</p>
+<p>最後一個主題拉～～～歡慶昨天中秋節～～～</p>
+<p>最後一個主題我們要講的是貪婪的演算法(Greedy Algorithm)，前言廢話不多說，所以就開始吧～～</p>
 <hr>
-<h2 id="dynamic-programming下的knapsack-problem">Dynamic Programming下的Knapsack Problem</h2>
-<p>Knapsack Problem是指當有一堆不同重量不同價值的物品，如何從這堆物品中選出最有價值的項目放入一個大小有限的背包(knapsack)中。在第八天，我們提到可以用<strong>Brute Force</strong>的概念，將這堆物品透過條列式的方式，將所有排列組合都條列出來，再從中去選擇符合背包大小且價值最高的組合。而後來針對這個問題又衍生出了<strong>Dynammic Programming</strong>的解決方式，在使用Dynamic Programming解決這個問題的時候，同樣是把大問題變成小問題，假設現在有一個背包，其容量(W)為5，那我們在進行Dynamic Programming的時候，就會從容量為0開始計算放進去的物品的價值合計，然後再來是容量為1，依此類推，最後我們就可以算出容量為5的時候哪個組合是最有價值的。</p>
+<h2 id="greedy-algorithm是什麼">Greedy Algorithm是什麼</h2>
+<p>Greedy Algorithm的做法跟Dynamic Programming有點類似，都是一步一步將解答建構出來，Dynamic Programming在進行的時候，會將所以<strong>小解答</strong>記錄下來，然後再利用這些小解答來推導出答案；然而，Greedy Algorithm與之不同的地方是：Greedy Algorithm再一步步將解答建構出來的過程中，總是選擇<code>當前最佳解</code>來記錄下來。如此一來，當整個流程進行完成後，留下來的結果就是想要的成果了。</p>
 <hr>
-<h2 id="一步一步找出答案">一步一步找出答案</h2>
-<p>在進行Dynamic Programming之前，要先準備好下面這個表格（就跟Edit Distance一樣）：</p>
-<ul>
-<li>範例：w為物件大小，v為物件價值；Ｗ為背包容量</li>
-<li>紅色的<code>0</code>是因為當<code>背包的容量為0</code>時，其背包內物品的價值也是0(因為放不了任何東西)。
-<img src="https://i.imgur.com/vnkzaRf.png" alt="Dynamic Programming-Knapsack-1"></li>
-</ul>
-<p>有了這個表格後，我們又要<strong>怎麼去填入每一個cell（Ｖ）的值</strong>呢？跟前面的Coin-Row Problem和Edit Distance一樣，在每一個cell填值進去都是有其條件的，配合這個條件就可以來進行Dynamic Programming：</p>
+<h2 id="問題在一個網絡系統中依序找出由近至遠的節點">問題：在一個網絡系統中，依序找出由近至遠的節點</h2>
+<p>在處理這種問題時，基本上會先將所有擁有的資料變成Graph的形式，紀錄著節點與節點之間的關聯與這個關聯的<strong>代價(Weight)</strong>，然後再從預計的起始節點開始一路往後推導，而今天要介紹的這個方法叫做<code>Prim's Algorithm</code>，基本上步驟如下：</p>
 <ol>
-<li>當W減去w的值若<strong>大於等於</strong>0 ➜ <code>V[x, y] = Max(V[x, y-1], v + V[x-w, y-1])</code></li>
-<li>當W減去w的值若<strong>小於</strong>0 ➜ <code>V[x, y] = V[x, y-1]</code>
-<img src="https://lh3.googleusercontent.com/pw/ACtC-3fgFsPIGjIsOplRw2hzBG_EiAt8x3wrwv8w66hB1PcH5EZuyxKmp4eNixfI6MYR3PTGxTt2tbHhfPIu8CBlcR8LD0BjIWjZy83UNweLnjbYcUFM4OlQO6ouyHlXDPwyPsNXInw2NGfM-1HWm5ANLxmu=s480-no?authuser=0" alt="Dynamic Programming-Knapsack-2"></li>
+<li>選擇任一節點並加入清單。</li>
+<li>從這個節點開始，將其所有『鄰居』及『代價』記錄下來。</li>
+<li>從記錄中選出代價最低的節點加入清單。</li>
+<li>反覆進行2~3步，直到所有節點都加入了清單。</li>
 </ol>
-<p>在進行Dynamic Programming的過程中，都是一步一步去比較去計算，然後透過這些步驟，就可以取得最後的結果：<code>75</code>。那重點又來了，又要<strong>怎麼回推出要放哪個物件呢？</strong> 讓我們繼續看下去：</p>
-<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3eD0JMK3xfmGkNf2hdAJvaQrs90lC2ZulOuPwFRPZkL9-L7LrbL16R4wsOvCcZCR2mCHPoRJQXuJwqbmozJDOdV98po-UtCpnwuAaEy_ZSUXTrOxldchtnCo15r3F1fP5Sy2wFTOuU1jhPks7aWoXrh=s480-no?authuser=0" alt="Dynamic Programming-Knapsack-3"></p>
-<p>當選擇出其中一個項目之後，就需要把容量扣除，才能透過backtracking取得結果，所以在這個範例中，最後選擇的是<code>w1和w5</code>，其價值為<code>75</code>。</p>
+<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3d6UFjuJhdrxTeVo7QdQBZomP57Lu_9nJPegZerRATjb7qDyg_jSY8bLcszc62lhRIHjaIPAMaAPz8okUhRXYlfIc8K_imulJYAVBQWiPt35mxJQDLGA36BOKFzRhbmMPZiQ98l9Zp8Qt9_PvGpiL2b=w480-h288-no?authuser=0" alt="Prime Algorithm"></p>
+<p>從上範例GIF中可以看到，假設我們預計起始點為Ａ，先在結果清單中將節點Ａ加入後，再從節點Ａ去計算其所有鄰居的<strong>距離</strong>，然後發現節點Ｅ的數值是最小的，因此將節點Ｅ放入結果清單，再從節點Ｅ來計算距離，而節點Ｅ唯一尚未加入結果清單的鄰居就只有節點Ｂ了，而且此時從節點Ｅ到節點Ｂ的距離是<code>5</code>，比原本的<code>7</code>還小，因此這時候節點Ｂ的數值被從<code>7</code>換成了<code>5</code>，然後再從<strong>Distance</strong>的紀錄中選出最小數值的節點加入結果清單，依此類推，直到所有節點都加入到結果清單。</p>
 <hr>
 <h2 id="小結">小結</h2>
-<p>Knapsack Problem也可以用Dynamic Programming來解決。</p>
+<p>Prim&rsquo;s Algorithm執行的過程中，若有數值較小的狀況，其數值會被替換，並在爾後變成判斷的依據。</p>
 <hr>
 <h2 id="預告">預告</h2>
-<p>明天我們將會進入最後一個主題 - <strong>貪婪的技術(Greedy Techniques)</strong>。</p>
+<p>明天我們將會介紹另外一種解決同一個問題的演算法 - Kruskal&rsquo;s Algorithm。</p>
 <hr>
 <h2 id="references">References</h2>
 <ol>
@@ -411,14 +406,10 @@ $(function() {
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/InformisTry/posts/ithome-triathlon/dp-edit-distance/"  style="width: 49rem;" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day23 -- Dynamic Programming - Edit Distance">&larr;
-                            【舌尖上的演算法】Day23 -- Dynamic Programming - Edit Distance</a>
+                        <a href="/InformisTry/posts/ithome-triathlon/dp-knapsack/"  style="width: 49rem;" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day24 -- Dynamic Programming - Knapsack">&larr;
+                            【舌尖上的演算法】Day24 -- Dynamic Programming - Knapsack</a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/InformisTry/posts/ithome-triathlon/gt-prim/" style="width: 49rem;" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day25 -- Greedy Techniques - Prim&#39;s Algorithm">&rarr; 【舌尖上的演算法】Day25 -- Greedy Techniques - Prim&#39;s Algorithm</a>
-                    </li>
                     
                 </ul>
 
