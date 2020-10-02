@@ -15,9 +15,9 @@
     
 
     
-    <meta name="title" content="【舌尖上的演算法】Day25 -- Greedy Techniques - Prim&#39;s Algorithm" />
-    <meta property="og:title" content="【舌尖上的演算法】Day25 -- Greedy Techniques - Prim&#39;s Algorithm" />
-    <meta property="twitter:title" content="【舌尖上的演算法】Day25 -- Greedy Techniques - Prim&#39;s Algorithm" />
+    <meta name="title" content="【舌尖上的演算法】Day26 -- Greedy Techniques - Kruskal&#39;s Algorithm" />
+    <meta property="og:title" content="【舌尖上的演算法】Day26 -- Greedy Techniques - Kruskal&#39;s Algorithm" />
+    <meta property="twitter:title" content="【舌尖上的演算法】Day26 -- Greedy Techniques - Kruskal&#39;s Algorithm" />
     
 
     
@@ -34,9 +34,9 @@
     <meta name="keyword"  content="Chih-Hsuan Lee, Informistry, Hank Lee, JumperC2P, Hank portfolio, Java, Python, Developer, Engineer, Software, ReactJS, Web, React, Database, Kubernetes, 微服務, Microservice, 演算法">
     <link rel="shortcut icon" href="/InformisTry/img/favicon.ico">
 
-    <title>【舌尖上的演算法】Day25 -- Greedy Techniques - Prim&#39;s Algorithm-HankLee</title>
+    <title>【舌尖上的演算法】Day26 -- Greedy Techniques - Kruskal&#39;s Algorithm-HankLee</title>
 
-    <link rel="canonical" href="/InformisTry/posts/ithome-triathlon/gt-prim">
+    <link rel="canonical" href="/InformisTry/posts/ithome-triathlon/gt-kruskal">
 
     <link rel="stylesheet" href="/InformisTry/css/iDisqus.min.css"/>
 	
@@ -185,7 +185,7 @@
                         </a>
                         
                     </div>
-                    <h1>【舌尖上的演算法】Day25 -- Greedy Techniques - Prim&#39;s Algorithm</h1>
+                    <h1>【舌尖上的演算法】Day26 -- Greedy Techniques - Kruskal&#39;s Algorithm</h1>
                     <h2 class="subheading">2020 IT邦鐵人賽</h2>
                     <span class="meta">
                         Posted by 
@@ -193,9 +193,9 @@
                             Hank Lee
                          
                         on 
-                        Friday, October 2, 2020
+                        Saturday, October 3, 2020
                         
-                            <span id="/posts/ithome-triathlon/gt-prim" class="leancloud_visitors meta_data_item" data-flag-title="">
+                            <span id="/posts/ithome-triathlon/gt-kruskal" class="leancloud_visitors meta_data_item" data-flag-title="">
     <span class="post-meta-item-icon">
       <span class="octicon octicon-eye"></span> 
     </span>
@@ -359,8 +359,8 @@ $(function() {
                     <nav id="TableOfContents">
   <ul>
     <li><a href="#前言">前言</a></li>
-    <li><a href="#greedy-algorithm是什麼">Greedy Algorithm是什麼</a></li>
-    <li><a href="#問題在一個網絡系統中依序找出由近至遠的節點">問題：在一個網絡系統中，依序找出由近至遠的節點</a></li>
+    <li><a href="#kruskals-algorithm是什麼">Kruskal&rsquo;s Algorithm是什麼？</a></li>
+    <li><a href="#kruskals-algorithm的流程">Kruskal&rsquo;s Algorithm的流程</a></li>
     <li><a href="#小結">小結</a></li>
     <li><a href="#預告">預告</a></li>
     <li><a href="#references">References</a></li>
@@ -369,30 +369,29 @@ $(function() {
                     
                 
 
-                <p><a href="https://ithelp.ithome.com.tw/articles/10248017">本系列文章同步分享於IT邦幫忙第12屆鐵人賽</a></p>
+                <p><a href="https://ithelp.ithome.com.tw/articles/10248056">本系列文章同步分享於IT邦幫忙第12屆鐵人賽</a></p>
 <h2 id="前言">前言</h2>
-<p>最後一個主題拉～～～歡慶昨天中秋節～～～</p>
-<p>最後一個主題我們要講的是貪婪的演算法(Greedy Algorithm)，前言廢話不多說，所以就開始吧～～</p>
+<p>昨天講了Prim&rsquo;s Algorithm，今天要講另一個Greedy Algorithm - Kruskal&rsquo;s Algorithm</p>
 <hr>
-<h2 id="greedy-algorithm是什麼">Greedy Algorithm是什麼</h2>
-<p>Greedy Algorithm的做法跟Dynamic Programming有點類似，都是一步一步將解答建構出來，Dynamic Programming在進行的時候，會將所以<strong>小解答</strong>記錄下來，然後再利用這些小解答來推導出答案；然而，Greedy Algorithm與之不同的地方是：Greedy Algorithm再一步步將解答建構出來的過程中，總是選擇<code>當前最佳解</code>來記錄下來。如此一來，當整個流程進行完成後，留下來的結果就是想要的成果了。</p>
+<h2 id="kruskals-algorithm是什麼">Kruskal&rsquo;s Algorithm是什麼？</h2>
+<p>Kruskal&rsquo;s Algorithm跟Prim&rsquo;s Algorithm的做法其實有點類似，但是Prim&rsquo;s Algorithm在選值的過程中，會依據值的大小改變排隊順序，而Kruskal&rsquo;s Algorithm選擇的條件則是針對<code>整個Graph</code>來判斷值的大小，然後從小的路線開始選，而且還有一個條件：<code>選擇的路線不能讓節點形成環狀</code>。</p>
 <hr>
-<h2 id="問題在一個網絡系統中依序找出由近至遠的節點">問題：在一個網絡系統中，依序找出由近至遠的節點</h2>
-<p>在處理這種問題時，基本上會先將所有擁有的資料變成Graph的形式，紀錄著節點與節點之間的關聯與這個關聯的<strong>代價(Weight)</strong>，然後再從預計的起始節點開始一路往後推導，而今天要介紹的這個方法叫做<code>Prim's Algorithm</code>，基本上步驟如下：</p>
+<h2 id="kruskals-algorithm的流程">Kruskal&rsquo;s Algorithm的流程</h2>
+<p>Kruskal&rsquo;s Algorithm基本的流程如下：</p>
 <ol>
-<li>選擇任一節點並加入清單。</li>
-<li>從這個節點開始，將其所有『鄰居』及『代價』記錄下來。</li>
-<li>從記錄中選出代價最低的節點加入清單。</li>
-<li>反覆進行2~3步，直到所有節點都加入了清單。</li>
+<li>先將所有路徑的資訊都整理好，並從小至大排列。</li>
+<li>從整個Graph中挑選出最小值的『路徑』，且這個路徑不會讓已經選中的其他路徑形成環狀</li>
+<li>反覆執行第二步，直到記錄下來的<code>路徑數量為節點數量減1</code>。（如果五個節點，需要四個路徑才能把這五個節點都連接起來）</li>
 </ol>
-<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3d6UFjuJhdrxTeVo7QdQBZomP57Lu_9nJPegZerRATjb7qDyg_jSY8bLcszc62lhRIHjaIPAMaAPz8okUhRXYlfIc8K_imulJYAVBQWiPt35mxJQDLGA36BOKFzRhbmMPZiQ98l9Zp8Qt9_PvGpiL2b=w480-h288-no?authuser=0" alt="Prime Algorithm"></p>
-<p>從上範例GIF中可以看到，假設我們預計起始點為Ａ，先在結果清單中將節點Ａ加入後，再從節點Ａ去計算其所有鄰居的<strong>距離</strong>，然後發現節點Ｅ的數值是最小的，因此將節點Ｅ放入結果清單，再從節點Ｅ來計算距離，而節點Ｅ唯一尚未加入結果清單的鄰居就只有節點Ｂ了，而且此時從節點Ｅ到節點Ｂ的距離是<code>5</code>，比原本的<code>7</code>還小，因此這時候節點Ｂ的數值被從<code>7</code>換成了<code>5</code>，然後再從<strong>Distance</strong>的紀錄中選出最小數值的節點加入結果清單，依此類推，直到所有節點都加入到結果清單。</p>
+<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3dGC_ZktU7Q3UO9ey3tp6gHWnnUO2T7jT7SNyQlOO_H-bQbdLteRkxz6awePX2ggfx96YCgYOeedZz4SdfkiK1OTLs06w8DwevzXgWAyndoJX-275a3y61v-w6l02sRLZIBWrIdfymERxzzswfRGVL0=w480-h288-no?authuser=0" alt="Kruskal&rsquo;s Algorithm"></p>
+<p>看看上面的範例，首先先將所有的路徑都條列出來，然後再根據其值一一選擇，一旦當所選擇的路徑與其他已選擇的路徑形成<code>環狀</code>，就會跳過當前選擇的路徑，直到最後<code>選擇的路徑數為節點數減1</code>（範例中共有7個節點，執行完畢後，所選擇的路徑數共有6條）。</p>
+<p>理論上，Kruskal&rsquo;s Algorithm看起來比Prim&rsquo;s Algorithm簡單，但是實際上卻不然；Kruskal&rsquo;s Algorithm比較難以實現是因為最麻煩的步驟是要去確認當前所選擇的路徑是否會形成環狀，從圖片上來看會覺得很簡單，但程式<strong>看不到</strong>，所以這個是實作上最麻煩的步驟。</p>
 <hr>
 <h2 id="小結">小結</h2>
-<p>Prim&rsquo;s Algorithm執行的過程中，若有數值較小的狀況，其數值會被替換，並在爾後變成判斷的依據。</p>
+<p>Kruskal&rsquo;s Algorithm再決定路徑時，除了依照賦予在當前路徑的值的大小之外，當前所選擇的路徑還不能與其他已選擇的路徑形成環狀，而這也是程式實作上最為麻煩的部分。</p>
 <hr>
 <h2 id="預告">預告</h2>
-<p>明天我們將會介紹另外一種解決同一個問題的演算法 - Kruskal&rsquo;s Algorithm。</p>
+<p>明天我們將會再介紹另外一種解決同一個問題的演算法 - Dijkstra&rsquo;s Algorithm。</p>
 <hr>
 <h2 id="references">References</h2>
 <ol>
@@ -406,14 +405,10 @@ $(function() {
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/InformisTry/posts/ithome-triathlon/dp-knapsack/"  style="width: 49rem;" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day24 -- Dynamic Programming - Knapsack">&larr;
-                            【舌尖上的演算法】Day24 -- Dynamic Programming - Knapsack</a>
+                        <a href="/InformisTry/posts/ithome-triathlon/gt-prim/"  style="width: 49rem;" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day25 -- Greedy Techniques - Prim&#39;s Algorithm">&larr;
+                            【舌尖上的演算法】Day25 -- Greedy Techniques - Prim&#39;s Algorithm</a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/InformisTry/posts/ithome-triathlon/gt-kruskal/" style="width: 49rem;" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day26 -- Greedy Techniques - Kruskal&#39;s Algorithm">&rarr; 【舌尖上的演算法】Day26 -- Greedy Techniques - Kruskal&#39;s Algorithm</a>
-                    </li>
                     
                 </ul>
 
