@@ -15,9 +15,9 @@
     
 
     
-    <meta name="title" content="【舌尖上的演算法】Day26 -- Greedy Techniques - Kruskal&#39;s Algorithm" />
-    <meta property="og:title" content="【舌尖上的演算法】Day26 -- Greedy Techniques - Kruskal&#39;s Algorithm" />
-    <meta property="twitter:title" content="【舌尖上的演算法】Day26 -- Greedy Techniques - Kruskal&#39;s Algorithm" />
+    <meta name="title" content="【舌尖上的演算法】Day27 -- Greedy Techniques - Dijkstra&#39;s Algorithm" />
+    <meta property="og:title" content="【舌尖上的演算法】Day27 -- Greedy Techniques - Dijkstra&#39;s Algorithm" />
+    <meta property="twitter:title" content="【舌尖上的演算法】Day27 -- Greedy Techniques - Dijkstra&#39;s Algorithm" />
     
 
     
@@ -34,9 +34,9 @@
     <meta name="keyword"  content="Chih-Hsuan Lee, Informistry, Hank Lee, JumperC2P, Hank portfolio, Java, Python, Developer, Engineer, Software, ReactJS, Web, React, Database, Kubernetes, 微服務, Microservice, 演算法">
     <link rel="shortcut icon" href="/InformisTry/img/favicon.ico">
 
-    <title>【舌尖上的演算法】Day26 -- Greedy Techniques - Kruskal&#39;s Algorithm-HankLee</title>
+    <title>【舌尖上的演算法】Day27 -- Greedy Techniques - Dijkstra&#39;s Algorithm-HankLee</title>
 
-    <link rel="canonical" href="/InformisTry/posts/ithome-triathlon/gt-kruskal">
+    <link rel="canonical" href="/InformisTry/posts/ithome-triathlon/gt-dijkstra">
 
     <link rel="stylesheet" href="/InformisTry/css/iDisqus.min.css"/>
 	
@@ -185,7 +185,7 @@
                         </a>
                         
                     </div>
-                    <h1>【舌尖上的演算法】Day26 -- Greedy Techniques - Kruskal&#39;s Algorithm</h1>
+                    <h1>【舌尖上的演算法】Day27 -- Greedy Techniques - Dijkstra&#39;s Algorithm</h1>
                     <h2 class="subheading">2020 IT邦鐵人賽</h2>
                     <span class="meta">
                         Posted by 
@@ -193,9 +193,9 @@
                             Hank Lee
                          
                         on 
-                        Saturday, October 3, 2020
+                        Sunday, October 4, 2020
                         
-                            <span id="/posts/ithome-triathlon/gt-kruskal" class="leancloud_visitors meta_data_item" data-flag-title="">
+                            <span id="/posts/ithome-triathlon/gt-dijkstra" class="leancloud_visitors meta_data_item" data-flag-title="">
     <span class="post-meta-item-icon">
       <span class="octicon octicon-eye"></span> 
     </span>
@@ -359,8 +359,8 @@ $(function() {
                     <nav id="TableOfContents">
   <ul>
     <li><a href="#前言">前言</a></li>
-    <li><a href="#kruskals-algorithm是什麼">Kruskal&rsquo;s Algorithm是什麼？</a></li>
-    <li><a href="#kruskals-algorithm的流程">Kruskal&rsquo;s Algorithm的流程</a></li>
+    <li><a href="#dijkstras-algorithm是什麼">Dijkstra&rsquo;s Algorithm是什麼</a></li>
+    <li><a href="#dijkstras-algorithm的流程">Dijkstra&rsquo;s Algorithm的流程</a></li>
     <li><a href="#小結">小結</a></li>
     <li><a href="#預告">預告</a></li>
     <li><a href="#references">References</a></li>
@@ -369,29 +369,30 @@ $(function() {
                     
                 
 
-                <p><a href="https://ithelp.ithome.com.tw/articles/10248056">本系列文章同步分享於IT邦幫忙第12屆鐵人賽</a></p>
+                <p><a href="https://ithelp.ithome.com.tw/articles/10248240">本系列文章同步分享於IT邦幫忙第12屆鐵人賽</a></p>
 <h2 id="前言">前言</h2>
-<p>昨天講了Prim&rsquo;s Algorithm，今天要講另一個Greedy Algorithm - Kruskal&rsquo;s Algorithm</p>
+<p>今天是這一個系列文章所要正式介紹的最後一個演算法了，而今天要講的這個演算法也是屬於Greedy Algorithm的其中一員，就是<strong>Dijkstra&rsquo;s Algorithm</strong>。</p>
 <hr>
-<h2 id="kruskals-algorithm是什麼">Kruskal&rsquo;s Algorithm是什麼？</h2>
-<p>Kruskal&rsquo;s Algorithm跟Prim&rsquo;s Algorithm的做法其實有點類似，但是Prim&rsquo;s Algorithm在選值的過程中，會依據值的大小改變排隊順序，而Kruskal&rsquo;s Algorithm選擇的條件則是針對<code>整個Graph</code>來判斷值的大小，然後從小的路線開始選，而且還有一個條件：<code>選擇的路線不能讓節點形成環狀</code>。</p>
+<h2 id="dijkstras-algorithm是什麼">Dijkstra&rsquo;s Algorithm是什麼</h2>
+<p>Dijkstra&rsquo;s Algorithm基本上是用來解決<code>最短路徑</code>的問題，因此在進行之前，一樣會將資料設定成Graph的資料型態，然後一樣紀錄了每個點與點之間的關係與距離，然後再一步步的推敲與計算；在Dijkstra&rsquo;s Algorithm的概念中，由於都不知道要去每個點的距離是多少，因此每個點的距離值都會設定為<code>無限大</code>，然後再一步步的計算。</p>
 <hr>
-<h2 id="kruskals-algorithm的流程">Kruskal&rsquo;s Algorithm的流程</h2>
-<p>Kruskal&rsquo;s Algorithm基本的流程如下：</p>
+<h2 id="dijkstras-algorithm的流程">Dijkstra&rsquo;s Algorithm的流程</h2>
+<p>Dijkstra&rsquo;s Algorithm基本上的流程如下：</p>
 <ol>
-<li>先將所有路徑的資訊都整理好，並從小至大排列。</li>
-<li>從整個Graph中挑選出最小值的『路徑』，且這個路徑不會讓已經選中的其他路徑形成環狀</li>
-<li>反覆執行第二步，直到記錄下來的<code>路徑數量為節點數量減1</code>。（如果五個節點，需要四個路徑才能把這五個節點都連接起來）</li>
+<li>先將每個點的距離設定成<code>無限大</code>。</li>
+<li>選擇一個起始點，並將這個起始點的距離值設定為0（因為從它開始，故自己到自己的距離為0）</li>
+<li>再從這個節點計算去『鄰居』的距離</li>
+<li>選擇最短距離的鄰居為下一個節點，並紀錄下距離。</li>
+<li>反覆進行3, 4步驟，直到所有節點都經過一輪。</li>
 </ol>
-<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3dGC_ZktU7Q3UO9ey3tp6gHWnnUO2T7jT7SNyQlOO_H-bQbdLteRkxz6awePX2ggfx96YCgYOeedZz4SdfkiK1OTLs06w8DwevzXgWAyndoJX-275a3y61v-w6l02sRLZIBWrIdfymERxzzswfRGVL0=w480-h288-no?authuser=0" alt="Kruskal&rsquo;s Algorithm"></p>
-<p>看看上面的範例，首先先將所有的路徑都條列出來，然後再根據其值一一選擇，一旦當所選擇的路徑與其他已選擇的路徑形成<code>環狀</code>，就會跳過當前選擇的路徑，直到最後<code>選擇的路徑數為節點數減1</code>（範例中共有7個節點，執行完畢後，所選擇的路徑數共有6條）。</p>
-<p>理論上，Kruskal&rsquo;s Algorithm看起來比Prim&rsquo;s Algorithm簡單，但是實際上卻不然；Kruskal&rsquo;s Algorithm比較難以實現是因為最麻煩的步驟是要去確認當前所選擇的路徑是否會形成環狀，從圖片上來看會覺得很簡單，但程式<strong>看不到</strong>，所以這個是實作上最麻煩的步驟。</p>
+<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3e-kMgYDrT-gkbSUz8zb-bv_QASWEfF6oxd3Qtc3JTFTB_mN0lRWsVVJHzGvPVZ2qfFUraD5-YJThKzVry27HQ2CLGR7qsorDD6dnTNGQcH5_rGiYmcVjj1c36kAHjmI8EPqj9GFlpFmbbEBrlcIJ90=w480-h180-no?authuser=0" alt="Dijkstra&rsquo;s Algorithm"></p>
+<p>從上GIF中可以看到，計算距離時，會將其數值疊加，這樣才能算出點與點之間的最短距離，一但計算的距離比舊的距離還小，就會取代原先的數值，然後再從中選出距離最短的繼續進行，直到所有的點都有其數據。</p>
 <hr>
 <h2 id="小結">小結</h2>
-<p>Kruskal&rsquo;s Algorithm再決定路徑時，除了依照賦予在當前路徑的值的大小之外，當前所選擇的路徑還不能與其他已選擇的路徑形成環狀，而這也是程式實作上最為麻煩的部分。</p>
+<p>Dijkstra&rsquo;s Algorithm進行前，會先預設抵達所有節點的距離為無限大，再從中選一個起始點開始計算，一步步地改變每個節點的距離，最後才取得抵達每個節點的最短距離。</p>
 <hr>
 <h2 id="預告">預告</h2>
-<p>明天我們將會再介紹另外一種解決同一個問題的演算法 - Dijkstra&rsquo;s Algorithm。</p>
+<p>最後三天，我們會來破解一個腦力遊戲，明天再來揭曉。</p>
 <hr>
 <h2 id="references">References</h2>
 <ol>
@@ -405,14 +406,10 @@ $(function() {
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/InformisTry/posts/ithome-triathlon/gt-prim/"  style="width: 49rem;" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day25 -- Greedy Techniques - Prim&#39;s Algorithm">&larr;
-                            【舌尖上的演算法】Day25 -- Greedy Techniques - Prim&#39;s Algorithm</a>
+                        <a href="/InformisTry/posts/ithome-triathlon/gt-kruskal/"  style="width: 49rem;" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day26 -- Greedy Techniques - Kruskal&#39;s Algorithm">&larr;
+                            【舌尖上的演算法】Day26 -- Greedy Techniques - Kruskal&#39;s Algorithm</a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/InformisTry/posts/ithome-triathlon/gt-dijkstra/" style="width: 49rem;" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day27 -- Greedy Techniques - Dijkstra&#39;s Algorithm">&rarr; 【舌尖上的演算法】Day27 -- Greedy Techniques - Dijkstra&#39;s Algorithm</a>
-                    </li>
                     
                 </ul>
 
