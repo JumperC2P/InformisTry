@@ -6,10 +6,19 @@
     <description>Recent content in Posts on InformisTry</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 04 Oct 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 05 Oct 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://jumperc2p.github.io/InformisTry/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【舌尖上的演算法】Day28 -- Sudoku - Backtracking</title>
+      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/sudoku-backtracking/</link>
+      <pubDate>Mon, 05 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/sudoku-backtracking/</guid>
+      <description>本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 講了27天的演算法，好像一直都沒有在一個實際的場合下使用，實在是有點無聊，現在已經進入倒數最</description>
+    </item>
     
     <item>
       <title>【舌尖上的演算法】Day27 -- Greedy Techniques - Dijkstra&#39;s Algorithm</title>
