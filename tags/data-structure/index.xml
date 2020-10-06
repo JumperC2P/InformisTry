@@ -6,10 +6,19 @@
     <description>Recent content in Data Structure on InformisTry</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 06 Oct 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 07 Oct 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://jumperc2p.github.io/InformisTry/tags/data-structure/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>【舌尖上的演算法】Day30 --  Algorithm X and Sudoku</title>
+      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/sudoku-algox-2/</link>
+      <pubDate>Wed, 07 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/sudoku-algox-2/</guid>
+      <description>本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 昨天介紹了Algorithm X的概念和流程，但跟數獨又有什麼關係呢？這個問題我大概花了兩～三</description>
+    </item>
     
     <item>
       <title>【舌尖上的演算法】Day29 -- Sudoku - Algorithm X</title>
