@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="InformisTry">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="https://jumperc2p.github.io/InformisTry/https://tinyurl.com/yc28myh2">
+    <meta property="twitter:image" content="https://jumperc2p.github.io/InformisTry/https://tinyurl.com/yc28myh2" />
+    
+
+    
+    <meta name="title" content="Data Structure" />
+    <meta property="og:title" content="Data Structure" />
+    <meta property="twitter:title" content="Data Structure" />
+    
+
+    
+    <meta name="description" content="Hank Lee。 IT &#43; Chemistry = InformisTry。 Career Change。">
+    <meta property="og:description" content="Hank Lee。 IT &#43; Chemistry = InformisTry。 Career Change。" />
+    <meta property="twitter:description" content="Hank Lee。 IT &#43; Chemistry = InformisTry。 Career Change。" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="Chih-Hsuan Lee, Informistry, Hank Lee, JumperC2P, Hank portfolio, Java, Python, Developer, Engineer, Software, ReactJS, Web, React, Database, Kubernetes, 微服務, Microservice, 演算法">
+    <link rel="shortcut icon" href="/InformisTry/img/favicon.ico">
+
+    <title>Data Structure-HankLee</title>
+
+    <link rel="canonical" href="/InformisTry/InformisTry/tags/data-structure/">
+
+    <link rel="stylesheet" href="/InformisTry/css/iDisqus.min.css"/>
+	
+    
+    <link rel="stylesheet" href="/InformisTry/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/InformisTry/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="/InformisTry/css/zanshang.css">
+    
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    
+    
+
+    
+    
+    <script src="/InformisTry/js/jquery.min.js"></script>
+    
+    
+    <script src="/InformisTry/js/bootstrap.min.js"></script>
+    
+    
+    <script src="/InformisTry/js/hux-blog.min.js"></script>
+
+    
+    
+
+    
+    <script data-ad-client="ca-pub-8332161170897799" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+</head>
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/InformisTry/">InformisTry</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/InformisTry/">Home</a>
+                    </li>
+                    
+                        
+                        <li>
+                            <a href="/InformisTry/categories/books">books</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/InformisTry/categories/life">life</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/InformisTry/categories/series">series</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/InformisTry/categories/tech">tech</a>
+                        </li>
+                        
+                    
+                    
+		            
+                        <li><a href="/InformisTry/top/about">ABOUT ME  </a></li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+<header class="intro-header" style="background-image: url('https://tinyurl.com/yc28myh2')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
+                <div class="site-heading">
+                    <h1>InformisTry </h1>
+                    
+		    <span class="subheading">The harder you work, the less repentance you will get.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+  
+<div class="container">
+    <div class="row">
+        
+        
+   	    <div class="
+            col-lg-8 col-lg-offset-1
+            col-md-8 col-md-offset-1
+            col-sm-12
+            col-xs-12
+            post-container
+        ">
+            
+
+<div class="post-preview">
+    <a href="https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/sudoku-algox-2/">
+        <h2 class="post-title">
+            【舌尖上的演算法】Day30 --  Algorithm X and Sudoku
+        </h2>
+	
+        <h3 class="post-subtitle">
+            2020 IT邦鐵人賽
+        </h3>
+	
+        <div class="post-content-preview">
+	
+            本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 昨天介紹了Algorithm X的概念和流程，但跟數獨又有什麼關係呢？這個問題我大概花了兩～三
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    Posted by Hank Lee Wednesday, October 7, 2020
+    
+    
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/sudoku-algox/">
+        <h2 class="post-title">
+            【舌尖上的演算法】Day29 -- Sudoku - Algorithm X
+        </h2>
+	
+        <h3 class="post-subtitle">
+            2020 IT邦鐵人賽
+        </h3>
+	
+        <div class="post-content-preview">
+	
+            本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 昨天我們介紹了如何使用Backtracking的方式來破解數獨，這個Backtracking
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    Posted by Hank Lee Tuesday, October 6, 2020
+    
+    
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/sudoku-backtracking/">
+        <h2 class="post-title">
+            【舌尖上的演算法】Day28 -- Sudoku - Backtracking
+        </h2>
+	
+        <h3 class="post-subtitle">
+            2020 IT邦鐵人賽
+        </h3>
+	
+        <div class="post-content-preview">
+	
+            本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 講了27天的演算法，好像一直都沒有在一個實際的場合下使用，實在是有點無聊，現在已經進入倒數最
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    Posted by Hank Lee Monday, October 5, 2020
+    
+    
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/gt-dijkstra/">
+        <h2 class="post-title">
+            【舌尖上的演算法】Day27 -- Greedy Techniques - Dijkstra&#39;s Algorithm
+        </h2>
+	
+        <h3 class="post-subtitle">
+            2020 IT邦鐵人賽
+        </h3>
+	
+        <div class="post-content-preview">
+	
+            本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 今天是這一個系列文章所要正式介紹的最後一個演算法了，而今天要講的這個演算法也是屬於Greed
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    Posted by Hank Lee Sunday, October 4, 2020
+    
+    
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/gt-kruskal/">
+        <h2 class="post-title">
+            【舌尖上的演算法】Day26 -- Greedy Techniques - Kruskal&#39;s Algorithm
+        </h2>
+	
+        <h3 class="post-subtitle">
+            2020 IT邦鐵人賽
+        </h3>
+	
+        <div class="post-content-preview">
+	
+            本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 昨天講了Prim&rsquo;s Algorithm，今天要講另一個Greedy Algorithm - Kruskal&rsquo;s Algorithm Kruskal&rsquo;s Al
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    Posted by Hank Lee Saturday, October 3, 2020
+    
+    
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/gt-prim/">
+        <h2 class="post-title">
+            【舌尖上的演算法】Day25 -- Greedy Techniques - Prim&#39;s Algorithm
+        </h2>
+	
+        <h3 class="post-subtitle">
+            2020 IT邦鐵人賽
+        </h3>
+	
+        <div class="post-content-preview">
+	
+            本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 最後一個主題拉～～～歡慶昨天中秋節～～～ 最後一個主題我們要講的是貪婪的演算法(Greedy A
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    Posted by Hank Lee Friday, October 2, 2020
+    
+    
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/dp-knapsack/">
+        <h2 class="post-title">
+            【舌尖上的演算法】Day24 -- Dynamic Programming - Knapsack
+        </h2>
+	
+        <h3 class="post-subtitle">
+            2020 IT邦鐵人賽
+        </h3>
+	
+        <div class="post-content-preview">
+	
+            本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 今天要把一個舊問題拉出來再提一次，那就是 &ndash; Knapsack Problem；上一次是在第八天提到可以用Bru
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    Posted by Hank Lee Thursday, October 1, 2020
+    
+    
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/dp-edit-distance/">
+        <h2 class="post-title">
+            【舌尖上的演算法】Day23 -- Dynamic Programming - Edit Distance
+        </h2>
+	
+        <h3 class="post-subtitle">
+            2020 IT邦鐵人賽
+        </h3>
+	
+        <div class="post-content-preview">
+	
+            本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 有些時候就是有一些無聊的問題想要解決，才會發展出一些簡單的演算法，然後才會進展出更厲害的演算
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    Posted by Hank Lee Wednesday, September 30, 2020
+    
+    
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/dp-coin-row-problem/">
+        <h2 class="post-title">
+            【舌尖上的演算法】Day22 -- Dynamic Programming - Coin-row Problem
+        </h2>
+	
+        <h3 class="post-subtitle">
+            2020 IT邦鐵人賽
+        </h3>
+	
+        <div class="post-content-preview">
+	
+            本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 今天算是進入我們倒數第二個主題了，雖然不知道前面的內容大家能不能吸收，或是了解了多少，但是&
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    Posted by Hank Lee Tuesday, September 29, 2020
+    
+    
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/ts-hash/">
+        <h2 class="post-title">
+            【舌尖上的演算法】Day21 -- Time and Space Tradeoff - Hashing
+        </h2>
+	
+        <h3 class="post-subtitle">
+            2020 IT邦鐵人賽
+        </h3>
+	
+        <div class="post-content-preview">
+	
+            本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 昨天介紹Distribution Sort的時候提到了Map/Dictionary，相信應該很
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    Posted by Hank Lee Monday, September 28, 2020
+    
+    
+    </p>
+
+</div>
+<hr>
+
+
+            
+
+
+<ul class="pager">
+    
+    
+    <li class="next">
+        <a href="/InformisTry/tags/data-structure/page/2/">Older Posts &rarr;</a>
+    </li>
+    
+</ul>
+
+
+       	</div>
+        
+
+<div class="
+    col-lg-3 col-lg-offset-0
+    col-md-3 col-md-offset-0
+    col-sm-12
+    col-xs-12
+    sidebar-container
+">
+    
+    
+    <section>
+        <hr class="hidden-sm hidden-xs">
+        <h5>FEATURED TAGS</h5>
+        <div class="tags">
+             
+            
+                
+                    <a href="/InformisTry/tags/algorithm" title="algorithm">
+                        algorithm
+                    </a>
+                
+            
+                
+            
+                
+                    <a href="/InformisTry/tags/data-structure" title="data-structure">
+                        data-structure
+                    </a>
+                
+            
+                
+                    <a href="/InformisTry/tags/hints" title="hints">
+                        hints
+                    </a>
+                
+            
+                
+                    <a href="/InformisTry/tags/ithome" title="ithome">
+                        ithome
+                    </a>
+                
+            
+                
+                    <a href="/InformisTry/tags/java" title="java">
+                        java
+                    </a>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                    <a href="/InformisTry/tags/triathlon" title="triathlon">
+                        triathlon
+                    </a>
+                
+            
+        </div>
+    </section>
+    
+
+    
+	
+    <section class="visible-md visible-lg">
+	<hr><h5><a href="/InformisTry/top/about">ABOUT ME</a></h5>
+        <div class="short-about">
+            
+            <a href="/InformisTry/top/about">
+               <img src="https://tinyurl.com/yad67a99" alt="avatar" style="cursor: pointer" />
+            </a>
+            
+            
+                <span style="color:slategray;font-weight: bolder;">Hank Lee👨🏻‍💻🇹🇼🇦🇺</span>
+            
+            
+                <p>Meds ➡︎ IT, Software Developer, Full Stack Developer, Mentor, Dog Lover</p>
+            
+           
+           <ul class="list-inline"> 
+                
+                <li>
+                    <a href="mailto:adslbbc1949@gmail.com">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+                
+               
+               
+               
+               
+               
+               
+               
+               <li>
+                   <a target="_blank" href="https://github.com/JumperC2P">
+                       <span class="fa-stack fa-lg">
+                           <i class="fa fa-circle fa-stack-2x"></i>
+                           <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                       </span>
+                   </a>
+               </li>
+               
+               
+               
+               
+               <li>
+                   <a target="_blank" href="https://www.linkedin.com/in/hank-lee-784779136/">
+                       <span class="fa-stack fa-lg">
+                           <i class="fa fa-circle fa-stack-2x"></i>
+                           <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                       </span>
+                   </a>
+               </li>
+               
+               
+               
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/8090654/h-lee">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+            
+            
+            
+               
+               
+               
+               
+                </ul>
+            </div>
+    </section>
+	
+    
+    
+    <section>
+        <hr class="hidden-sm hidden-xs">
+        <h5>FRIENDS</h5>
+        <ul class="list-inline">
+            
+            <li><a target="_blank" href="https://ianjustin39.github.io/ianlife/">Ian化學系軟體工程師</a></li>
+            
+        </ul>
+    </section>
+    
+
+    
+    
+</div>
+
+	</div>
+</div>
+
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                    
+                    <li>
+                        <a href="mailto:adslbbc1949@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/JumperC2P">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/hank-lee-784779136/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/8090654/h-lee">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+            
+                    
+                    
+                    
+            
+            
+            
+                </ul>
+		        <p class="copyright text-muted">
+                    Copyright &copy; InformisTry 2021
+                    <br>
+                    <small id="busuanzi_container_site_pv" style='display:none'> Page Views: <span id="busuanzi_value_site_pv"></span> </small>
+                    |
+                    <small id="busuanzi_container_site_uv" style='display:none'> Count of Visits: <span id="busuanzi_value_site_uv"></span> </small>
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-172654708-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+</body>
+</html>

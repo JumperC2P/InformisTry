@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="InformisTry">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="https://jumperc2p.github.io/InformisTry/https://tinyurl.com/yc28myh2">
+    <meta property="twitter:image" content="https://jumperc2p.github.io/InformisTry/https://tinyurl.com/yc28myh2" />
+    
+
+    
+    <meta name="title" content="【舌尖上的演算法】Day30 --  Algorithm X and Sudoku" />
+    <meta property="og:title" content="【舌尖上的演算法】Day30 --  Algorithm X and Sudoku" />
+    <meta property="twitter:title" content="【舌尖上的演算法】Day30 --  Algorithm X and Sudoku" />
+    
+
+    
+    <meta name="description" content="Hank Lee。 IT &#43; Chemistry = InformisTry。 Career Change。">
+    <meta property="og:description" content="Hank Lee。 IT &#43; Chemistry = InformisTry。 Career Change。" />
+    <meta property="twitter:description" content="Hank Lee。 IT &#43; Chemistry = InformisTry。 Career Change。" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="Chih-Hsuan Lee, Informistry, Hank Lee, JumperC2P, Hank portfolio, Java, Python, Developer, Engineer, Software, ReactJS, Web, React, Database, Kubernetes, 微服務, Microservice, 演算法">
+    <link rel="shortcut icon" href="/InformisTry/img/favicon.ico">
+
+    <title>【舌尖上的演算法】Day30 --  Algorithm X and Sudoku-HankLee</title>
+
+    <link rel="canonical" href="/InformisTry/posts/ithome-triathlon/sudoku-algox-2">
+
+    <link rel="stylesheet" href="/InformisTry/css/iDisqus.min.css"/>
+	
+    
+    <link rel="stylesheet" href="/InformisTry/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/InformisTry/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="/InformisTry/css/zanshang.css">
+    
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    
+    
+
+    
+    
+    <script src="/InformisTry/js/jquery.min.js"></script>
+    
+    
+    <script src="/InformisTry/js/bootstrap.min.js"></script>
+    
+    
+    <script src="/InformisTry/js/hux-blog.min.js"></script>
+
+    
+    
+
+    
+    <script data-ad-client="ca-pub-8332161170897799" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+</head>
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/InformisTry/">InformisTry</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/InformisTry/">Home</a>
+                    </li>
+                    
+                        
+                        <li>
+                            <a href="/InformisTry/categories/books">books</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/InformisTry/categories/life">life</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/InformisTry/categories/series">series</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/InformisTry/categories/tech">tech</a>
+                        </li>
+                        
+                    
+                    
+		            
+                        <li><a href="/InformisTry/top/about">ABOUT ME  </a></li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('https://tinyurl.com/y7zeezbe')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/InformisTry/tags/algorithm" title="Algorithm">
+                            Algorithm
+                        </a>
+                        
+                        <a class="tag" href="/InformisTry/tags/ithome" title="iThome">
+                            iThome
+                        </a>
+                        
+                        <a class="tag" href="/InformisTry/tags/triathlon" title="triathlon">
+                            triathlon
+                        </a>
+                        
+                        <a class="tag" href="/InformisTry/tags/data-structure" title="Data Structure">
+                            Data Structure
+                        </a>
+                        
+                    </div>
+                    <h1>【舌尖上的演算法】Day30 --  Algorithm X and Sudoku</h1>
+                    <h2 class="subheading">2020 IT邦鐵人賽</h2>
+                    <span class="meta">
+                        Posted by 
+                        
+                            Hank Lee
+                         
+                        on 
+                        Wednesday, October 7, 2020
+                        
+                            <span id="/posts/ithome-triathlon/sudoku-algox-2" class="leancloud_visitors meta_data_item" data-flag-title="">
+    <span class="post-meta-item-icon">
+      <span class="octicon octicon-eye"></span> 
+    </span>
+    <i class="fa fa-eye"></i>
+    <span class="old-visitors-count" style="display: none;"></span>
+    <span class="leancloud-visitors-count"></span>
+</span>
+
+
+
+<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+
+<script>
+	AV.initialize("", "");
+</script>
+
+<script type="text/javascript">
+function showTime(Counter) {
+    var query = new AV.Query(Counter);
+    var entries = [];
+    var $visitors = $(".leancloud_visitors");
+
+    $visitors.each(function() {
+        entries.push($(this).attr("id").trim());
+    });
+
+    query.containedIn('url', entries);
+    query.find()
+        .done(function(results) {
+            var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+            var OLD_COUNT_CONTAINER_REF = '.old-visitors-count';
+
+            
+            
+            
+            
+
+            for (var i = 0; i < results.length; i++) {
+                var item = results[i];
+                var url = item.get('url');
+                var time = item.get('time');
+                var element = document.getElementById(url);
+
+                $(element).find(COUNT_CONTAINER_REF).text(time);
+            }
+            for (var i = 0; i < entries.length; i++) {
+                var url = entries[i];
+                var element = document.getElementById(url);
+                var countSpan = $(element).find(COUNT_CONTAINER_REF);
+                if (countSpan.text() == '') {
+                    var oldCountSpan = $(element).find(OLD_COUNT_CONTAINER_REF).text();
+                    if(oldCountSpan!=''){
+                        countSpan.text(0+parseInt(oldCountSpan));
+                    }else{
+                        countSpan.text(0);          
+                    }
+                }
+            }
+        })
+        .fail(function(object, error) {
+            console.log("Error: " + error.code + " " + error.message);
+        });
+}
+
+function addCount(Counter) {
+    var $visitors = $(".leancloud_visitors");
+    var url = $visitors.attr('id').trim();
+    var title = $visitors.attr('data-flag-title').trim();
+    var query = new AV.Query(Counter);
+
+    query.equalTo("url", url);
+    query.find({
+        success: function(results) {
+            if (results.length > 0) {
+                var counter = results[0];
+                counter.fetchWhenSave(true);
+                counter.increment("time");
+                counter.save(null, {
+                    success: function(counter) {
+                        var $element = $(document.getElementById(url));
+                        $element.find('.leancloud-visitors-count').text(counter.get('time'));
+                    },
+                    error: function(counter, error) {
+                        console.log('Failed to save Visitor num, with error message: ' + error.message);
+                    }
+                });
+            } else {
+                var newcounter = new Counter();
+                 
+                var acl = new AV.ACL();
+                acl.setPublicReadAccess(true);
+                acl.setPublicWriteAccess(true);
+                newcounter.setACL(acl);
+                 
+                newcounter.set("title", title);
+                newcounter.set("url", url);
+                var OLD_COUNT_CONTAINER_REF = '.old-visitors-count';
+                var $element = $(document.getElementById(url));
+                var oldCountSpan = $element.find(OLD_COUNT_CONTAINER_REF).text();
+                if(oldCountSpan!=''){
+                    newcounter.set("time", parseInt(oldCountSpan)+1);
+                }else{
+ 	                    newcounter.set("time",  1);
+                }
+                newcounter.save(null, {
+                    success: function(newcounter) {
+                        var $element = $(document.getElementById(url));
+                        $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                    },
+                    error: function(newcounter, error) {
+                        console.log('Failed to create');
+                    }
+                });
+            }
+        },
+        error: function(error) {
+            console.log('Error:' + error.code + " " + error.message);
+        }
+    });
+}
+$(function() {
+    var Counter = AV.Object.extend("Counter");
+    
+    
+    if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+    } else {
+        showTime(Counter);
+    }
+});
+</script>
+
+                        
+                        
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                    
+                    <header>
+                        <h2>Table of Contents</h2>
+                    </header>
+                    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#algorithm-x-vs-數獨">Algorithm X v.s 數獨</a></li>
+    <li><a href="#algorithm-x-解決-sudoku-範例程式">Algorithm X 解決 Sudoku 範例程式</a></li>
+    <li><a href="#小結">小結</a></li>
+    <li><a href="#後記">後記</a></li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+                    
+                
+
+                <p><a href="https://ithelp.ithome.com.tw/articles/10250123">本系列文章同步分享於IT邦幫忙第12屆鐵人賽</a></p>
+<h2 id="前言">前言</h2>
+<p>昨天介紹了Algorithm X的概念和流程，但跟數獨又有什麼關係呢？這個問題我大概花了兩～三天才弄懂，因此今天就要來介紹這一層關係，並且會提供給大家範例程式碼，那就讓我們看下去吧～</p>
+<hr>
+<h2 id="algorithm-x-vs-數獨">Algorithm X v.s 數獨</h2>
+<p>昨天提到Algorithm Ｘ在使用的時候，會先將資料轉換成Matrix，但是數獨到底跟Matrix有什麼關係勒？</p>
+<p>我們以4x4的數獨為例（因為9x9的資料太多了），因為數獨基本上會有<code>4個限制</code>：</p>
+<ol>
+<li>一個欄位一個值</li>
+<li>同一個區塊中，所填入的數字不可重複。</li>
+<li>同一行中填入的數字不可重複。</li>
+<li>同一列中填入的數字不可重複。</li>
+</ol>
+<p>因此我們在製作Matrix的時候，欄（Column）的數量會是4x4x4，前兩個4的是數獨的大小，<strong>最後一個4就是這四個限制</strong>，因此欄的數量會是64個；而列的數量也是4x4x4，前兩個一樣是數獨的大小，<strong>最後一個4是『數字的數量(1~4)』</strong>，因此列的數量也是64，所以我們準備的Matrix就會是一個64x64的大矩陣。</p>
+<blockquote>
+<p>如果是9x9的數獨，就會是324x729的更大矩陣。</p>
+</blockquote>
+<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3dNVjYtoYSCExUJLlVqz6k7PVUVPTlMCaGpXBhSyOHw_NtKoa98GiXbuxDjgmxCLNRprYdFjAERIiZyWWPCMzwhAOGm4hxe6S9yOZQMhgrPVckqNy7J9mK4Enh1Wdl-7th-Blndj1z6ByLYT2mBVT9Z=s300-no?authuser=0" alt="Sudoku - 4x4"></p>
+<p>在這個Matrix中，欄基本上是代表每一個欄位(如上圖），因為每16欄是一個限制，64欄總共分成4組，剛好對應4個限制，因此每一組中都會有1~16的編號，而全部的欄位的編號是用index 0~63；此外，<code>列表示的是（值, 列, 欄）(cand, r, c)</code>，也就是哪一個座標位置（欄位）的值是什麼，再來，會將每4個列設定為一組，每一組對應的是<strong>同一個欄位但不同值</strong>，以前面四個列為例，都是說在0,0這個位置中，填入的數字分別是1~4。</p>
+<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3f9ZK_hWNPKHcd4HLng5YuF-kjzXvWaHqTwHW2U5uHQeOicd4uMNkPgz3Lws3inj9q9Y44MxxuLm5765ogOR1HHGcioYUbLfUYdpdOYJgnNY2C1I5U4ABnyJS-daztB003SG7Oy9cMbeUHJlWGn9-gj=w1303-h950-no?authuser=0" alt="Algorithm X - Matrix"></p>
+<p>按照上表來看，第一組欄(index 0 ~ index 15)的限制是每一個欄位只能有一個值，因此你們會發現，在下面欄位中填1的時候，同一個欄位且同一欄都會填入1，因為同一欄表示的是同一個欄位（用上面的編號來看）；而第二組欄的限制是每一列填入的數字不可重複，因此對應到(cand, r, c)去看的話，就會看到同一欄中有填入1的欄位相互抵觸（有我就沒有他）；第三組欄的限制和第四組欄的限制也是透過同樣的方式去填入數字1。上表看起來可能不清楚，因此檔案可以在<a href="https://drive.google.com/file/d/1De0RMYaO7h-pllbQaai0KzLrItqDVrPL/view?usp=sharing">這邊下載</a>，讓大家可以把檔案載回去看，可能需要一點時間研究，這個檔案中也包含了如果是套用到一個已知解答的4x4數獨上時，表格會變成什麼樣子，其中最下面可以看到每一個欄的1的合計都是<code>1</code>（也只能是這樣才是答案）。</p>
+<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3e0fRGAQjCG5M71CP3RHkkCRHoP3-WBom9lkfIpGNtgX20iIOvnj7E3155sgzjLKPu7wsWa_ZMARoXgmERWfxNR71hFrYq4OC6xaGkvp-m9bgx5hVAsR62Md9iRCzW75aLk45VSQh_uogKR4OG0xUZm=w800-h200-no?authuser=0" alt="Algorithm X - Sudoku functions"></p>
+<p>那問題又來了：<strong>如何去判斷哪個欄位要填數字1?</strong> 上面的這個表格就是整理出來的公式，在程式實作的時候，就可以利用這些公式在對應的位置中填入數字1。</p>
+<p>只要產生出了這個複雜的Matrix，我們就可以用Algorithm X的概念來計算數獨的答案。</p>
+<hr>
+<h2 id="algorithm-x-解決-sudoku-範例程式">Algorithm X 解決 Sudoku 範例程式</h2>
+<p>程式的概念基本上是我們要先產生Matrix，因此可以透過<code>MatrixUtils.generateMatrix(size, sqrt, symbols, numOfConstraints)</code>這個方法來產生matrix，裡面就已經套入了上面提到的四個公式來在欄位中放入數字1（如果要看產生出來的結果，可以呼叫<code>MatrixUtils.printMatrix()</code>來看看結果是不是如預期，程式如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#ff79c6">import</span> java.util.ArrayList<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.HashMap<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.List<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.Map<span style="color:#ff79c6">;</span>
+
+<span style="color:#6272a4">/**
+</span><span style="color:#6272a4"> * @author Hank Lee
+</span><span style="color:#6272a4"> * Shared in InformisTry -- https://jumperc2p.github.io/InformisTry/
+</span><span style="color:#6272a4"> */</span>
+<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">class</span> <span style="color:#50fa7b">MatrixUtils</span> <span style="color:#ff79c6">{</span>
+	
+<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">static</span> Map<span style="color:#ff79c6">&lt;</span>String<span style="color:#ff79c6">,</span> List<span style="color:#ff79c6">&lt;</span>String<span style="color:#ff79c6">&gt;&gt;</span> combinations <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> HashMap<span style="color:#ff79c6">&lt;&gt;();</span>
+    
+	<span style="color:#6272a4">/**
+</span><span style="color:#6272a4">	 * The generation methods to prepare matrix
+</span><span style="color:#6272a4">	 * @param size the size of sudoku. For example, a 4x4 sudoku grid will give &#34;4&#34;.
+</span><span style="color:#6272a4">	 * @param sqrt the sqrt of the size of sudoku. For example, a 4x4 sudoku grid will give &#34;2&#34;.
+</span><span style="color:#6272a4">	 * @param symbols the symbols used in grid
+</span><span style="color:#6272a4">	 * @param numberOfConstraints the number of constraints
+</span><span style="color:#6272a4">	 * @param cages the cages for killer sudoku
+</span><span style="color:#6272a4">	 * @return matrixes
+</span><span style="color:#6272a4">	 */</span>
+    <span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">static</span> List<span style="color:#ff79c6">&lt;</span>Matrix<span style="color:#ff79c6">&gt;</span> <span style="color:#50fa7b">generateMatrix</span><span style="color:#ff79c6">(</span>Integer size<span style="color:#ff79c6">,</span> Integer sqrt<span style="color:#ff79c6">,</span> Integer<span style="color:#ff79c6">[]</span> symbols<span style="color:#ff79c6">,</span> <span style="color:#8be9fd">int</span> numberOfConstraints<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+
+		<span style="color:#6272a4">// Prepare to matrix
+</span><span style="color:#6272a4"></span>    	List<span style="color:#ff79c6">&lt;</span>Matrix<span style="color:#ff79c6">&gt;</span> matrixs <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">null</span><span style="color:#ff79c6">;</span>
+    	matrixs <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> ArrayList<span style="color:#ff79c6">&lt;&gt;();</span>
+		<span style="color:#ff79c6">for</span> <span style="color:#ff79c6">(</span><span style="color:#8be9fd">int</span> row <span style="color:#ff79c6">=</span> 0<span style="color:#ff79c6">;</span> row <span style="color:#ff79c6">&lt;</span> size<span style="color:#ff79c6">;</span> row<span style="color:#ff79c6">++)</span> <span style="color:#ff79c6">{</span>
+			<span style="color:#ff79c6">for</span> <span style="color:#ff79c6">(</span><span style="color:#8be9fd">int</span> col <span style="color:#ff79c6">=</span> 0<span style="color:#ff79c6">;</span> col <span style="color:#ff79c6">&lt;</span> size<span style="color:#ff79c6">;</span> col<span style="color:#ff79c6">++)</span> <span style="color:#ff79c6">{</span>
+				<span style="color:#ff79c6">for</span> <span style="color:#ff79c6">(</span><span style="color:#8be9fd">int</span> value <span style="color:#ff79c6">:</span> symbols<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+					Integer<span style="color:#ff79c6">[]</span> constraints <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> Integer<span style="color:#ff79c6">[</span>size<span style="color:#ff79c6">*</span>size<span style="color:#ff79c6">*</span>numberOfConstraints<span style="color:#ff79c6">];</span>
+					
+					<span style="color:#6272a4">// One value constraint: 
+</span><span style="color:#6272a4"></span>					<span style="color:#6272a4">// constraint number : row x size + col
+</span><span style="color:#6272a4"></span>					constraints<span style="color:#ff79c6">[</span>row <span style="color:#ff79c6">*</span> size <span style="color:#ff79c6">+</span> col<span style="color:#ff79c6">]</span> <span style="color:#ff79c6">=</span> 1<span style="color:#ff79c6">;</span>
+					
+					<span style="color:#6272a4">// Row constraint:
+</span><span style="color:#6272a4"></span>					<span style="color:#6272a4">// constraint number : size^2 + row x size + value - 1
+</span><span style="color:#6272a4"></span>					constraints<span style="color:#ff79c6">[((</span><span style="color:#8be9fd">int</span><span style="color:#ff79c6">)</span> Math<span style="color:#ff79c6">.</span><span style="color:#50fa7b">pow</span><span style="color:#ff79c6">(</span>size<span style="color:#ff79c6">,</span>2<span style="color:#ff79c6">))</span> <span style="color:#ff79c6">+</span> row <span style="color:#ff79c6">*</span> size <span style="color:#ff79c6">+</span> value <span style="color:#ff79c6">-</span> 1<span style="color:#ff79c6">]</span> <span style="color:#ff79c6">=</span> 1<span style="color:#ff79c6">;</span>
+					
+					<span style="color:#6272a4">// Column constraint:
+</span><span style="color:#6272a4"></span>					<span style="color:#6272a4">// constraint number : 2 x size^2 + col x size + value - 1
+</span><span style="color:#6272a4"></span>					constraints<span style="color:#ff79c6">[</span>2 <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">((</span><span style="color:#8be9fd">int</span><span style="color:#ff79c6">)</span> Math<span style="color:#ff79c6">.</span><span style="color:#50fa7b">pow</span><span style="color:#ff79c6">(</span>size<span style="color:#ff79c6">,</span>2<span style="color:#ff79c6">))</span> <span style="color:#ff79c6">+</span> col <span style="color:#ff79c6">*</span> size <span style="color:#ff79c6">+</span> value <span style="color:#ff79c6">-</span> 1<span style="color:#ff79c6">]</span> <span style="color:#ff79c6">=</span> 1<span style="color:#ff79c6">;</span>
+					
+					<span style="color:#6272a4">// Box constraint:
+</span><span style="color:#6272a4"></span>					<span style="color:#6272a4">// constraint number : 3 x size^2 + (row / sqrt) x size x sqrt + (col / sqrt) x size + value - 1
+</span><span style="color:#6272a4"></span>					constraints<span style="color:#ff79c6">[</span>3 <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">((</span><span style="color:#8be9fd">int</span><span style="color:#ff79c6">)</span> Math<span style="color:#ff79c6">.</span><span style="color:#50fa7b">pow</span><span style="color:#ff79c6">(</span>size<span style="color:#ff79c6">,</span>2<span style="color:#ff79c6">))</span> <span style="color:#ff79c6">+</span> <span style="color:#ff79c6">(</span>row <span style="color:#ff79c6">/</span> sqrt<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">*</span> size <span style="color:#ff79c6">*</span> sqrt <span style="color:#ff79c6">+</span> <span style="color:#ff79c6">(</span>col <span style="color:#ff79c6">/</span> sqrt<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">*</span> size <span style="color:#ff79c6">+</span> value <span style="color:#ff79c6">-</span> 1<span style="color:#ff79c6">]</span> <span style="color:#ff79c6">=</span> 1<span style="color:#ff79c6">;</span>
+					
+					matrixs<span style="color:#ff79c6">.</span><span style="color:#50fa7b">add</span><span style="color:#ff79c6">(</span><span style="color:#ff79c6">new</span> Matrix<span style="color:#ff79c6">(</span>row<span style="color:#ff79c6">,</span> col<span style="color:#ff79c6">,</span> value<span style="color:#ff79c6">,</span> constraints<span style="color:#ff79c6">));</span>
+					
+				<span style="color:#ff79c6">}</span>
+			<span style="color:#ff79c6">}</span>
+		<span style="color:#ff79c6">}</span>
+	
+		
+		<span style="color:#6272a4">// To print the matrix
+</span><span style="color:#6272a4">//		printMatrix(matrixs, size);
+</span><span style="color:#6272a4"></span>		<span style="color:#ff79c6">return</span> matrixs<span style="color:#ff79c6">;</span>
+    <span style="color:#ff79c6">}</span>
+    
+    
+    <span style="color:#6272a4">/**
+</span><span style="color:#6272a4">     * To print the matrix in the console
+</span><span style="color:#6272a4">     * 
+</span><span style="color:#6272a4">     * @param matrixes the matrix
+</span><span style="color:#6272a4">     * @param size the size of sudoku. For example, a 4x4 sudoku grid will give &#34;4&#34;.
+</span><span style="color:#6272a4">     */</span>
+    <span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">static</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">printMatrix</span><span style="color:#ff79c6">(</span>List<span style="color:#ff79c6">&lt;</span>Matrix<span style="color:#ff79c6">&gt;</span> matrixes<span style="color:#ff79c6">,</span> <span style="color:#8be9fd">int</span> size<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+    	<span style="color:#6272a4">//1,1,1 | c c c c c c c c c c c c c c c c | c c c c c c c c c c c c c c c c | c c c c c c c c c c c c | c c c c c c c c c c c c c c c c 
+</span><span style="color:#6272a4"></span>		System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;r,c,v | c c c c c c c c c c c c c c c c | c c c c c c c c c c c c c c c c | c c c c c c c c c c c c c c c c | c c c c c c c c c c c c c c c c | c c c c c c c c c c c c c c c c&#34;</span><span style="color:#ff79c6">);</span>
+		System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------&#34;</span><span style="color:#ff79c6">);</span>
+		
+		<span style="color:#ff79c6">for</span> <span style="color:#ff79c6">(</span>Matrix m <span style="color:#ff79c6">:</span> matrixes<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+			System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">print</span><span style="color:#ff79c6">(</span>m<span style="color:#ff79c6">.</span><span style="color:#50fa7b">row</span><span style="color:#ff79c6">+</span><span style="color:#f1fa8c">&#34;,&#34;</span><span style="color:#ff79c6">+</span>m<span style="color:#ff79c6">.</span><span style="color:#50fa7b">col</span><span style="color:#ff79c6">+</span><span style="color:#f1fa8c">&#34;,&#34;</span><span style="color:#ff79c6">+</span>m<span style="color:#ff79c6">.</span><span style="color:#50fa7b">value</span><span style="color:#ff79c6">+</span><span style="color:#f1fa8c">&#34; | &#34;</span><span style="color:#ff79c6">);</span>
+			<span style="color:#ff79c6">for</span> <span style="color:#ff79c6">(</span><span style="color:#8be9fd">int</span> i <span style="color:#ff79c6">=</span> 0<span style="color:#ff79c6">;</span> i <span style="color:#ff79c6">&lt;</span> m<span style="color:#ff79c6">.</span><span style="color:#50fa7b">constraints</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">length</span><span style="color:#ff79c6">;</span> i<span style="color:#ff79c6">++)</span> <span style="color:#ff79c6">{</span>
+				<span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>i <span style="color:#ff79c6">!=</span> 0 <span style="color:#ff79c6">&amp;&amp;</span> i <span style="color:#ff79c6">%</span> <span style="color:#ff79c6">(</span>size<span style="color:#ff79c6">*</span>size<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">==</span> 0<span style="color:#ff79c6">)</span>
+					System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">print</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;| &#34;</span><span style="color:#ff79c6">);</span>
+				Integer val <span style="color:#ff79c6">=</span> m<span style="color:#ff79c6">.</span><span style="color:#50fa7b">constraints</span><span style="color:#ff79c6">[</span>i<span style="color:#ff79c6">];</span>
+				System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">print</span><span style="color:#ff79c6">((</span>val <span style="color:#ff79c6">==</span> <span style="color:#ff79c6">null</span> <span style="color:#ff79c6">?</span> <span style="color:#f1fa8c">&#34; &#34;</span><span style="color:#ff79c6">:</span>m<span style="color:#ff79c6">.</span><span style="color:#50fa7b">constraints</span><span style="color:#ff79c6">[</span>i<span style="color:#ff79c6">])+</span><span style="color:#f1fa8c">&#34; &#34;</span><span style="color:#ff79c6">);</span>
+			<span style="color:#ff79c6">}</span>
+			System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">();</span>
+			<span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>m<span style="color:#ff79c6">.</span><span style="color:#50fa7b">value</span> <span style="color:#ff79c6">%</span> size <span style="color:#ff79c6">==</span> 0<span style="color:#ff79c6">)</span>
+				System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------&#34;</span><span style="color:#ff79c6">);</span>
+		<span style="color:#ff79c6">}</span>
+    	
+    <span style="color:#ff79c6">}</span>
+
+<span style="color:#ff79c6">}</span>
+</code></pre></div><p>有了Matrix之後，在Solver裡面，因為數獨會有一些預設值，所以有了這些預設值的話，就透過<code>removeRowsByGrid(sudokuGrid)</code>去改變Matrix的內容（利用預設值將Matrix的內容刪減），然後才正式進行solve的動作，程式如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#ff79c6">import</span> java.util.ArrayList<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.HashMap<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.List<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.Map<span style="color:#ff79c6">;</span>
+
+<span style="color:#6272a4">/**
+</span><span style="color:#6272a4"> * Algorithm X solver for standard Sudoku.
+</span><span style="color:#6272a4"> * @author Hank Lee
+</span><span style="color:#6272a4"> * Shared in InformisTry -- https://jumperc2p.github.io/InformisTry/
+</span><span style="color:#6272a4"> */</span>
+<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">class</span> <span style="color:#50fa7b">AlgorXSolver</span> <span style="color:#ff79c6">{</span>
+	<span style="color:#6272a4">// prepare the object to store matrix, partial solutions and the columns deleted
+</span><span style="color:#6272a4"></span>	List<span style="color:#ff79c6">&lt;</span>Matrix<span style="color:#ff79c6">&gt;</span> matrixes <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">null</span><span style="color:#ff79c6">;</span>
+	List<span style="color:#ff79c6">&lt;</span>Matrix<span style="color:#ff79c6">&gt;</span> solutions <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> ArrayList<span style="color:#ff79c6">&lt;&gt;();</span>
+	List<span style="color:#ff79c6">&lt;</span>Integer<span style="color:#ff79c6">&gt;</span> deletedColumns <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> ArrayList<span style="color:#ff79c6">&lt;&gt;();</span>
+	Integer size <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">null</span><span style="color:#ff79c6">;</span>
+
+	<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#50fa7b">AlgorXSolver</span><span style="color:#ff79c6">()</span> <span style="color:#ff79c6">{</span>
+	<span style="color:#ff79c6">}</span> <span style="color:#6272a4">// end of AlgorXSolver()
+</span><span style="color:#6272a4"></span>
+	<span style="color:#6272a4">/**
+</span><span style="color:#6272a4">	 * The public solve method for other programs to call
+</span><span style="color:#6272a4">	 */</span>
+	<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd">boolean</span> <span style="color:#50fa7b">solve</span><span style="color:#ff79c6">(</span>SudokuGrid sudokuGrid<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+
+		<span style="color:#8be9fd">int</span> numConstraints <span style="color:#ff79c6">=</span> 4<span style="color:#ff79c6">;</span>
+
+		<span style="color:#6272a4">// if the matrix is empty, it need to be generated by the size of sudoku grid
+</span><span style="color:#6272a4"></span>		<span style="color:#6272a4">// and symbols and the number of constraints.
+</span><span style="color:#6272a4"></span>		<span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>matrixes <span style="color:#ff79c6">==</span> <span style="color:#ff79c6">null</span><span style="color:#ff79c6">)</span>
+			matrixes <span style="color:#ff79c6">=</span> MatrixUtils<span style="color:#ff79c6">.</span><span style="color:#50fa7b">generateMatrix</span><span style="color:#ff79c6">(</span>sudokuGrid<span style="color:#ff79c6">.</span><span style="color:#50fa7b">size</span><span style="color:#ff79c6">,</span> sudokuGrid<span style="color:#ff79c6">.</span><span style="color:#50fa7b">sqrt</span><span style="color:#ff79c6">,</span> sudokuGrid<span style="color:#ff79c6">.</span><span style="color:#50fa7b">symbols</span><span style="color:#ff79c6">,</span> numConstraints<span style="color:#ff79c6">);</span>
+
+		<span style="color:#6272a4">// As some cells have been inserted value,
+</span><span style="color:#6272a4"></span>		<span style="color:#6272a4">// we need to get rid of those rows and columns related to them in the matrix
+</span><span style="color:#6272a4"></span>		removeRowsByGrid<span style="color:#ff79c6">(</span>sudokuGrid<span style="color:#ff79c6">);</span>
+
+		<span style="color:#6272a4">// the total number of constraints need to be satisfied in the matrix
+</span><span style="color:#6272a4"></span>		size <span style="color:#ff79c6">=</span> sudokuGrid<span style="color:#ff79c6">.</span><span style="color:#50fa7b">size</span> <span style="color:#ff79c6">*</span> sudokuGrid<span style="color:#ff79c6">.</span><span style="color:#50fa7b">size</span> <span style="color:#ff79c6">*</span> numConstraints<span style="color:#ff79c6">;</span>
+
+		<span style="color:#6272a4">// call the private solve method to find the solution of the standard sudoku
+</span><span style="color:#6272a4"></span>		<span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>solve<span style="color:#ff79c6">(</span>matrixes<span style="color:#ff79c6">,</span> deletedColumns<span style="color:#ff79c6">))</span> <span style="color:#ff79c6">{</span>
+			<span style="color:#6272a4">// After finding the solutions,
+</span><span style="color:#6272a4"></span>			<span style="color:#6272a4">// add the value to each cell of the standard sudoku grind.
+</span><span style="color:#6272a4"></span>			<span style="color:#ff79c6">for</span> <span style="color:#ff79c6">(</span>Matrix matrix <span style="color:#ff79c6">:</span> solutions<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+				sudokuGrid<span style="color:#ff79c6">.</span><span style="color:#50fa7b">grid</span><span style="color:#ff79c6">[</span>matrix<span style="color:#ff79c6">.</span><span style="color:#50fa7b">row</span><span style="color:#ff79c6">][</span>matrix<span style="color:#ff79c6">.</span><span style="color:#50fa7b">col</span><span style="color:#ff79c6">]</span> <span style="color:#ff79c6">=</span> matrix<span style="color:#ff79c6">.</span><span style="color:#50fa7b">value</span><span style="color:#ff79c6">;</span>
+			<span style="color:#ff79c6">}</span>
+			<span style="color:#ff79c6">return</span> <span style="color:#ff79c6">true</span><span style="color:#ff79c6">;</span>
+		<span style="color:#ff79c6">}</span>
+
+		<span style="color:#ff79c6">return</span> <span style="color:#ff79c6">false</span><span style="color:#ff79c6">;</span>
+	<span style="color:#ff79c6">}</span> <span style="color:#6272a4">// end of solve()
+</span><span style="color:#6272a4"></span>
+	<span style="color:#6272a4">/**
+</span><span style="color:#6272a4">	 * The exact method to solve standard sudoku problem
+</span><span style="color:#6272a4">	 * 
+</span><span style="color:#6272a4">	 * @param matrixes       the matrixes to analyse
+</span><span style="color:#6272a4">	 * @param deletedColumns those deleted columns of constraints in matrix
+</span><span style="color:#6272a4">	 * @return the problem is solved or not.
+</span><span style="color:#6272a4">	 */</span>
+	@SuppressWarnings<span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;unchecked&#34;</span><span style="color:#ff79c6">)</span>
+	<span style="color:#8be9fd;font-style:italic">private</span> Boolean <span style="color:#50fa7b">solve</span><span style="color:#ff79c6">(</span>List<span style="color:#ff79c6">&lt;</span>Matrix<span style="color:#ff79c6">&gt;</span> matrixes<span style="color:#ff79c6">,</span> List<span style="color:#ff79c6">&lt;</span>Integer<span style="color:#ff79c6">&gt;</span> deletedColumns<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+
+		<span style="color:#6272a4">// If Matrix is empty, the problem is solved; terminate successfully.
+</span><span style="color:#6272a4"></span>		<span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>matrixes<span style="color:#ff79c6">.</span><span style="color:#50fa7b">size</span><span style="color:#ff79c6">()</span> <span style="color:#ff79c6">==</span> 0<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+			<span style="color:#ff79c6">return</span> <span style="color:#ff79c6">true</span><span style="color:#ff79c6">;</span>
+		<span style="color:#ff79c6">}</span>
+
+		<span style="color:#6272a4">// Find the minimize sum of column constraints in the current matrix
+</span><span style="color:#6272a4"></span>		<span style="color:#6272a4">// and get the matrixes of potential solution
+</span><span style="color:#6272a4"></span>		Map<span style="color:#ff79c6">&lt;</span>String<span style="color:#ff79c6">,</span> Object<span style="color:#ff79c6">&gt;</span> minMap <span style="color:#ff79c6">=</span> findMinSumByColumn<span style="color:#ff79c6">(</span>matrixes<span style="color:#ff79c6">,</span> deletedColumns<span style="color:#ff79c6">);</span>
+		List<span style="color:#ff79c6">&lt;</span>Matrix<span style="color:#ff79c6">&gt;</span> potentialSols <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>List<span style="color:#ff79c6">&lt;</span>Matrix<span style="color:#ff79c6">&gt;)</span> minMap<span style="color:#ff79c6">.</span><span style="color:#50fa7b">get</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;potentialSols&#34;</span><span style="color:#ff79c6">);</span>
+
+		<span style="color:#6272a4">// If the index is null, it means that it cannot find a solution based on the
+</span><span style="color:#6272a4"></span>		<span style="color:#6272a4">// current situation.
+</span><span style="color:#6272a4"></span>		<span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>minMap<span style="color:#ff79c6">.</span><span style="color:#50fa7b">get</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;idx&#34;</span><span style="color:#ff79c6">)</span> <span style="color:#ff79c6">==</span> <span style="color:#ff79c6">null</span><span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+			<span style="color:#ff79c6">return</span> <span style="color:#ff79c6">false</span><span style="color:#ff79c6">;</span>
+		<span style="color:#ff79c6">}</span>
+
+		<span style="color:#6272a4">// If the min value is 0, then the size of potential solution will be 0,
+</span><span style="color:#6272a4"></span>		<span style="color:#6272a4">// which means the process is terminated unsuccessfully.
+</span><span style="color:#6272a4"></span>		<span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>potentialSols<span style="color:#ff79c6">.</span><span style="color:#50fa7b">size</span><span style="color:#ff79c6">()</span> <span style="color:#ff79c6">==</span> 0<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+			<span style="color:#ff79c6">return</span> <span style="color:#ff79c6">false</span><span style="color:#ff79c6">;</span>
+		<span style="color:#ff79c6">}</span>
+
+		<span style="color:#6272a4">// To store the current matrix and deleted columns for backtracking recovery
+</span><span style="color:#6272a4"></span>		List<span style="color:#ff79c6">&lt;</span>Matrix<span style="color:#ff79c6">&gt;</span> tempmatrixes <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> ArrayList<span style="color:#ff79c6">&lt;&gt;();</span>
+		tempmatrixes<span style="color:#ff79c6">.</span><span style="color:#50fa7b">addAll</span><span style="color:#ff79c6">(</span>matrixes<span style="color:#ff79c6">);</span>
+		List<span style="color:#ff79c6">&lt;</span>Integer<span style="color:#ff79c6">&gt;</span> tempDeletedColumns <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> ArrayList<span style="color:#ff79c6">&lt;&gt;();</span>
+		tempDeletedColumns<span style="color:#ff79c6">.</span><span style="color:#50fa7b">addAll</span><span style="color:#ff79c6">(</span>deletedColumns<span style="color:#ff79c6">);</span>
+
+		<span style="color:#ff79c6">for</span> <span style="color:#ff79c6">(</span>Matrix matrix <span style="color:#ff79c6">:</span> potentialSols<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+			<span style="color:#6272a4">// add the partial solutions
+</span><span style="color:#6272a4"></span>			solutions<span style="color:#ff79c6">.</span><span style="color:#50fa7b">add</span><span style="color:#ff79c6">(</span>matrix<span style="color:#ff79c6">);</span>
+
+			<span style="color:#6272a4">// find which columns should be deleted
+</span><span style="color:#6272a4"></span>			<span style="color:#ff79c6">for</span> <span style="color:#ff79c6">(</span><span style="color:#8be9fd">int</span> i <span style="color:#ff79c6">=</span> 0<span style="color:#ff79c6">;</span> i <span style="color:#ff79c6">&lt;</span> matrix<span style="color:#ff79c6">.</span><span style="color:#50fa7b">constraints</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">length</span><span style="color:#ff79c6">;</span> i<span style="color:#ff79c6">++)</span> <span style="color:#ff79c6">{</span>
+				<span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>matrix<span style="color:#ff79c6">.</span><span style="color:#50fa7b">constraints</span><span style="color:#ff79c6">[</span>i<span style="color:#ff79c6">]</span> <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">null</span> <span style="color:#ff79c6">&amp;&amp;</span> matrix<span style="color:#ff79c6">.</span><span style="color:#50fa7b">constraints</span><span style="color:#ff79c6">[</span>i<span style="color:#ff79c6">]</span> <span style="color:#ff79c6">==</span> 1<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+					deletedColumns<span style="color:#ff79c6">.</span><span style="color:#50fa7b">add</span><span style="color:#ff79c6">(</span>i<span style="color:#ff79c6">);</span>
+				<span style="color:#ff79c6">}</span>
+			<span style="color:#ff79c6">}</span>
+
+			<span style="color:#6272a4">// remove matrix based on the deleted columns
+</span><span style="color:#6272a4"></span>			<span style="color:#ff79c6">for</span> <span style="color:#ff79c6">(</span>Integer i <span style="color:#ff79c6">:</span> deletedColumns<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+				<span style="color:#6272a4">// delete row by idx
+</span><span style="color:#6272a4"></span>				matrixes<span style="color:#ff79c6">.</span><span style="color:#50fa7b">removeIf</span><span style="color:#ff79c6">(</span>x <span style="color:#ff79c6">-&gt;</span> x<span style="color:#ff79c6">.</span><span style="color:#50fa7b">constraints</span><span style="color:#ff79c6">[</span>i<span style="color:#ff79c6">]</span> <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">null</span><span style="color:#ff79c6">);</span>
+			<span style="color:#ff79c6">}</span>
+
+			<span style="color:#6272a4">// Use the modified matrix to find partial solutions recursively.
+</span><span style="color:#6272a4"></span>			<span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>solve<span style="color:#ff79c6">(</span>matrixes<span style="color:#ff79c6">,</span> deletedColumns<span style="color:#ff79c6">))</span> <span style="color:#ff79c6">{</span>
+				<span style="color:#ff79c6">return</span> <span style="color:#ff79c6">true</span><span style="color:#ff79c6">;</span>
+
+				<span style="color:#6272a4">// if it returns false, it means that the partial solution is wrong,
+</span><span style="color:#6272a4"></span>				<span style="color:#6272a4">// and the process need to be recovered to the previous state, which is
+</span><span style="color:#6272a4"></span>				<span style="color:#6272a4">// backtracking.
+</span><span style="color:#6272a4"></span>			<span style="color:#ff79c6">}</span> <span style="color:#ff79c6">else</span> <span style="color:#ff79c6">{</span>
+				solutions<span style="color:#ff79c6">.</span><span style="color:#50fa7b">remove</span><span style="color:#ff79c6">(</span>matrix<span style="color:#ff79c6">);</span>
+				matrixes<span style="color:#ff79c6">.</span><span style="color:#50fa7b">removeAll</span><span style="color:#ff79c6">(</span>matrixes<span style="color:#ff79c6">);</span>
+				matrixes<span style="color:#ff79c6">.</span><span style="color:#50fa7b">addAll</span><span style="color:#ff79c6">(</span>tempmatrixes<span style="color:#ff79c6">);</span>
+				deletedColumns<span style="color:#ff79c6">.</span><span style="color:#50fa7b">removeAll</span><span style="color:#ff79c6">(</span>deletedColumns<span style="color:#ff79c6">);</span>
+				deletedColumns<span style="color:#ff79c6">.</span><span style="color:#50fa7b">addAll</span><span style="color:#ff79c6">(</span>tempDeletedColumns<span style="color:#ff79c6">);</span>
+			<span style="color:#ff79c6">}</span>
+		<span style="color:#ff79c6">}</span>
+
+		<span style="color:#ff79c6">return</span> <span style="color:#ff79c6">false</span><span style="color:#ff79c6">;</span>
+	<span style="color:#ff79c6">}</span>
+
+	<span style="color:#6272a4">/**
+</span><span style="color:#6272a4">	 * The method is used to find the minimize sum of columns in the current matrix
+</span><span style="color:#6272a4">	 * and based on the column, prepare to matrixes which are potential solutions.
+</span><span style="color:#6272a4">	 * 
+</span><span style="color:#6272a4">	 * @param matrixes       the current matrix
+</span><span style="color:#6272a4">	 * @param deletedColumns the column deleted
+</span><span style="color:#6272a4">	 * @return
+</span><span style="color:#6272a4">	 */</span>
+	<span style="color:#8be9fd;font-style:italic">private</span> Map<span style="color:#ff79c6">&lt;</span>String<span style="color:#ff79c6">,</span> Object<span style="color:#ff79c6">&gt;</span> <span style="color:#50fa7b">findMinSumByColumn</span><span style="color:#ff79c6">(</span>List<span style="color:#ff79c6">&lt;</span>Matrix<span style="color:#ff79c6">&gt;</span> matrixes<span style="color:#ff79c6">,</span> List<span style="color:#ff79c6">&lt;</span>Integer<span style="color:#ff79c6">&gt;</span> deletedColumns<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+
+		Integer<span style="color:#ff79c6">[]</span> sum <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> Integer<span style="color:#ff79c6">[</span>size<span style="color:#ff79c6">];</span>
+		Integer min <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">null</span><span style="color:#ff79c6">;</span>
+		Integer idx <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">null</span><span style="color:#ff79c6">;</span>
+
+		<span style="color:#ff79c6">for</span> <span style="color:#ff79c6">(</span>Matrix m <span style="color:#ff79c6">:</span> matrixes<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+			<span style="color:#ff79c6">for</span> <span style="color:#ff79c6">(</span><span style="color:#8be9fd">int</span> i <span style="color:#ff79c6">=</span> 0<span style="color:#ff79c6">;</span> i <span style="color:#ff79c6">&lt;</span> size<span style="color:#ff79c6">;</span> i<span style="color:#ff79c6">++)</span> <span style="color:#ff79c6">{</span>
+				<span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>m<span style="color:#ff79c6">.</span><span style="color:#50fa7b">constraints</span><span style="color:#ff79c6">[</span>i<span style="color:#ff79c6">]</span> <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">null</span><span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+					<span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>sum<span style="color:#ff79c6">[</span>i<span style="color:#ff79c6">]</span> <span style="color:#ff79c6">==</span> <span style="color:#ff79c6">null</span><span style="color:#ff79c6">)</span>
+						sum<span style="color:#ff79c6">[</span>i<span style="color:#ff79c6">]</span> <span style="color:#ff79c6">=</span> 0<span style="color:#ff79c6">;</span>
+					sum<span style="color:#ff79c6">[</span>i<span style="color:#ff79c6">]</span> <span style="color:#ff79c6">=</span> sum<span style="color:#ff79c6">[</span>i<span style="color:#ff79c6">]</span> <span style="color:#ff79c6">+</span> m<span style="color:#ff79c6">.</span><span style="color:#50fa7b">constraints</span><span style="color:#ff79c6">[</span>i<span style="color:#ff79c6">];</span>
+				<span style="color:#ff79c6">}</span>
+			<span style="color:#ff79c6">}</span>
+		<span style="color:#ff79c6">}</span>
+
+		<span style="color:#ff79c6">for</span> <span style="color:#ff79c6">(</span><span style="color:#8be9fd">int</span> i <span style="color:#ff79c6">=</span> 0<span style="color:#ff79c6">;</span> i <span style="color:#ff79c6">&lt;</span> size<span style="color:#ff79c6">;</span> i<span style="color:#ff79c6">++)</span> <span style="color:#ff79c6">{</span>
+			<span style="color:#6272a4">// if the index of column can be found in the list of deleted columns
+</span><span style="color:#6272a4"></span>			<span style="color:#6272a4">// it means that the column should be skipped.
+</span><span style="color:#6272a4"></span>			<span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>deletedColumns<span style="color:#ff79c6">.</span><span style="color:#50fa7b">contains</span><span style="color:#ff79c6">(</span>i<span style="color:#ff79c6">))</span> <span style="color:#ff79c6">{</span>
+				<span style="color:#ff79c6">continue</span><span style="color:#ff79c6">;</span>
+			<span style="color:#ff79c6">}</span>
+			<span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>sum<span style="color:#ff79c6">[</span>i<span style="color:#ff79c6">]</span> <span style="color:#ff79c6">==</span> <span style="color:#ff79c6">null</span><span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+				idx <span style="color:#ff79c6">=</span> i<span style="color:#ff79c6">;</span>
+				<span style="color:#ff79c6">break</span><span style="color:#ff79c6">;</span>
+			<span style="color:#ff79c6">}</span>
+			<span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>min <span style="color:#ff79c6">==</span> <span style="color:#ff79c6">null</span> <span style="color:#ff79c6">||</span> min <span style="color:#ff79c6">&gt;</span> sum<span style="color:#ff79c6">[</span>i<span style="color:#ff79c6">])</span> <span style="color:#ff79c6">{</span>
+				min <span style="color:#ff79c6">=</span> sum<span style="color:#ff79c6">[</span>i<span style="color:#ff79c6">];</span>
+				idx <span style="color:#ff79c6">=</span> i<span style="color:#ff79c6">;</span>
+			<span style="color:#ff79c6">}</span>
+		<span style="color:#ff79c6">}</span>
+
+		List<span style="color:#ff79c6">&lt;</span>Matrix<span style="color:#ff79c6">&gt;</span> potentialSols <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> ArrayList<span style="color:#ff79c6">&lt;&gt;();</span>
+
+		<span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>min <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">null</span><span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+			<span style="color:#ff79c6">for</span> <span style="color:#ff79c6">(</span>Matrix m <span style="color:#ff79c6">:</span> matrixes<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+				<span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>m<span style="color:#ff79c6">.</span><span style="color:#50fa7b">constraints</span><span style="color:#ff79c6">[</span>idx<span style="color:#ff79c6">]</span> <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">null</span><span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+					potentialSols<span style="color:#ff79c6">.</span><span style="color:#50fa7b">add</span><span style="color:#ff79c6">(</span>m<span style="color:#ff79c6">);</span>
+				<span style="color:#ff79c6">}</span>
+			<span style="color:#ff79c6">}</span>
+		<span style="color:#ff79c6">}</span>
+
+		Map<span style="color:#ff79c6">&lt;</span>String<span style="color:#ff79c6">,</span> Object<span style="color:#ff79c6">&gt;</span> minMap <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> HashMap<span style="color:#ff79c6">&lt;&gt;();</span>
+		minMap<span style="color:#ff79c6">.</span><span style="color:#50fa7b">put</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;potentialSols&#34;</span><span style="color:#ff79c6">,</span> potentialSols<span style="color:#ff79c6">);</span>
+		minMap<span style="color:#ff79c6">.</span><span style="color:#50fa7b">put</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;idx&#34;</span><span style="color:#ff79c6">,</span> idx<span style="color:#ff79c6">);</span>
+
+		<span style="color:#ff79c6">assert</span> <span style="color:#ff79c6">(</span>idx <span style="color:#ff79c6">==</span> <span style="color:#ff79c6">null</span><span style="color:#ff79c6">);</span>
+
+		<span style="color:#ff79c6">return</span> minMap<span style="color:#ff79c6">;</span>
+	<span style="color:#ff79c6">}</span>
+
+	<span style="color:#6272a4">/**
+</span><span style="color:#6272a4">	 * Remove the rows and columns if the cell contains a value
+</span><span style="color:#6272a4">	 * 
+</span><span style="color:#6272a4">	 * @param sudokuGrid the sudoku grid
+</span><span style="color:#6272a4">	 */</span>
+	<span style="color:#8be9fd;font-style:italic">private</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">removeRowsByGrid</span><span style="color:#ff79c6">(</span>SudokuGrid sudokuGrid<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+
+		<span style="color:#ff79c6">for</span> <span style="color:#ff79c6">(</span><span style="color:#8be9fd">int</span> i <span style="color:#ff79c6">=</span> 0<span style="color:#ff79c6">;</span> i <span style="color:#ff79c6">&lt;</span> sudokuGrid<span style="color:#ff79c6">.</span><span style="color:#50fa7b">size</span><span style="color:#ff79c6">;</span> i<span style="color:#ff79c6">++)</span> <span style="color:#ff79c6">{</span>
+			<span style="color:#ff79c6">for</span> <span style="color:#ff79c6">(</span><span style="color:#8be9fd">int</span> j <span style="color:#ff79c6">=</span> 0<span style="color:#ff79c6">;</span> j <span style="color:#ff79c6">&lt;</span> sudokuGrid<span style="color:#ff79c6">.</span><span style="color:#50fa7b">size</span><span style="color:#ff79c6">;</span> j<span style="color:#ff79c6">++)</span> <span style="color:#ff79c6">{</span>
+				<span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>sudokuGrid<span style="color:#ff79c6">.</span><span style="color:#50fa7b">grid</span><span style="color:#ff79c6">[</span>i<span style="color:#ff79c6">][</span>j<span style="color:#ff79c6">]</span> <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">null</span><span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+					<span style="color:#6272a4">// delete row by idx
+</span><span style="color:#6272a4"></span>					<span style="color:#ff79c6">for</span> <span style="color:#ff79c6">(</span>Matrix m <span style="color:#ff79c6">:</span> matrixes<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+						<span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>m<span style="color:#ff79c6">.</span><span style="color:#50fa7b">row</span> <span style="color:#ff79c6">==</span> i <span style="color:#ff79c6">&amp;&amp;</span> m<span style="color:#ff79c6">.</span><span style="color:#50fa7b">col</span> <span style="color:#ff79c6">==</span> j <span style="color:#ff79c6">&amp;&amp;</span> m<span style="color:#ff79c6">.</span><span style="color:#50fa7b">value</span> <span style="color:#ff79c6">==</span> sudokuGrid<span style="color:#ff79c6">.</span><span style="color:#50fa7b">grid</span><span style="color:#ff79c6">[</span>i<span style="color:#ff79c6">][</span>j<span style="color:#ff79c6">])</span> <span style="color:#ff79c6">{</span>
+							matrixes<span style="color:#ff79c6">.</span><span style="color:#50fa7b">remove</span><span style="color:#ff79c6">(</span>m<span style="color:#ff79c6">);</span>
+
+							<span style="color:#ff79c6">for</span> <span style="color:#ff79c6">(</span><span style="color:#8be9fd">int</span> k <span style="color:#ff79c6">=</span> 0<span style="color:#ff79c6">;</span> k <span style="color:#ff79c6">&lt;</span> m<span style="color:#ff79c6">.</span><span style="color:#50fa7b">constraints</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">length</span><span style="color:#ff79c6">;</span> k<span style="color:#ff79c6">++)</span> <span style="color:#ff79c6">{</span>
+								<span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>m<span style="color:#ff79c6">.</span><span style="color:#50fa7b">constraints</span><span style="color:#ff79c6">[</span>k<span style="color:#ff79c6">]</span> <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">null</span> <span style="color:#ff79c6">&amp;&amp;</span> m<span style="color:#ff79c6">.</span><span style="color:#50fa7b">constraints</span><span style="color:#ff79c6">[</span>k<span style="color:#ff79c6">]</span> <span style="color:#ff79c6">==</span> 1<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+									deletedColumns<span style="color:#ff79c6">.</span><span style="color:#50fa7b">add</span><span style="color:#ff79c6">(</span>k<span style="color:#ff79c6">);</span>
+								<span style="color:#ff79c6">}</span>
+							<span style="color:#ff79c6">}</span>
+
+							<span style="color:#ff79c6">for</span> <span style="color:#ff79c6">(</span>Integer n <span style="color:#ff79c6">:</span> deletedColumns<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+								<span style="color:#6272a4">// delete row by idx
+</span><span style="color:#6272a4"></span>								matrixes<span style="color:#ff79c6">.</span><span style="color:#50fa7b">removeIf</span><span style="color:#ff79c6">(</span>x <span style="color:#ff79c6">-&gt;</span> x<span style="color:#ff79c6">.</span><span style="color:#50fa7b">constraints</span><span style="color:#ff79c6">[</span>n<span style="color:#ff79c6">]</span> <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">null</span><span style="color:#ff79c6">);</span>
+							<span style="color:#ff79c6">}</span>
+
+							<span style="color:#ff79c6">break</span><span style="color:#ff79c6">;</span>
+						<span style="color:#ff79c6">}</span>
+					<span style="color:#ff79c6">}</span>
+				<span style="color:#ff79c6">}</span>
+			<span style="color:#ff79c6">}</span>
+		<span style="color:#ff79c6">}</span>
+	<span style="color:#ff79c6">}</span>
+
+<span style="color:#ff79c6">}</span>
+</code></pre></div><p>當中的SudokuGrid則是紀錄數獨的物件，內容為：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#6272a4">/**
+</span><span style="color:#6272a4"> * @author Hank Lee
+</span><span style="color:#6272a4"> * Shared in InformisTry -- https://jumperc2p.github.io/InformisTry/
+</span><span style="color:#6272a4"> *
+</span><span style="color:#6272a4"> */</span>
+<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">class</span> <span style="color:#50fa7b">SudokuGrid</span> <span style="color:#ff79c6">{</span>
+	
+	<span style="color:#8be9fd;font-style:italic">public</span> Integer size <span style="color:#ff79c6">=</span> 0<span style="color:#ff79c6">;</span>
+	<span style="color:#8be9fd;font-style:italic">public</span> Integer<span style="color:#ff79c6">[]</span> symbols <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">null</span><span style="color:#ff79c6">;</span>
+	<span style="color:#8be9fd;font-style:italic">public</span> Integer<span style="color:#ff79c6">[][]</span> grid <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">null</span><span style="color:#ff79c6">;</span>
+	<span style="color:#8be9fd;font-style:italic">public</span> Integer sqrt <span style="color:#ff79c6">=</span> 0<span style="color:#ff79c6">;</span>
+	
+	<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd">boolean</span> <span style="color:#50fa7b">validate</span><span style="color:#ff79c6">()</span> <span style="color:#ff79c6">{</span>
+    	
+    	<span style="color:#ff79c6">for</span> <span style="color:#ff79c6">(</span><span style="color:#8be9fd">int</span> currentY <span style="color:#ff79c6">=</span> 0<span style="color:#ff79c6">;</span> currentY <span style="color:#ff79c6">&lt;</span> size<span style="color:#ff79c6">;</span> currentY<span style="color:#ff79c6">++)</span> <span style="color:#ff79c6">{</span>
+    		<span style="color:#ff79c6">for</span> <span style="color:#ff79c6">(</span><span style="color:#8be9fd">int</span> currentX <span style="color:#ff79c6">=</span> 0<span style="color:#ff79c6">;</span> currentX <span style="color:#ff79c6">&lt;</span> size<span style="color:#ff79c6">;</span> currentX<span style="color:#ff79c6">++)</span> <span style="color:#ff79c6">{</span>
+    			<span style="color:#8be9fd">int</span> currentNumber <span style="color:#ff79c6">=</span> grid<span style="color:#ff79c6">[</span>currentY<span style="color:#ff79c6">][</span>currentX<span style="color:#ff79c6">];</span>
+    			<span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(!</span><span style="color:#ff79c6">this</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">basicValidate</span><span style="color:#ff79c6">(</span><span style="color:#ff79c6">this</span><span style="color:#ff79c6">,</span> currentNumber<span style="color:#ff79c6">,</span> currentX<span style="color:#ff79c6">,</span> currentY<span style="color:#ff79c6">))</span>
+    				<span style="color:#ff79c6">return</span> <span style="color:#ff79c6">false</span><span style="color:#ff79c6">;</span>
+    		<span style="color:#ff79c6">}</span>
+    	<span style="color:#ff79c6">}</span>
+		
+		<span style="color:#ff79c6">return</span> <span style="color:#ff79c6">true</span><span style="color:#ff79c6">;</span>
+    <span style="color:#ff79c6">}</span>
+
+	
+	<span style="color:#6272a4">/**
+</span><span style="color:#6272a4">	 * To do the basic validation of sudoku grid.
+</span><span style="color:#6272a4">	 * In the method, it only checks basic 3 constraints, 
+</span><span style="color:#6272a4">	 * which are box-value constraints, row-value constraints and column-value constraints
+</span><span style="color:#6272a4">	 * 
+</span><span style="color:#6272a4">	 * @param sudokuGrid the sudoku grid
+</span><span style="color:#6272a4">	 * @param currentNumber the current number to check
+</span><span style="color:#6272a4">	 * @param currentX the current column of the cell
+</span><span style="color:#6272a4">	 * @param currentY the current row of the cell
+</span><span style="color:#6272a4">	 * @return true: valid, false: invalid
+</span><span style="color:#6272a4">	 */</span>
+	<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd">boolean</span> <span style="color:#50fa7b">basicValidate</span><span style="color:#ff79c6">(</span>SudokuGrid sudokuGrid<span style="color:#ff79c6">,</span> <span style="color:#8be9fd">int</span> currentNumber<span style="color:#ff79c6">,</span> <span style="color:#8be9fd">int</span> currentX<span style="color:#ff79c6">,</span> <span style="color:#8be9fd">int</span> currentY<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+		
+
+		<span style="color:#6272a4">// compare each number in one row
+</span><span style="color:#6272a4"></span>		<span style="color:#ff79c6">for</span> <span style="color:#ff79c6">(</span><span style="color:#8be9fd">int</span> x <span style="color:#ff79c6">=</span> 0<span style="color:#ff79c6">;</span> x <span style="color:#ff79c6">&lt;</span> sudokuGrid<span style="color:#ff79c6">.</span><span style="color:#50fa7b">size</span><span style="color:#ff79c6">;</span> x<span style="color:#ff79c6">++)</span> <span style="color:#ff79c6">{</span>
+			<span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>currentX <span style="color:#ff79c6">!=</span> x <span style="color:#ff79c6">&amp;&amp;</span> sudokuGrid<span style="color:#ff79c6">.</span><span style="color:#50fa7b">grid</span><span style="color:#ff79c6">[</span>currentY<span style="color:#ff79c6">][</span>x<span style="color:#ff79c6">]</span> <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">null</span> <span style="color:#ff79c6">&amp;&amp;</span> currentNumber <span style="color:#ff79c6">==</span> sudokuGrid<span style="color:#ff79c6">.</span><span style="color:#50fa7b">grid</span><span style="color:#ff79c6">[</span>currentY<span style="color:#ff79c6">][</span>x<span style="color:#ff79c6">])</span>
+				<span style="color:#ff79c6">return</span> <span style="color:#ff79c6">false</span><span style="color:#ff79c6">;</span>
+		<span style="color:#ff79c6">}</span>
+		
+		<span style="color:#6272a4">// compare each number in one column
+</span><span style="color:#6272a4"></span>		<span style="color:#ff79c6">for</span> <span style="color:#ff79c6">(</span><span style="color:#8be9fd">int</span> y <span style="color:#ff79c6">=</span> 0<span style="color:#ff79c6">;</span> y <span style="color:#ff79c6">&lt;</span> sudokuGrid<span style="color:#ff79c6">.</span><span style="color:#50fa7b">size</span><span style="color:#ff79c6">;</span> y<span style="color:#ff79c6">++)</span> <span style="color:#ff79c6">{</span>
+			<span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>currentY <span style="color:#ff79c6">!=</span> y <span style="color:#ff79c6">&amp;&amp;</span> sudokuGrid<span style="color:#ff79c6">.</span><span style="color:#50fa7b">grid</span><span style="color:#ff79c6">[</span>y<span style="color:#ff79c6">][</span>currentX<span style="color:#ff79c6">]</span> <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">null</span> <span style="color:#ff79c6">&amp;&amp;</span> currentNumber <span style="color:#ff79c6">==</span> sudokuGrid<span style="color:#ff79c6">.</span><span style="color:#50fa7b">grid</span><span style="color:#ff79c6">[</span>y<span style="color:#ff79c6">][</span>currentX<span style="color:#ff79c6">])</span>
+				<span style="color:#ff79c6">return</span> <span style="color:#ff79c6">false</span><span style="color:#ff79c6">;</span>
+		<span style="color:#ff79c6">}</span>
+		
+		<span style="color:#6272a4">// compare each number in one sub-grid
+</span><span style="color:#6272a4"></span>		<span style="color:#8be9fd">int</span> modX <span style="color:#ff79c6">=</span> currentX <span style="color:#ff79c6">/</span> sudokuGrid<span style="color:#ff79c6">.</span><span style="color:#50fa7b">sqrt</span><span style="color:#ff79c6">;</span>
+		<span style="color:#8be9fd">int</span> modY <span style="color:#ff79c6">=</span> currentY <span style="color:#ff79c6">/</span> sudokuGrid<span style="color:#ff79c6">.</span><span style="color:#50fa7b">sqrt</span><span style="color:#ff79c6">;</span>
+		
+		<span style="color:#ff79c6">for</span> <span style="color:#ff79c6">(</span><span style="color:#8be9fd">int</span> y <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>modY<span style="color:#ff79c6">*</span>sudokuGrid<span style="color:#ff79c6">.</span><span style="color:#50fa7b">sqrt</span><span style="color:#ff79c6">);</span> y<span style="color:#ff79c6">&lt;((</span>modY<span style="color:#ff79c6">+</span>1<span style="color:#ff79c6">)*</span>sudokuGrid<span style="color:#ff79c6">.</span><span style="color:#50fa7b">sqrt</span><span style="color:#ff79c6">);</span> y<span style="color:#ff79c6">++)</span> <span style="color:#ff79c6">{</span>
+			<span style="color:#ff79c6">for</span> <span style="color:#ff79c6">(</span><span style="color:#8be9fd">int</span> x <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>modX<span style="color:#ff79c6">*</span>sudokuGrid<span style="color:#ff79c6">.</span><span style="color:#50fa7b">sqrt</span><span style="color:#ff79c6">);</span> x<span style="color:#ff79c6">&lt;((</span>modX<span style="color:#ff79c6">+</span>1<span style="color:#ff79c6">)*</span>sudokuGrid<span style="color:#ff79c6">.</span><span style="color:#50fa7b">sqrt</span><span style="color:#ff79c6">);</span> x<span style="color:#ff79c6">++)</span> <span style="color:#ff79c6">{</span>
+				<span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>currentX <span style="color:#ff79c6">!=</span> x <span style="color:#ff79c6">&amp;&amp;</span> currentY <span style="color:#ff79c6">!=</span> y <span style="color:#ff79c6">&amp;&amp;</span> sudokuGrid<span style="color:#ff79c6">.</span><span style="color:#50fa7b">grid</span><span style="color:#ff79c6">[</span>y<span style="color:#ff79c6">][</span>x<span style="color:#ff79c6">]</span> <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">null</span> <span style="color:#ff79c6">&amp;&amp;</span> sudokuGrid<span style="color:#ff79c6">.</span><span style="color:#50fa7b">grid</span><span style="color:#ff79c6">[</span>y<span style="color:#ff79c6">][</span>x<span style="color:#ff79c6">]</span> <span style="color:#ff79c6">==</span> currentNumber<span style="color:#ff79c6">)</span>
+					<span style="color:#ff79c6">return</span> <span style="color:#ff79c6">false</span><span style="color:#ff79c6">;</span>
+			<span style="color:#ff79c6">}</span>
+		<span style="color:#ff79c6">}</span>
+		
+		<span style="color:#ff79c6">return</span> <span style="color:#ff79c6">true</span><span style="color:#ff79c6">;</span>
+		
+	<span style="color:#ff79c6">}</span>
+<span style="color:#ff79c6">}</span>
+</code></pre></div><p>這個範例程式我感覺還可以進行優化，目前執行起來的時間會比Backtracking還要長，但優化這件事情，就有緣再說囉！</p>
+<hr>
+<h2 id="小結">小結</h2>
+<p>用Algorithm Ｘ解決數獨的問題，麻煩的地方是要產生對應的Matrix，產生這個Matrix之後，一切就簡單了許多，上面的範例我是用Wikipedia上面的範例去進行的，針對這個範例寫出code之後，再直接套入這個數獨的Matrix，一樣可以產生結果。</p>
+<hr>
+<h2 id="後記">後記</h2>
+<p>三個字：『終於啊～～～～～』</p>
+<p>30天實在是有點硬，不對，應該說，沒先把文章寫好就參加實在有點硬，但這次參加活動主要也是想為自己留下一個里程碑吧，演算法這些東西在學了之後說真的其實也忘了差不多，藉由這次的整理也算是讓自己可以複習這些內容，我已經盡量讓我自己可以每天都有文章可以產出，畢竟我現在是最後一個學期，手上一次在進行兩個專案，時間上實在是有點太緊繃，但也很高興自己完成了這件事。</p>
+<p>原本希望能自己將內容寫的更有趣更清楚一點，但這我有點愧疚，我感覺自己寫出來的東西未如預期的簡單明瞭，也不知道大家能不能弄懂這些內容，希望還勉強可以接受。</p>
+<p>謝謝30天都來看我的文章的人，也謝謝那些看過任何一篇文章的人，希望這些內容多多少少可以幫助到一些在學習的人。</p>
+<p>下台一鞠躬。</p>
+<hr>
+<h2 id="references">References</h2>
+<ol>
+<li><a href="https://en.wikipedia.org/wiki/Knuth%27s_Algorithm_X">Knuth&rsquo;s Algorithm X</a></li>
+<li><a href="https://www.ocf.berkeley.edu/~jchu/publicportal/sudoku/0011047.pdf">Knuth, Donald E. (2000), &ldquo;Dancing links&rdquo;, in Davies, Jim; Roscoe, Bill; Woodcock, Jim (eds.), Millennial Perspectives in Computer Science: Proceedings of the 1999 Oxford-Microsoft Symposium in Honour of Sir Tony Hoare, Palgrave, pp. 187–214</a></li>
+</ol>
+
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/InformisTry/posts/ithome-triathlon/sudoku-algox/"  style="width: 49rem;" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day29 -- Sudoku - Algorithm X">&larr;
+                            【舌尖上的演算法】Day29 -- Sudoku - Algorithm X</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/InformisTry/posts/books/atmoic_habits/" style="width: 49rem;" data-toggle="tooltip" data-placement="top" title="值得反覆思考的-『原子習慣』">&rarr; 值得反覆思考的-『原子習慣』</a>
+                    </li>
+                    
+                </ul>
+
+                
+<div id="disqus-comment"></div>
+
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "informistry" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+            </div>
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        <a href="/InformisTry/tags/algorithm" title="algorithm">
+                            algorithm
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/InformisTry/tags/data-structure" title="data-structure">
+                            data-structure
+                        </a>
+                        
+                        
+                        
+                        <a href="/InformisTry/tags/hints" title="hints">
+                            hints
+                        </a>
+                        
+                        
+                        
+                        <a href="/InformisTry/tags/ithome" title="ithome">
+                            ithome
+                        </a>
+                        
+                        
+                        
+                        <a href="/InformisTry/tags/java" title="java">
+                            java
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/InformisTry/tags/triathlon" title="triathlon">
+                            triathlon
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>FRIENDS</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="https://ianjustin39.github.io/ianlife/">Ian化學系軟體工程師</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                    
+                    <li>
+                        <a href="mailto:adslbbc1949@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/JumperC2P">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/hank-lee-784779136/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/8090654/h-lee">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+            
+                    
+                    
+                    
+            
+            
+            
+                </ul>
+		        <p class="copyright text-muted">
+                    Copyright &copy; InformisTry 2021
+                    <br>
+                    <small id="busuanzi_container_site_pv" style='display:none'> Page Views: <span id="busuanzi_value_site_pv"></span> </small>
+                    |
+                    <small id="busuanzi_container_site_uv" style='display:none'> Count of Visits: <span id="busuanzi_value_site_uv"></span> </small>
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-172654708-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+</body>
+</html>

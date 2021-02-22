@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="InformisTry">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="https://jumperc2p.github.io/InformisTry/https://tinyurl.com/yc28myh2">
+    <meta property="twitter:image" content="https://jumperc2p.github.io/InformisTry/https://tinyurl.com/yc28myh2" />
+    
+
+    
+    <meta name="title" content="A Combination of TimerTask and Timer" />
+    <meta property="og:title" content="A Combination of TimerTask and Timer" />
+    <meta property="twitter:title" content="A Combination of TimerTask and Timer" />
+    
+
+    
+    <meta name="description" content="Hank Lee。 IT &#43; Chemistry = InformisTry。 Career Change。">
+    <meta property="og:description" content="Hank Lee。 IT &#43; Chemistry = InformisTry。 Career Change。" />
+    <meta property="twitter:description" content="Hank Lee。 IT &#43; Chemistry = InformisTry。 Career Change。" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="Chih-Hsuan Lee, Informistry, Hank Lee, JumperC2P, Hank portfolio, Java, Python, Developer, Engineer, Software, ReactJS, Web, React, Database, Kubernetes, 微服務, Microservice, 演算法">
+    <link rel="shortcut icon" href="/InformisTry/img/favicon.ico">
+
+    <title>A Combination of TimerTask and Timer-HankLee</title>
+
+    <link rel="canonical" href="/InformisTry/posts/a_combination_of_timertask_and_timer">
+
+    <link rel="stylesheet" href="/InformisTry/css/iDisqus.min.css"/>
+	
+    
+    <link rel="stylesheet" href="/InformisTry/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/InformisTry/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="/InformisTry/css/zanshang.css">
+    
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    
+    
+
+    
+    
+    <script src="/InformisTry/js/jquery.min.js"></script>
+    
+    
+    <script src="/InformisTry/js/bootstrap.min.js"></script>
+    
+    
+    <script src="/InformisTry/js/hux-blog.min.js"></script>
+
+    
+    
+
+    
+    <script data-ad-client="ca-pub-8332161170897799" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+</head>
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/InformisTry/">InformisTry</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/InformisTry/">Home</a>
+                    </li>
+                    
+                        
+                        <li>
+                            <a href="/InformisTry/categories/books">books</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/InformisTry/categories/life">life</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/InformisTry/categories/series">series</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/InformisTry/categories/tech">tech</a>
+                        </li>
+                        
+                    
+                    
+		            
+                        <li><a href="/InformisTry/top/about">ABOUT ME  </a></li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('https://tinyurl.com/yc28myh2')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/InformisTry/tags/java" title="Java">
+                            Java
+                        </a>
+                        
+                        <a class="tag" href="/InformisTry/tags/thread" title="Thread">
+                            Thread
+                        </a>
+                        
+                        <a class="tag" href="/InformisTry/tags/hints" title="Hints">
+                            Hints
+                        </a>
+                        
+                    </div>
+                    <h1>A Combination of TimerTask and Timer</h1>
+                    <h2 class="subheading">How to use TimerTask and Timer in a easy way</h2>
+                    <span class="meta">
+                        Posted by 
+                        
+                            Hank Lee
+                         
+                        on 
+                        Sunday, May 3, 2020
+                        
+                            <span id="/posts/a_combination_of_timertask_and_timer" class="leancloud_visitors meta_data_item" data-flag-title="">
+    <span class="post-meta-item-icon">
+      <span class="octicon octicon-eye"></span> 
+    </span>
+    <i class="fa fa-eye"></i>
+    <span class="old-visitors-count" style="display: none;"></span>
+    <span class="leancloud-visitors-count"></span>
+</span>
+
+
+
+<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+
+<script>
+	AV.initialize("", "");
+</script>
+
+<script type="text/javascript">
+function showTime(Counter) {
+    var query = new AV.Query(Counter);
+    var entries = [];
+    var $visitors = $(".leancloud_visitors");
+
+    $visitors.each(function() {
+        entries.push($(this).attr("id").trim());
+    });
+
+    query.containedIn('url', entries);
+    query.find()
+        .done(function(results) {
+            var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+            var OLD_COUNT_CONTAINER_REF = '.old-visitors-count';
+
+            
+            
+            
+            
+
+            for (var i = 0; i < results.length; i++) {
+                var item = results[i];
+                var url = item.get('url');
+                var time = item.get('time');
+                var element = document.getElementById(url);
+
+                $(element).find(COUNT_CONTAINER_REF).text(time);
+            }
+            for (var i = 0; i < entries.length; i++) {
+                var url = entries[i];
+                var element = document.getElementById(url);
+                var countSpan = $(element).find(COUNT_CONTAINER_REF);
+                if (countSpan.text() == '') {
+                    var oldCountSpan = $(element).find(OLD_COUNT_CONTAINER_REF).text();
+                    if(oldCountSpan!=''){
+                        countSpan.text(0+parseInt(oldCountSpan));
+                    }else{
+                        countSpan.text(0);          
+                    }
+                }
+            }
+        })
+        .fail(function(object, error) {
+            console.log("Error: " + error.code + " " + error.message);
+        });
+}
+
+function addCount(Counter) {
+    var $visitors = $(".leancloud_visitors");
+    var url = $visitors.attr('id').trim();
+    var title = $visitors.attr('data-flag-title').trim();
+    var query = new AV.Query(Counter);
+
+    query.equalTo("url", url);
+    query.find({
+        success: function(results) {
+            if (results.length > 0) {
+                var counter = results[0];
+                counter.fetchWhenSave(true);
+                counter.increment("time");
+                counter.save(null, {
+                    success: function(counter) {
+                        var $element = $(document.getElementById(url));
+                        $element.find('.leancloud-visitors-count').text(counter.get('time'));
+                    },
+                    error: function(counter, error) {
+                        console.log('Failed to save Visitor num, with error message: ' + error.message);
+                    }
+                });
+            } else {
+                var newcounter = new Counter();
+                 
+                var acl = new AV.ACL();
+                acl.setPublicReadAccess(true);
+                acl.setPublicWriteAccess(true);
+                newcounter.setACL(acl);
+                 
+                newcounter.set("title", title);
+                newcounter.set("url", url);
+                var OLD_COUNT_CONTAINER_REF = '.old-visitors-count';
+                var $element = $(document.getElementById(url));
+                var oldCountSpan = $element.find(OLD_COUNT_CONTAINER_REF).text();
+                if(oldCountSpan!=''){
+                    newcounter.set("time", parseInt(oldCountSpan)+1);
+                }else{
+ 	                    newcounter.set("time",  1);
+                }
+                newcounter.save(null, {
+                    success: function(newcounter) {
+                        var $element = $(document.getElementById(url));
+                        $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                    },
+                    error: function(newcounter, error) {
+                        console.log('Failed to create');
+                    }
+                });
+            }
+        },
+        error: function(error) {
+            console.log('Error:' + error.code + " " + error.message);
+        }
+    });
+}
+$(function() {
+    var Counter = AV.Object.extend("Counter");
+    
+    
+    if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+    } else {
+        showTime(Counter);
+    }
+});
+</script>
+
+                        
+                        
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                    
+                    <header>
+                        <h2>Table of Contents</h2>
+                    </header>
+                    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#brief-introduction">Brief Introduction</a></li>
+    <li><a href="#how-to-use-them">How to use them</a></li>
+    <li><a href="#extra-example-1-use-with-javanetsocket">Extra Example-1 (Use with java.net.Socket)</a></li>
+    <li><a href="#extra-example-2-use-with-javanetsocket-and-multi-thread-of-clients">Extra Example-2 (Use with java.net.Socket and multi-thread of clients)</a></li>
+    <li><a href="#sample-code">Sample Code</a></li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+                    
+                
+
+                <p>In this article, I will give you a brief introduction about what Timer and TimerTask are and then a simple example to help you understand how to use them.</p>
+<h2 id="brief-introduction">Brief Introduction</h2>
+<h4 id="1-javautiltimertask">1. java.util.TimerTask:</h4>
+<p><code>java.util.TimerTask</code> is a class object which implements <code>Runnable</code> interface. By implementing the run method in TimerTask, we can tell the program what to do during runnint the task. So, <code>java.util.TimerTask</code> can be seen as a <strong>task</strong> object which contains what kinds of works to do when running the thread.</p>
+<h4 id="2-javautiltimer">2. java.util.Timer:</h4>
+<p><code>java.util.Timer</code>, on the other hand, is a class object used to schedule tasks for future execution. It is thread-safe, which means that <strong>multiple threads can share one Timer object without doing synchronization from other programs.</strong> So, <code>java.util.Timer</code> can be seen as a <strong>schedular</strong> object to arrange tasks to run.</p>
+<h2 id="how-to-use-them">How to use them</h2>
+<h4 id="1-implementation-of-a-timertask">1. Implementation of a TimerTask:</h4>
+<p>As <code>java.util.TimerTask</code> implements <code>java.lang.Runnable</code>, I need to overwrite the <strong>run</strong> method to declare what I need the thread to do.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#ff79c6">import</span> java.time.Instant<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.time.LocalDateTime<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.time.ZoneId<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.TimerTask<span style="color:#ff79c6">;</span>
+
+<span style="color:#6272a4">/**
+</span><span style="color:#6272a4"> * @author Hank Lee
+</span><span style="color:#6272a4"> * Shared from InformisTry -- https://jumperc2p.github.io/InformisTry/
+</span><span style="color:#6272a4"> *
+</span><span style="color:#6272a4"> */</span>
+<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">class</span> <span style="color:#50fa7b">PrintTask</span> <span style="color:#8be9fd;font-style:italic">extends</span> TimerTask <span style="color:#ff79c6">{</span>
+    
+    @Override
+    <span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">run</span><span style="color:#ff79c6">()</span> <span style="color:#ff79c6">{</span>
+        
+        <span style="color:#6272a4">// Gets the system default time-zone.
+</span><span style="color:#6272a4"></span>        ZoneId zone <span style="color:#ff79c6">=</span> ZoneId<span style="color:#ff79c6">.</span><span style="color:#50fa7b">systemDefault</span><span style="color:#ff79c6">();</span>
+        
+        <span style="color:#6272a4">// Returns the scheduled execution time of the most recent actual execution of this task.
+</span><span style="color:#6272a4"></span>        Long scheduledExecutionTime <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">this</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">scheduledExecutionTime</span><span style="color:#ff79c6">();</span>
+        
+        <span style="color:#6272a4">// Obtains an instance of LocalDateTime from an Instant and zone ID.
+</span><span style="color:#6272a4"></span>        LocalDateTime dateTime <span style="color:#ff79c6">=</span> LocalDateTime<span style="color:#ff79c6">.</span><span style="color:#50fa7b">ofInstant</span><span style="color:#ff79c6">(</span>Instant<span style="color:#ff79c6">.</span><span style="color:#50fa7b">ofEpochMilli</span><span style="color:#ff79c6">(</span>scheduledExecutionTime<span style="color:#ff79c6">),</span> zone<span style="color:#ff79c6">);</span>
+        
+        System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;Print message at: &#34;</span><span style="color:#ff79c6">+</span> dateTime<span style="color:#ff79c6">);</span>
+    <span style="color:#ff79c6">}</span>
+<span style="color:#ff79c6">}</span>
+</code></pre></div><p>In the example of PrintTask class, I use run method to print the scheduled execution time obtained by calling the <code>scheduledExecutionTime()</code> in <code>java.util.TimerTask</code>. So far, I have already setup a timer task and are waiting for using <code>java.util.Timer</code> to schedule it.</p>
+<h4 id="2-implementation-of-a-timer">2. Implementation of a Timer:</h4>
+<p>To setup a schedular using <code>java.util.Timer</code>, there is a simple example below:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#ff79c6">import</span> java.util.Timer<span style="color:#ff79c6">;</span>
+
+<span style="color:#6272a4">/**
+</span><span style="color:#6272a4"> * @author Hank Lee
+</span><span style="color:#6272a4"> * Shared in InformisTry -- https://jumperc2p.github.io/InformisTry/
+</span><span style="color:#6272a4"> *
+</span><span style="color:#6272a4"> */</span>
+<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">class</span> <span style="color:#50fa7b">TimerAndTimerTask</span> <span style="color:#ff79c6">{</span>
+
+	<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">static</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">main</span><span style="color:#ff79c6">(</span>String<span style="color:#ff79c6">[]</span> args<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+		
+		<span style="color:#6272a4">// create a new timer and give it a name
+</span><span style="color:#6272a4"></span>		Timer timer <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> Timer<span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;PrintTaskTimer&#34;</span><span style="color:#ff79c6">);</span>
+		
+		<span style="color:#6272a4">// schedule the PrintTask class and setup two parameters: delay and period
+</span><span style="color:#6272a4"></span>		<span style="color:#8be9fd">long</span> delay <span style="color:#ff79c6">=</span> 0<span style="color:#ff79c6">;</span>
+		<span style="color:#8be9fd">long</span> period <span style="color:#ff79c6">=</span> 2000<span style="color:#ff79c6">;</span>
+		timer<span style="color:#ff79c6">.</span><span style="color:#50fa7b">schedule</span><span style="color:#ff79c6">(</span><span style="color:#ff79c6">new</span> PrintTask<span style="color:#ff79c6">(),</span> delay<span style="color:#ff79c6">,</span> period<span style="color:#ff79c6">);</span>
+		System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;Timer has already started.&#34;</span><span style="color:#ff79c6">);</span>
+		
+		<span style="color:#6272a4">// record the current time
+</span><span style="color:#6272a4"></span>		Long startTime <span style="color:#ff79c6">=</span> System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">currentTimeMillis</span><span style="color:#ff79c6">();</span>
+		
+		<span style="color:#6272a4">// use while loop to restrict the execution
+</span><span style="color:#6272a4"></span>		<span style="color:#ff79c6">while</span> <span style="color:#ff79c6">(</span><span style="color:#ff79c6">true</span><span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+			
+			Long endTime <span style="color:#ff79c6">=</span> System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">currentTimeMillis</span><span style="color:#ff79c6">();</span>
+			
+			<span style="color:#6272a4">// when the running time comes to 20 seconds, cancel the timer and break the loop.
+</span><span style="color:#6272a4"></span>			<span style="color:#ff79c6">if</span> <span style="color:#ff79c6">((</span>endTime<span style="color:#ff79c6">-</span>startTime<span style="color:#ff79c6">)/(</span>1000<span style="color:#ff79c6">*</span>20<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">==</span> 1<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+				timer<span style="color:#ff79c6">.</span><span style="color:#50fa7b">cancel</span><span style="color:#ff79c6">();</span>
+				System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;Cancel timer. End the program.&#34;</span><span style="color:#ff79c6">);</span>
+				<span style="color:#ff79c6">break</span><span style="color:#ff79c6">;</span>
+			<span style="color:#ff79c6">}</span>
+			
+		<span style="color:#ff79c6">}</span>
+	<span style="color:#ff79c6">}</span>
+<span style="color:#ff79c6">}</span>
+</code></pre></div><p>In the example code, I create a new <code>java.util.Timer</code> object and give it a specified name <em>PrintTaskTimer</em>. Also, I declare two variables of times for deloy and period. Then, use the method <code>schedule(TimerTask task, long delay, long period)</code> to setup which TimerTask to execute and the times of delay and the period of execution. At that time, the PrintTask is scheduled and will execute every 2 seconds with no delay. In the while loop, I use it to setup that the timer will only run for 20 seconds. When time&rsquo;s up, the timer will be canceled and end the program. The result of running <code>TimerAndTimerTask</code> is shown as below:</p>
+<pre><code>Timer has already started.
+Print message at: 2020-05-03T17:01:16.780
+Print message at: 2020-05-03T17:01:18.783
+Print message at: 2020-05-03T17:01:20.786
+Print message at: 2020-05-03T17:01:22.791
+Print message at: 2020-05-03T17:01:24.791
+Print message at: 2020-05-03T17:01:26.794
+Print message at: 2020-05-03T17:01:28.797
+Print message at: 2020-05-03T17:01:30.802
+Print message at: 2020-05-03T17:01:32.807
+Print message at: 2020-05-03T17:01:34.811
+Cancel timer. End the program.
+</code></pre><p>As you can see, the differences of execution times between each messages are not exacly 2 seconds. The reason is that it needs some time to execute <code>PrintTask</code>. No sooner does the execution end than <code>Timer</code> starts to count for 2 seconds and execute <code>PrintTask</code> again. If you want to fix the issue, you can use another schedule method called <code>scheduleAtFixedRate(TimerTask task, long delay, long period)</code>. The example and result are shown as below.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#6272a4">// Just need to change the method here.
+</span><span style="color:#6272a4"></span>timer<span style="color:#ff79c6">.</span><span style="color:#50fa7b">scheduleAtFixedRate</span><span style="color:#ff79c6">(</span><span style="color:#ff79c6">new</span> PrintTask<span style="color:#ff79c6">(),</span> delay<span style="color:#ff79c6">,</span> period<span style="color:#ff79c6">);</span>
+</code></pre></div><p>Result:</p>
+<pre><code>Timer has already started.
+Print message at: 2020-05-03T17:18:26.730
+Print message at: 2020-05-03T17:18:28.730
+Print message at: 2020-05-03T17:18:30.730
+Print message at: 2020-05-03T17:18:32.730
+Print message at: 2020-05-03T17:18:34.730
+Print message at: 2020-05-03T17:18:36.730
+Print message at: 2020-05-03T17:18:38.730
+Print message at: 2020-05-03T17:18:40.730
+Print message at: 2020-05-03T17:18:42.730
+Print message at: 2020-05-03T17:18:44.730
+Cancel timer. End the program.
+</code></pre><h2 id="extra-example-1-use-with-javanetsocket">Extra Example-1 (Use with java.net.Socket)</h2>
+<p>Recently, I use java.util.Timer and java.util.TimerTask in my java.net.Socket programs to send messages from server to client to check whether the client is still alive or not. The logic in my implementation is that <strong>before the server is waiting for the response from client, I start the schedule to send message periodically. Once the server receive the message from client, I cancel the schedular. With the same logic in client site, I start the schedule to catch the message sent from server and print the message in the console before getting the input from console entered by user. Once the user enters a message, I cancel the schedular.</strong> The examples are as below:</p>
+<p>The sample code of <code>ServerTask.java</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#ff79c6">import</span> java.io.PrintWriter<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.TimerTask<span style="color:#ff79c6">;</span>
+
+<span style="color:#6272a4">/**
+</span><span style="color:#6272a4"> * @author Hank Lee
+</span><span style="color:#6272a4"> * Shared in InformisTry -- https://jumperc2p.github.io/InformisTry/
+</span><span style="color:#6272a4"> *
+</span><span style="color:#6272a4"> */</span>
+<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">class</span> <span style="color:#50fa7b">ServerTask</span> <span style="color:#8be9fd;font-style:italic">extends</span> TimerTask <span style="color:#ff79c6">{</span>
+	
+	<span style="color:#8be9fd;font-style:italic">private</span> PrintWriter outputToClient<span style="color:#ff79c6">;</span>
+	
+	<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#50fa7b">ServerTask</span> <span style="color:#ff79c6">(</span>PrintWriter outputToClient<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+		<span style="color:#ff79c6">this</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">outputToClient</span> <span style="color:#ff79c6">=</span> outputToClient<span style="color:#ff79c6">;</span>
+	<span style="color:#ff79c6">}</span>
+
+	@Override
+	<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">run</span><span style="color:#ff79c6">()</span> <span style="color:#ff79c6">{</span>
+		
+		<span style="color:#ff79c6">try</span> <span style="color:#ff79c6">{</span>
+			<span style="color:#6272a4">// Send the message to Client.
+</span><span style="color:#6272a4"></span>			outputToClient<span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;Are you still there?&#34;</span><span style="color:#ff79c6">);</span>
+		<span style="color:#ff79c6">}</span> <span style="color:#ff79c6">catch</span> <span style="color:#ff79c6">(</span>Exception e<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{}</span>
+
+	<span style="color:#ff79c6">}</span>
+
+<span style="color:#ff79c6">}</span>
+
+</code></pre></div><p>In the <code>ServerTask.java</code>, I use the thread to send message to client.</p>
+<p>The sample code of <code>Server.java</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#ff79c6">import</span> java.io.IOException<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.io.PrintWriter<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.net.ServerSocket<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.net.Socket<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.NoSuchElementException<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.Scanner<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.Timer<span style="color:#ff79c6">;</span>
+
+<span style="color:#6272a4">/**
+</span><span style="color:#6272a4"> * @author Hank Lee
+</span><span style="color:#6272a4"> * Shared in InformisTry -- https://jumperc2p.github.io/InformisTry/
+</span><span style="color:#6272a4"> *
+</span><span style="color:#6272a4"> */</span>
+<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">class</span> <span style="color:#50fa7b">Server</span> <span style="color:#ff79c6">{</span>
+	
+	<span style="color:#8be9fd;font-style:italic">private</span> <span style="color:#8be9fd;font-style:italic">final</span> <span style="color:#8be9fd">int</span> PORT <span style="color:#ff79c6">=</span> 61023<span style="color:#ff79c6">;</span>
+	<span style="color:#8be9fd;font-style:italic">private</span> Socket connection<span style="color:#ff79c6">;</span>
+	
+	<span style="color:#8be9fd;font-style:italic">private</span> Scanner inputFromClient<span style="color:#ff79c6">;</span>
+    <span style="color:#8be9fd;font-style:italic">private</span> PrintWriter outputToClient<span style="color:#ff79c6">;</span>
+	
+	<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#50fa7b">Server</span><span style="color:#ff79c6">()</span> <span style="color:#ff79c6">{</span>
+		
+		 ServerSocket server <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">null</span><span style="color:#ff79c6">;</span>
+		 
+		 <span style="color:#ff79c6">try</span><span style="color:#ff79c6">{</span>
+			 
+			<span style="color:#6272a4">// create a new socket
+</span><span style="color:#6272a4"></span>            server <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> ServerSocket<span style="color:#ff79c6">(</span>PORT<span style="color:#ff79c6">);</span>
+            System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;Starts the server&#34;</span><span style="color:#ff79c6">);</span>
+
+            <span style="color:#ff79c6">while</span> <span style="color:#ff79c6">(</span><span style="color:#ff79c6">true</span><span style="color:#ff79c6">)</span>
+            <span style="color:#ff79c6">{</span>
+                System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;Waiting for new connections...&#34;</span><span style="color:#ff79c6">);</span>
+                <span style="color:#6272a4">// accept connections from client
+</span><span style="color:#6272a4"></span>                connection <span style="color:#ff79c6">=</span> server<span style="color:#ff79c6">.</span><span style="color:#50fa7b">accept</span><span style="color:#ff79c6">();</span>
+                System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;Connection accepted&#34;</span><span style="color:#ff79c6">);</span>
+
+                <span style="color:#6272a4">// get the OutputStream and InputStream from connection
+</span><span style="color:#6272a4"></span>                outputToClient <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> PrintWriter<span style="color:#ff79c6">(</span>connection<span style="color:#ff79c6">.</span><span style="color:#50fa7b">getOutputStream</span><span style="color:#ff79c6">(),</span><span style="color:#ff79c6">true</span><span style="color:#ff79c6">);</span>
+                inputFromClient <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> Scanner<span style="color:#ff79c6">(</span>connection<span style="color:#ff79c6">.</span><span style="color:#50fa7b">getInputStream</span><span style="color:#ff79c6">());</span>
+                
+                <span style="color:#ff79c6">try</span> <span style="color:#ff79c6">{</span>
+                	
+                	<span style="color:#ff79c6">while</span> <span style="color:#ff79c6">(</span><span style="color:#ff79c6">true</span><span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+                		<span style="color:#6272a4">// send messages to client.
+</span><span style="color:#6272a4"></span>                		outputToClient<span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;Send messages to server. Or if you want to end the connection, please enter \&#34;q\&#34;:&#34;</span><span style="color:#ff79c6">);</span>
+                		
+                		<span style="color:#6272a4">// create new Timer to schedule TimerTask and start its schedule.
+</span><span style="color:#6272a4"></span>                		Timer timer <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> Timer<span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;ServerTaskTimer&#34;</span><span style="color:#ff79c6">);</span>
+                		<span style="color:#6272a4">// use delay to let the timer start after 3 seconds.
+</span><span style="color:#6272a4"></span>                		<span style="color:#8be9fd">long</span> delay <span style="color:#ff79c6">=</span> 3000<span style="color:#ff79c6">;</span>
+                		<span style="color:#8be9fd">long</span> period <span style="color:#ff79c6">=</span> 3000<span style="color:#ff79c6">;</span>
+                		timer<span style="color:#ff79c6">.</span><span style="color:#50fa7b">scheduleAtFixedRate</span><span style="color:#ff79c6">(</span><span style="color:#ff79c6">new</span> ServerTask<span style="color:#ff79c6">(</span>outputToClient<span style="color:#ff79c6">),</span> delay<span style="color:#ff79c6">,</span> period<span style="color:#ff79c6">);</span>
+                		<span style="color:#6272a4">// take input from client
+</span><span style="color:#6272a4"></span>                		String clientMessage <span style="color:#ff79c6">=</span> inputFromClient<span style="color:#ff79c6">.</span><span style="color:#50fa7b">nextLine</span><span style="color:#ff79c6">();</span>
+                		<span style="color:#6272a4">// Once it receive the message from client, cancel the timer.
+</span><span style="color:#6272a4"></span>                		timer<span style="color:#ff79c6">.</span><span style="color:#50fa7b">cancel</span><span style="color:#ff79c6">();</span>
+                		System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;Client says: &#34;</span> <span style="color:#ff79c6">+</span> clientMessage<span style="color:#ff79c6">);</span>
+                		<span style="color:#6272a4">// check if the client wants to end the connection.
+</span><span style="color:#6272a4"></span>                		<span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;q&#34;</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">equals</span><span style="color:#ff79c6">(</span>clientMessage<span style="color:#ff79c6">))</span> <span style="color:#ff79c6">{</span>
+                			System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;Client ends the connection.&#34;</span><span style="color:#ff79c6">);</span>
+                			<span style="color:#ff79c6">break</span><span style="color:#ff79c6">;</span>
+                		<span style="color:#ff79c6">}</span>
+                	<span style="color:#ff79c6">}</span>
+                <span style="color:#ff79c6">}</span><span style="color:#ff79c6">catch</span> <span style="color:#ff79c6">(</span>NoSuchElementException ne<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+                	System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;Client quits the game.&#34;</span><span style="color:#ff79c6">);</span>
+                <span style="color:#ff79c6">}</span>
+            <span style="color:#ff79c6">}</span>
+        <span style="color:#ff79c6">}</span> <span style="color:#ff79c6">catch</span> <span style="color:#ff79c6">(</span>IOException e<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+            e<span style="color:#ff79c6">.</span><span style="color:#50fa7b">printStackTrace</span><span style="color:#ff79c6">();</span>
+        <span style="color:#ff79c6">}</span> <span style="color:#ff79c6">finally</span> <span style="color:#ff79c6">{</span>
+            <span style="color:#ff79c6">try</span> <span style="color:#ff79c6">{</span>
+                server<span style="color:#ff79c6">.</span><span style="color:#50fa7b">close</span><span style="color:#ff79c6">();</span>
+            <span style="color:#ff79c6">}</span> <span style="color:#ff79c6">catch</span> <span style="color:#ff79c6">(</span>IOException e<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span> <span style="color:#ff79c6">}</span>
+        <span style="color:#ff79c6">}</span>
+	<span style="color:#ff79c6">}</span>
+
+	<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">static</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">main</span><span style="color:#ff79c6">(</span>String<span style="color:#ff79c6">[]</span> args<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+		<span style="color:#ff79c6">new</span> Server<span style="color:#ff79c6">();</span>
+	<span style="color:#ff79c6">}</span>
+
+<span style="color:#ff79c6">}</span>
+</code></pre></div><p>In the <code>Server.java</code>, it will send a introduction to client first, then start the timer before waiting for response from client. Once getting response, it stops the timer and print the message from client in console until the message is equals to &ldquo;q&rdquo;.</p>
+<p>The sample code of <code>ClientTask.java</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#ff79c6">import</span> java.util.Scanner<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.TimerTask<span style="color:#ff79c6">;</span>
+
+<span style="color:#6272a4">/**
+</span><span style="color:#6272a4"> * @author Hank Lee
+</span><span style="color:#6272a4"> * Shared in InformisTry -- https://jumperc2p.github.io/InformisTry/
+</span><span style="color:#6272a4"> *
+</span><span style="color:#6272a4"> */</span>
+<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">class</span> <span style="color:#50fa7b">ClientTask</span> <span style="color:#8be9fd;font-style:italic">extends</span> TimerTask <span style="color:#ff79c6">{</span>
+	
+	<span style="color:#8be9fd;font-style:italic">private</span> Scanner inputFromServer<span style="color:#ff79c6">;</span>
+	
+	<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#50fa7b">ClientTask</span><span style="color:#ff79c6">(</span>Scanner inputFromServer<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+		<span style="color:#ff79c6">this</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">inputFromServer</span> <span style="color:#ff79c6">=</span> inputFromServer<span style="color:#ff79c6">;</span>
+	<span style="color:#ff79c6">}</span>
+
+	@Override
+	<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">run</span><span style="color:#ff79c6">()</span> <span style="color:#ff79c6">{</span>
+		
+		<span style="color:#ff79c6">try</span> <span style="color:#ff79c6">{</span>
+			<span style="color:#6272a4">// Print the message from server.
+</span><span style="color:#6272a4"></span>			System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;ClientTask: &#34;</span> <span style="color:#ff79c6">+</span> inputFromServer<span style="color:#ff79c6">.</span><span style="color:#50fa7b">nextLine</span><span style="color:#ff79c6">());</span>
+		<span style="color:#ff79c6">}</span> <span style="color:#ff79c6">catch</span> <span style="color:#ff79c6">(</span>Exception e<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{}</span>
+
+	<span style="color:#ff79c6">}</span>
+
+<span style="color:#ff79c6">}</span>
+</code></pre></div><p>In the <code>ClientTask.java</code>, I use the thread to catch message sent from server and print the message to console.</p>
+<p>The sample code of <code>Client.java</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#ff79c6">import</span> java.io.*<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.net.Socket<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.NoSuchElementException<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.Scanner<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.Timer<span style="color:#ff79c6">;</span>
+
+<span style="color:#6272a4">/**
+</span><span style="color:#6272a4"> * @author Hank Lee
+</span><span style="color:#6272a4"> * Shared in InformisTry -- https://jumperc2p.github.io/InformisTry/
+</span><span style="color:#6272a4"> *
+</span><span style="color:#6272a4"> */</span>
+<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">class</span> <span style="color:#50fa7b">Client</span> <span style="color:#ff79c6">{</span>
+	<span style="color:#8be9fd;font-style:italic">private</span> <span style="color:#8be9fd;font-style:italic">final</span> <span style="color:#8be9fd;font-style:italic">static</span> String ADDRESS <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;localhost&#34;</span><span style="color:#ff79c6">;</span>
+	<span style="color:#8be9fd;font-style:italic">private</span> <span style="color:#8be9fd;font-style:italic">final</span> <span style="color:#8be9fd;font-style:italic">static</span> <span style="color:#8be9fd">int</span> PORT <span style="color:#ff79c6">=</span> 61023<span style="color:#ff79c6">;</span>
+
+	<span style="color:#8be9fd;font-style:italic">private</span> Socket connection<span style="color:#ff79c6">;</span>
+
+	<span style="color:#8be9fd;font-style:italic">private</span> PrintWriter outputToServer<span style="color:#ff79c6">;</span>
+	<span style="color:#8be9fd;font-style:italic">private</span> Scanner inputFromServer<span style="color:#ff79c6">;</span>
+
+	<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#50fa7b">Client</span><span style="color:#ff79c6">()</span> <span style="color:#ff79c6">{</span>
+		<span style="color:#ff79c6">try</span> <span style="color:#ff79c6">{</span>
+			<span style="color:#6272a4">// create a socket with the address and port
+</span><span style="color:#6272a4"></span>			connection <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> Socket<span style="color:#ff79c6">(</span>ADDRESS<span style="color:#ff79c6">,</span> PORT<span style="color:#ff79c6">);</span>
+
+			<span style="color:#6272a4">// get the OutputStream and InputStream from the connection
+</span><span style="color:#6272a4"></span>			outputToServer <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> PrintWriter<span style="color:#ff79c6">(</span>connection<span style="color:#ff79c6">.</span><span style="color:#50fa7b">getOutputStream</span><span style="color:#ff79c6">(),</span> <span style="color:#ff79c6">true</span><span style="color:#ff79c6">);</span>
+			inputFromServer <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> Scanner<span style="color:#ff79c6">(</span>connection<span style="color:#ff79c6">.</span><span style="color:#50fa7b">getInputStream</span><span style="color:#ff79c6">());</span>
+			Scanner inputFromConsole<span style="color:#ff79c6">;</span>
+
+			<span style="color:#6272a4">// use while loop to listen feedbacks from server.
+</span><span style="color:#6272a4"></span>			<span style="color:#ff79c6">while</span> <span style="color:#ff79c6">(</span><span style="color:#ff79c6">true</span><span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+
+				<span style="color:#ff79c6">try</span> <span style="color:#ff79c6">{</span>
+					<span style="color:#6272a4">// read the message from server
+</span><span style="color:#6272a4"></span>					String serverMessage <span style="color:#ff79c6">=</span> inputFromServer<span style="color:#ff79c6">.</span><span style="color:#50fa7b">nextLine</span><span style="color:#ff79c6">();</span>
+
+					<span style="color:#6272a4">// print the message from server.
+</span><span style="color:#6272a4"></span>					System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span>serverMessage<span style="color:#ff79c6">);</span>
+
+					<span style="color:#6272a4">// create a Timer to schedule ClientTask which use to receive the message from
+</span><span style="color:#6272a4"></span>					<span style="color:#6272a4">// ServerTask.
+</span><span style="color:#6272a4"></span>					Timer timer <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> Timer<span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;ClientTaskTimer&#34;</span><span style="color:#ff79c6">);</span>
+					<span style="color:#6272a4">// use delay to let the timer start after 3 seconds.
+</span><span style="color:#6272a4"></span>					<span style="color:#8be9fd">long</span> delay <span style="color:#ff79c6">=</span> 3000<span style="color:#ff79c6">;</span>
+					<span style="color:#8be9fd">long</span> period <span style="color:#ff79c6">=</span> 3000<span style="color:#ff79c6">;</span>
+					timer<span style="color:#ff79c6">.</span><span style="color:#50fa7b">scheduleAtFixedRate</span><span style="color:#ff79c6">(</span><span style="color:#ff79c6">new</span> ClientTask<span style="color:#ff79c6">(</span><span style="color:#ff79c6">new</span> Scanner<span style="color:#ff79c6">(</span>connection<span style="color:#ff79c6">.</span><span style="color:#50fa7b">getInputStream</span><span style="color:#ff79c6">())),</span> delay<span style="color:#ff79c6">,</span> period<span style="color:#ff79c6">);</span>
+
+					<span style="color:#6272a4">// get input from console and use PrintWriter to send the input to server.
+</span><span style="color:#6272a4"></span>					inputFromConsole <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> Scanner<span style="color:#ff79c6">(</span>System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">in</span><span style="color:#ff79c6">);</span>
+					String messageToServer <span style="color:#ff79c6">=</span> inputFromConsole<span style="color:#ff79c6">.</span><span style="color:#50fa7b">nextLine</span><span style="color:#ff79c6">();</span>
+					outputToServer<span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span>messageToServer<span style="color:#ff79c6">);</span>
+					<span style="color:#6272a4">// After sending message to server, cancel the timer.
+</span><span style="color:#6272a4"></span>					timer<span style="color:#ff79c6">.</span><span style="color:#50fa7b">cancel</span><span style="color:#ff79c6">();</span>
+
+					<span style="color:#6272a4">// check if client wants to end the connection
+</span><span style="color:#6272a4"></span>					<span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;q&#34;</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">equals</span><span style="color:#ff79c6">(</span>messageToServer<span style="color:#ff79c6">))</span> <span style="color:#ff79c6">{</span>
+						System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;End the connection.&#34;</span><span style="color:#ff79c6">);</span>
+						inputFromConsole<span style="color:#ff79c6">.</span><span style="color:#50fa7b">close</span><span style="color:#ff79c6">();</span>
+						<span style="color:#ff79c6">break</span><span style="color:#ff79c6">;</span>
+					<span style="color:#ff79c6">}</span>
+					<span style="color:#6272a4">// If the server is shut down, end the while loop.
+</span><span style="color:#6272a4"></span>				<span style="color:#ff79c6">}</span> <span style="color:#ff79c6">catch</span> <span style="color:#ff79c6">(</span>NoSuchElementException nsee<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+					nsee<span style="color:#ff79c6">.</span><span style="color:#50fa7b">printStackTrace</span><span style="color:#ff79c6">();</span>
+					System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;The server is out of service.&#34;</span><span style="color:#ff79c6">);</span>
+					<span style="color:#ff79c6">break</span><span style="color:#ff79c6">;</span>
+				<span style="color:#ff79c6">}</span>
+			<span style="color:#ff79c6">}</span>
+			System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">exit</span><span style="color:#ff79c6">(</span>0<span style="color:#ff79c6">);</span>
+
+		<span style="color:#ff79c6">}</span> <span style="color:#ff79c6">catch</span> <span style="color:#ff79c6">(</span>IOException e<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+			e<span style="color:#ff79c6">.</span><span style="color:#50fa7b">printStackTrace</span><span style="color:#ff79c6">();</span>
+		<span style="color:#ff79c6">}</span>
+	<span style="color:#ff79c6">}</span>
+
+	<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">static</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">main</span><span style="color:#ff79c6">(</span>String<span style="color:#ff79c6">[]</span> args<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+		<span style="color:#ff79c6">new</span> Client<span style="color:#ff79c6">();</span>
+	<span style="color:#ff79c6">}</span>
+<span style="color:#ff79c6">}</span>
+</code></pre></div><p>In the <code>Client.java</code>, it prints the introduction from server first, and setup the timer then waiting for the input from console. Once receiving the input, it stops the timer and send the message to server until the input is equals to &ldquo;q&rdquo;.</p>
+<p>In <code>Server.java</code> and <code>Client.java</code>, I setup a delay time for 3 seconds, as I want timers to start tasks after 3 seconds.</p>
+<p>The console output in server site will be:</p>
+<pre><code>Starts the server
+Waiting for new connections...
+Connection accepted
+Client says: Hi Server
+Client says: Hello
+Client says: q
+Client ends the connection.
+Waiting for new connections...
+</code></pre><p><code>Server.java</code> will execute until stoping it manually.</p>
+<p>The console output in client site will be:</p>
+<pre><code>Send messages to server. Or if you want to end the connection, please enter &quot;q&quot;:
+ClientTask: Are you still there?
+Hi Server
+Send messages to server. Or if you want to end the connection, please enter &quot;q&quot;:
+ClientTask: Are you still there?
+Hello
+Send messages to server. Or if you want to end the connection, please enter &quot;q&quot;:
+ClientTask: Are you still there?
+ClientTask: Are you still there?
+ClientTask: Are you still there?
+q
+End the connection.
+</code></pre><p>The messages which starts from <em>ClientTask:</em> are printed in <code>ClientTask.java</code>.</p>
+<h2 id="extra-example-2-use-with-javanetsocket-and-multi-thread-of-clients">Extra Example-2 (Use with java.net.Socket and multi-thread of clients)</h2>
+<p>It&rsquo;s time to handle multi-thread in the server site with Timer and TimerTask. It&rsquo;s very easy to implement it by just moving part of the codes of <code>Server.java</code> to another class object which extends <code>java.lang.Thread</code>, which is <code>ClientThreadHandler.java</code> in my sample code. There is no need to change the code in <code>Client.java</code> and <code>ClientTask.java</code>. The codes are shown as below.</p>
+<p>The sample code of <code>Server.java</code> with handling multi-thread:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#ff79c6">import</span> java.io.IOException<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.net.ServerSocket<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.net.Socket<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.ArrayList<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.List<span style="color:#ff79c6">;</span>
+
+<span style="color:#6272a4">/**
+</span><span style="color:#6272a4"> * @author Hank Lee
+</span><span style="color:#6272a4"> * Shared in InformisTry -- https://jumperc2p.github.io/InformisTry/
+</span><span style="color:#6272a4"> *
+</span><span style="color:#6272a4"> */</span>
+<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">class</span> <span style="color:#50fa7b">Server</span> <span style="color:#ff79c6">{</span>
+	
+	<span style="color:#8be9fd;font-style:italic">private</span> <span style="color:#8be9fd;font-style:italic">final</span> <span style="color:#8be9fd">int</span> PORT <span style="color:#ff79c6">=</span> 61023<span style="color:#ff79c6">;</span>
+	<span style="color:#8be9fd;font-style:italic">private</span> Socket connection<span style="color:#ff79c6">;</span>
+	
+	<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#50fa7b">Server</span><span style="color:#ff79c6">()</span> <span style="color:#ff79c6">{</span>
+		
+		 ServerSocket server <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">null</span><span style="color:#ff79c6">;</span>
+		 List<span style="color:#ff79c6">&lt;</span>ClientThreadHandler<span style="color:#ff79c6">&gt;</span> clients <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> ArrayList<span style="color:#ff79c6">&lt;&gt;();</span>
+		 
+		 <span style="color:#ff79c6">try</span><span style="color:#ff79c6">{</span>
+			 
+			<span style="color:#6272a4">// create a new socket
+</span><span style="color:#6272a4"></span>            server <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> ServerSocket<span style="color:#ff79c6">(</span>PORT<span style="color:#ff79c6">);</span>
+            System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;Starts the server&#34;</span><span style="color:#ff79c6">);</span>
+
+            <span style="color:#ff79c6">while</span> <span style="color:#ff79c6">(</span><span style="color:#ff79c6">true</span><span style="color:#ff79c6">)</span>
+            <span style="color:#ff79c6">{</span>
+                System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;Waiting for new connections...&#34;</span><span style="color:#ff79c6">);</span>
+                <span style="color:#6272a4">// accept connections from client
+</span><span style="color:#6272a4"></span>                connection <span style="color:#ff79c6">=</span> server<span style="color:#ff79c6">.</span><span style="color:#50fa7b">accept</span><span style="color:#ff79c6">();</span>
+                clients<span style="color:#ff79c6">.</span><span style="color:#50fa7b">add</span><span style="color:#ff79c6">(</span><span style="color:#ff79c6">new</span> ClientThreadHandler<span style="color:#ff79c6">(</span>connection<span style="color:#ff79c6">));</span>
+                System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;Connection accepted&#34;</span><span style="color:#ff79c6">);</span>
+                System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;Start the thread.&#34;</span><span style="color:#ff79c6">);</span>
+                clients<span style="color:#ff79c6">.</span><span style="color:#50fa7b">get</span><span style="color:#ff79c6">(</span>clients<span style="color:#ff79c6">.</span><span style="color:#50fa7b">size</span><span style="color:#ff79c6">()-</span>1<span style="color:#ff79c6">).</span><span style="color:#50fa7b">start</span><span style="color:#ff79c6">();</span>
+               
+            <span style="color:#ff79c6">}</span>
+        <span style="color:#ff79c6">}</span> <span style="color:#ff79c6">catch</span> <span style="color:#ff79c6">(</span>IOException e<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+            e<span style="color:#ff79c6">.</span><span style="color:#50fa7b">printStackTrace</span><span style="color:#ff79c6">();</span>
+        <span style="color:#ff79c6">}</span> <span style="color:#ff79c6">finally</span> <span style="color:#ff79c6">{</span>
+            <span style="color:#ff79c6">try</span> <span style="color:#ff79c6">{</span>
+                server<span style="color:#ff79c6">.</span><span style="color:#50fa7b">close</span><span style="color:#ff79c6">();</span>
+            <span style="color:#ff79c6">}</span> <span style="color:#ff79c6">catch</span> <span style="color:#ff79c6">(</span>IOException e<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span> <span style="color:#ff79c6">}</span>
+        <span style="color:#ff79c6">}</span>
+	<span style="color:#ff79c6">}</span>
+
+	<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">static</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">main</span><span style="color:#ff79c6">(</span>String<span style="color:#ff79c6">[]</span> args<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+		<span style="color:#ff79c6">new</span> Server<span style="color:#ff79c6">();</span>
+	<span style="color:#ff79c6">}</span>
+
+<span style="color:#ff79c6">}</span>
+</code></pre></div><p>As you can see, in the <code>Server.java</code>, I just accept connections, and use the connection to create an instance of <code>ClientThreadHandler.java</code> and put the instance into a list, then start the instance.</p>
+<p>The sample code of <code>ClientThreadHandler.java</code> which extends <code>java.lang.Thread</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#ff79c6">import</span> java.io.IOException<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.io.PrintWriter<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.net.Socket<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.NoSuchElementException<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.Scanner<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.Timer<span style="color:#ff79c6">;</span>
+
+<span style="color:#6272a4">/**
+</span><span style="color:#6272a4"> * @author Hank Lee
+</span><span style="color:#6272a4"> * Shared in InformisTry -- https://jumperc2p.github.io/InformisTry/
+</span><span style="color:#6272a4"> *
+</span><span style="color:#6272a4"> */</span>
+<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">class</span> <span style="color:#50fa7b">ClientThreadHandler</span> <span style="color:#8be9fd;font-style:italic">extends</span> Thread <span style="color:#ff79c6">{</span>
+	
+	<span style="color:#8be9fd;font-style:italic">private</span> Scanner inputFromClient<span style="color:#ff79c6">;</span>
+    <span style="color:#8be9fd;font-style:italic">private</span> PrintWriter outputToClient<span style="color:#ff79c6">;</span>
+	
+	<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#50fa7b">ClientThreadHandler</span><span style="color:#ff79c6">(</span>Socket connection<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+		
+		<span style="color:#6272a4">// get the OutputStream and InputStream from connection
+</span><span style="color:#6272a4"></span>        <span style="color:#ff79c6">try</span> <span style="color:#ff79c6">{</span>
+			outputToClient <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> PrintWriter<span style="color:#ff79c6">(</span>connection<span style="color:#ff79c6">.</span><span style="color:#50fa7b">getOutputStream</span><span style="color:#ff79c6">(),</span><span style="color:#ff79c6">true</span><span style="color:#ff79c6">);</span>
+			inputFromClient <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> Scanner<span style="color:#ff79c6">(</span>connection<span style="color:#ff79c6">.</span><span style="color:#50fa7b">getInputStream</span><span style="color:#ff79c6">());</span>
+		<span style="color:#ff79c6">}</span> <span style="color:#ff79c6">catch</span> <span style="color:#ff79c6">(</span>IOException e<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+			e<span style="color:#ff79c6">.</span><span style="color:#50fa7b">printStackTrace</span><span style="color:#ff79c6">();</span>
+		<span style="color:#ff79c6">}</span>
+	<span style="color:#ff79c6">}</span>
+	
+	@Override
+	<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">run</span><span style="color:#ff79c6">()</span> <span style="color:#ff79c6">{</span>
+		
+		  <span style="color:#ff79c6">try</span> <span style="color:#ff79c6">{</span>
+          	
+          	<span style="color:#ff79c6">while</span> <span style="color:#ff79c6">(</span><span style="color:#ff79c6">true</span><span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+          		<span style="color:#6272a4">// send messages to client.
+</span><span style="color:#6272a4"></span>          		outputToClient<span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;Send messages to server. Or if you want to end the connection, please enter \&#34;q\&#34;:&#34;</span><span style="color:#ff79c6">);</span>
+          		
+          		<span style="color:#6272a4">// create new Timer to schedule TimerTask and start its schedule.
+</span><span style="color:#6272a4"></span>          		Timer timer <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> Timer<span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;ServerTaskTimer&#34;</span><span style="color:#ff79c6">);</span>
+          		<span style="color:#6272a4">// use delay to let the timer start after 3 seconds.
+</span><span style="color:#6272a4"></span>          		<span style="color:#8be9fd">long</span> delay <span style="color:#ff79c6">=</span> 3000<span style="color:#ff79c6">;</span>
+          		<span style="color:#8be9fd">long</span> period <span style="color:#ff79c6">=</span> 3000<span style="color:#ff79c6">;</span>
+          		timer<span style="color:#ff79c6">.</span><span style="color:#50fa7b">scheduleAtFixedRate</span><span style="color:#ff79c6">(</span><span style="color:#ff79c6">new</span> ServerTask<span style="color:#ff79c6">(</span>outputToClient<span style="color:#ff79c6">),</span> delay<span style="color:#ff79c6">,</span> period<span style="color:#ff79c6">);</span>
+          		<span style="color:#6272a4">// take input from client
+</span><span style="color:#6272a4"></span>          		String clientMessage <span style="color:#ff79c6">=</span> inputFromClient<span style="color:#ff79c6">.</span><span style="color:#50fa7b">nextLine</span><span style="color:#ff79c6">();</span>
+          		<span style="color:#6272a4">// Once it receive the message from client, cancel the timer.
+</span><span style="color:#6272a4"></span>          		timer<span style="color:#ff79c6">.</span><span style="color:#50fa7b">cancel</span><span style="color:#ff79c6">();</span>
+          		System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;Client says: &#34;</span> <span style="color:#ff79c6">+</span> clientMessage<span style="color:#ff79c6">);</span>
+          		<span style="color:#6272a4">// check if the client wants to end the connection.
+</span><span style="color:#6272a4"></span>          		<span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;q&#34;</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">equals</span><span style="color:#ff79c6">(</span>clientMessage<span style="color:#ff79c6">))</span> <span style="color:#ff79c6">{</span>
+          			System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;Client ends the connection.&#34;</span><span style="color:#ff79c6">);</span>
+          			<span style="color:#ff79c6">break</span><span style="color:#ff79c6">;</span>
+          		<span style="color:#ff79c6">}</span>
+          	<span style="color:#ff79c6">}</span>
+          <span style="color:#ff79c6">}</span><span style="color:#ff79c6">catch</span> <span style="color:#ff79c6">(</span>NoSuchElementException ne<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+          	System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;Client quits the game.&#34;</span><span style="color:#ff79c6">);</span>
+          <span style="color:#ff79c6">}</span>
+	<span style="color:#ff79c6">}</span>
+<span style="color:#ff79c6">}</span>
+</code></pre></div><p>In the <code>ClientThreadHandler.java</code>, I just paste codes used to react with client from <code>Server.java</code>.</p>
+<p>That&rsquo;s all. No thing is difficult.</p>
+<h2 id="sample-code">Sample Code</h2>
+<p>The sample code can be downloaded <a href="https://github.com/JumperC2P/Informistry_sample_code">here</a>:</p>
+<ul>
+<li>Extra example -1 is in the package of <strong>timer_example</strong>.</li>
+<li>Extra example -2 is in the package of <strong>multithread_socket_with_timer</strong>.</li>
+</ul>
+<blockquote>
+<p>If you would like to use the code provided here, <strong>please indicate the source</strong>.</p>
+</blockquote>
+<p>Using <code>java.util.Timer</code> and <code>java.util.TimerTask</code> can help us execute other programs at the same time. But I still need more practices to understand the knowledge of Thread.</p>
+<p>If you have any options about the article, please feel free to give me a comment below. Thank you.</p>
+<h2 id="references">References</h2>
+<ol>
+<li><a href="https://docs.oracle.com/javase/8/docs/api/java/util/Timer.html">Java API - Timer</a></li>
+<li><a href="https://docs.oracle.com/javase/8/docs/api/java/util/TimerTask.html">Java API - TimerTask</a></li>
+<li><a href="https://www.baeldung.com/java-timer-and-timertask">Java Timer-Baeldung</a></li>
+</ol>
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/InformisTry/posts/whats_informistry/"  style="width: 49rem;" data-toggle="tooltip" data-placement="top" title="What&#39;s Informistry?">&larr;
+                            What&#39;s Informistry?</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/InformisTry/posts/a_brief_introduction_of_using_java_logger/" style="width: 49rem;" data-toggle="tooltip" data-placement="top" title="A Brief Introduction of Using Java Logger">&rarr; A Brief Introduction of Using Java Logger</a>
+                    </li>
+                    
+                </ul>
+
+                
+<div id="disqus-comment"></div>
+
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "informistry" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+            </div>
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        <a href="/InformisTry/tags/algorithm" title="algorithm">
+                            algorithm
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/InformisTry/tags/data-structure" title="data-structure">
+                            data-structure
+                        </a>
+                        
+                        
+                        
+                        <a href="/InformisTry/tags/hints" title="hints">
+                            hints
+                        </a>
+                        
+                        
+                        
+                        <a href="/InformisTry/tags/ithome" title="ithome">
+                            ithome
+                        </a>
+                        
+                        
+                        
+                        <a href="/InformisTry/tags/java" title="java">
+                            java
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/InformisTry/tags/triathlon" title="triathlon">
+                            triathlon
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>FRIENDS</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="https://ianjustin39.github.io/ianlife/">Ian化學系軟體工程師</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                    
+                    <li>
+                        <a href="mailto:adslbbc1949@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/JumperC2P">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/hank-lee-784779136/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/8090654/h-lee">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+            
+                    
+                    
+                    
+            
+            
+            
+                </ul>
+		        <p class="copyright text-muted">
+                    Copyright &copy; InformisTry 2021
+                    <br>
+                    <small id="busuanzi_container_site_pv" style='display:none'> Page Views: <span id="busuanzi_value_site_pv"></span> </small>
+                    |
+                    <small id="busuanzi_container_site_uv" style='display:none'> Count of Visits: <span id="busuanzi_value_site_uv"></span> </small>
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-172654708-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+</body>
+</html>

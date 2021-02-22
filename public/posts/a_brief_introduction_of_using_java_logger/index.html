@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="InformisTry">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="https://jumperc2p.github.io/InformisTry/https://tinyurl.com/yc28myh2">
+    <meta property="twitter:image" content="https://jumperc2p.github.io/InformisTry/https://tinyurl.com/yc28myh2" />
+    
+
+    
+    <meta name="title" content="A Brief Introduction of Using Java Logger" />
+    <meta property="og:title" content="A Brief Introduction of Using Java Logger" />
+    <meta property="twitter:title" content="A Brief Introduction of Using Java Logger" />
+    
+
+    
+    <meta name="description" content="Hank Lee。 IT &#43; Chemistry = InformisTry。 Career Change。">
+    <meta property="og:description" content="Hank Lee。 IT &#43; Chemistry = InformisTry。 Career Change。" />
+    <meta property="twitter:description" content="Hank Lee。 IT &#43; Chemistry = InformisTry。 Career Change。" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="Chih-Hsuan Lee, Informistry, Hank Lee, JumperC2P, Hank portfolio, Java, Python, Developer, Engineer, Software, ReactJS, Web, React, Database, Kubernetes, 微服務, Microservice, 演算法">
+    <link rel="shortcut icon" href="/InformisTry/img/favicon.ico">
+
+    <title>A Brief Introduction of Using Java Logger-HankLee</title>
+
+    <link rel="canonical" href="/InformisTry/posts/a_brief_introduction_of_using_java_logger">
+
+    <link rel="stylesheet" href="/InformisTry/css/iDisqus.min.css"/>
+	
+    
+    <link rel="stylesheet" href="/InformisTry/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/InformisTry/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="/InformisTry/css/zanshang.css">
+    
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    
+    
+
+    
+    
+    <script src="/InformisTry/js/jquery.min.js"></script>
+    
+    
+    <script src="/InformisTry/js/bootstrap.min.js"></script>
+    
+    
+    <script src="/InformisTry/js/hux-blog.min.js"></script>
+
+    
+    
+
+    
+    <script data-ad-client="ca-pub-8332161170897799" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+</head>
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/InformisTry/">InformisTry</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/InformisTry/">Home</a>
+                    </li>
+                    
+                        
+                        <li>
+                            <a href="/InformisTry/categories/books">books</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/InformisTry/categories/life">life</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/InformisTry/categories/series">series</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/InformisTry/categories/tech">tech</a>
+                        </li>
+                        
+                    
+                    
+		            
+                        <li><a href="/InformisTry/top/about">ABOUT ME  </a></li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('https://tinyurl.com/yc28myh2')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/InformisTry/tags/java" title="Java">
+                            Java
+                        </a>
+                        
+                        <a class="tag" href="/InformisTry/tags/log" title="Log">
+                            Log
+                        </a>
+                        
+                        <a class="tag" href="/InformisTry/tags/hints" title="Hints">
+                            Hints
+                        </a>
+                        
+                    </div>
+                    <h1>A Brief Introduction of Using Java Logger</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by 
+                        
+                            Hank Lee
+                         
+                        on 
+                        Friday, May 8, 2020
+                        
+                            <span id="/posts/a_brief_introduction_of_using_java_logger" class="leancloud_visitors meta_data_item" data-flag-title="">
+    <span class="post-meta-item-icon">
+      <span class="octicon octicon-eye"></span> 
+    </span>
+    <i class="fa fa-eye"></i>
+    <span class="old-visitors-count" style="display: none;"></span>
+    <span class="leancloud-visitors-count"></span>
+</span>
+
+
+
+<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+
+<script>
+	AV.initialize("", "");
+</script>
+
+<script type="text/javascript">
+function showTime(Counter) {
+    var query = new AV.Query(Counter);
+    var entries = [];
+    var $visitors = $(".leancloud_visitors");
+
+    $visitors.each(function() {
+        entries.push($(this).attr("id").trim());
+    });
+
+    query.containedIn('url', entries);
+    query.find()
+        .done(function(results) {
+            var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+            var OLD_COUNT_CONTAINER_REF = '.old-visitors-count';
+
+            
+            
+            
+            
+
+            for (var i = 0; i < results.length; i++) {
+                var item = results[i];
+                var url = item.get('url');
+                var time = item.get('time');
+                var element = document.getElementById(url);
+
+                $(element).find(COUNT_CONTAINER_REF).text(time);
+            }
+            for (var i = 0; i < entries.length; i++) {
+                var url = entries[i];
+                var element = document.getElementById(url);
+                var countSpan = $(element).find(COUNT_CONTAINER_REF);
+                if (countSpan.text() == '') {
+                    var oldCountSpan = $(element).find(OLD_COUNT_CONTAINER_REF).text();
+                    if(oldCountSpan!=''){
+                        countSpan.text(0+parseInt(oldCountSpan));
+                    }else{
+                        countSpan.text(0);          
+                    }
+                }
+            }
+        })
+        .fail(function(object, error) {
+            console.log("Error: " + error.code + " " + error.message);
+        });
+}
+
+function addCount(Counter) {
+    var $visitors = $(".leancloud_visitors");
+    var url = $visitors.attr('id').trim();
+    var title = $visitors.attr('data-flag-title').trim();
+    var query = new AV.Query(Counter);
+
+    query.equalTo("url", url);
+    query.find({
+        success: function(results) {
+            if (results.length > 0) {
+                var counter = results[0];
+                counter.fetchWhenSave(true);
+                counter.increment("time");
+                counter.save(null, {
+                    success: function(counter) {
+                        var $element = $(document.getElementById(url));
+                        $element.find('.leancloud-visitors-count').text(counter.get('time'));
+                    },
+                    error: function(counter, error) {
+                        console.log('Failed to save Visitor num, with error message: ' + error.message);
+                    }
+                });
+            } else {
+                var newcounter = new Counter();
+                 
+                var acl = new AV.ACL();
+                acl.setPublicReadAccess(true);
+                acl.setPublicWriteAccess(true);
+                newcounter.setACL(acl);
+                 
+                newcounter.set("title", title);
+                newcounter.set("url", url);
+                var OLD_COUNT_CONTAINER_REF = '.old-visitors-count';
+                var $element = $(document.getElementById(url));
+                var oldCountSpan = $element.find(OLD_COUNT_CONTAINER_REF).text();
+                if(oldCountSpan!=''){
+                    newcounter.set("time", parseInt(oldCountSpan)+1);
+                }else{
+ 	                    newcounter.set("time",  1);
+                }
+                newcounter.save(null, {
+                    success: function(newcounter) {
+                        var $element = $(document.getElementById(url));
+                        $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                    },
+                    error: function(newcounter, error) {
+                        console.log('Failed to create');
+                    }
+                });
+            }
+        },
+        error: function(error) {
+            console.log('Error:' + error.code + " " + error.message);
+        }
+    });
+}
+$(function() {
+    var Counter = AV.Object.extend("Counter");
+    
+    
+    if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+    } else {
+        showTime(Counter);
+    }
+});
+</script>
+
+                        
+                        
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                    
+                    <header>
+                        <h2>Table of Contents</h2>
+                    </header>
+                    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#brief-introduction">Brief Introduction</a></li>
+    <li><a href="#a-simple-example">A Simple Example</a></li>
+    <li><a href="#extra-example---use-java-logger-in-different-threads-with-javautilsocket">Extra Example - Use Java Logger in Different Threads with java.util.Socket</a></li>
+    <li><a href="#sample-code">Sample Code</a></li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+                    
+                
+
+                <p>Recently, I am asked to record some information about how my server runs. So, I decide to use <code>java.util.logging.Logger</code> to implement the logging process.
+Also this article will give you a sample code of how to use the basic function of <code>java.util.logging.Logger</code>.</p>
+<h2 id="brief-introduction">Brief Introduction</h2>
+<p><code>java.util.logging.Logger</code> is a class object used to log information in systems or applications. You don&rsquo;t need to use lots of <code>System.out.println(&quot;WHATEVER MESSAGE YOU PRINT&quot;)</code> to print in the console, and also with <code>java.util.logging.Logger</code>, you can easily print the log into a file, which make you much more convenient to maintain you log files.</p>
+<p>There are different levels you can use in <code>java.util.logging.Logger</code>. Those levels are delcared in <code>java.util.logging.Level</code>. The levels are:</p>
+<ul>
+<li>SEVERE (highest value)</li>
+<li>WARNING</li>
+<li>INFO</li>
+<li>CONFIG</li>
+<li>FINE</li>
+<li>FINER</li>
+<li>FINEST (lowest value)</li>
+</ul>
+<p>Besides, there is a level <strong>&ldquo;OFF&rdquo;</strong> which can be used to turn off logging, and a level <strong>&ldquo;ALL&rdquo;</strong> to enable to log all the messages.</p>
+<h2 id="a-simple-example">A Simple Example</h2>
+<ol>
+<li>Use Java Logger in code
+There is a very simple example of using <code>java.util.logging.Logger</code>.</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#ff79c6">import</span> java.util.Random<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.logging.Level<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.logging.Logger<span style="color:#ff79c6">;</span>
+
+<span style="color:#6272a4">/**
+</span><span style="color:#6272a4"> * @author Hank Lee
+</span><span style="color:#6272a4"> * Shared in InformisTry -- https://jumperc2p.github.io/InformisTry/
+</span><span style="color:#6272a4"> *
+</span><span style="color:#6272a4"> */</span>
+<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">class</span> <span style="color:#50fa7b">MyLogger</span> <span style="color:#ff79c6">{</span>
+
+	<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">static</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">main</span><span style="color:#ff79c6">(</span>String<span style="color:#ff79c6">[]</span> args<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+		
+		<span style="color:#6272a4">// use the method &#34;getLogger(String name)&#34; in Logger class to get a Logger object
+</span><span style="color:#6272a4"></span>		Logger logger <span style="color:#ff79c6">=</span> Logger<span style="color:#ff79c6">.</span><span style="color:#50fa7b">getLogger</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;MyLogger&#34;</span><span style="color:#ff79c6">);</span> 
+		
+		<span style="color:#6272a4">// set the level of the logger as INFO
+</span><span style="color:#6272a4"></span>		logger<span style="color:#ff79c6">.</span><span style="color:#50fa7b">setLevel</span><span style="color:#ff79c6">(</span>Level<span style="color:#ff79c6">.</span><span style="color:#50fa7b">INFO</span><span style="color:#ff79c6">);</span>
+		
+		<span style="color:#6272a4">// use java.util.Random to receive a random number
+</span><span style="color:#6272a4"></span>		Random random <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> Random<span style="color:#ff79c6">();</span>
+		
+		<span style="color:#6272a4">//setup a range to random number
+</span><span style="color:#6272a4"></span>		<span style="color:#8be9fd">int</span> range <span style="color:#ff79c6">=</span> 50<span style="color:#ff79c6">;</span>
+		
+		<span style="color:#ff79c6">while</span> <span style="color:#ff79c6">(</span><span style="color:#ff79c6">true</span><span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+			<span style="color:#6272a4">// get a random number
+</span><span style="color:#6272a4"></span>			<span style="color:#8be9fd">int</span> number <span style="color:#ff79c6">=</span> random<span style="color:#ff79c6">.</span><span style="color:#50fa7b">nextInt</span><span style="color:#ff79c6">(</span>range<span style="color:#ff79c6">);</span>
+			
+			logger<span style="color:#ff79c6">.</span><span style="color:#50fa7b">log</span><span style="color:#ff79c6">(</span>Level<span style="color:#ff79c6">.</span><span style="color:#50fa7b">INFO</span><span style="color:#ff79c6">,</span> <span style="color:#f1fa8c">&#34;The random number is :&#34;</span> <span style="color:#ff79c6">+</span> number<span style="color:#ff79c6">);</span>
+			
+			<span style="color:#6272a4">// when the remainder of random number divided 7 is 0 , stop the while loop.
+</span><span style="color:#6272a4"></span>			<span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>number <span style="color:#ff79c6">%</span> 7 <span style="color:#ff79c6">==</span> 0<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+				<span style="color:#ff79c6">break</span><span style="color:#ff79c6">;</span>
+			<span style="color:#ff79c6">}</span>
+		<span style="color:#ff79c6">}</span>
+	<span style="color:#ff79c6">}</span>
+<span style="color:#ff79c6">}</span>
+</code></pre></div><p>In this sample, I just call the method <code>getLogger(String name)</code> in <code>java.util.logging.Logger</code> to get a Logger object, and set the level of logger is <strong>INFO</strong>. Then, I use a while loop to log the random number until the remainder of the random number divided 7 is 0. After executing the <code>MyLogger.java</code>, the messages are printed in console (shown as below).</p>
+<pre><code class="language-console" data-lang="console">May 04, 2020 11:02:26 PM logging_example.MyLogger main
+INFO: The random number is :31
+May 04, 2020 11:02:26 PM logging_example.MyLogger main
+INFO: The random number is :39
+May 04, 2020 11:02:26 PM logging_example.MyLogger main
+INFO: The random number is :17
+May 04, 2020 11:02:26 PM logging_example.MyLogger main
+INFO: The random number is :13
+May 04, 2020 11:02:26 PM logging_example.MyLogger main
+INFO: The random number is :5
+May 04, 2020 11:02:26 PM logging_example.MyLogger main
+INFO: The random number is :32
+May 04, 2020 11:02:26 PM logging_example.MyLogger main
+INFO: The random number is :39
+May 04, 2020 11:02:26 PM logging_example.MyLogger main
+INFO: The random number is :39
+May 04, 2020 11:02:26 PM logging_example.MyLogger main
+INFO: The random number is :41
+May 04, 2020 11:02:26 PM logging_example.MyLogger main
+INFO: The random number is :8
+May 04, 2020 11:02:26 PM logging_example.MyLogger main
+INFO: The random number is :18
+May 04, 2020 11:02:26 PM logging_example.MyLogger main
+INFO: The random number is :39
+May 04, 2020 11:02:26 PM logging_example.MyLogger main
+INFO: The random number is :43
+May 04, 2020 11:02:26 PM logging_example.MyLogger main
+INFO: The random number is :5
+May 04, 2020 11:02:26 PM logging_example.MyLogger main
+INFO: The random number is :9
+May 04, 2020 11:02:26 PM logging_example.MyLogger main
+INFO: The random number is :36
+May 04, 2020 11:02:26 PM logging_example.MyLogger main
+INFO: The random number is :38
+May 04, 2020 11:02:26 PM logging_example.MyLogger main
+INFO: The random number is :28
+</code></pre><blockquote>
+<p>The <strong>logging_example</strong> in the message is my package, and <strong>main</strong> is the method where call Logger object to log messages.</p>
+</blockquote>
+<ol start="2">
+<li>Use Java Logger to Print Messages Into A File
+Now, you know how to use <code>java.util.logging.Logger</code>, but what if you need to write log messages into a file?😖 Don&rsquo;t wory. It&rsquo;s very easy to achieve the goal by using <code>java.util.logging.Logger</code> with <code>java.util.logging.FileHandler</code>. The sample code is as below.</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#ff79c6">package</span> logging_example<span style="color:#ff79c6">;</span>
+
+<span style="color:#ff79c6">import</span> java.io.IOException<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.Random<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.logging.FileHandler<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.logging.Level<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.logging.Logger<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.logging.SimpleFormatter<span style="color:#ff79c6">;</span>
+
+<span style="color:#6272a4">/**
+</span><span style="color:#6272a4"> * @author Hank Lee
+</span><span style="color:#6272a4"> * Shared in InformisTry -- https://jumperc2p.github.io/InformisTry/
+</span><span style="color:#6272a4"> *
+</span><span style="color:#6272a4"> */</span>
+<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">class</span> <span style="color:#50fa7b">MyLoggerWithFileOutput</span> <span style="color:#ff79c6">{</span>
+
+	<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">static</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">main</span><span style="color:#ff79c6">(</span>String<span style="color:#ff79c6">[]</span> args<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+		
+		<span style="color:#6272a4">// use the method &#34;getLogger(String name)&#34; in Logger class to get a Logger object
+</span><span style="color:#6272a4"></span>		Logger logger <span style="color:#ff79c6">=</span> Logger<span style="color:#ff79c6">.</span><span style="color:#50fa7b">getLogger</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;MyLogger&#34;</span><span style="color:#ff79c6">);</span> 
+		
+		<span style="color:#6272a4">// Declare a FileHandler variable.
+</span><span style="color:#6272a4"></span>		FileHandler fh<span style="color:#ff79c6">;</span>
+		
+		<span style="color:#6272a4">// set the level of the logger as INFO
+</span><span style="color:#6272a4"></span>		logger<span style="color:#ff79c6">.</span><span style="color:#50fa7b">setLevel</span><span style="color:#ff79c6">(</span>Level<span style="color:#ff79c6">.</span><span style="color:#50fa7b">INFO</span><span style="color:#ff79c6">);</span>
+		
+		<span style="color:#ff79c6">try</span> <span style="color:#ff79c6">{</span>
+			<span style="color:#6272a4">// create a new FileHandler object with the log file path
+</span><span style="color:#6272a4"></span>			fh <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> FileHandler<span style="color:#ff79c6">(</span>System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">getProperty</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;user.dir&#34;</span><span style="color:#ff79c6">)+</span><span style="color:#f1fa8c">&#34;/informistry.log&#34;</span><span style="color:#ff79c6">);</span>
+			
+			<span style="color:#6272a4">// create a SimpleFormatter object to setup the format of log
+</span><span style="color:#6272a4"></span>			SimpleFormatter formatterFH <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> SimpleFormatter<span style="color:#ff79c6">();</span>  
+			<span style="color:#6272a4">// set the SimpleFormatter to the FileHandler
+</span><span style="color:#6272a4"></span>			fh<span style="color:#ff79c6">.</span><span style="color:#50fa7b">setFormatter</span><span style="color:#ff79c6">(</span>formatterFH<span style="color:#ff79c6">);</span> 
+			
+			<span style="color:#6272a4">// add the FileHandler to the logger
+</span><span style="color:#6272a4"></span>			logger<span style="color:#ff79c6">.</span><span style="color:#50fa7b">addHandler</span><span style="color:#ff79c6">(</span>fh<span style="color:#ff79c6">);</span>
+			
+			<span style="color:#6272a4">// use java.util.Random to receive a random number
+</span><span style="color:#6272a4"></span>			Random random <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> Random<span style="color:#ff79c6">();</span>
+			
+			<span style="color:#6272a4">//setup a range to random number
+</span><span style="color:#6272a4"></span>			<span style="color:#8be9fd">int</span> range <span style="color:#ff79c6">=</span> 50<span style="color:#ff79c6">;</span>
+			
+			<span style="color:#ff79c6">while</span> <span style="color:#ff79c6">(</span><span style="color:#ff79c6">true</span><span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+				<span style="color:#6272a4">// get a random number
+</span><span style="color:#6272a4"></span>				<span style="color:#8be9fd">int</span> number <span style="color:#ff79c6">=</span> random<span style="color:#ff79c6">.</span><span style="color:#50fa7b">nextInt</span><span style="color:#ff79c6">(</span>range<span style="color:#ff79c6">);</span>
+				
+				logger<span style="color:#ff79c6">.</span><span style="color:#50fa7b">log</span><span style="color:#ff79c6">(</span>Level<span style="color:#ff79c6">.</span><span style="color:#50fa7b">INFO</span><span style="color:#ff79c6">,</span> <span style="color:#f1fa8c">&#34;The random number is :&#34;</span> <span style="color:#ff79c6">+</span> number<span style="color:#ff79c6">);</span>
+				
+				<span style="color:#6272a4">// when the remainder of random number divided 7 is 0 , stop the while loop.
+</span><span style="color:#6272a4"></span>				<span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>number <span style="color:#ff79c6">%</span> 7 <span style="color:#ff79c6">==</span> 0<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+					<span style="color:#ff79c6">break</span><span style="color:#ff79c6">;</span>
+				<span style="color:#ff79c6">}</span>
+			<span style="color:#ff79c6">}</span>
+		<span style="color:#ff79c6">}</span> <span style="color:#ff79c6">catch</span> <span style="color:#ff79c6">(</span>SecurityException e<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+			e<span style="color:#ff79c6">.</span><span style="color:#50fa7b">printStackTrace</span><span style="color:#ff79c6">();</span>
+		<span style="color:#ff79c6">}</span> <span style="color:#ff79c6">catch</span> <span style="color:#ff79c6">(</span>IOException e<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+			e<span style="color:#ff79c6">.</span><span style="color:#50fa7b">printStackTrace</span><span style="color:#ff79c6">();</span>
+		<span style="color:#ff79c6">}</span>  
+	<span style="color:#ff79c6">}</span>
+<span style="color:#ff79c6">}</span>
+</code></pre></div><p>There are the other class I used to write log messages to a file: <code>java.util.logging.FileHandler</code> and <code>java.util.logging.SimpleFormatter</code>. The fronter is used to declare where and which file to write log messages, and the latter is used to format the log messages. After running the program, it generates a log file named <strong>informistry.log</strong> at the root, and it contains:</p>
+<pre><code class="language-console" data-lang="console">May 04, 2020 11:16:48 PM logging_example.MyLoggerWithFileOutput main
+INFO: The random number is :32
+May 04, 2020 11:16:48 PM logging_example.MyLoggerWithFileOutput main
+INFO: The random number is :21
+</code></pre><p>Not that hard, right?!👍</p>
+<h2 id="extra-example---use-java-logger-in-different-threads-with-javautilsocket">Extra Example - Use Java Logger in Different Threads with java.util.Socket</h2>
+<p>Bouns Time🤣: How to combine Java Logger with <code>java.util.Socket</code> in different threads. The socket program code I used is mentioned in my another article. If you want to know how to implement a socket program which can handle multiple threas, take a look at <a href="https://jumperc2p.github.io/InformisTry/posts/a_combination_of_timertask_and_timer/">A Combination of TimerTask and Timer</a>. Here, I just add the logging part into the socket program. So, in the sample code, I just add a Logger class <code>MyLoggerWithFileOutput.java</code> and call the <code>MyLogger.java</code> in other java files.</p>
+<p>The sample code of <code>MyLoggerWithFileOutput.java</code> is shown as below. I make it as a singleton object as I want all the threads to use the same Logger object and write log messages into the same file.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#ff79c6">import</span> java.io.IOException<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.logging.FileHandler<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.logging.Level<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.logging.Logger<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.logging.SimpleFormatter<span style="color:#ff79c6">;</span>
+
+<span style="color:#6272a4">/**
+</span><span style="color:#6272a4"> * @author Hank Lee
+</span><span style="color:#6272a4"> * Shared in InformisTry -- https://jumperc2p.github.io/InformisTry/
+</span><span style="color:#6272a4"> * Singleton Object
+</span><span style="color:#6272a4"> */</span>
+<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">class</span> <span style="color:#50fa7b">MyLoggerWithFileOutput</span> <span style="color:#ff79c6">{</span>
+	
+	<span style="color:#8be9fd;font-style:italic">private</span> <span style="color:#8be9fd;font-style:italic">static</span>  Logger logger<span style="color:#ff79c6">;</span>
+	
+	<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">static</span>  Logger <span style="color:#50fa7b">getLogger</span><span style="color:#ff79c6">()</span> <span style="color:#ff79c6">{</span>
+		
+		<span style="color:#ff79c6">if</span><span style="color:#ff79c6">(</span>logger <span style="color:#ff79c6">==</span> <span style="color:#ff79c6">null</span><span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+			
+			logger <span style="color:#ff79c6">=</span> Logger<span style="color:#ff79c6">.</span><span style="color:#50fa7b">getLogger</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;MyLoggerWithFileOutput&#34;</span><span style="color:#ff79c6">);</span> 
+			
+			<span style="color:#6272a4">// use the method &#34;getLogger(String name)&#34; in Logger class to get a Logger object
+</span><span style="color:#6272a4"></span>			logger <span style="color:#ff79c6">=</span> Logger<span style="color:#ff79c6">.</span><span style="color:#50fa7b">getLogger</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;MyLogger&#34;</span><span style="color:#ff79c6">);</span> 
+			
+			<span style="color:#6272a4">// Declare a FileHandler variable.
+</span><span style="color:#6272a4"></span>			FileHandler fh<span style="color:#ff79c6">;</span>
+			
+			<span style="color:#6272a4">// set the level of the logger as INFO
+</span><span style="color:#6272a4"></span>			logger<span style="color:#ff79c6">.</span><span style="color:#50fa7b">setLevel</span><span style="color:#ff79c6">(</span>Level<span style="color:#ff79c6">.</span><span style="color:#50fa7b">INFO</span><span style="color:#ff79c6">);</span>
+			
+			<span style="color:#ff79c6">try</span> <span style="color:#ff79c6">{</span>
+				<span style="color:#6272a4">// create a new FileHandler object with the log file path
+</span><span style="color:#6272a4"></span>				fh <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> FileHandler<span style="color:#ff79c6">(</span>System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">getProperty</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;user.dir&#34;</span><span style="color:#ff79c6">)+</span><span style="color:#f1fa8c">&#34;/informistry.log&#34;</span><span style="color:#ff79c6">);</span>
+				
+				<span style="color:#6272a4">// create a SimpleFormatter object to setup the format of log
+</span><span style="color:#6272a4"></span>				SimpleFormatter formatterFH <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> SimpleFormatter<span style="color:#ff79c6">();</span>  
+				<span style="color:#6272a4">// set the SimpleFormatter to the FileHandler
+</span><span style="color:#6272a4"></span>				fh<span style="color:#ff79c6">.</span><span style="color:#50fa7b">setFormatter</span><span style="color:#ff79c6">(</span>formatterFH<span style="color:#ff79c6">);</span> 
+				
+				<span style="color:#6272a4">// add the FileHandler to the logger
+</span><span style="color:#6272a4"></span>				logger<span style="color:#ff79c6">.</span><span style="color:#50fa7b">addHandler</span><span style="color:#ff79c6">(</span>fh<span style="color:#ff79c6">);</span>
+			<span style="color:#ff79c6">}</span> <span style="color:#ff79c6">catch</span> <span style="color:#ff79c6">(</span>SecurityException e<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+				e<span style="color:#ff79c6">.</span><span style="color:#50fa7b">printStackTrace</span><span style="color:#ff79c6">();</span>
+			<span style="color:#ff79c6">}</span> <span style="color:#ff79c6">catch</span> <span style="color:#ff79c6">(</span>IOException e<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+				e<span style="color:#ff79c6">.</span><span style="color:#50fa7b">printStackTrace</span><span style="color:#ff79c6">();</span>
+			<span style="color:#ff79c6">}</span>  
+		<span style="color:#ff79c6">}</span>
+		 
+		 <span style="color:#ff79c6">return</span> logger<span style="color:#ff79c6">;</span>
+	<span style="color:#ff79c6">}</span>
+<span style="color:#ff79c6">}</span>
+</code></pre></div><p>The sample code of adding the Logger in <code>Server.java</code> and <code>ClientThreadHandler.java</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#ff79c6">import</span> java.io.IOException<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.net.ServerSocket<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.net.Socket<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.ArrayList<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.List<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.logging.Level<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.logging.Logger<span style="color:#ff79c6">;</span>
+
+<span style="color:#6272a4">/**
+</span><span style="color:#6272a4"> * @author Hank Lee
+</span><span style="color:#6272a4"> * Shared in InformisTry -- https://jumperc2p.github.io/InformisTry/
+</span><span style="color:#6272a4"> *
+</span><span style="color:#6272a4"> */</span>
+<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">class</span> <span style="color:#50fa7b">Server</span> <span style="color:#ff79c6">{</span>
+	
+	<span style="color:#8be9fd;font-style:italic">private</span> <span style="color:#8be9fd;font-style:italic">final</span> <span style="color:#8be9fd">int</span> PORT <span style="color:#ff79c6">=</span> 61023<span style="color:#ff79c6">;</span>
+	<span style="color:#8be9fd;font-style:italic">private</span> Socket connection<span style="color:#ff79c6">;</span>
+	<span style="color:#8be9fd;font-style:italic">private</span> <span style="color:#8be9fd;font-style:italic">static</span> Logger MyLogger <span style="color:#ff79c6">=</span> MyLoggerWithFileOutput<span style="color:#ff79c6">.</span><span style="color:#50fa7b">getLogger</span><span style="color:#ff79c6">();</span>
+	
+	<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#50fa7b">Server</span><span style="color:#ff79c6">()</span> <span style="color:#ff79c6">{</span>
+		
+		 ServerSocket server <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">null</span><span style="color:#ff79c6">;</span>
+		 List<span style="color:#ff79c6">&lt;</span>ClientThreadHandler<span style="color:#ff79c6">&gt;</span> clients <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> ArrayList<span style="color:#ff79c6">&lt;&gt;();</span>
+		 
+		 <span style="color:#ff79c6">try</span><span style="color:#ff79c6">{</span>
+			 
+			<span style="color:#6272a4">// create a new socket
+</span><span style="color:#6272a4"></span>            server <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> ServerSocket<span style="color:#ff79c6">(</span>PORT<span style="color:#ff79c6">);</span>
+            MyLogger<span style="color:#ff79c6">.</span><span style="color:#50fa7b">log</span><span style="color:#ff79c6">(</span>Level<span style="color:#ff79c6">.</span><span style="color:#50fa7b">INFO</span><span style="color:#ff79c6">,</span> <span style="color:#f1fa8c">&#34;Starts the server&#34;</span><span style="color:#ff79c6">);</span>
+            System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;Starts the server&#34;</span><span style="color:#ff79c6">);</span>
+
+            <span style="color:#ff79c6">while</span> <span style="color:#ff79c6">(</span><span style="color:#ff79c6">true</span><span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+                MyLogger<span style="color:#ff79c6">.</span><span style="color:#50fa7b">log</span><span style="color:#ff79c6">(</span>Level<span style="color:#ff79c6">.</span><span style="color:#50fa7b">INFO</span><span style="color:#ff79c6">,</span> <span style="color:#f1fa8c">&#34;Waiting for new connections...&#34;</span><span style="color:#ff79c6">);</span>
+                System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;Waiting for new connections...&#34;</span><span style="color:#ff79c6">);</span>
+                <span style="color:#6272a4">// accept connections from client
+</span><span style="color:#6272a4"></span>                connection <span style="color:#ff79c6">=</span> server<span style="color:#ff79c6">.</span><span style="color:#50fa7b">accept</span><span style="color:#ff79c6">();</span>
+                clients<span style="color:#ff79c6">.</span><span style="color:#50fa7b">add</span><span style="color:#ff79c6">(</span><span style="color:#ff79c6">new</span> ClientThreadHandler<span style="color:#ff79c6">(</span>connection<span style="color:#ff79c6">));</span>
+                MyLogger<span style="color:#ff79c6">.</span><span style="color:#50fa7b">log</span><span style="color:#ff79c6">(</span>Level<span style="color:#ff79c6">.</span><span style="color:#50fa7b">INFO</span><span style="color:#ff79c6">,</span> <span style="color:#f1fa8c">&#34;Connection accepted&#34;</span><span style="color:#ff79c6">);</span>
+                MyLogger<span style="color:#ff79c6">.</span><span style="color:#50fa7b">log</span><span style="color:#ff79c6">(</span>Level<span style="color:#ff79c6">.</span><span style="color:#50fa7b">INFO</span><span style="color:#ff79c6">,</span> <span style="color:#f1fa8c">&#34;Start the thread.&#34;</span><span style="color:#ff79c6">);</span>
+                System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;Connection accepted&#34;</span><span style="color:#ff79c6">);</span>
+                System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;Start the thread.&#34;</span><span style="color:#ff79c6">);</span>
+                clients<span style="color:#ff79c6">.</span><span style="color:#50fa7b">get</span><span style="color:#ff79c6">(</span>clients<span style="color:#ff79c6">.</span><span style="color:#50fa7b">size</span><span style="color:#ff79c6">()-</span>1<span style="color:#ff79c6">).</span><span style="color:#50fa7b">start</span><span style="color:#ff79c6">();</span>
+               
+            <span style="color:#ff79c6">}</span>
+        <span style="color:#ff79c6">}</span> <span style="color:#ff79c6">catch</span> <span style="color:#ff79c6">(</span>IOException e<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+            e<span style="color:#ff79c6">.</span><span style="color:#50fa7b">printStackTrace</span><span style="color:#ff79c6">();</span>
+        <span style="color:#ff79c6">}</span> <span style="color:#ff79c6">finally</span> <span style="color:#ff79c6">{</span>
+            <span style="color:#ff79c6">try</span> <span style="color:#ff79c6">{</span>
+                server<span style="color:#ff79c6">.</span><span style="color:#50fa7b">close</span><span style="color:#ff79c6">();</span>
+            <span style="color:#ff79c6">}</span> <span style="color:#ff79c6">catch</span> <span style="color:#ff79c6">(</span>IOException e<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span> <span style="color:#ff79c6">}</span>
+        <span style="color:#ff79c6">}</span>
+	<span style="color:#ff79c6">}</span>
+
+	<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">static</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">main</span><span style="color:#ff79c6">(</span>String<span style="color:#ff79c6">[]</span> args<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+		<span style="color:#ff79c6">new</span> Server<span style="color:#ff79c6">();</span>
+	<span style="color:#ff79c6">}</span>
+
+<span style="color:#ff79c6">}</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#ff79c6">import</span> java.io.IOException<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.io.PrintWriter<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.net.Socket<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.NoSuchElementException<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.Scanner<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.Timer<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.logging.Level<span style="color:#ff79c6">;</span>
+<span style="color:#ff79c6">import</span> java.util.logging.Logger<span style="color:#ff79c6">;</span>
+
+<span style="color:#6272a4">/**
+</span><span style="color:#6272a4"> * @author Hank Lee
+</span><span style="color:#6272a4"> * Shared in InformisTry -- https://jumperc2p.github.io/InformisTry/
+</span><span style="color:#6272a4"> *
+</span><span style="color:#6272a4"> */</span>
+<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">class</span> <span style="color:#50fa7b">ClientThreadHandler</span> <span style="color:#8be9fd;font-style:italic">extends</span> Thread <span style="color:#ff79c6">{</span>
+	
+	<span style="color:#8be9fd;font-style:italic">private</span> Scanner inputFromClient<span style="color:#ff79c6">;</span>
+    <span style="color:#8be9fd;font-style:italic">private</span> PrintWriter outputToClient<span style="color:#ff79c6">;</span>
+    <span style="color:#8be9fd;font-style:italic">private</span> <span style="color:#8be9fd;font-style:italic">static</span> Logger MyLogger <span style="color:#ff79c6">=</span> MyLoggerWithFileOutput<span style="color:#ff79c6">.</span><span style="color:#50fa7b">getLogger</span><span style="color:#ff79c6">();</span>
+	
+	<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#50fa7b">ClientThreadHandler</span><span style="color:#ff79c6">(</span>Socket connection<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+		
+		<span style="color:#6272a4">// get the OutputStream and InputStream from connection
+</span><span style="color:#6272a4"></span>        <span style="color:#ff79c6">try</span> <span style="color:#ff79c6">{</span>
+			outputToClient <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> PrintWriter<span style="color:#ff79c6">(</span>connection<span style="color:#ff79c6">.</span><span style="color:#50fa7b">getOutputStream</span><span style="color:#ff79c6">(),</span><span style="color:#ff79c6">true</span><span style="color:#ff79c6">);</span>
+			inputFromClient <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> Scanner<span style="color:#ff79c6">(</span>connection<span style="color:#ff79c6">.</span><span style="color:#50fa7b">getInputStream</span><span style="color:#ff79c6">());</span>
+		<span style="color:#ff79c6">}</span> <span style="color:#ff79c6">catch</span> <span style="color:#ff79c6">(</span>IOException e<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+			e<span style="color:#ff79c6">.</span><span style="color:#50fa7b">printStackTrace</span><span style="color:#ff79c6">();</span>
+		<span style="color:#ff79c6">}</span>
+	<span style="color:#ff79c6">}</span>
+	
+	@Override
+	<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">run</span><span style="color:#ff79c6">()</span> <span style="color:#ff79c6">{</span>
+		
+		  <span style="color:#ff79c6">try</span> <span style="color:#ff79c6">{</span>
+          	
+          	<span style="color:#ff79c6">while</span> <span style="color:#ff79c6">(</span><span style="color:#ff79c6">true</span><span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+          		<span style="color:#6272a4">// send messages to client.
+</span><span style="color:#6272a4"></span>          		outputToClient<span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;Send messages to server. Or if you want to end the connection, please enter \&#34;q\&#34;:&#34;</span><span style="color:#ff79c6">);</span>
+          		
+          		<span style="color:#6272a4">// create new Timer to schedule TimerTask and start its schedule.
+</span><span style="color:#6272a4"></span>          		Timer timer <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> Timer<span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;ServerTaskTimer&#34;</span><span style="color:#ff79c6">);</span>
+          		<span style="color:#6272a4">// use delay to let the timer start after 3 seconds.
+</span><span style="color:#6272a4"></span>          		<span style="color:#8be9fd">long</span> delay <span style="color:#ff79c6">=</span> 3000<span style="color:#ff79c6">;</span>
+          		<span style="color:#8be9fd">long</span> period <span style="color:#ff79c6">=</span> 3000<span style="color:#ff79c6">;</span>
+          		timer<span style="color:#ff79c6">.</span><span style="color:#50fa7b">scheduleAtFixedRate</span><span style="color:#ff79c6">(</span><span style="color:#ff79c6">new</span> ServerTask<span style="color:#ff79c6">(</span>outputToClient<span style="color:#ff79c6">),</span> delay<span style="color:#ff79c6">,</span> period<span style="color:#ff79c6">);</span>
+          		<span style="color:#6272a4">// take input from client
+</span><span style="color:#6272a4"></span>          		String clientMessage <span style="color:#ff79c6">=</span> inputFromClient<span style="color:#ff79c6">.</span><span style="color:#50fa7b">nextLine</span><span style="color:#ff79c6">();</span>
+          		<span style="color:#6272a4">// Once it receive the message from client, cancel the timer.
+</span><span style="color:#6272a4"></span>          		timer<span style="color:#ff79c6">.</span><span style="color:#50fa7b">cancel</span><span style="color:#ff79c6">();</span>
+          		System<span style="color:#ff79c6">.</span><span style="color:#50fa7b">out</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">println</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;Client says: &#34;</span> <span style="color:#ff79c6">+</span> clientMessage<span style="color:#ff79c6">);</span>
+          		MyLogger<span style="color:#ff79c6">.</span><span style="color:#50fa7b">log</span><span style="color:#ff79c6">(</span>Level<span style="color:#ff79c6">.</span><span style="color:#50fa7b">INFO</span><span style="color:#ff79c6">,</span> <span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;Client says: &#34;</span> <span style="color:#ff79c6">+</span> clientMessage<span style="color:#ff79c6">));</span>
+          		<span style="color:#6272a4">// check if the client wants to end the connection.
+</span><span style="color:#6272a4"></span>          		<span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;q&#34;</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">equals</span><span style="color:#ff79c6">(</span>clientMessage<span style="color:#ff79c6">))</span> <span style="color:#ff79c6">{</span>
+          			MyLogger<span style="color:#ff79c6">.</span><span style="color:#50fa7b">log</span><span style="color:#ff79c6">(</span>Level<span style="color:#ff79c6">.</span><span style="color:#50fa7b">INFO</span><span style="color:#ff79c6">,</span> <span style="color:#f1fa8c">&#34;Client ends the connection.&#34;</span><span style="color:#ff79c6">);</span>
+          			<span style="color:#ff79c6">break</span><span style="color:#ff79c6">;</span>
+          		<span style="color:#ff79c6">}</span>
+          	<span style="color:#ff79c6">}</span>
+          <span style="color:#ff79c6">}</span><span style="color:#ff79c6">catch</span> <span style="color:#ff79c6">(</span>NoSuchElementException ne<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+        	  MyLogger<span style="color:#ff79c6">.</span><span style="color:#50fa7b">log</span><span style="color:#ff79c6">(</span>Level<span style="color:#ff79c6">.</span><span style="color:#50fa7b">INFO</span><span style="color:#ff79c6">,</span> <span style="color:#f1fa8c">&#34;Client quits the game.&#34;</span><span style="color:#ff79c6">);</span>
+          <span style="color:#ff79c6">}</span>
+	<span style="color:#ff79c6">}</span>
+<span style="color:#ff79c6">}</span>
+</code></pre></div><p>After running the multi-thread socket program, the log file is generated at the root path.</p>
+<pre><code class="language-console" data-lang="console">May 05, 2020 12:22:29 AM logging_example_multithread.Server &lt;init&gt;
+INFO: Starts the server
+May 05, 2020 12:22:29 AM logging_example_multithread.Server &lt;init&gt;
+INFO: Waiting for new connections...
+May 05, 2020 12:22:48 AM logging_example_multithread.Server &lt;init&gt;
+INFO: Connection accepted
+May 05, 2020 12:22:48 AM logging_example_multithread.Server &lt;init&gt;
+INFO: Start the thread.
+May 05, 2020 12:22:48 AM logging_example_multithread.Server &lt;init&gt;
+INFO: Waiting for new connections...
+May 05, 2020 12:23:03 AM logging_example_multithread.Server &lt;init&gt;
+INFO: Connection accepted
+May 05, 2020 12:23:03 AM logging_example_multithread.Server &lt;init&gt;
+INFO: Start the thread.
+May 05, 2020 12:23:03 AM logging_example_multithread.Server &lt;init&gt;
+INFO: Waiting for new connections...
+May 05, 2020 12:23:19 AM logging_example_multithread.ClientThreadHandler run
+INFO: Client says: Hi, I'm here.
+May 05, 2020 12:23:23 AM logging_example_multithread.ClientThreadHandler run
+INFO: Client says: Hello
+May 05, 2020 12:23:25 AM logging_example_multithread.ClientThreadHandler run
+INFO: Client quits the game.
+May 05, 2020 12:23:26 AM logging_example_multithread.ClientThreadHandler run
+INFO: Client says: q
+May 05, 2020 12:23:26 AM logging_example_multithread.ClientThreadHandler run
+INFO: Client ends the connection.
+</code></pre><p><code>java.util.logging.Logger</code> is much more complex than I mentioned here. In the article, I just point out a simple way to use <code>java.util.logging.Logger</code> to achieve the logging process. If you want to learn more knowledge about <code>java.util.logging.Logger</code>, please take a look at <a href="https://docs.oracle.com/javase/8/docs/api/java/util/logging/Logger.html">Java 8 API - Logger</a>. Hope the article can help you figure out how to fix the problem you face in.</p>
+<h2 id="sample-code">Sample Code</h2>
+<p>The sample code can be downloaded <a href="https://github.com/JumperC2P/Informistry_sample_code">here</a>:</p>
+<ul>
+<li>Simple example is in the package of <strong>logging_example</strong>.</li>
+<li>Extra example is in the package of <strong>logging_example_multithread</strong>.</li>
+</ul>
+<blockquote>
+<p>If you would like to use the code provided here, <strong>please indicate the source</strong>.</p>
+</blockquote>
+<h2 id="references">References</h2>
+<ol>
+<li><a href="https://docs.oracle.com/javase/8/docs/api/java/util/logging/Logger.html">Java 8 API - Logger</a></li>
+<li><a href="https://docs.oracle.com/javase/8/docs/api/java/util/logging/Level.html">Java 8 API - Level</a></li>
+<li><a href="https://docs.oracle.com/javase/8/docs/api/java/util/logging/FileHandler.html">Java 8 API - FileHandler</a></li>
+<li><a href="https://docs.oracle.com/javase/8/docs/api/java/util/logging/SimpleFormatter.html">Java 8 API - SimpleFormatter</a></li>
+<li><a href="https://www.vogella.com/tutorials/Logging/article.html">Java Logging API - Tutorial</a></li>
+</ol>
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/InformisTry/posts/a_combination_of_timertask_and_timer/"  style="width: 49rem;" data-toggle="tooltip" data-placement="top" title="A Combination of TimerTask and Timer">&larr;
+                            A Combination of TimerTask and Timer</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/InformisTry/posts/iThome-triathlon/whats_algorithm/" style="width: 49rem;" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day1 -- 初嚐演算法">&rarr; 【舌尖上的演算法】Day1 -- 初嚐演算法</a>
+                    </li>
+                    
+                </ul>
+
+                
+<div id="disqus-comment"></div>
+
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "informistry" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+            </div>
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        <a href="/InformisTry/tags/algorithm" title="algorithm">
+                            algorithm
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/InformisTry/tags/data-structure" title="data-structure">
+                            data-structure
+                        </a>
+                        
+                        
+                        
+                        <a href="/InformisTry/tags/hints" title="hints">
+                            hints
+                        </a>
+                        
+                        
+                        
+                        <a href="/InformisTry/tags/ithome" title="ithome">
+                            ithome
+                        </a>
+                        
+                        
+                        
+                        <a href="/InformisTry/tags/java" title="java">
+                            java
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/InformisTry/tags/triathlon" title="triathlon">
+                            triathlon
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>FRIENDS</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="https://ianjustin39.github.io/ianlife/">Ian化學系軟體工程師</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                    
+                    <li>
+                        <a href="mailto:adslbbc1949@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/JumperC2P">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/hank-lee-784779136/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/8090654/h-lee">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+            
+                    
+                    
+                    
+            
+            
+            
+                </ul>
+		        <p class="copyright text-muted">
+                    Copyright &copy; InformisTry 2021
+                    <br>
+                    <small id="busuanzi_container_site_pv" style='display:none'> Page Views: <span id="busuanzi_value_site_pv"></span> </small>
+                    |
+                    <small id="busuanzi_container_site_uv" style='display:none'> Count of Visits: <span id="busuanzi_value_site_uv"></span> </small>
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-172654708-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+</body>
+</html>
