@@ -6,11 +6,7 @@
     <description>Recent content in Data Structure on InformisTry</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 07 Oct 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://jumperc2p.github.io/InformisTry/tags/data-structure/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 07 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://jumperc2p.github.io/InformisTry/tags/data-structure/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>【舌尖上的演算法】Day30 --  Algorithm X and Sudoku</title>
       <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/sudoku-algox-2/</link>
@@ -247,37 +243,37 @@
     
     <item>
       <title>【舌尖上的演算法】Day4 -- 抽象資料型別及特性</title>
-      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/abstract_data_types/</link>
+      <link>https://jumperc2p.github.io/InformisTry/posts/iThome-triathlon/abstract_data_types/</link>
       <pubDate>Fri, 11 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/abstract_data_types/</guid>
+      <guid>https://jumperc2p.github.io/InformisTry/posts/iThome-triathlon/abstract_data_types/</guid>
       <description>本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 第二天和第三天我們介紹了針對演算法執行效率(Time Complexity)進行了說明，然而除</description>
     </item>
     
     <item>
       <title>【舌尖上的演算法】Day3 -- 解析演算法的優劣（下）</title>
-      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/algorithm_time_complexity_2/</link>
+      <link>https://jumperc2p.github.io/InformisTry/posts/iThome-triathlon/algorithm_time_complexity_2/</link>
       <pubDate>Thu, 10 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/algorithm_time_complexity_2/</guid>
+      <guid>https://jumperc2p.github.io/InformisTry/posts/iThome-triathlon/algorithm_time_complexity_2/</guid>
       <description>本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 第二天我們提到了衡量一個演算法好壞的因素分別是執行時間(Time complexity)和使用</description>
     </item>
     
     <item>
       <title>【舌尖上的演算法】Day2 -- 解析演算法的優劣（上）</title>
-      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/algorithm_time_complexity_1/</link>
+      <link>https://jumperc2p.github.io/InformisTry/posts/iThome-triathlon/algorithm_time_complexity_1/</link>
       <pubDate>Wed, 09 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/algorithm_time_complexity_1/</guid>
+      <guid>https://jumperc2p.github.io/InformisTry/posts/iThome-triathlon/algorithm_time_complexity_1/</guid>
       <description>本系列文章同步分享於IT邦幫忙第12屆鐵人賽 前言 第一天我們針對了演算法做了非常簡單的介紹，我們提到演算法本身是一個用來解決問題的一系列精準不</description>
     </item>
     
     <item>
       <title>【舌尖上的演算法】Day1 -- 初嚐演算法</title>
-      <link>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/whats_algorithm/</link>
+      <link>https://jumperc2p.github.io/InformisTry/posts/iThome-triathlon/whats_algorithm/</link>
       <pubDate>Tue, 08 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://jumperc2p.github.io/InformisTry/posts/ithome-triathlon/whats_algorithm/</guid>
+      <guid>https://jumperc2p.github.io/InformisTry/posts/iThome-triathlon/whats_algorithm/</guid>
       <description>前言 從生物科技產業轉行到資訊科技產業不知不覺來到第五個年頭，這五年裡當個無憂無慮的小小碼農渾渾噩噩地來到了今天，雖然內心一直覺得既然踏入了這</description>
     </item>
     

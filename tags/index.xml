@@ -6,10 +6,24 @@
     <description>Recent content in Tags on InformisTry</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 07 Oct 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 19 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://jumperc2p.github.io/InformisTry/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Books</title>
+      <link>https://jumperc2p.github.io/InformisTry/tags/books/</link>
+      <pubDate>Fri, 19 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://jumperc2p.github.io/InformisTry/tags/books/</guid>
+      <description></description>
+    </item>
     
-	<atom:link href="https://jumperc2p.github.io/InformisTry/tags/index.xml" rel="self" type="application/rss+xml" />
-    
+    <item>
+      <title>Review</title>
+      <link>https://jumperc2p.github.io/InformisTry/tags/review/</link>
+      <pubDate>Fri, 19 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://jumperc2p.github.io/InformisTry/tags/review/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Algorithm</title>
