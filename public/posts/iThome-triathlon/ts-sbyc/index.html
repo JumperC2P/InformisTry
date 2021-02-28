@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="InformisTry">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="https://jumperc2p.github.io/InformisTry/https://tinyurl.com/yc28myh2">
+    <meta property="twitter:image" content="https://jumperc2p.github.io/InformisTry/https://tinyurl.com/yc28myh2" />
+    
+
+    
+    <meta name="title" content="【舌尖上的演算法】Day20 -- Time and Space Tradeoff- Distribution Sorting" />
+    <meta property="og:title" content="【舌尖上的演算法】Day20 -- Time and Space Tradeoff- Distribution Sorting" />
+    <meta property="twitter:title" content="【舌尖上的演算法】Day20 -- Time and Space Tradeoff- Distribution Sorting" />
+    
+
+    
+    <meta name="description" content="Hank Lee。 IT &#43; Chemistry = InformisTry。 Career Change。">
+    <meta property="og:description" content="Hank Lee。 IT &#43; Chemistry = InformisTry。 Career Change。" />
+    <meta property="twitter:description" content="Hank Lee。 IT &#43; Chemistry = InformisTry。 Career Change。" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="Chih-Hsuan Lee, Informistry, Hank Lee, JumperC2P, Hank portfolio, Java, Python, Developer, Engineer, Software, ReactJS, Web, React, Database, Kubernetes, 微服務, Microservice, 演算法">
+    <link rel="shortcut icon" href="/InformisTry/img/favicon.ico">
+
+    <title>【舌尖上的演算法】Day20 -- Time and Space Tradeoff- Distribution Sorting-HankLee</title>
+
+    <link rel="canonical" href="/InformisTry/posts/ithome-triathlon/ts-sbyc">
+
+    <link rel="stylesheet" href="/InformisTry/css/iDisqus.min.css"/>
+	
+    
+    <link rel="stylesheet" href="/InformisTry/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/InformisTry/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="/InformisTry/css/zanshang.css">
+    
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    
+    
+
+    
+    
+    <script src="/InformisTry/js/jquery.min.js"></script>
+    
+    
+    <script src="/InformisTry/js/bootstrap.min.js"></script>
+    
+    
+    <script src="/InformisTry/js/hux-blog.min.js"></script>
+
+    
+    
+
+    
+    <script data-ad-client="ca-pub-8332161170897799" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+</head>
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/InformisTry/">InformisTry</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/InformisTry/">Home</a>
+                    </li>
+                    
+                        
+                        <li>
+                            <a href="/InformisTry/categories/books">books</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/InformisTry/categories/life">life</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/InformisTry/categories/series">series</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/InformisTry/categories/tech">tech</a>
+                        </li>
+                        
+                    
+                    
+		            
+                        <li><a href="/InformisTry/top/about">ABOUT ME  </a></li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('https://tinyurl.com/y7zeezbe')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/InformisTry/tags/algorithm" title="Algorithm">
+                            Algorithm
+                        </a>
+                        
+                        <a class="tag" href="/InformisTry/tags/ithome" title="iThome">
+                            iThome
+                        </a>
+                        
+                        <a class="tag" href="/InformisTry/tags/triathlon" title="triathlon">
+                            triathlon
+                        </a>
+                        
+                        <a class="tag" href="/InformisTry/tags/data-structure" title="Data Structure">
+                            Data Structure
+                        </a>
+                        
+                    </div>
+                    <h1>【舌尖上的演算法】Day20 -- Time and Space Tradeoff- Distribution Sorting</h1>
+                    <h2 class="subheading">2020 IT邦鐵人賽</h2>
+                    <span class="meta">
+                        Posted by 
+                        
+                            Hank Lee
+                         
+                        on 
+                        Sunday, September 27, 2020
+                        
+                            <span id="/posts/ithome-triathlon/ts-sbyc" class="leancloud_visitors meta_data_item" data-flag-title="">
+    <span class="post-meta-item-icon">
+      <span class="octicon octicon-eye"></span> 
+    </span>
+    <i class="fa fa-eye"></i>
+    <span class="old-visitors-count" style="display: none;"></span>
+    <span class="leancloud-visitors-count"></span>
+</span>
+
+
+
+<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+
+<script>
+	AV.initialize("", "");
+</script>
+
+<script type="text/javascript">
+function showTime(Counter) {
+    var query = new AV.Query(Counter);
+    var entries = [];
+    var $visitors = $(".leancloud_visitors");
+
+    $visitors.each(function() {
+        entries.push($(this).attr("id").trim());
+    });
+
+    query.containedIn('url', entries);
+    query.find()
+        .done(function(results) {
+            var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+            var OLD_COUNT_CONTAINER_REF = '.old-visitors-count';
+
+            
+            
+            
+            
+
+            for (var i = 0; i < results.length; i++) {
+                var item = results[i];
+                var url = item.get('url');
+                var time = item.get('time');
+                var element = document.getElementById(url);
+
+                $(element).find(COUNT_CONTAINER_REF).text(time);
+            }
+            for (var i = 0; i < entries.length; i++) {
+                var url = entries[i];
+                var element = document.getElementById(url);
+                var countSpan = $(element).find(COUNT_CONTAINER_REF);
+                if (countSpan.text() == '') {
+                    var oldCountSpan = $(element).find(OLD_COUNT_CONTAINER_REF).text();
+                    if(oldCountSpan!=''){
+                        countSpan.text(0+parseInt(oldCountSpan));
+                    }else{
+                        countSpan.text(0);          
+                    }
+                }
+            }
+        })
+        .fail(function(object, error) {
+            console.log("Error: " + error.code + " " + error.message);
+        });
+}
+
+function addCount(Counter) {
+    var $visitors = $(".leancloud_visitors");
+    var url = $visitors.attr('id').trim();
+    var title = $visitors.attr('data-flag-title').trim();
+    var query = new AV.Query(Counter);
+
+    query.equalTo("url", url);
+    query.find({
+        success: function(results) {
+            if (results.length > 0) {
+                var counter = results[0];
+                counter.fetchWhenSave(true);
+                counter.increment("time");
+                counter.save(null, {
+                    success: function(counter) {
+                        var $element = $(document.getElementById(url));
+                        $element.find('.leancloud-visitors-count').text(counter.get('time'));
+                    },
+                    error: function(counter, error) {
+                        console.log('Failed to save Visitor num, with error message: ' + error.message);
+                    }
+                });
+            } else {
+                var newcounter = new Counter();
+                 
+                var acl = new AV.ACL();
+                acl.setPublicReadAccess(true);
+                acl.setPublicWriteAccess(true);
+                newcounter.setACL(acl);
+                 
+                newcounter.set("title", title);
+                newcounter.set("url", url);
+                var OLD_COUNT_CONTAINER_REF = '.old-visitors-count';
+                var $element = $(document.getElementById(url));
+                var oldCountSpan = $element.find(OLD_COUNT_CONTAINER_REF).text();
+                if(oldCountSpan!=''){
+                    newcounter.set("time", parseInt(oldCountSpan)+1);
+                }else{
+ 	                    newcounter.set("time",  1);
+                }
+                newcounter.save(null, {
+                    success: function(newcounter) {
+                        var $element = $(document.getElementById(url));
+                        $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                    },
+                    error: function(newcounter, error) {
+                        console.log('Failed to create');
+                    }
+                });
+            }
+        },
+        error: function(error) {
+            console.log('Error:' + error.code + " " + error.message);
+        }
+    });
+}
+$(function() {
+    var Counter = AV.Object.extend("Counter");
+    
+    
+    if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+    } else {
+        showTime(Counter);
+    }
+});
+</script>
+
+                        
+                        
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                    
+                    <header>
+                        <h2>Table of Contents</h2>
+                    </header>
+                    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#time-and-space-tradeoff的概念">Time and Space Tradeoff的概念</a></li>
+    <li><a href="#輸入增進計畫input-enhancement-counting-sort">輸入增進計畫(Input Enhancement)-Counting Sort</a></li>
+    <li><a href="#distribution-sorting">Distribution Sorting</a></li>
+    <li><a href="#小結">小結</a></li>
+    <li><a href="#預告">預告</a></li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+                    
+                
+
+                <p><a href="https://ithelp.ithome.com.tw/articles/10244858">本系列文章同步分享於IT邦幫忙第12屆鐵人賽</a></p>
+<h2 id="前言">前言</h2>
+<p>我們生活中隨時隨地都在做出選擇，而在做選擇時，我們都會根據利弊進行判斷，今天要講的演算法適用於這種狀況。</p>
+<hr>
+<h2 id="time-and-space-tradeoff的概念">Time and Space Tradeoff的概念</h2>
+<p>在設計演算法的時候，有些時候為了讓執行速度加快，我們可以使用更多內存去儲存資料，藉此減少迴圈數；反之，如果內存不足，可能所設計的演算法就會有更多的迴圈，而導致執行時間變長，這也算是一種利弊取捨，同時也是Time and Space Tradeoff的概念，我們在時間和空間中進行取捨，而這兩天我們會介紹的兩種方式都是利用空間換取時間（畢竟現在要加大記憶體也不是什麼難事了）。</p>
+<hr>
+<h2 id="輸入增進計畫input-enhancement-counting-sort">輸入增進計畫(Input Enhancement)-Counting Sort</h2>
+<p>Input Enhancement的主要訴求，就是<code>針對輸入值進行預處理</code>，就像如果用樹幹製作的傢俱，在製作前需要先將樹幹的樹皮移除，而演算法處理資料也會有這種概念，在經過這種預處理後產生的資料，可能會需要使用更多的儲存空間來保存，然而卻可以大幅加速產生對應的結果，因此在這種狀況下，<code>時間的利遠大於空間的弊</code>，就像我們下面要講的<strong>Sort by Counting</strong>。</p>
+<hr>
+<h2 id="distribution-sorting">Distribution Sorting</h2>
+<p>如果要針對一個包含數個重複數值的陣列進行排序，原本的作法可能是：</p>
+<ol>
+<li>寫一個迴圈，找出最小的值。</li>
+<li>再寫一個迴圈，計算這個值重複幾次。</li>
+<li>再把這個值依照他重複的次數放到一個新的陣列當中。</li>
+<li>將原本的陣列中的所有這個值刪除。</li>
+<li>重複1~5步，直到初始陣列為空。</li>
+</ol>
+<p>上面這個步驟沒有太大的毛病，但是可以更好，所以我們可以改良成下面的方式，也就是所謂的<code>Distribution Sort</code>：</p>
+<ol>
+<li>透過一個迴圈將初始陣列中所有數值及其重複次數記錄到另一個物件當中（Map/Dictionary）。</li>
+<li>改變這個Map/Dictionary的Value（後一個的值加上前一個的值）。</li>
+<li>再利用這個改變後的Map/Dictionary配合初始陣列，一步一步地將排序的結果生成。</li>
+</ol>
+<p>第一種做法就只會有<strong>兩個參數：當前的值和重複的次數，以及兩個陣列（一新一舊）</strong>，而第二種做法就會<code>多一個Map/Dictionary</code>的物件和兩個陣列，而這個Map/Dictionary中記錄了所有的值和個別重複的次數，因此所使用的<strong>空間比較多</strong>，但是<strong>節省了執行時間</strong>，因此Distribution Sort是一種Time and Space Tradeoff。</p>
+<p>我們透過下面GIF來更加了解這個過程，首先先針對Array當中所有的值計算重複次數，記錄到一個Key-Value的物件中，然後再利用初始陣列Backward的順序，配合這個Key-Value的物件將值放到新陣列中對應的位置，並將Key-Value的Value減一（下一次的位置），反覆進行，即可得到排序後的結果。</p>
+<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3dUyPzQ12U0BACU8HWzmdKSgN_3mgnX0OFHdpa24HcfyRRKBw69Ib2zKat3WZb5-z45jwKoGMPpcuWtalTNY9bKWxtjMLrHP8A-I5hJ4dlpOR0WnrcVIAmnhmmW-4dzknxQXaI-TL74WjR6tUej_Zo1=w480-h384-no?authuser=0" alt="Distribution Sort"></p>
+<hr>
+<h2 id="小結">小結</h2>
+<ol>
+<li>空間換取時間，抑或時間換取空間，就是Time and Space Tradeoff的概念。</li>
+<li>Distribution Sort會利用額外的空間來記錄過渡狀態，並利用過渡狀態進行排列。</li>
+</ol>
+<hr>
+<h2 id="預告">預告</h2>
+<p>明天我們將會介紹另一種Time and Space Tradeoff的演算法 - hashing。</p>
+<hr>
+<h2 id="references">References</h2>
+<ol>
+<li><a href="https://doc.lagout.org/science/0_Computer%20Science/2_Algorithms/Introduction%20to%20the%20Design%20and%20Analysis%20of%20Algorithms%20%283rd%20ed.%29%20%5BLevitin%202011-10-09%5D.pdf">Introduction to the Design and Analysis of Algorithms, 3rd Edition, by Anany Levitin</a></li>
+</ol>
+
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/InformisTry/posts/ithome-triathlon/tandc-2-3-tree/"  style="width: 49rem;" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day19 -- Transform and Conquer - 2-3 Trees">&larr;
+                            【舌尖上的演算法】Day19 -- Transform and Conquer - 2-3 Trees</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/InformisTry/posts/ithome-triathlon/ts-hash/" style="width: 49rem;" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day21 -- Time and Space Tradeoff - Hashing">&rarr; 【舌尖上的演算法】Day21 -- Time and Space Tradeoff - Hashing</a>
+                    </li>
+                    
+                </ul>
+
+                
+<div id="disqus-comment"></div>
+
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "informistry" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+            </div>
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        <a href="/InformisTry/tags/algorithm" title="algorithm">
+                            algorithm
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/InformisTry/tags/data-structure" title="data-structure">
+                            data-structure
+                        </a>
+                        
+                        
+                        
+                        <a href="/InformisTry/tags/hints" title="hints">
+                            hints
+                        </a>
+                        
+                        
+                        
+                        <a href="/InformisTry/tags/ithome" title="ithome">
+                            ithome
+                        </a>
+                        
+                        
+                        
+                        <a href="/InformisTry/tags/java" title="java">
+                            java
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/InformisTry/tags/triathlon" title="triathlon">
+                            triathlon
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>FRIENDS</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="https://ianjustin39.github.io/ianlife/">Ian化學系軟體工程師</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                    
+                    <li>
+                        <a href="mailto:adslbbc1949@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/JumperC2P">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/hank-lee-784779136/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/8090654/h-lee">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+            
+                    
+                    
+                    
+            
+            
+            
+                </ul>
+		        <p class="copyright text-muted">
+                    Copyright &copy; InformisTry 2021
+                    <br>
+                    <small id="busuanzi_container_site_pv" style='display:none'> Page Views: <span id="busuanzi_value_site_pv"></span> </small>
+                    |
+                    <small id="busuanzi_container_site_uv" style='display:none'> Count of Visits: <span id="busuanzi_value_site_uv"></span> </small>
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-172654708-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+</body>
+</html>

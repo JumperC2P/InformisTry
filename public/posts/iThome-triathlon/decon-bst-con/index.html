@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="InformisTry">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="https://jumperc2p.github.io/InformisTry/https://tinyurl.com/yc28myh2">
+    <meta property="twitter:image" content="https://jumperc2p.github.io/InformisTry/https://tinyurl.com/yc28myh2" />
+    
+
+    
+    <meta name="title" content="【舌尖上的演算法】Day14 -- Decrease and Conquer - Binary Search Tree-續" />
+    <meta property="og:title" content="【舌尖上的演算法】Day14 -- Decrease and Conquer - Binary Search Tree-續" />
+    <meta property="twitter:title" content="【舌尖上的演算法】Day14 -- Decrease and Conquer - Binary Search Tree-續" />
+    
+
+    
+    <meta name="description" content="Hank Lee。 IT &#43; Chemistry = InformisTry。 Career Change。">
+    <meta property="og:description" content="Hank Lee。 IT &#43; Chemistry = InformisTry。 Career Change。" />
+    <meta property="twitter:description" content="Hank Lee。 IT &#43; Chemistry = InformisTry。 Career Change。" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="Chih-Hsuan Lee, Informistry, Hank Lee, JumperC2P, Hank portfolio, Java, Python, Developer, Engineer, Software, ReactJS, Web, React, Database, Kubernetes, 微服務, Microservice, 演算法">
+    <link rel="shortcut icon" href="/InformisTry/img/favicon.ico">
+
+    <title>【舌尖上的演算法】Day14 -- Decrease and Conquer - Binary Search Tree-續-HankLee</title>
+
+    <link rel="canonical" href="/InformisTry/posts/ithome-triathlon/decon-bst-con">
+
+    <link rel="stylesheet" href="/InformisTry/css/iDisqus.min.css"/>
+	
+    
+    <link rel="stylesheet" href="/InformisTry/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/InformisTry/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="/InformisTry/css/zanshang.css">
+    
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    
+    
+
+    
+    
+    <script src="/InformisTry/js/jquery.min.js"></script>
+    
+    
+    <script src="/InformisTry/js/bootstrap.min.js"></script>
+    
+    
+    <script src="/InformisTry/js/hux-blog.min.js"></script>
+
+    
+    
+
+    
+    <script data-ad-client="ca-pub-8332161170897799" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+</head>
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/InformisTry/">InformisTry</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/InformisTry/">Home</a>
+                    </li>
+                    
+                        
+                        <li>
+                            <a href="/InformisTry/categories/books">books</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/InformisTry/categories/life">life</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/InformisTry/categories/series">series</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/InformisTry/categories/tech">tech</a>
+                        </li>
+                        
+                    
+                    
+		            
+                        <li><a href="/InformisTry/top/about">ABOUT ME  </a></li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('https://tinyurl.com/y7zeezbe')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/InformisTry/tags/algorithm" title="Algorithm">
+                            Algorithm
+                        </a>
+                        
+                        <a class="tag" href="/InformisTry/tags/ithome" title="iThome">
+                            iThome
+                        </a>
+                        
+                        <a class="tag" href="/InformisTry/tags/triathlon" title="triathlon">
+                            triathlon
+                        </a>
+                        
+                        <a class="tag" href="/InformisTry/tags/data-structure" title="Data Structure">
+                            Data Structure
+                        </a>
+                        
+                    </div>
+                    <h1>【舌尖上的演算法】Day14 -- Decrease and Conquer - Binary Search Tree-續</h1>
+                    <h2 class="subheading">2020 IT邦鐵人賽</h2>
+                    <span class="meta">
+                        Posted by 
+                        
+                            Hank Lee
+                         
+                        on 
+                        Monday, September 21, 2020
+                        
+                            <span id="/posts/ithome-triathlon/decon-bst-con" class="leancloud_visitors meta_data_item" data-flag-title="">
+    <span class="post-meta-item-icon">
+      <span class="octicon octicon-eye"></span> 
+    </span>
+    <i class="fa fa-eye"></i>
+    <span class="old-visitors-count" style="display: none;"></span>
+    <span class="leancloud-visitors-count"></span>
+</span>
+
+
+
+<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+
+<script>
+	AV.initialize("", "");
+</script>
+
+<script type="text/javascript">
+function showTime(Counter) {
+    var query = new AV.Query(Counter);
+    var entries = [];
+    var $visitors = $(".leancloud_visitors");
+
+    $visitors.each(function() {
+        entries.push($(this).attr("id").trim());
+    });
+
+    query.containedIn('url', entries);
+    query.find()
+        .done(function(results) {
+            var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+            var OLD_COUNT_CONTAINER_REF = '.old-visitors-count';
+
+            
+            
+            
+            
+
+            for (var i = 0; i < results.length; i++) {
+                var item = results[i];
+                var url = item.get('url');
+                var time = item.get('time');
+                var element = document.getElementById(url);
+
+                $(element).find(COUNT_CONTAINER_REF).text(time);
+            }
+            for (var i = 0; i < entries.length; i++) {
+                var url = entries[i];
+                var element = document.getElementById(url);
+                var countSpan = $(element).find(COUNT_CONTAINER_REF);
+                if (countSpan.text() == '') {
+                    var oldCountSpan = $(element).find(OLD_COUNT_CONTAINER_REF).text();
+                    if(oldCountSpan!=''){
+                        countSpan.text(0+parseInt(oldCountSpan));
+                    }else{
+                        countSpan.text(0);          
+                    }
+                }
+            }
+        })
+        .fail(function(object, error) {
+            console.log("Error: " + error.code + " " + error.message);
+        });
+}
+
+function addCount(Counter) {
+    var $visitors = $(".leancloud_visitors");
+    var url = $visitors.attr('id').trim();
+    var title = $visitors.attr('data-flag-title').trim();
+    var query = new AV.Query(Counter);
+
+    query.equalTo("url", url);
+    query.find({
+        success: function(results) {
+            if (results.length > 0) {
+                var counter = results[0];
+                counter.fetchWhenSave(true);
+                counter.increment("time");
+                counter.save(null, {
+                    success: function(counter) {
+                        var $element = $(document.getElementById(url));
+                        $element.find('.leancloud-visitors-count').text(counter.get('time'));
+                    },
+                    error: function(counter, error) {
+                        console.log('Failed to save Visitor num, with error message: ' + error.message);
+                    }
+                });
+            } else {
+                var newcounter = new Counter();
+                 
+                var acl = new AV.ACL();
+                acl.setPublicReadAccess(true);
+                acl.setPublicWriteAccess(true);
+                newcounter.setACL(acl);
+                 
+                newcounter.set("title", title);
+                newcounter.set("url", url);
+                var OLD_COUNT_CONTAINER_REF = '.old-visitors-count';
+                var $element = $(document.getElementById(url));
+                var oldCountSpan = $element.find(OLD_COUNT_CONTAINER_REF).text();
+                if(oldCountSpan!=''){
+                    newcounter.set("time", parseInt(oldCountSpan)+1);
+                }else{
+ 	                    newcounter.set("time",  1);
+                }
+                newcounter.save(null, {
+                    success: function(newcounter) {
+                        var $element = $(document.getElementById(url));
+                        $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                    },
+                    error: function(newcounter, error) {
+                        console.log('Failed to create');
+                    }
+                });
+            }
+        },
+        error: function(error) {
+            console.log('Error:' + error.code + " " + error.message);
+        }
+    });
+}
+$(function() {
+    var Counter = AV.Object.extend("Counter");
+    
+    
+    if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+    } else {
+        showTime(Counter);
+    }
+});
+</script>
+
+                        
+                        
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                    
+                    <header>
+                        <h2>Table of Contents</h2>
+                    </header>
+                    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#讀取bst的順序">讀取BST的順序</a></li>
+    <li><a href="#how-to-balance-bst">How to Balance BST</a></li>
+    <li><a href="#小結">小結</a></li>
+    <li><a href="#預告">預告</a></li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+                    
+                
+
+                <p><a href="https://ithelp.ithome.com.tw/articles/10241265">本系列文章同步分享於IT邦幫忙第12屆鐵人賽</a></p>
+<h2 id="前言">前言</h2>
+<p>昨天我們介紹了<code>Binary Search Tree(BST)</code>，而今天要講的BST包含了兩點：<strong>Process BST和Balancing</strong>。</p>
+<hr>
+<h2 id="讀取bst的順序">讀取BST的順序</h2>
+<p>我自己在實作BST的時候，我一定要把BST的每個Node數值印出來，我才能確定我所實作的Search, Insert和Delete是正確的，因此如何把BST的內容按照所期望的方式印出來就是我這邊要介紹的內容，大致上讀取BST時有三種過程：</p>
+<h4 id="1-preorder">1. Preorder:</h4>
+<p>Preorder是先讀取Root Node，才往左邊分支往下開始讀取，等左邊分支的Node都讀取完了，再前往右邊分支去讀取。
+<img src="https://lh3.googleusercontent.com/pw/ACtC-3ei-O3zizcE8Z8SMnsBaYayXvBltCkA6A-5zzBXP4Cl0EzUZmuWWGbnOPw9hSX7awIbXIa17NId-49UGdXQNO0fxaAmbop1X_OdZaASnE0nRp0Pz7PodyZSNsRoj8uB5qdc5Zqr39dUrmnSX0g5Y43M=w480-h288-no?authuser=0" alt="BST-Preorder"></p>
+<h4 id="2-inorder">2. Inorder:</h4>
+<p>Inorder是先一路向下，下到左邊分支的最左下角開始讀取，然後再來是Root Node，再來才是右邊分支。這是唯一一個讀取後是『正序排列』的結果。
+<img src="https://lh3.googleusercontent.com/pw/ACtC-3fX6WA2dL4Yzoo02YoZnwZhNnVHRwKmfdb7LJ0Vsui0FdTpvDp7kPKRiwZfRbX8vaC-0oDCGeF5faeRZeStU2XMIzrvqLkp2jbD1eh3s59azm9VK_YDnW-NSL4XjjTxRcFd1rsjpZpvR64xm_Tffo5o=w480-h288-no?authuser=0" alt="BST-Inorder"></p>
+<h4 id="3-postorder">3. Postorder:</h4>
+<p>Postorder則是先讀取左邊分支，再來是右邊分支，最後才讀取Root Node。
+<img src="https://lh3.googleusercontent.com/pw/ACtC-3djOSBpz0NXxkUzC3eXrpSZhXE2I3g-brEyZglkL5XLinBnXqGiTd4ZWGj9cjMq9O57dLBz_FZ2T5yLd1ynGFYm3qFlboas9vhhECck012XtHOm9xxqGvmPveYXBVuf9OuYzY4H_Pd9VwmMc7RJvMdT=w480-h288-no?authuser=0" alt="BST-PostOrder"></p>
+<hr>
+<h2 id="how-to-balance-bst">How to Balance BST</h2>
+<p>昨天有提到BST有分為Balanced BST和Unbalanced BST，而有沒有BST有沒有被Balanced可以說是很關鍵的一個問題；試問，假設現在有一個陣列的長度是<code>15</code>，那如果一個BST沒有進行過Balance，那這個BST的Height就會是<code>14</code>（<a href="">原因請看昨日的分享</a>），這樣表示若是這種狀況下，在進行BST Search的時候，最壞的狀況下要找到最後一個Node才有結果；但是如果經過Balanced的BST，其Height僅為<code>4</code>，如此一來，進行BST Search最壞的情況下也只需要找四次就可以有結果了。那我們要怎麼去做到balance這件事呢？</p>
+<p>Code在此，給大家參考，不敢說效能很好，但是經過我的測試看起來是可行的：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd;font-style:italic">class</span> <span style="color:#50fa7b">BSTProc</span> <span style="color:#ff79c6">{</span>
+	
+	<span style="color:#8be9fd;font-style:italic">private</span> BSTProc parentNode<span style="color:#ff79c6">;</span>
+	<span style="color:#8be9fd;font-style:italic">private</span> BSTProc leftNode<span style="color:#ff79c6">;</span>
+	<span style="color:#8be9fd;font-style:italic">private</span> BSTProc rightNode<span style="color:#ff79c6">;</span>
+	
+	<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#50fa7b">BSTProc</span><span style="color:#ff79c6">(</span>String procLabel<span style="color:#ff79c6">,</span> <span style="color:#8be9fd">int</span> vt<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+		<span style="color:#ff79c6">this</span><span style="color:#ff79c6">(</span>procLabel<span style="color:#ff79c6">,</span> vt<span style="color:#ff79c6">,</span> <span style="color:#ff79c6">null</span><span style="color:#ff79c6">,</span> <span style="color:#ff79c6">null</span><span style="color:#ff79c6">,</span> <span style="color:#ff79c6">null</span><span style="color:#ff79c6">);</span>
+	<span style="color:#ff79c6">}</span>
+	
+	<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#50fa7b">BSTProc</span><span style="color:#ff79c6">(</span>String procLabel<span style="color:#ff79c6">,</span> <span style="color:#8be9fd">int</span> vt<span style="color:#ff79c6">,</span> BSTProc parentNode<span style="color:#ff79c6">,</span> BSTProc leftNode<span style="color:#ff79c6">,</span> BSTProc rightNode<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+		<span style="color:#8be9fd;font-style:italic">super</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">setProcLabel</span><span style="color:#ff79c6">(</span>procLabel<span style="color:#ff79c6">);</span>
+		<span style="color:#8be9fd;font-style:italic">super</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">setVt</span><span style="color:#ff79c6">(</span>vt<span style="color:#ff79c6">);</span>
+		<span style="color:#ff79c6">this</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">setParentNode</span><span style="color:#ff79c6">(</span>parentNode<span style="color:#ff79c6">);</span>
+		<span style="color:#ff79c6">this</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">setLeftNode</span><span style="color:#ff79c6">(</span>leftNode<span style="color:#ff79c6">);</span>
+		<span style="color:#ff79c6">this</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">setRightNode</span><span style="color:#ff79c6">(</span>rightNode<span style="color:#ff79c6">);</span>
+	<span style="color:#ff79c6">}</span>
+
+	<span style="color:#8be9fd;font-style:italic">public</span> BSTProc <span style="color:#50fa7b">getParentNode</span><span style="color:#ff79c6">()</span> <span style="color:#ff79c6">{</span>
+		<span style="color:#ff79c6">return</span> parentNode<span style="color:#ff79c6">;</span>
+	<span style="color:#ff79c6">}</span>
+
+	<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">setParentNode</span><span style="color:#ff79c6">(</span>BSTProc parentNode<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+		<span style="color:#ff79c6">this</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">parentNode</span> <span style="color:#ff79c6">=</span> parentNode<span style="color:#ff79c6">;</span>
+	<span style="color:#ff79c6">}</span>
+
+	<span style="color:#8be9fd;font-style:italic">public</span> BSTProc <span style="color:#50fa7b">getLeftNode</span><span style="color:#ff79c6">()</span> <span style="color:#ff79c6">{</span>
+		<span style="color:#ff79c6">return</span> leftNode<span style="color:#ff79c6">;</span>
+	<span style="color:#ff79c6">}</span>
+
+	<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">setLeftNode</span><span style="color:#ff79c6">(</span>BSTProc leftNode<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+		<span style="color:#ff79c6">this</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">leftNode</span> <span style="color:#ff79c6">=</span> leftNode<span style="color:#ff79c6">;</span>
+	<span style="color:#ff79c6">}</span>
+
+	<span style="color:#8be9fd;font-style:italic">public</span> BSTProc <span style="color:#50fa7b">getRightNode</span><span style="color:#ff79c6">()</span> <span style="color:#ff79c6">{</span>
+		<span style="color:#ff79c6">return</span> rightNode<span style="color:#ff79c6">;</span>
+	<span style="color:#ff79c6">}</span>
+
+	<span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">setRightNode</span><span style="color:#ff79c6">(</span>BSTProc rightNode<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+		<span style="color:#ff79c6">this</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">rightNode</span> <span style="color:#ff79c6">=</span> rightNode<span style="color:#ff79c6">;</span>
+	<span style="color:#ff79c6">}</span> 
+
+<span style="color:#ff79c6">}</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">
+    <span style="color:#6272a4">// Rebuild an existed BST
+</span><span style="color:#6272a4"></span>    <span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd">void</span> <span style="color:#50fa7b">rebuild</span><span style="color:#ff79c6">()</span> <span style="color:#ff79c6">{</span>
+		
+        index <span style="color:#ff79c6">=</span> 0<span style="color:#ff79c6">;</span>
+        
+        <span style="color:#6272a4">// Transform a BST to an sorted array
+</span><span style="color:#6272a4"></span>		BSTProc<span style="color:#ff79c6">[]</span> array <span style="color:#ff79c6">=</span> getProcessAsc<span style="color:#ff79c6">(</span><span style="color:#ff79c6">new</span> BSTProc<span style="color:#ff79c6">[</span>size<span style="color:#ff79c6">],</span> rootNode<span style="color:#ff79c6">);</span>
+        
+        <span style="color:#6272a4">// Get the index of middle value of the array
+</span><span style="color:#6272a4"></span>        <span style="color:#8be9fd">int</span> middleIndex <span style="color:#ff79c6">=</span> Integer<span style="color:#ff79c6">.</span><span style="color:#50fa7b">valueOf</span><span style="color:#ff79c6">(</span>array<span style="color:#ff79c6">.</span><span style="color:#50fa7b">length</span><span style="color:#ff79c6">/</span>2<span style="color:#ff79c6">);</span>
+        <span style="color:#6272a4">// Set the value of the root node as the value of the middle of the array
+</span><span style="color:#6272a4"></span>		rootNode <span style="color:#ff79c6">=</span> array<span style="color:#ff79c6">[</span>middleIndex<span style="color:#ff79c6">];</span>
+		rootNode<span style="color:#ff79c6">.</span><span style="color:#50fa7b">setParentNode</span><span style="color:#ff79c6">(</span><span style="color:#ff79c6">null</span><span style="color:#ff79c6">);</span>
+        
+        <span style="color:#6272a4">// Set left node, starting from root node recursively.
+</span><span style="color:#6272a4"></span>        rootNode<span style="color:#ff79c6">.</span><span style="color:#50fa7b">setLeftNode</span><span style="color:#ff79c6">(</span>treeBuilder<span style="color:#ff79c6">(</span>array<span style="color:#ff79c6">,</span> 0<span style="color:#ff79c6">,</span> middleIndex<span style="color:#ff79c6">-</span>1<span style="color:#ff79c6">,</span> rootNode<span style="color:#ff79c6">));</span>
+        
+        <span style="color:#6272a4">// Set right node, starting from root node recursively.
+</span><span style="color:#6272a4"></span>		rootNode<span style="color:#ff79c6">.</span><span style="color:#50fa7b">setRightNode</span><span style="color:#ff79c6">(</span>treeBuilder<span style="color:#ff79c6">(</span>array<span style="color:#ff79c6">,</span> middleIndex<span style="color:#ff79c6">+</span>1<span style="color:#ff79c6">,</span> array<span style="color:#ff79c6">.</span><span style="color:#50fa7b">length</span><span style="color:#ff79c6">-</span>1<span style="color:#ff79c6">,</span> rootNode<span style="color:#ff79c6">));</span>
+		
+    <span style="color:#ff79c6">}</span>
+    
+    <span style="color:#8be9fd;font-style:italic">private</span> BSTProc<span style="color:#ff79c6">[]</span> <span style="color:#50fa7b">getProcessAsc</span><span style="color:#ff79c6">(</span>BSTProc<span style="color:#ff79c6">[]</span> array<span style="color:#ff79c6">,</span> BSTProc currentNode<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+		
+		<span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>currentNode<span style="color:#ff79c6">.</span><span style="color:#50fa7b">getLeftNode</span><span style="color:#ff79c6">()</span> <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">null</span><span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+			array <span style="color:#ff79c6">=</span> getProcessAsc<span style="color:#ff79c6">(</span>array<span style="color:#ff79c6">,</span> currentNode<span style="color:#ff79c6">.</span><span style="color:#50fa7b">getLeftNode</span><span style="color:#ff79c6">());</span>
+		<span style="color:#ff79c6">}</span>
+		
+		array<span style="color:#ff79c6">[</span>index<span style="color:#ff79c6">]</span> <span style="color:#ff79c6">=</span> currentNode<span style="color:#ff79c6">;</span>
+		index<span style="color:#ff79c6">++;</span>
+		
+		<span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>currentNode<span style="color:#ff79c6">.</span><span style="color:#50fa7b">getRightNode</span><span style="color:#ff79c6">()</span> <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">null</span><span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+			array <span style="color:#ff79c6">=</span> getProcessAsc<span style="color:#ff79c6">(</span>array<span style="color:#ff79c6">,</span> currentNode<span style="color:#ff79c6">.</span><span style="color:#50fa7b">getRightNode</span><span style="color:#ff79c6">());</span>
+		<span style="color:#ff79c6">}</span>
+		
+		<span style="color:#ff79c6">return</span> array<span style="color:#ff79c6">;</span>
+	<span style="color:#ff79c6">}</span>
+
+	<span style="color:#8be9fd;font-style:italic">private</span> BSTProc <span style="color:#50fa7b">treeBuilder</span><span style="color:#ff79c6">(</span>BSTProc<span style="color:#ff79c6">[]</span> array<span style="color:#ff79c6">,</span> <span style="color:#8be9fd">int</span> startIndex<span style="color:#ff79c6">,</span> <span style="color:#8be9fd">int</span> endIndex<span style="color:#ff79c6">,</span> BSTProc parentNode<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+		
+		<span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span>endIndex <span style="color:#ff79c6">&lt;</span> startIndex<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+			<span style="color:#ff79c6">return</span> <span style="color:#ff79c6">null</span><span style="color:#ff79c6">;</span>
+		<span style="color:#ff79c6">}</span>
+		
+		<span style="color:#8be9fd">int</span> middleIndex <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">(</span>startIndex <span style="color:#ff79c6">+</span> endIndex<span style="color:#ff79c6">)/</span>2<span style="color:#ff79c6">;</span>
+		BSTProc currentNode <span style="color:#ff79c6">=</span> array<span style="color:#ff79c6">[</span>middleIndex<span style="color:#ff79c6">];</span>
+		<span style="color:#ff79c6">if</span> <span style="color:#ff79c6">(</span> currentNode <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">null</span><span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+			currentNode<span style="color:#ff79c6">.</span><span style="color:#50fa7b">setParentNode</span><span style="color:#ff79c6">(</span>parentNode<span style="color:#ff79c6">);</span>
+			currentNode<span style="color:#ff79c6">.</span><span style="color:#50fa7b">setLeftNode</span><span style="color:#ff79c6">(</span>treeBuilder<span style="color:#ff79c6">(</span>array<span style="color:#ff79c6">,</span> startIndex<span style="color:#ff79c6">,</span> middleIndex<span style="color:#ff79c6">-</span>1<span style="color:#ff79c6">,</span> currentNode<span style="color:#ff79c6">));</span>
+			currentNode<span style="color:#ff79c6">.</span><span style="color:#50fa7b">setRightNode</span><span style="color:#ff79c6">(</span>treeBuilder<span style="color:#ff79c6">(</span>array<span style="color:#ff79c6">,</span> middleIndex<span style="color:#ff79c6">+</span>1<span style="color:#ff79c6">,</span> endIndex<span style="color:#ff79c6">,</span> currentNode<span style="color:#ff79c6">));</span>
+		<span style="color:#ff79c6">}</span>
+		
+		<span style="color:#ff79c6">return</span> currentNode<span style="color:#ff79c6">;</span>
+	<span style="color:#ff79c6">}</span>
+
+</code></pre></div><p>基本上這個方式是將原本已經存在的ＢＳＴ，轉換成正序排列的Array後，將Array一再拆分成兩邊，找出其對應的child node後，在連到對應的parent node上面；經過我的實測結果，其示意圖如下：</p>
+<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3fYawibJZlzeHAXbqSW0XcYv4PlJQUT4xj7U9C1Tw_XmNY5QT4cLPnSR8YKk_Hn6mM6D0HA23tO1_2uWKcCebAAoAB1rWTzOHC33FtGcDXOiElod2oWTG-gW4Aa87QDTQW7D-zhlCiDYkM2JULJLlN8=w1000-h368-no?authuser=0" alt="Balancing-BST"></p>
+<hr>
+<h2 id="小結">小結</h2>
+<ol>
+<li>BST的讀取順序分為Preorder, Inorder和Postorder。</li>
+<li>BST的平衡會大幅影響執行效率。</li>
+</ol>
+<hr>
+<h2 id="預告">預告</h2>
+<p>明天我們將會介紹新的演算法類別-Divide and Conquer。</p>
+<hr>
+<h2 id="references">References</h2>
+<ol>
+<li><a href="https://doc.lagout.org/science/0_Computer%20Science/2_Algorithms/Introduction%20to%20the%20Design%20and%20Analysis%20of%20Algorithms%20%283rd%20ed.%29%20%5BLevitin%202011-10-09%5D.pdf">Introduction to the Design and Analysis of Algorithms, 3rd Edition, by Anany Levitin</a></li>
+</ol>
+
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/InformisTry/posts/ithome-triathlon/decon-bst/"  style="width: 49rem;" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day13 -- Decrease and Conquer - Binary Search Tree">&larr;
+                            【舌尖上的演算法】Day13 -- Decrease and Conquer - Binary Search Tree</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/InformisTry/posts/ithome-triathlon/dicon-ms/" style="width: 49rem;" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day15 -- Divide and Conquer - Merge Sort">&rarr; 【舌尖上的演算法】Day15 -- Divide and Conquer - Merge Sort</a>
+                    </li>
+                    
+                </ul>
+
+                
+<div id="disqus-comment"></div>
+
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "informistry" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+            </div>
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        <a href="/InformisTry/tags/algorithm" title="algorithm">
+                            algorithm
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/InformisTry/tags/data-structure" title="data-structure">
+                            data-structure
+                        </a>
+                        
+                        
+                        
+                        <a href="/InformisTry/tags/hints" title="hints">
+                            hints
+                        </a>
+                        
+                        
+                        
+                        <a href="/InformisTry/tags/ithome" title="ithome">
+                            ithome
+                        </a>
+                        
+                        
+                        
+                        <a href="/InformisTry/tags/java" title="java">
+                            java
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/InformisTry/tags/triathlon" title="triathlon">
+                            triathlon
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>FRIENDS</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="https://ianjustin39.github.io/ianlife/">Ian化學系軟體工程師</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                    
+                    <li>
+                        <a href="mailto:adslbbc1949@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/JumperC2P">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/hank-lee-784779136/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/8090654/h-lee">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+            
+                    
+                    
+                    
+            
+            
+            
+                </ul>
+		        <p class="copyright text-muted">
+                    Copyright &copy; InformisTry 2021
+                    <br>
+                    <small id="busuanzi_container_site_pv" style='display:none'> Page Views: <span id="busuanzi_value_site_pv"></span> </small>
+                    |
+                    <small id="busuanzi_container_site_uv" style='display:none'> Count of Visits: <span id="busuanzi_value_site_uv"></span> </small>
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-172654708-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+</body>
+</html>

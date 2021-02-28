@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="InformisTry">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="https://jumperc2p.github.io/InformisTry/https://tinyurl.com/yc28myh2">
+    <meta property="twitter:image" content="https://jumperc2p.github.io/InformisTry/https://tinyurl.com/yc28myh2" />
+    
+
+    
+    <meta name="title" content="【舌尖上的演算法】Day16 -- Divide and Conquer - Quick Sort" />
+    <meta property="og:title" content="【舌尖上的演算法】Day16 -- Divide and Conquer - Quick Sort" />
+    <meta property="twitter:title" content="【舌尖上的演算法】Day16 -- Divide and Conquer - Quick Sort" />
+    
+
+    
+    <meta name="description" content="Hank Lee。 IT &#43; Chemistry = InformisTry。 Career Change。">
+    <meta property="og:description" content="Hank Lee。 IT &#43; Chemistry = InformisTry。 Career Change。" />
+    <meta property="twitter:description" content="Hank Lee。 IT &#43; Chemistry = InformisTry。 Career Change。" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="Chih-Hsuan Lee, Informistry, Hank Lee, JumperC2P, Hank portfolio, Java, Python, Developer, Engineer, Software, ReactJS, Web, React, Database, Kubernetes, 微服務, Microservice, 演算法">
+    <link rel="shortcut icon" href="/InformisTry/img/favicon.ico">
+
+    <title>【舌尖上的演算法】Day16 -- Divide and Conquer - Quick Sort-HankLee</title>
+
+    <link rel="canonical" href="/InformisTry/posts/ithome-triathlon/dicon-qs">
+
+    <link rel="stylesheet" href="/InformisTry/css/iDisqus.min.css"/>
+	
+    
+    <link rel="stylesheet" href="/InformisTry/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/InformisTry/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="/InformisTry/css/zanshang.css">
+    
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    
+    
+
+    
+    
+    <script src="/InformisTry/js/jquery.min.js"></script>
+    
+    
+    <script src="/InformisTry/js/bootstrap.min.js"></script>
+    
+    
+    <script src="/InformisTry/js/hux-blog.min.js"></script>
+
+    
+    
+
+    
+    <script data-ad-client="ca-pub-8332161170897799" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+</head>
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/InformisTry/">InformisTry</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/InformisTry/">Home</a>
+                    </li>
+                    
+                        
+                        <li>
+                            <a href="/InformisTry/categories/books">books</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/InformisTry/categories/life">life</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/InformisTry/categories/series">series</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/InformisTry/categories/tech">tech</a>
+                        </li>
+                        
+                    
+                    
+		            
+                        <li><a href="/InformisTry/top/about">ABOUT ME  </a></li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('https://tinyurl.com/y7zeezbe')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/InformisTry/tags/algorithm" title="Algorithm">
+                            Algorithm
+                        </a>
+                        
+                        <a class="tag" href="/InformisTry/tags/ithome" title="iThome">
+                            iThome
+                        </a>
+                        
+                        <a class="tag" href="/InformisTry/tags/triathlon" title="triathlon">
+                            triathlon
+                        </a>
+                        
+                        <a class="tag" href="/InformisTry/tags/data-structure" title="Data Structure">
+                            Data Structure
+                        </a>
+                        
+                    </div>
+                    <h1>【舌尖上的演算法】Day16 -- Divide and Conquer - Quick Sort</h1>
+                    <h2 class="subheading">2020 IT邦鐵人賽</h2>
+                    <span class="meta">
+                        Posted by 
+                        
+                            Hank Lee
+                         
+                        on 
+                        Wednesday, September 23, 2020
+                        
+                            <span id="/posts/ithome-triathlon/dicon-qs" class="leancloud_visitors meta_data_item" data-flag-title="">
+    <span class="post-meta-item-icon">
+      <span class="octicon octicon-eye"></span> 
+    </span>
+    <i class="fa fa-eye"></i>
+    <span class="old-visitors-count" style="display: none;"></span>
+    <span class="leancloud-visitors-count"></span>
+</span>
+
+
+
+<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+
+<script>
+	AV.initialize("", "");
+</script>
+
+<script type="text/javascript">
+function showTime(Counter) {
+    var query = new AV.Query(Counter);
+    var entries = [];
+    var $visitors = $(".leancloud_visitors");
+
+    $visitors.each(function() {
+        entries.push($(this).attr("id").trim());
+    });
+
+    query.containedIn('url', entries);
+    query.find()
+        .done(function(results) {
+            var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+            var OLD_COUNT_CONTAINER_REF = '.old-visitors-count';
+
+            
+            
+            
+            
+
+            for (var i = 0; i < results.length; i++) {
+                var item = results[i];
+                var url = item.get('url');
+                var time = item.get('time');
+                var element = document.getElementById(url);
+
+                $(element).find(COUNT_CONTAINER_REF).text(time);
+            }
+            for (var i = 0; i < entries.length; i++) {
+                var url = entries[i];
+                var element = document.getElementById(url);
+                var countSpan = $(element).find(COUNT_CONTAINER_REF);
+                if (countSpan.text() == '') {
+                    var oldCountSpan = $(element).find(OLD_COUNT_CONTAINER_REF).text();
+                    if(oldCountSpan!=''){
+                        countSpan.text(0+parseInt(oldCountSpan));
+                    }else{
+                        countSpan.text(0);          
+                    }
+                }
+            }
+        })
+        .fail(function(object, error) {
+            console.log("Error: " + error.code + " " + error.message);
+        });
+}
+
+function addCount(Counter) {
+    var $visitors = $(".leancloud_visitors");
+    var url = $visitors.attr('id').trim();
+    var title = $visitors.attr('data-flag-title').trim();
+    var query = new AV.Query(Counter);
+
+    query.equalTo("url", url);
+    query.find({
+        success: function(results) {
+            if (results.length > 0) {
+                var counter = results[0];
+                counter.fetchWhenSave(true);
+                counter.increment("time");
+                counter.save(null, {
+                    success: function(counter) {
+                        var $element = $(document.getElementById(url));
+                        $element.find('.leancloud-visitors-count').text(counter.get('time'));
+                    },
+                    error: function(counter, error) {
+                        console.log('Failed to save Visitor num, with error message: ' + error.message);
+                    }
+                });
+            } else {
+                var newcounter = new Counter();
+                 
+                var acl = new AV.ACL();
+                acl.setPublicReadAccess(true);
+                acl.setPublicWriteAccess(true);
+                newcounter.setACL(acl);
+                 
+                newcounter.set("title", title);
+                newcounter.set("url", url);
+                var OLD_COUNT_CONTAINER_REF = '.old-visitors-count';
+                var $element = $(document.getElementById(url));
+                var oldCountSpan = $element.find(OLD_COUNT_CONTAINER_REF).text();
+                if(oldCountSpan!=''){
+                    newcounter.set("time", parseInt(oldCountSpan)+1);
+                }else{
+ 	                    newcounter.set("time",  1);
+                }
+                newcounter.save(null, {
+                    success: function(newcounter) {
+                        var $element = $(document.getElementById(url));
+                        $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                    },
+                    error: function(newcounter, error) {
+                        console.log('Failed to create');
+                    }
+                });
+            }
+        },
+        error: function(error) {
+            console.log('Error:' + error.code + " " + error.message);
+        }
+    });
+}
+$(function() {
+    var Counter = AV.Object.extend("Counter");
+    
+    
+    if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+    } else {
+        showTime(Counter);
+    }
+});
+</script>
+
+                        
+                        
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                    
+                    <header>
+                        <h2>Table of Contents</h2>
+                    </header>
+                    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#quick-sort的流程">Quick Sort的流程</a></li>
+    <li><a href="#quick-sort的時間複雜度">Quick Sort的時間複雜度</a></li>
+    <li><a href="#小結">小結</a></li>
+    <li><a href="#預告">預告</a></li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+                    
+                
+
+                <p><a href="https://ithelp.ithome.com.tw/articles/10241650">本系列文章同步分享於IT邦幫忙第12屆鐵人賽</a></p>
+<h2 id="前言">前言</h2>
+<p>昨天介紹了第一種Divide and Conquer的演算法(Merge Sort)，今天我們要來講第二個屬於這個類別的演算法-Quick Sort。</p>
+<hr>
+<h2 id="quick-sort的流程">Quick Sort的流程</h2>
+<p>相較於其他Sorting的演算法，Quick Sor算是比較特殊的一種，為什麼這麼說呢？因為經由Quick Sort執行過後的結果<strong>並非是一個正序或倒序排列的結果</strong>，反而僅僅是<code>依照大小分為兩邊</code>而已(如下示意圖）。</p>
+<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3eDTVatSvL-p6my48lx8KF_tF_8-B7A4P95I27R6CADbR5dZQD5cJOdr_Gvcu_7Dizm-nF8KburKFRL9P9n9avupAgyOK1dT47TrgZmGD3UAWi36AqGnbcehGZKWakh7zKfO2cZiKyhYmr0QaDU8q9B=w600-h358-no?authuser=0" alt="Quick Sort-pivot"></p>
+<p>因為<strong>要依照數值大小分兩邊</strong>，就必須要有一個<code>基準點(pivot)</code>，然後將其他數值去跟這個pivot做比較，再分配到兩邊（如圖中的紅色和藍色的區塊）；而至於實際上數值怎麼交換位置，我們看看下面的範例好了：</p>
+<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3ffMGXxda36cmTyM8zDCbAvFPaEFdN9YWtdzeVPdhyPebpavRSESWBd6womQ3dDs4B3xumPOwVph7iOq-LqxgWt5063aVKVbtahOPQfV4dU1_-LmzHy2ZSeSfrnBeNYTMyGeixnrEB1N-gInTThj8WJ=w480-h288-no?authuser=0" alt="Quick Sort-Sample"></p>
+<p>在這個範例中，我們取用陣列的第一個數值作為基準點(Pivot)，然後依序從用第二個位置(<code>i</code>)和最後一個位置(<code>j</code>)的值開始進行與Pivot的比較，若兩個值都比Pivot還大，那就會從<code>j</code>開始一步一步往前移動，並與<code>i</code>的值做比較，當<code>j</code>的數值比<code>i</code>小時，<code>i</code>和<code>j</code>兩個就會交換，交換過後，再改成從<code>i</code>的位置一步一步往後移動，並與<code>j</code>的值比較，當<code>i</code>的值比<code>j</code>大時，<code>i</code>和<code>j</code>再次交換，反覆這個動作，直到<code>i</code>和<code>j</code>插肩而過（此時<code>j</code>在前，<code>i</code>在後），這兩個指標所在位置的兩個數值會<strong>交換兩次</strong>，交換兩次後，pivot的數值會再與<code>j</code>的數值交換位置，如此以來，Pivot的左手邊都會是比其小的數值，而右手邊則反之。Pseudo-Code在下方，請自行參閱：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#8be9fd;font-style:italic">function</span> QPartition(<span style="color:#8be9fd;font-style:italic">Array</span>[l,...,r]){
+    p <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">Array</span>[l];
+    i <span style="color:#ff79c6">=</span> l;
+    j <span style="color:#ff79c6">=</span> r <span style="color:#ff79c6">+</span> <span style="color:#bd93f9">1</span>;
+    repeat
+        <span style="color:#ff79c6">do</span>
+            i <span style="color:#ff79c6">=</span> i <span style="color:#ff79c6">+</span> <span style="color:#bd93f9">1</span>
+        <span style="color:#ff79c6">while</span> <span style="color:#8be9fd;font-style:italic">Array</span>[i] <span style="color:#ff79c6">&lt;</span> p and i <span style="color:#ff79c6">&lt;</span> r
+        <span style="color:#ff79c6">do</span>
+            j <span style="color:#ff79c6">=</span> j <span style="color:#ff79c6">-</span> <span style="color:#bd93f9">1</span>
+        <span style="color:#ff79c6">while</span> <span style="color:#8be9fd;font-style:italic">Array</span>[j] <span style="color:#ff79c6">&gt;</span> p
+        swap(<span style="color:#8be9fd;font-style:italic">Array</span>[i], <span style="color:#8be9fd;font-style:italic">Array</span>[j])
+    until i <span style="color:#ff79c6">&gt;=</span> j
+    swap(<span style="color:#8be9fd;font-style:italic">Array</span>[i], <span style="color:#8be9fd;font-style:italic">Array</span>[j])
+    swap(<span style="color:#8be9fd;font-style:italic">Array</span>[l], <span style="color:#8be9fd;font-style:italic">Array</span>[j])
+    <span style="color:#ff79c6">return</span> j
+}
+
+<span style="color:#6272a4">// Input: A subarray Array[l,...,r] of Array[0,...,n-1]
+</span><span style="color:#6272a4">// Output: A subarray Array[l,...,r] sorted in ascending order.
+</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">function</span> QuickSort(<span style="color:#8be9fd;font-style:italic">Array</span>[l,...,r]){
+    <span style="color:#ff79c6">if</span> l <span style="color:#ff79c6">&lt;</span> r {
+        <span style="color:#6272a4">// s is the index to split the array
+</span><span style="color:#6272a4"></span>        s <span style="color:#ff79c6">=</span> QPartition(<span style="color:#8be9fd;font-style:italic">Array</span>[l,...,r])
+        QuickSort(<span style="color:#8be9fd;font-style:italic">Array</span>[l,...,s<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>])
+        QuickSort(<span style="color:#8be9fd;font-style:italic">Array</span>[s<span style="color:#ff79c6">+</span><span style="color:#bd93f9">1</span>,...,r])
+    }
+}
+</code></pre></div><hr>
+<h2 id="quick-sort的時間複雜度">Quick Sort的時間複雜度</h2>
+<h4 id="1-best-case">1. Best Case:</h4>
+<p>發生的情況是這個挑選的Pivot可以剛剛好將一個陣列切成左右對等長度的兩個子陣列，如此一來，其時間複雜度為<code>𝜪(n·㏒2 n)</code>。</p>
+<h4 id="2-worst-case">2. Worst Case:</h4>
+<p>如果Pivot選擇的不好，那等於會讓某一個切出來的子陣列是<code>空的</code>，這種狀況通常出現在陣列已經排序過了（正序或倒序），這樣的話，期時間複雜度為<code>𝜪(n^2)</code>。</p>
+<h4 id="3-average-case">3. Average Case:</h4>
+<p>統計的結果是Average Case的比較次數大概會是Merge Sort的1.39倍，因此其時間複雜度為<code>𝜪(1.39n·㏒2 n)</code>。</p>
+<hr>
+<h2 id="小結">小結</h2>
+<ol>
+<li>Quick Sort是到目前為止介紹的Sorting演算法中唯一一個結果沒真正排序的演算法。</li>
+<li>Quick Sort的時間複雜度對於Best Case, Worst Case和Average Case來說都不相同。</li>
+</ol>
+<hr>
+<h2 id="預告">預告</h2>
+<p>明天我們將會進入另一個主題-Transform and Conquer。</p>
+<hr>
+<h2 id="references">References</h2>
+<ol>
+<li><a href="https://doc.lagout.org/science/0_Computer%20Science/2_Algorithms/Introduction%20to%20the%20Design%20and%20Analysis%20of%20Algorithms%20%283rd%20ed.%29%20%5BLevitin%202011-10-09%5D.pdf">Introduction to the Design and Analysis of Algorithms, 3rd Edition, by Anany Levitin</a></li>
+</ol>
+
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/InformisTry/posts/ithome-triathlon/dicon-ms/"  style="width: 49rem;" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day15 -- Divide and Conquer - Merge Sort">&larr;
+                            【舌尖上的演算法】Day15 -- Divide and Conquer - Merge Sort</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/InformisTry/posts/ithome-triathlon/tandc-avl-tree/" style="width: 49rem;" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day17 -- Transform and Conquer - AVL Tree(上）">&rarr; 【舌尖上的演算法】Day17 -- Transform and Conquer - AVL Tree(上）</a>
+                    </li>
+                    
+                </ul>
+
+                
+<div id="disqus-comment"></div>
+
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "informistry" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+            </div>
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        <a href="/InformisTry/tags/algorithm" title="algorithm">
+                            algorithm
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/InformisTry/tags/data-structure" title="data-structure">
+                            data-structure
+                        </a>
+                        
+                        
+                        
+                        <a href="/InformisTry/tags/hints" title="hints">
+                            hints
+                        </a>
+                        
+                        
+                        
+                        <a href="/InformisTry/tags/ithome" title="ithome">
+                            ithome
+                        </a>
+                        
+                        
+                        
+                        <a href="/InformisTry/tags/java" title="java">
+                            java
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/InformisTry/tags/triathlon" title="triathlon">
+                            triathlon
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>FRIENDS</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="https://ianjustin39.github.io/ianlife/">Ian化學系軟體工程師</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                    
+                    <li>
+                        <a href="mailto:adslbbc1949@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/JumperC2P">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/hank-lee-784779136/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/8090654/h-lee">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+            
+                    
+                    
+                    
+            
+            
+            
+                </ul>
+		        <p class="copyright text-muted">
+                    Copyright &copy; InformisTry 2021
+                    <br>
+                    <small id="busuanzi_container_site_pv" style='display:none'> Page Views: <span id="busuanzi_value_site_pv"></span> </small>
+                    |
+                    <small id="busuanzi_container_site_uv" style='display:none'> Count of Visits: <span id="busuanzi_value_site_uv"></span> </small>
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-172654708-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="InformisTry">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="https://jumperc2p.github.io/InformisTry/https://tinyurl.com/yc28myh2">
+    <meta property="twitter:image" content="https://jumperc2p.github.io/InformisTry/https://tinyurl.com/yc28myh2" />
+    
+
+    
+    <meta name="title" content="【舌尖上的演算法】Day13 -- Decrease and Conquer - Binary Search Tree" />
+    <meta property="og:title" content="【舌尖上的演算法】Day13 -- Decrease and Conquer - Binary Search Tree" />
+    <meta property="twitter:title" content="【舌尖上的演算法】Day13 -- Decrease and Conquer - Binary Search Tree" />
+    
+
+    
+    <meta name="description" content="Hank Lee。 IT &#43; Chemistry = InformisTry。 Career Change。">
+    <meta property="og:description" content="Hank Lee。 IT &#43; Chemistry = InformisTry。 Career Change。" />
+    <meta property="twitter:description" content="Hank Lee。 IT &#43; Chemistry = InformisTry。 Career Change。" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="Chih-Hsuan Lee, Informistry, Hank Lee, JumperC2P, Hank portfolio, Java, Python, Developer, Engineer, Software, ReactJS, Web, React, Database, Kubernetes, 微服務, Microservice, 演算法">
+    <link rel="shortcut icon" href="/InformisTry/img/favicon.ico">
+
+    <title>【舌尖上的演算法】Day13 -- Decrease and Conquer - Binary Search Tree-HankLee</title>
+
+    <link rel="canonical" href="/InformisTry/posts/ithome-triathlon/decon-bst">
+
+    <link rel="stylesheet" href="/InformisTry/css/iDisqus.min.css"/>
+	
+    
+    <link rel="stylesheet" href="/InformisTry/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/InformisTry/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="/InformisTry/css/zanshang.css">
+    
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    
+    
+
+    
+    
+    <script src="/InformisTry/js/jquery.min.js"></script>
+    
+    
+    <script src="/InformisTry/js/bootstrap.min.js"></script>
+    
+    
+    <script src="/InformisTry/js/hux-blog.min.js"></script>
+
+    
+    
+
+    
+    <script data-ad-client="ca-pub-8332161170897799" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+</head>
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/InformisTry/">InformisTry</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/InformisTry/">Home</a>
+                    </li>
+                    
+                        
+                        <li>
+                            <a href="/InformisTry/categories/books">books</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/InformisTry/categories/life">life</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/InformisTry/categories/series">series</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/InformisTry/categories/tech">tech</a>
+                        </li>
+                        
+                    
+                    
+		            
+                        <li><a href="/InformisTry/top/about">ABOUT ME  </a></li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('https://tinyurl.com/y7zeezbe')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/InformisTry/tags/algorithm" title="Algorithm">
+                            Algorithm
+                        </a>
+                        
+                        <a class="tag" href="/InformisTry/tags/ithome" title="iThome">
+                            iThome
+                        </a>
+                        
+                        <a class="tag" href="/InformisTry/tags/triathlon" title="triathlon">
+                            triathlon
+                        </a>
+                        
+                        <a class="tag" href="/InformisTry/tags/data-structure" title="Data Structure">
+                            Data Structure
+                        </a>
+                        
+                    </div>
+                    <h1>【舌尖上的演算法】Day13 -- Decrease and Conquer - Binary Search Tree</h1>
+                    <h2 class="subheading">2020 IT邦鐵人賽</h2>
+                    <span class="meta">
+                        Posted by 
+                        
+                            Hank Lee
+                         
+                        on 
+                        Sunday, September 20, 2020
+                        
+                            <span id="/posts/ithome-triathlon/decon-bst" class="leancloud_visitors meta_data_item" data-flag-title="">
+    <span class="post-meta-item-icon">
+      <span class="octicon octicon-eye"></span> 
+    </span>
+    <i class="fa fa-eye"></i>
+    <span class="old-visitors-count" style="display: none;"></span>
+    <span class="leancloud-visitors-count"></span>
+</span>
+
+
+
+<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+
+<script>
+	AV.initialize("", "");
+</script>
+
+<script type="text/javascript">
+function showTime(Counter) {
+    var query = new AV.Query(Counter);
+    var entries = [];
+    var $visitors = $(".leancloud_visitors");
+
+    $visitors.each(function() {
+        entries.push($(this).attr("id").trim());
+    });
+
+    query.containedIn('url', entries);
+    query.find()
+        .done(function(results) {
+            var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+            var OLD_COUNT_CONTAINER_REF = '.old-visitors-count';
+
+            
+            
+            
+            
+
+            for (var i = 0; i < results.length; i++) {
+                var item = results[i];
+                var url = item.get('url');
+                var time = item.get('time');
+                var element = document.getElementById(url);
+
+                $(element).find(COUNT_CONTAINER_REF).text(time);
+            }
+            for (var i = 0; i < entries.length; i++) {
+                var url = entries[i];
+                var element = document.getElementById(url);
+                var countSpan = $(element).find(COUNT_CONTAINER_REF);
+                if (countSpan.text() == '') {
+                    var oldCountSpan = $(element).find(OLD_COUNT_CONTAINER_REF).text();
+                    if(oldCountSpan!=''){
+                        countSpan.text(0+parseInt(oldCountSpan));
+                    }else{
+                        countSpan.text(0);          
+                    }
+                }
+            }
+        })
+        .fail(function(object, error) {
+            console.log("Error: " + error.code + " " + error.message);
+        });
+}
+
+function addCount(Counter) {
+    var $visitors = $(".leancloud_visitors");
+    var url = $visitors.attr('id').trim();
+    var title = $visitors.attr('data-flag-title').trim();
+    var query = new AV.Query(Counter);
+
+    query.equalTo("url", url);
+    query.find({
+        success: function(results) {
+            if (results.length > 0) {
+                var counter = results[0];
+                counter.fetchWhenSave(true);
+                counter.increment("time");
+                counter.save(null, {
+                    success: function(counter) {
+                        var $element = $(document.getElementById(url));
+                        $element.find('.leancloud-visitors-count').text(counter.get('time'));
+                    },
+                    error: function(counter, error) {
+                        console.log('Failed to save Visitor num, with error message: ' + error.message);
+                    }
+                });
+            } else {
+                var newcounter = new Counter();
+                 
+                var acl = new AV.ACL();
+                acl.setPublicReadAccess(true);
+                acl.setPublicWriteAccess(true);
+                newcounter.setACL(acl);
+                 
+                newcounter.set("title", title);
+                newcounter.set("url", url);
+                var OLD_COUNT_CONTAINER_REF = '.old-visitors-count';
+                var $element = $(document.getElementById(url));
+                var oldCountSpan = $element.find(OLD_COUNT_CONTAINER_REF).text();
+                if(oldCountSpan!=''){
+                    newcounter.set("time", parseInt(oldCountSpan)+1);
+                }else{
+ 	                    newcounter.set("time",  1);
+                }
+                newcounter.save(null, {
+                    success: function(newcounter) {
+                        var $element = $(document.getElementById(url));
+                        $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                    },
+                    error: function(newcounter, error) {
+                        console.log('Failed to create');
+                    }
+                });
+            }
+        },
+        error: function(error) {
+            console.log('Error:' + error.code + " " + error.message);
+        }
+    });
+}
+$(function() {
+    var Counter = AV.Object.extend("Counter");
+    
+    
+    if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+    } else {
+        showTime(Counter);
+    }
+});
+</script>
+
+                        
+                        
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                    
+                    <header>
+                        <h2>Table of Contents</h2>
+                    </header>
+                    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#binary-search-tree是怎樣的資料結構呢">Binary Search Tree是怎樣的資料結構呢？</a></li>
+    <li><a href="#binary-search-tree的演算法">Binary Search Tree的演算法</a></li>
+    <li><a href="#小結">小結</a></li>
+    <li><a href="#預告">預告</a></li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+                    
+                
+
+                <p><a href="https://ithelp.ithome.com.tw/articles/10240495">本系列文章同步分享於IT邦幫忙第12屆鐵人賽</a></p>
+<h2 id="前言">前言</h2>
+<p>第十二天我們介紹了Binary Search，而Binary Search在執行的過程中，每一次的迴圈都是將已經正序排列的陣列拆成兩半，且左半段的數值一定比右半段的數值小，而我們在第四天介紹抽象資料型別的時候有提到一個資料結構也是會分成左右兩邊的，那就是<code>Rooted Tree</code>，因此今天我們要介紹的<code>Binary Search Tree（ＢＳＴ）</code>就是結合了Binary Search和Tree的特性而產生出來的一個資料結構。</p>
+<hr>
+<h2 id="binary-search-tree是怎樣的資料結構呢">Binary Search Tree是怎樣的資料結構呢？</h2>
+<p>Tree這種抽象資料型別下面也是有多種不同實作方式的資料結構，而今天我們要講的這個Binary Search Tree只是其中的一種，再講Binary Search Tree之前，我們要先介紹<strong>Binary Tree</strong>（其結構示意圖如下）:</p>
+<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3cGTM0B8K4LrImMSPBR4Qs0vTgjxMd0J8KMg1dIhm7rDIKRj3tZcAfREZcjSc6Aoy4kAAp5hVqQfAp7jwKZtbN9gtEudU3KpMQ5CTRJwmS0AWhAyasGHWKa-keVlk1Xb9qSnuENl-PHk45jByNZdtvh=w600-h358-no?authuser=0" alt="Binary Tree"></p>
+<p>配合上方示意圖，可以說Binary Tree的架構很簡單，大概就是兩點：</p>
+<ol>
+<li>一個有<code>『根』</code>的樹狀結構</li>
+<li>每一個節點都包含<code>不多於</code>兩個子節點</li>
+<li>在每一個<code>父節點</code>都會記碌<code>左</code>子節點和<code>右</code>子節點的資訊。</li>
+</ol>
+<blockquote>
+<p>在實作上，位於整個結構中最下方節點並不會有子節點，此時其左右子節點的紀錄方式則為null</p>
+</blockquote>
+<p>而Binary Search Tree則是在更進一步地規範：<code>所有位於父節點左邊的子節點，其值均比父節點之值小；反之，所有位於父節點右邊的子節點，其值均比父節點之值大</code>；那如果有一個值跟父節點的值相同，則看是要放在父節點的左邊或是右邊都可以，但是實作上必須統一，不能在同一個實作中，有的放左邊，有的放右邊。下方圖中則是示範兩種不同結構的Binary Search Tree：</p>
+<p><img src="https://lh3.googleusercontent.com/pw/ACtC-3fMVwk_NPq9KKC3jyox5W5Tl3a547TQsPH_6E3hsENmOv0Wv7I3ChlW9OvTLRR4DQnHqrvDpP2rAZSEyjuBt3Hv7o1qpL__7arKi1dI0N_7AahWN1VY6gFMqh-sr2Jsn-s5K6mrkdK9tZ5V7iSj2rII=w600-h360-no?authuser=0" alt="BST"></p>
+<p>上圖左邊的是『平衡型』的Binary Search Tree，而右邊則是『未平衡』的Binary Search Tree，而Binary Search Tree的平衡與否，與其在進行資料結構轉換前的陣列內容有關，假設原先的陣列是正序或倒序排列，那轉換後的Binary Search Tree絕對會是像上圖右邊一樣，呈現一個『棒狀』結構，這樣的結構與線性結構大同小異，並不能展現Binary Search Tree的優勢。關於<strong>如何平衡Binary Search Tree</strong>，我們晚點再來說。</p>
+<p>在進入到下一個項目前，還有一個很重要的事情要說，就是Binary Search Tree的<code>高度(height)</code>，在計算高度時，起始值跟Array的index相同，都是從<code>0</code>開始，也就是Root Node的Height是0，其子節點的Height是1，依此類推，因此上方圖中的兩個BST的Height都是3。</p>
+<hr>
+<h2 id="binary-search-tree的演算法">Binary Search Tree的演算法</h2>
+<p>既然BST是一種資料結構，那他當然也有Search, Insert, Delete這三種操作，下面我們來一一介紹：</p>
+<h3 id="1-bst-search">1. BST Search</h3>
+<p>如同上面所說，在建構BST時，會依照值的大小排到左邊分支或是右邊分支，因此在做Search的時候，可以透過這個特性去找，其Pseudo-code如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#6272a4">// Input: A BST tree and a target to be found
+</span><span style="color:#6272a4">// Output: A BST tree
+</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">function</span> BSTSearch(BSTree, t){
+    <span style="color:#ff79c6">if</span> (BSTree is empyt) or (BSTree.value <span style="color:#ff79c6">==</span> t) {
+        <span style="color:#ff79c6">return</span> BSTree;
+    }
+    <span style="color:#ff79c6">if</span> BSTree.value <span style="color:#ff79c6">&gt;</span> t {
+        <span style="color:#ff79c6">return</span> BSTSearch(Left child node <span style="color:#ff79c6">of</span> BSTree, t);
+    }<span style="color:#ff79c6">else</span>{
+        <span style="color:#ff79c6">return</span> BSTSearch(Right child node <span style="color:#ff79c6">of</span> BSTree, t);
+    }
+}
+
+</code></pre></div><p>BST Search也是透過遞迴的方式進行，假設還沒有找到目標所在的位置，就會依據當前節點的值和目標比較，進而再將sub-tree傳入BSTSearch中，再一次進行拆解與尋找；下方範例GIF檔應該可以更清楚的表達這個過程：
+<img src="https://lh3.googleusercontent.com/pw/ACtC-3eNW0GJkwndp_VPxMu_Q5VLw9qy5EPu8lWJA2scDOnhDif_hLa2ujAWQWVnz-9wiOiSSLli0RKRXbuvfY8_1Q-i6J0_h2OqdhIODXa-cVKRNRAk-CRpmdcxZHDA6cFzPwGIt01q1v8P4Dda9XKzJET3=w480-h288-no?authuser=0" alt="BST-Search"></p>
+<p>在做BST Search的時候，若這個BST的結構是<code>Stick</code>，那這個BST Search的Worst Case時間複雜度為<code>𝜪(n)</code>；但是，如果這個BST是<code>balanced</code>，那Worst Case就變成了<code>𝜪(㏒2 n)</code>。</p>
+<h3 id="2-bst-insert">2. BST Insert</h3>
+<p>BST在做Insertion的時候，也是很簡單的，也是依據值的比較，來決定要加在哪一個節點下面，我們透過GIF來了解過程吧：
+<img src="https://lh3.googleusercontent.com/pw/ACtC-3fgy62TnbFdiNSv6ZG7vhOXYEHj2B4jslmppQw6CUSwT0QwvgjzIm_zSqIF9XL8rSldT9iqVAKkspeFclRKM_I8fsFXfyy0i5xToooIXQtHrUWPr_hVLnkNhmNQ1E7ijgKgy4AYdxQAstx5N1Pxh7dG=w480-h288-no?authuser=0" alt="BST-Insert"></p>
+<h3 id="3-bst-delete">3. BST Delete</h3>
+<p>Deletion在BST裡面則比較麻煩，他有三種情況是需要被考慮的：</p>
+<h4 id="1-要刪除的node並沒有任何的child-node">(1) 要刪除的Node並沒有任何的child node:</h4>
+<p>這個情況下的處理很簡單，由於這個要刪除的node並沒有其他child node，因此，直接斷開這個node相關的連結即可。
+<img src="https://lh3.googleusercontent.com/pw/ACtC-3csac02WO6BUd6OOpXk2m0CCdd4AZJNTAsAg6DfWGwfbSLJKuvxIiY0luBst6D2_wwcWbl5bNKSFfxZYfJtK1mASiFqbWjLD9fIxUJrHqLlmtnOk-ylxttYa-7ZM2i9EyZfyLjgPHqko0bpXKmUEHCb=w480-h288-no?authuser=0" alt="BST-Delete-1"></p>
+<h4 id="2-要刪除的node有一個child-node">(2) 要刪除的Node有一個child node:</h4>
+<p>因為在BST裡面存在著parent-child的關係，因此每個node都會記錄期parent node和children node的資訊，當現在要刪除的Node(A Node)是有一個child node(C Node)的時候，即表示對於這個要刪除的node的parent node(B Node)而言，B Node要將原先紀錄A Node的資訊更改成C Node，而C Node則是將其parent node由原先的A Node改成B Node，這樣與A Node有關的所有連結都消失了，等同於A Node從BST中刪除了。
+<img src="https://lh3.googleusercontent.com/pw/ACtC-3c6oydWr733weFBn74ytdQgm_faFS_74_kh72hc-BMci0E7z52-D20GrwNVrhmX8lkkXLH3ETF0N8RwEAvwjhDPjEaC7raYRNMDEO9o2MgwqmyWnS1r4jiojK8Sf0puffXMt0Gy-UBtrnWl09-rxxVS=w480-h288-no?authuser=0" alt="BST-Delete-2"></p>
+<h4 id="3-要刪除的node有兩個child-node">(3) 要刪除的Node有兩個child node:</h4>
+<p>當這個要刪除的Node有兩個child node的時候，我們則是要從他所有的child node中尋找能夠換到這個位置的Node，通常會有兩種方式，一是用左邊分支中最右下的Node或是其右邊分支最左下的Node去取代，二是若其中一個child node也只有連接一個child node，那也可以用這個child node來取代，因為僅有這兩種狀況其Node被置換到該位置後，不破壞BST的規則，有點複雜，看看下面GIF吧：
+<img src="https://lh3.googleusercontent.com/pw/ACtC-3d4YM-ahz0kNKK926KBPrrj5mviM3lzN-ddjy_xXpaLHWONMpv7edKBMnUZ2rgpNHrBKVDvYq7DdW9XMLCGFnAvJRdDw5t4iyCJl0NetHxwlMHM7MjZ_L7Dmaqqev41inLRu5Oyi2T6IKnYeOqBTXSQ=w480-h288-no?authuser=0" alt="BST-Delete-3-1">
+<img src="https://lh3.googleusercontent.com/pw/ACtC-3dsG26L2rn_F5sX2xRprXJCZI-N2ZNQ7FNISrbGH2ikaoMtvYOu8Mt8wSp1ET_EK55iN3yk82LFflM44Anpy-G7itiVxvV7zP2hbTOJ9ImWcc-IYHU9YCxkD1ouiV23DMZMDcqUzceY6-dxsALZmzyT=w480-h288-no?authuser=0" alt="BST-Delete-3-2"></p>
+<hr>
+<h2 id="小結">小結</h2>
+<ol>
+<li>Binary Search Tree的三個重點：有根、兩個children node、左小右大。</li>
+<li>Stick BST的時間複雜度比Balanced BST大。</li>
+<li>BST的Deletion要考慮多種情況。</li>
+</ol>
+<hr>
+<h2 id="預告">預告</h2>
+<p>明天我們將會繼續介紹BST。</p>
+<hr>
+<h2 id="references">References</h2>
+<ol>
+<li><a href="https://doc.lagout.org/science/0_Computer%20Science/2_Algorithms/Introduction%20to%20the%20Design%20and%20Analysis%20of%20Algorithms%20%283rd%20ed.%29%20%5BLevitin%202011-10-09%5D.pdf">Introduction to the Design and Analysis of Algorithms, 3rd Edition, by Anany Levitin</a></li>
+</ol>
+
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/InformisTry/posts/ithome-triathlon/decon-binary-search/"  style="width: 49rem;" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day12 -- Decrease and Conquer - Binary Search">&larr;
+                            【舌尖上的演算法】Day12 -- Decrease and Conquer - Binary Search</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/InformisTry/posts/ithome-triathlon/decon-bst-con/" style="width: 49rem;" data-toggle="tooltip" data-placement="top" title="【舌尖上的演算法】Day14 -- Decrease and Conquer - Binary Search Tree-續">&rarr; 【舌尖上的演算法】Day14 -- Decrease and Conquer - Binary Search Tree-續</a>
+                    </li>
+                    
+                </ul>
+
+                
+<div id="disqus-comment"></div>
+
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "informistry" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+            </div>
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        <a href="/InformisTry/tags/algorithm" title="algorithm">
+                            algorithm
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/InformisTry/tags/data-structure" title="data-structure">
+                            data-structure
+                        </a>
+                        
+                        
+                        
+                        <a href="/InformisTry/tags/hints" title="hints">
+                            hints
+                        </a>
+                        
+                        
+                        
+                        <a href="/InformisTry/tags/ithome" title="ithome">
+                            ithome
+                        </a>
+                        
+                        
+                        
+                        <a href="/InformisTry/tags/java" title="java">
+                            java
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/InformisTry/tags/triathlon" title="triathlon">
+                            triathlon
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>FRIENDS</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="https://ianjustin39.github.io/ianlife/">Ian化學系軟體工程師</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                    
+                    <li>
+                        <a href="mailto:adslbbc1949@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/JumperC2P">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/hank-lee-784779136/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/8090654/h-lee">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+            
+                    
+                    
+                    
+            
+            
+            
+                </ul>
+		        <p class="copyright text-muted">
+                    Copyright &copy; InformisTry 2021
+                    <br>
+                    <small id="busuanzi_container_site_pv" style='display:none'> Page Views: <span id="busuanzi_value_site_pv"></span> </small>
+                    |
+                    <small id="busuanzi_container_site_uv" style='display:none'> Count of Visits: <span id="busuanzi_value_site_uv"></span> </small>
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-172654708-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+</body>
+</html>
