@@ -6,10 +6,19 @@
     <description>Recent content on InformisTry</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 07 Oct 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 19 Feb 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://jumperc2p.github.io/InformisTry/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>值得反覆思考的-『原子習慣』</title>
+      <link>https://jumperc2p.github.io/InformisTry/posts/books/atmoic_habits/</link>
+      <pubDate>Fri, 19 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://jumperc2p.github.io/InformisTry/posts/books/atmoic_habits/</guid>
+      <description>&lt;p&gt;我們從出生開始，在不知不覺中就有許多習慣的養成，當中包含著對我們有益的好習慣，同時也有拖我們後腿的壞習慣，但是否我們從來沒有想過&lt;code&gt;如何有意識地培養好習慣、剔除壞習慣？&lt;/code&gt;；在這本書中提出了四大法則，非常值得我們好好省思我們的過去，一一檢視自身的習慣，並如何一步一步地養成好習慣並減少壞習慣帶給我們的影響。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>【舌尖上的演算法】Day30 --  Algorithm X and Sudoku</title>
