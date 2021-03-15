@@ -214,7 +214,13 @@ const hitTemplate = function(hit) {
   if (hit.date) {
     date = moment.unix(hit.date).format('MMM D, YYYY');
   }
-  let url = `${hit.url}#${hit.anchor}`;
+
+  let url = "";
+  if (hit.anchor){
+    url = `/InformisTry${hit.url}#${hit.anchor}`;
+  }else{
+    url = `/InformisTry/${hit.url}`;
+  }
   const title = hit._highlightResult.title.value;
 
   let breadcrumbs = '';
