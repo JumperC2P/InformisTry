@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Review on InformisTry</title>
+    <title>Review on InformisTry-HankLee</title>
     <link>https://jumperc2p.github.io/InformisTry/tags/review/</link>
-    <description>Recent content in Review on InformisTry</description>
+    <description>Recent content in Review on InformisTry-HankLee</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 19 Feb 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 25 Apr 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://jumperc2p.github.io/InformisTry/tags/review/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>易懂難實踐的-『與成功有約：高效能人士的七個習慣』</title>
+      <link>https://jumperc2p.github.io/InformisTry/posts/books/7_habits_to_success/</link>
+      <pubDate>Sun, 25 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://jumperc2p.github.io/InformisTry/posts/books/7_habits_to_success/</guid>
+      <description>&lt;p&gt;生活於現在這種高科技時代下，我們時常透過手機在看這個世界，光是照相的App就層出不窮，甚至App內有許許多多內建的濾鏡，直接套用這些濾鏡，出來的相片就會長得不一樣；而這個現象不只是單單發生在影像上，其實多數人都是透過一層『濾鏡』在看待世界發生的人事物，而這層濾鏡，就是 &lt;code&gt;自己的思維和認知&lt;/code&gt;；套上了這個濾鏡，往往就造成了未來截然不同的作法與後果。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>值得反覆思考的-『原子習慣』</title>
