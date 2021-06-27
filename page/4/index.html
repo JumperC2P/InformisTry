@@ -543,12 +543,6 @@ Also this article will give you a sample code of how to use the basic function o
 </div>
 
 
-<script>
-    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
-        var $nav = document.querySelector("nav");
-        if($nav) FastClick.attach($nav);
-    })
-</script>
 
 	</div>
 </div>
@@ -641,9 +635,6 @@ Also this article will give you a sample code of how to use the basic function o
 </footer>
 
 
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
 <script>
     function async(u, c) {
       var d = document, t = 'script',
@@ -672,6 +663,17 @@ Also this article will give you a sample code of how to use the basic function o
         })
     }
 </script>
+
+
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
